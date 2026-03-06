@@ -1,0 +1,99 @@
+CREATE TABLE
+    images (
+        id TEXT NOT NULL PRIMARY KEY,
+        description TEXT,
+        external_link TEXT,
+        use_counter INT NOT NULL DEFAULT 0 CHECK (use_counter >= 0),
+        last_used_at BIGINT,
+        file_path TEXT NOT NULL UNIQUE,
+        is_favorite BOOLEAN DEFAULT 0 CHECK (is_favorite IN (0, 1)),
+        blur_hash TEXT NOT NULL,
+        created_at BIGINT NOT NULL
+    );
+
+CREATE TABLE
+    videos (
+        id TEXT NOT NULL PRIMARY KEY,
+        description TEXT,
+        external_link TEXT,
+        use_counter INT NOT NULL DEFAULT 0 CHECK (use_counter >= 0),
+        last_used_at BIGINT,
+        file_path TEXT NOT NULL UNIQUE,
+        file_size BIGINT NOT NULL,
+        duration INT NOT NULL CHECK (duration >= 0),
+        is_favorite BOOLEAN DEFAULT 0 CHECK (is_favorite IN (0, 1)),
+        created_at BIGINT NOT NULL
+    );
+
+CREATE TABLE
+    audio (
+        id TEXT NOT NULL PRIMARY KEY,
+        description TEXT,
+        external_link TEXT,
+        use_counter INT NOT NULL DEFAULT 0 CHECK (use_counter >= 0),
+        last_used_at BIGINT,
+        file_path TEXT NOT NULL UNIQUE,
+        file_size BIGINT NOT NULL,
+        duration INT NOT NULL CHECK (duration >= 0),
+        is_favorite BOOLEAN DEFAULT 0 CHECK (is_favorite IN (0, 1)),
+        created_at BIGINT NOT NULL
+    );
+
+CREATE TABLE
+    snippets (
+        id TEXT NOT NULL PRIMARY KEY,
+        content TEXT NOT NULL,
+        description TEXT,
+        external_link TEXT,
+        use_counter INT NOT NULL DEFAULT 0 CHECK (use_counter >= 0),
+        last_used_at BIGINT,
+        is_favorite BOOLEAN DEFAULT 0 CHECK (is_favorite IN (0, 1)),
+        created_at BIGINT NOT NULL
+    );
+
+CREATE TABLE
+    tags (
+        id TEXT NOT NULL PRIMARY KEY,
+        name TEXT NOT NULL UNIQUE COLLATE NOCASE,
+        created_at BIGINT NOT NULL
+    );
+
+CREATE TABLE
+    images_tags (
+        image_id TEXT NOT NULL REFERENCES images (id) ON DELETE CASCADE,
+        tag_id TEXT NOT NULL REFERENCES tags (id) ON DELETE CASCADE,
+        PRIMARY KEY (image_id, tag_id)
+    );
+
+CREATE TABLE
+    videos_tags (
+        video_id TEXT NOT NULL REFERENCES videos (id) ON DELETE CASCADE,
+        tag_id TEXT NOT NULL REFERENCES tags (id) ON DELETE CASCADE,
+        PRIMARY KEY (video_id, tag_id)
+    );
+
+CREATE TABLE
+    audio_tags (
+        audio_id TEXT NOT NULL REFERENCES audio (id) ON DELETE CASCADE,
+        tag_id TEXT NOT NULL REFERENCES tags (id) ON DELETE CASCADE,
+        PRIMARY KEY (audio_id, tag_id)
+    );
+
+CREATE TABLE
+    snippets_tags (
+        snippet_id TEXT NOT NULL REFERENCES snippets (id) ON DELETE CASCADE,
+        tag_id TEXT NOT NULL REFERENCES tags (id) ON DELETE CASCADE,
+        PRIMARY KEY (snippet_id, tag_id)
+    );
+
+CREATE TABLE
+    settings (
+        id INT NOT NULL PRIMARY KEY CHECK (id = 1),
+        library_path TEXT,
+        minimize_on_copy BOOLEAN NOT NULL DEFAULT 0 CHECK (minimize_on_copy IN (0, 1))
+    );
+
+INSERT INTO
+    settings (id)
+VALUES
+    (1);

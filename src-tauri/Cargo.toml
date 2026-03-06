@@ -1,0 +1,47 @@
+[package]
+name = "reaction-manager"
+version = "0.1.0"
+description = "A Tauri App"
+authors = ["you"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+# The `_lib` suffix may seem redundant but it is necessary
+# to make the lib name unique and wouldn't conflict with the bin name.
+# This seems to be only an issue on Windows, see https://github.com/rust-lang/cargo/issues/8519
+name = "reaction_manager_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["protocol-asset"] }
+tauri-plugin-opener = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+diesel = { version = "2.2.11", features = [
+    "r2d2",
+    "returning_clauses_for_sqlite_3_35",
+    "sqlite",
+] }
+diesel_migrations = { version = "2.2.0", features = ["sqlite"] }
+nanoid = "0.4.0"
+directories = "6.0.0"
+walkdir = "2.5.0"
+env_logger = "0.11.8"
+log = "0.4.27"
+clap = { version = "4.5.40", features = ["derive"] }
+libsqlite3-sys = { version = "0.30", features = [
+    "bundled",
+] } # Provides "sqlite3.lib"
+thiserror = "2.0.18"
+anyhow = "1.0.100"
+specta = "2.0.0-rc.21"
+specta-typescript = "0.0.9"
+tauri-specta = { version = "=2.0.0-rc.21", features = ["derive", "typescript"] }
+
+[target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]
+tauri-plugin-single-instance = "2"
