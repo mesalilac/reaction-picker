@@ -10,13 +10,15 @@ pub struct VideoEntity {
     pub last_used_at: Option<Timestamp>,
     pub file_path: String,
     pub file_size: i64,
+    pub width: i32,
+    pub height: i32,
     pub duration: i32,
     pub is_favorite: bool,
     pub created_at: Timestamp,
 }
 
 impl VideoEntity {
-    pub fn new(file_path: String, file_size: i64, duration: i32) -> Self {
+    pub fn new(file_path: String, file_size: i64, width: i32, height: i32, duration: i32) -> Self {
         Self {
             id: nanoid!(),
             description: None,
@@ -25,6 +27,8 @@ impl VideoEntity {
             last_used_at: None,
             file_path,
             file_size,
+            width,
+            height,
             duration,
             is_favorite: false,
             created_at: Timestamp::now(),
@@ -42,6 +46,8 @@ pub struct Video {
     pub last_used_at: Option<Timestamp>,
     pub file_path: String,
     pub file_size: i64,
+    pub width: i32,
+    pub height: i32,
     pub duration: i32,
     pub is_favorite: bool,
     pub tags: Vec<Tag>,
@@ -58,6 +64,8 @@ impl Video {
             last_used_at: entity.last_used_at,
             file_path: entity.file_path,
             file_size: entity.file_size,
+            width: entity.width,
+            height: entity.height,
             duration: entity.duration,
             is_favorite: entity.is_favorite,
             tags,

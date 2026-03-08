@@ -9,13 +9,22 @@ pub struct ImageEntity {
     pub use_counter: i32,
     pub last_used_at: Option<Timestamp>,
     pub file_path: String,
+    pub file_size: i64,
+    pub width: i32,
+    pub height: i32,
     pub is_favorite: bool,
     pub blur_hash: String,
     pub created_at: Timestamp,
 }
 
 impl ImageEntity {
-    pub fn new(file_path: String, blur_hash: String) -> Self {
+    pub fn new(
+        file_path: String,
+        file_size: i64,
+        width: i32,
+        height: i32,
+        blur_hash: String,
+    ) -> Self {
         Self {
             id: nanoid!(),
             description: None,
@@ -23,6 +32,9 @@ impl ImageEntity {
             use_counter: 0,
             last_used_at: None,
             file_path,
+            file_size,
+            width,
+            height,
             is_favorite: false,
             blur_hash,
             created_at: Timestamp::now(),
@@ -39,6 +51,9 @@ pub struct Image {
     pub use_counter: i32,
     pub last_used_at: Option<Timestamp>,
     pub file_path: String,
+    pub file_size: i64,
+    pub width: i32,
+    pub height: i32,
     pub is_favorite: bool,
     pub blur_hash: String,
     pub tags: Vec<Tag>,
@@ -54,6 +69,9 @@ impl Image {
             use_counter: entity.use_counter,
             last_used_at: entity.last_used_at,
             file_path: entity.file_path,
+            file_size: entity.file_size,
+            width: entity.width,
+            height: entity.height,
             is_favorite: entity.is_favorite,
             blur_hash: entity.blur_hash,
             tags,

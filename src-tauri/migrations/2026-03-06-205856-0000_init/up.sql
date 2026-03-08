@@ -6,6 +6,9 @@ CREATE TABLE
         use_counter INT NOT NULL DEFAULT 0 CHECK (use_counter >= 0),
         last_used_at BIGINT,
         file_path TEXT NOT NULL UNIQUE,
+        file_size BIGINT NOT NULL,
+        width INT NOT NULL CHECK (width >= 0),
+        height INT NOT NULL CHECK (height >= 0),
         is_favorite BOOLEAN DEFAULT 0 CHECK (is_favorite IN (0, 1)),
         blur_hash TEXT NOT NULL,
         created_at BIGINT NOT NULL
@@ -20,6 +23,8 @@ CREATE TABLE
         last_used_at BIGINT,
         file_path TEXT NOT NULL UNIQUE,
         file_size BIGINT NOT NULL,
+        width INT NOT NULL CHECK (width >= 0),
+        height INT NOT NULL CHECK (height >= 0),
         duration INT NOT NULL CHECK (duration >= 0),
         is_favorite BOOLEAN DEFAULT 0 CHECK (is_favorite IN (0, 1)),
         created_at BIGINT NOT NULL
