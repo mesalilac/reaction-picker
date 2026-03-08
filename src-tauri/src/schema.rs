@@ -3,6 +3,7 @@
 diesel::table! {
     audio (id) {
         id -> Text,
+        title -> Nullable<Text>,
         description -> Nullable<Text>,
         external_link -> Nullable<Text>,
         use_counter -> Integer,
@@ -27,6 +28,7 @@ diesel::table! {
 diesel::table! {
     images (id) {
         id -> Text,
+        title -> Nullable<Text>,
         description -> Nullable<Text>,
         external_link -> Nullable<Text>,
         use_counter -> Integer,
@@ -60,8 +62,9 @@ diesel::table! {
 diesel::table! {
     snippets (id) {
         id -> Text,
-        content -> Text,
+        title -> Nullable<Text>,
         description -> Nullable<Text>,
+        content -> Text,
         external_link -> Nullable<Text>,
         use_counter -> Integer,
         last_used_at -> Nullable<BigInt>,
@@ -88,6 +91,7 @@ diesel::table! {
 diesel::table! {
     videos (id) {
         id -> Text,
+        title -> Nullable<Text>,
         description -> Nullable<Text>,
         external_link -> Nullable<Text>,
         use_counter -> Integer,

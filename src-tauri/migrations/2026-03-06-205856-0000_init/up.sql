@@ -1,6 +1,7 @@
 CREATE TABLE
     images (
         id TEXT NOT NULL PRIMARY KEY,
+        title TEXT,
         description TEXT,
         external_link TEXT,
         use_counter INT NOT NULL DEFAULT 0 CHECK (use_counter >= 0),
@@ -19,6 +20,7 @@ CREATE TABLE
 CREATE TABLE
     videos (
         id TEXT NOT NULL PRIMARY KEY,
+        title TEXT,
         description TEXT,
         external_link TEXT,
         use_counter INT NOT NULL DEFAULT 0 CHECK (use_counter >= 0),
@@ -39,6 +41,7 @@ CREATE TABLE
 CREATE TABLE
     audio (
         id TEXT NOT NULL PRIMARY KEY,
+        title TEXT,
         description TEXT,
         external_link TEXT,
         use_counter INT NOT NULL DEFAULT 0 CHECK (use_counter >= 0),
@@ -55,8 +58,9 @@ CREATE TABLE
 CREATE TABLE
     snippets (
         id TEXT NOT NULL PRIMARY KEY,
-        content TEXT NOT NULL,
+        title TEXT,
         description TEXT,
+        content TEXT NOT NULL,
         external_link TEXT,
         use_counter INT NOT NULL DEFAULT 0 CHECK (use_counter >= 0),
         last_used_at BIGINT,

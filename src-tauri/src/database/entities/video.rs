@@ -4,6 +4,7 @@ use super::prelude::*;
 #[diesel(table_name = videos)]
 pub struct VideoEntity {
     pub id: String,
+    pub title: Option<String>,
     pub description: Option<String>,
     pub external_link: Option<String>,
     pub use_counter: i32,
@@ -34,6 +35,7 @@ impl VideoEntity {
     ) -> Self {
         Self {
             id: nanoid!(),
+            title: None,
             description: None,
             external_link: None,
             use_counter: 0,
@@ -57,6 +59,7 @@ impl VideoEntity {
 #[serde(rename_all = "camelCase")]
 pub struct Video {
     pub id: String,
+    pub title: Option<String>,
     pub description: Option<String>,
     pub external_link: Option<String>,
     pub use_counter: i32,
@@ -79,6 +82,7 @@ impl Video {
     pub fn from_entity(entity: VideoEntity, tags: Vec<Tag>) -> Self {
         Self {
             id: entity.id,
+            title: entity.title,
             description: entity.description,
             external_link: entity.external_link,
             use_counter: entity.use_counter,

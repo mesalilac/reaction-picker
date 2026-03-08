@@ -4,8 +4,9 @@ use super::prelude::*;
 #[diesel(table_name = snippets)]
 pub struct SnippetEntity {
     pub id: String,
-    pub content: String,
+    pub title: Option<String>,
     pub description: Option<String>,
+    pub content: String,
     pub external_link: Option<String>,
     pub use_counter: i32,
     pub last_used_at: Option<Timestamp>,
@@ -17,8 +18,9 @@ impl SnippetEntity {
     pub fn new(content: String) -> Self {
         Self {
             id: nanoid!(),
-            content,
+            title: None,
             description: None,
+            content,
             external_link: None,
             use_counter: 0,
             last_used_at: None,
@@ -32,8 +34,9 @@ impl SnippetEntity {
 #[serde(rename_all = "camelCase")]
 pub struct Snippet {
     pub id: String,
-    pub content: String,
+    pub title: Option<String>,
     pub description: Option<String>,
+    pub content: String,
     pub external_link: Option<String>,
     pub use_counter: i32,
     pub last_used_at: Option<Timestamp>,
@@ -46,8 +49,9 @@ impl Snippet {
     pub fn from_entity(entity: SnippetEntity, tags: Vec<Tag>) -> Self {
         Self {
             id: entity.id,
-            content: entity.content,
+            title: entity.title,
             description: entity.description,
+            content: entity.content,
             external_link: entity.external_link,
             use_counter: entity.use_counter,
             last_used_at: entity.last_used_at,

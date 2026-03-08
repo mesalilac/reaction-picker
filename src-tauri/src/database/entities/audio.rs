@@ -4,6 +4,7 @@ use super::prelude::*;
 #[diesel(table_name = audio)]
 pub struct AudioEntity {
     pub id: String,
+    pub title: Option<String>,
     pub description: Option<String>,
     pub external_link: Option<String>,
     pub use_counter: i32,
@@ -27,6 +28,7 @@ impl AudioEntity {
     ) -> Self {
         Self {
             id: nanoid!(),
+            title: None,
             description: None,
             external_link: None,
             use_counter: 0,
@@ -46,6 +48,7 @@ impl AudioEntity {
 #[serde(rename_all = "camelCase")]
 pub struct Audio {
     pub id: String,
+    pub title: Option<String>,
     pub description: Option<String>,
     pub external_link: Option<String>,
     pub use_counter: i32,
@@ -64,6 +67,7 @@ impl Audio {
     pub fn from_entity(entity: AudioEntity, tags: Vec<Tag>) -> Self {
         Self {
             id: entity.id,
+            title: entity.title,
             description: entity.description,
             external_link: entity.external_link,
             use_counter: entity.use_counter,
