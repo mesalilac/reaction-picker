@@ -96,6 +96,7 @@ diesel::table! {
         mime_type -> Text,
         file_size -> BigInt,
         checksum -> Text,
+        has_audio -> Nullable<Bool>,
         width -> Integer,
         height -> Integer,
         duration -> Integer,

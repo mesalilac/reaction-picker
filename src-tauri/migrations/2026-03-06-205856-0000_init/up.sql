@@ -27,6 +27,7 @@ CREATE TABLE
         mime_type TEXT NOT NULL,
         file_size BIGINT NOT NULL,
         checksum TEXT NOT NULL UNIQUE,
+        has_audio BOOLEAN DEFAULT 0 CHECK (has_audio IN (0, 1)),
         width INT NOT NULL CHECK (width >= 0),
         height INT NOT NULL CHECK (height >= 0),
         duration INT NOT NULL CHECK (duration >= 0),
