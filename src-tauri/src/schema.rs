@@ -14,6 +14,7 @@ diesel::table! {
         checksum -> Text,
         duration -> Integer,
         is_favorite -> Bool,
+        deleted_at -> Nullable<BigInt>,
         created_at -> BigInt,
     }
 }
@@ -41,6 +42,7 @@ diesel::table! {
         height -> Integer,
         is_favorite -> Bool,
         blur_hash -> Text,
+        deleted_at -> Nullable<BigInt>,
         created_at -> BigInt,
     }
 }
@@ -69,6 +71,7 @@ diesel::table! {
         use_counter -> Integer,
         last_used_at -> Nullable<BigInt>,
         is_favorite -> Bool,
+        deleted_at -> Nullable<BigInt>,
         created_at -> BigInt,
     }
 }
@@ -106,6 +109,7 @@ diesel::table! {
         height -> Integer,
         duration -> Integer,
         is_favorite -> Bool,
+        deleted_at -> Nullable<BigInt>,
         created_at -> BigInt,
     }
 }

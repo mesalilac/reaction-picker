@@ -11,6 +11,7 @@ pub struct SnippetEntity {
     pub use_counter: i32,
     pub last_used_at: Option<Timestamp>,
     pub is_favorite: bool,
+    pub deleted_at: Option<Timestamp>,
     pub created_at: Timestamp,
 }
 
@@ -25,6 +26,7 @@ impl SnippetEntity {
             use_counter: 0,
             last_used_at: None,
             is_favorite: false,
+            deleted_at: None,
             created_at: Timestamp::now(),
         }
     }
@@ -42,6 +44,7 @@ pub struct Snippet {
     pub last_used_at: Option<Timestamp>,
     pub is_favorite: bool,
     pub tags: Vec<Tag>,
+    pub deleted_at: Option<Timestamp>,
     pub created_at: Timestamp,
 }
 
@@ -57,6 +60,7 @@ impl Snippet {
             last_used_at: entity.last_used_at,
             is_favorite: entity.is_favorite,
             tags,
+            deleted_at: entity.deleted_at,
             created_at: entity.created_at,
         }
     }

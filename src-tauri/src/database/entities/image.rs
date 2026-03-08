@@ -17,6 +17,7 @@ pub struct ImageEntity {
     pub height: i32,
     pub is_favorite: bool,
     pub blur_hash: String,
+    pub deleted_at: Option<Timestamp>,
     pub created_at: Timestamp,
 }
 
@@ -45,6 +46,7 @@ impl ImageEntity {
             height,
             is_favorite: false,
             blur_hash,
+            deleted_at: None,
             created_at: Timestamp::now(),
         }
     }
@@ -68,6 +70,7 @@ pub struct Image {
     pub is_favorite: bool,
     pub blur_hash: String,
     pub tags: Vec<Tag>,
+    pub deleted_at: Option<Timestamp>,
     pub created_at: Timestamp,
 }
 
@@ -89,6 +92,7 @@ impl Image {
             is_favorite: entity.is_favorite,
             blur_hash: entity.blur_hash,
             tags,
+            deleted_at: entity.deleted_at,
             created_at: entity.created_at,
         }
     }

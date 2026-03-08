@@ -15,6 +15,7 @@ pub struct AudioEntity {
     pub checksum: String,
     pub duration: i32,
     pub is_favorite: bool,
+    pub deleted_at: Option<Timestamp>,
     pub created_at: Timestamp,
 }
 
@@ -39,6 +40,7 @@ impl AudioEntity {
             checksum,
             duration,
             is_favorite: false,
+            deleted_at: None,
             created_at: Timestamp::now(),
         }
     }
@@ -60,6 +62,7 @@ pub struct Audio {
     pub duration: i32,
     pub is_favorite: bool,
     pub tags: Vec<Tag>,
+    pub deleted_at: Option<Timestamp>,
     pub created_at: Timestamp,
 }
 
@@ -79,6 +82,7 @@ impl Audio {
             duration: entity.duration,
             is_favorite: entity.is_favorite,
             tags,
+            deleted_at: entity.deleted_at,
             created_at: entity.created_at,
         }
     }
