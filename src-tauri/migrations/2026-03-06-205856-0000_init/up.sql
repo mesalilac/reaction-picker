@@ -12,7 +12,7 @@ CREATE TABLE
         checksum TEXT NOT NULL UNIQUE,
         width INT NOT NULL CHECK (width >= 0),
         height INT NOT NULL CHECK (height >= 0),
-        is_favorite BOOLEAN DEFAULT 0 CHECK (is_favorite IN (0, 1)),
+        is_favorite BOOLEAN NOT NULL DEFAULT 0 CHECK (is_favorite IN (0, 1)),
         blur_hash TEXT NOT NULL,
         created_at BIGINT NOT NULL
     );
@@ -30,11 +30,11 @@ CREATE TABLE
         mime_type TEXT NOT NULL,
         file_size BIGINT NOT NULL,
         checksum TEXT NOT NULL UNIQUE,
-        has_audio BOOLEAN DEFAULT 0 CHECK (has_audio IN (0, 1)),
+        has_audio BOOLEAN NOT NULL DEFAULT 0 CHECK (has_audio IN (0, 1)),
         width INT NOT NULL CHECK (width >= 0),
         height INT NOT NULL CHECK (height >= 0),
         duration INT NOT NULL CHECK (duration >= 0),
-        is_favorite BOOLEAN DEFAULT 0 CHECK (is_favorite IN (0, 1)),
+        is_favorite BOOLEAN NOT NULL DEFAULT 0 CHECK (is_favorite IN (0, 1)),
         created_at BIGINT NOT NULL
     );
 
@@ -51,7 +51,7 @@ CREATE TABLE
         file_size BIGINT NOT NULL,
         checksum TEXT NOT NULL UNIQUE,
         duration INT NOT NULL CHECK (duration >= 0),
-        is_favorite BOOLEAN DEFAULT 0 CHECK (is_favorite IN (0, 1)),
+        is_favorite BOOLEAN NOT NULL DEFAULT 0 CHECK (is_favorite IN (0, 1)),
         created_at BIGINT NOT NULL
     );
 
@@ -64,7 +64,7 @@ CREATE TABLE
         external_link TEXT,
         use_counter INT NOT NULL DEFAULT 0 CHECK (use_counter >= 0),
         last_used_at BIGINT,
-        is_favorite BOOLEAN DEFAULT 0 CHECK (is_favorite IN (0, 1)),
+        is_favorite BOOLEAN NOT NULL DEFAULT 0 CHECK (is_favorite IN (0, 1)),
         created_at BIGINT NOT NULL
     );
 

@@ -13,7 +13,7 @@ diesel::table! {
         file_size -> BigInt,
         checksum -> Text,
         duration -> Integer,
-        is_favorite -> Nullable<Bool>,
+        is_favorite -> Bool,
         created_at -> BigInt,
     }
 }
@@ -39,7 +39,7 @@ diesel::table! {
         checksum -> Text,
         width -> Integer,
         height -> Integer,
-        is_favorite -> Nullable<Bool>,
+        is_favorite -> Bool,
         blur_hash -> Text,
         created_at -> BigInt,
     }
@@ -68,7 +68,7 @@ diesel::table! {
         external_link -> Nullable<Text>,
         use_counter -> Integer,
         last_used_at -> Nullable<BigInt>,
-        is_favorite -> Nullable<Bool>,
+        is_favorite -> Bool,
         created_at -> BigInt,
     }
 }
@@ -101,11 +101,11 @@ diesel::table! {
         mime_type -> Text,
         file_size -> BigInt,
         checksum -> Text,
-        has_audio -> Nullable<Bool>,
+        has_audio -> Bool,
         width -> Integer,
         height -> Integer,
         duration -> Integer,
-        is_favorite -> Nullable<Bool>,
+        is_favorite -> Bool,
         created_at -> BigInt,
     }
 }
