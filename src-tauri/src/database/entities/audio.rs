@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::utils::fs::get_app_audio_dir;
+use crate::{commands::prelude::TagEntity, utils::fs::get_app_audio_dir};
 use std::path::PathBuf;
 
 pub struct AudioMetadata {
@@ -71,7 +71,7 @@ pub struct Audio {
 }
 
 impl Audio {
-    pub fn from_entity(entity: AudioEntity, tags: Vec<Tag>) -> Self {
+    pub fn from_entity(entity: AudioEntity, tags: Vec<TagEntity>) -> Self {
         Self {
             id: entity.id,
             title: entity.title,
@@ -85,7 +85,7 @@ impl Audio {
             checksum: entity.checksum,
             duration: entity.duration,
             is_favorite: entity.is_favorite,
-            tags,
+            tags: tags.into_iter().map(Tag::from_entity).collect(),
             deleted_at: entity.deleted_at,
             created_at: entity.created_at,
         }

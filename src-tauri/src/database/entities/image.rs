@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::utils::fs::get_app_images_dir;
+use crate::{commands::prelude::TagEntity, utils::fs::get_app_images_dir};
 use std::path::PathBuf;
 
 pub struct ImageMetadata {
@@ -79,7 +79,7 @@ pub struct Image {
 }
 
 impl Image {
-    pub fn from_entity(entity: ImageEntity, tags: Vec<Tag>) -> Self {
+    pub fn from_entity(entity: ImageEntity, tags: Vec<TagEntity>) -> Self {
         Self {
             id: entity.id,
             title: entity.title,
@@ -95,7 +95,7 @@ impl Image {
             height: entity.height,
             is_favorite: entity.is_favorite,
             blur_hash: entity.blur_hash,
-            tags,
+            tags: tags.into_iter().map(Tag::from_entity).collect(),
             deleted_at: entity.deleted_at,
             created_at: entity.created_at,
         }

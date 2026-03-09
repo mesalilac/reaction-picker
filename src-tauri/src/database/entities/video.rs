@@ -1,5 +1,8 @@
 use super::prelude::*;
-use crate::utils::fs::{get_app_thumbnails_dir, get_app_videos_dir};
+use crate::{
+    commands::prelude::TagEntity,
+    utils::fs::{get_app_thumbnails_dir, get_app_videos_dir},
+};
 use std::path::PathBuf;
 
 pub struct VideoMetadata {
@@ -86,7 +89,7 @@ pub struct Video {
 }
 
 impl Video {
-    pub fn from_entity(entity: VideoEntity, tags: Vec<Tag>) -> Self {
+    pub fn from_entity(entity: VideoEntity, tags: Vec<TagEntity>) -> Self {
         Self {
             id: entity.id,
             title: entity.title,
@@ -106,7 +109,7 @@ impl Video {
             height: entity.height,
             duration: entity.duration,
             is_favorite: entity.is_favorite,
-            tags,
+            tags: tags.into_iter().map(Tag::from_entity).collect(),
             deleted_at: entity.deleted_at,
             created_at: entity.created_at,
         }
