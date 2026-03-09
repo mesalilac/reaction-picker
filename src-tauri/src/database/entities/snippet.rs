@@ -1,3 +1,5 @@
+use crate::commands::prelude::TagEntity;
+
 use super::prelude::*;
 
 #[derive(Queryable, Selectable, Insertable, Identifiable, Debug, Clone)]
@@ -49,7 +51,7 @@ pub struct Snippet {
 }
 
 impl Snippet {
-    pub fn from_entity(entity: SnippetEntity, tags: Vec<Tag>) -> Self {
+    pub fn from_entity(entity: SnippetEntity, tags: Vec<TagEntity>) -> Self {
         Self {
             id: entity.id,
             title: entity.title,
@@ -59,7 +61,7 @@ impl Snippet {
             use_counter: entity.use_counter,
             last_used_at: entity.last_used_at,
             is_favorite: entity.is_favorite,
-            tags,
+            tags: tags.into_iter().map(Tag::from_entity).collect(),
             deleted_at: entity.deleted_at,
             created_at: entity.created_at,
         }
