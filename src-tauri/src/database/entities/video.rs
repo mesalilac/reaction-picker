@@ -1,3 +1,7 @@
+use std::path::PathBuf;
+
+use crate::utils::fs::{get_app_thumbnails_dir, get_app_videos_dir};
+
 use super::prelude::*;
 
 #[derive(Queryable, Selectable, Insertable, Identifiable, Debug, Clone)]
@@ -25,7 +29,7 @@ pub struct VideoEntity {
 
 impl VideoEntity {
     pub fn new(
-        file_path: String,
+        file_path: PathBuf,
         mime_type: String,
         file_size: i64,
         checksum: String,
@@ -41,7 +45,7 @@ impl VideoEntity {
             external_link: None,
             use_counter: 0,
             last_used_at: None,
-            file_path,
+            file_path: file_path.to_string_lossy().to_string(),
             thumbnail_path: None,
             mime_type,
             file_size,
@@ -66,8 +70,8 @@ pub struct Video {
     pub external_link: Option<String>,
     pub use_counter: i32,
     pub last_used_at: Option<Timestamp>,
-    pub file_path: String,
-    pub thumbnail_path: Option<String>,
+    pub file_path: PathBuf,
+    pub thumbnail_path: Option<PathBuf>,
     pub mime_type: String,
     pub file_size: i64,
     pub checksum: String,
@@ -90,8 +94,10 @@ impl Video {
             external_link: entity.external_link,
             use_counter: entity.use_counter,
             last_used_at: entity.last_used_at,
-            file_path: entity.file_path,
-            thumbnail_path: entity.thumbnail_path,
+            file_path: get_app_videos_dir().join(entity.file_path),
+            thumbnail_path: entity
+                .thumbnail_path
+                .map(|p| get_app_thumbnails_dir().join(p)),
             mime_type: entity.mime_type,
             file_size: entity.file_size,
             checksum: entity.checksum,

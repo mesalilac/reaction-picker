@@ -1,3 +1,7 @@
+use std::path::PathBuf;
+
+use crate::utils::fs::get_app_audio_dir;
+
 use super::prelude::*;
 
 #[derive(Queryable, Selectable, Insertable, Identifiable, Debug, Clone)]
@@ -21,7 +25,7 @@ pub struct AudioEntity {
 
 impl AudioEntity {
     pub fn new(
-        file_path: String,
+        file_path: PathBuf,
         mime_type: String,
         file_size: i64,
         checksum: String,
@@ -34,7 +38,7 @@ impl AudioEntity {
             external_link: None,
             use_counter: 0,
             last_used_at: None,
-            file_path,
+            file_path: file_path.to_string_lossy().to_string(),
             mime_type,
             file_size,
             checksum,
@@ -55,7 +59,7 @@ pub struct Audio {
     pub external_link: Option<String>,
     pub use_counter: i32,
     pub last_used_at: Option<Timestamp>,
-    pub file_path: String,
+    pub file_path: PathBuf,
     pub mime_type: String,
     pub file_size: i64,
     pub checksum: String,
@@ -75,7 +79,7 @@ impl Audio {
             external_link: entity.external_link,
             use_counter: entity.use_counter,
             last_used_at: entity.last_used_at,
-            file_path: entity.file_path,
+            file_path: get_app_audio_dir().join(entity.file_path),
             mime_type: entity.mime_type,
             file_size: entity.file_size,
             checksum: entity.checksum,
