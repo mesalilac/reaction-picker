@@ -1,8 +1,5 @@
 use super::prelude::*;
-use crate::{
-    commands::prelude::TagEntity,
-    utils::fs::{get_app_thumbnails_dir, get_app_videos_dir},
-};
+use crate::{commands::prelude::TagEntity, utils::fs::get_app_videos_dir};
 use std::path::PathBuf;
 
 pub struct VideoMetadata {
