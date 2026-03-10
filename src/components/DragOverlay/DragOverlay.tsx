@@ -1,4 +1,5 @@
-import { listen, TauriEvent } from '@tauri-apps/api/event';
+import { type Event, listen, TauriEvent } from '@tauri-apps/api/event';
+import type { DragDropEvent } from '@tauri-apps/api/window';
 import clsx from 'clsx';
 import type { VoidComponent } from 'solid-js';
 import { createSignal, onCleanup, onMount } from 'solid-js';
@@ -10,20 +11,27 @@ type Props = {
 
 export const DragOverlay: VoidComponent<Props> = (props) => {
     const [isDragActive, setIsDragActive] = createSignal(false);
+    const [filesCount, setFilesCount] = createSignal(0);
 
     onMount(() => {
-        const dropListener = listen(TauriEvent.DRAG_DROP, (e) => {
-            console.log(e);
-            setIsDragActive(false);
-        });
+        const dropListener = listen<Extract<DragDropEvent, { type: 'drop' }>>(
+            TauriEvent.DRAG_DROP,
+            (e) => {
+                console.log(e);
+                setIsDragActive(false);
+            },
+        );
 
-        const dragEnterListener = listen(TauriEvent.DRAG_ENTER, (e) => {
+        const dragEnterListener = listen<
+            Extract<DragDropEvent, { type: 'enter' }>
+        >(TauriEvent.DRAG_ENTER, (e) => {
             setIsDragActive(true);
-            console.log(e);
+            setFilesCount(e.payload.paths.length);
         });
 
-        const dragLeaveListener = listen(TauriEvent.DRAG_LEAVE, (e) => {
-            console.log(e);
+        const dragLeaveListener = listen<
+            Extract<DragDropEvent, { type: 'leave' }>
+        >(TauriEvent.DRAG_LEAVE, (e) => {
             setIsDragActive(false);
         });
 
@@ -43,7 +51,7 @@ export const DragOverlay: VoidComponent<Props> = (props) => {
                 )}
             >
                 <div class='flex flex-col items-center gap-3 rounded-xl border-2 border-white/40 border-dashed bg-white/10 px-13 py-10 text-white shadow-xl'>
-                    <p>Drop files here</p>
+                    <p>Drop {filesCount()} file(s) here</p>
                 </div>
             </div>
         </Portal>
