@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import type { VoidComponent } from 'solid-js';
 import { createSignal, onCleanup, onMount } from 'solid-js';
 import { Portal } from 'solid-js/web';
-import toast from 'solid-toast';
+import { toast } from 'solid-sonner';
 import { commands } from '@/bindings';
 
 type Props = {
