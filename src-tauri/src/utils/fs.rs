@@ -14,6 +14,7 @@ pub fn get_app_data_dir() -> PathBuf {
             .expect("Failed to get base dir")
             .data_local_dir()
             .join(APP_NAME)
+            .join("data")
     };
 
     if !app_data_dir.exists() {
