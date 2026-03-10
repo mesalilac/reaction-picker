@@ -84,7 +84,6 @@ export type Audio = {
 export type CommandError =
     | { kind: 'Database'; message: string }
     | { kind: 'Io'; message: string }
-    | { kind: 'ScanFailure'; message: string }
     | { kind: 'Unknown'; message: string };
 export type GeneralStats = {
     imageCount: number;
