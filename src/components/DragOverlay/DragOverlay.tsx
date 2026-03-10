@@ -6,12 +6,15 @@ import { createSignal, onCleanup, onMount } from 'solid-js';
 import { Portal } from 'solid-js/web';
 import { toast } from 'solid-sonner';
 import { commands } from '@/bindings';
+import { useGlobalData } from '@/store';
 
 type Props = {
     ref?: HTMLDivElement | ((el: HTMLDivElement) => void);
 };
 
 export const DragOverlay: VoidComponent<Props> = (props) => {
+    const globalData = useGlobalData();
+
     const [isDragActive, setIsDragActive] = createSignal(false);
     const [filesCount, setFilesCount] = createSignal(0);
 
@@ -26,9 +29,14 @@ export const DragOverlay: VoidComponent<Props> = (props) => {
                 toast.promise(commands.utilDropFiles(e.payload.paths), {
                     loading: `Processing ${filesCount()} file(s)`,
                     success: (e) => {
-                        if (e.status === 'ok')
+                        if (e.status === 'ok') {
+                            globalData.resources.images.refetch();
+                            globalData.resources.videos.refetch();
+                            globalData.resources.audio.refetch();
+                            globalData.resources.generalStats.refetch();
+
                             return `File(s) processed: ${e.data}`;
-                        else return `Processing error: ${e.error}`;
+                        } else return `Processing error: ${e.error}`;
                     },
                     error: 'Failed to process file(s)',
                 });
