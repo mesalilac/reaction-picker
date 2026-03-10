@@ -156,13 +156,10 @@ export type Video = {
     useCounter: number;
     lastUsedAt: Timestamp | null;
     filePath: string;
-    thumbnailPath: string | null;
     mimeType: string;
     fileSize: number;
     checksum: string;
     hasAudio: boolean;
-    width: number;
-    height: number;
     duration: number;
     isFavorite: boolean;
     tags: Tag[];
