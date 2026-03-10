@@ -1,4 +1,4 @@
-import { type Event, listen, TauriEvent } from '@tauri-apps/api/event';
+import { listen, TauriEvent } from '@tauri-apps/api/event';
 import type { DragDropEvent } from '@tauri-apps/api/window';
 import clsx from 'clsx';
 import type { VoidComponent } from 'solid-js';
@@ -44,7 +44,7 @@ export const DragOverlay: VoidComponent<Props> = (props) => {
 
         const dragLeaveListener = listen<
             Extract<DragDropEvent, { type: 'leave' }>
-        >(TauriEvent.DRAG_LEAVE, (e) => {
+        >(TauriEvent.DRAG_LEAVE, () => {
             setIsDragActive(false);
         });
 
