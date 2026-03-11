@@ -42,10 +42,8 @@ export const Tab: VoidComponent<Props> = (props) => {
     return (
         <button
             class={clsx(
-                'cursor-pointer rounded-md p-1 transition-colors duration-150 ease-out',
-                {
-                    'bg-blue-500': isActive(),
-                },
+                'cursor-pointer border-b-2 p-1 transition-colors duration-150 ease-out',
+                isActive() ? 'text-blue-500' : 'border-transparent',
             )}
             onClick={() => globalData.setStore('activeTab', props.type)}
             ref={props.ref}

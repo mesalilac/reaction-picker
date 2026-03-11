@@ -19,7 +19,7 @@ export const Nav: VoidComponent<Props> = (props) => {
 
     return (
         <div class='flex justify-between'>
-            <div class='flex gap-5' ref={props.ref}>
+            <div class='flex gap-3' ref={props.ref}>
                 <Tab count={mediaCount()} type='Media' />
                 <Tab
                     count={globalData.resources.images.get()?.length || 0}
