@@ -47,6 +47,7 @@ infer = "0.19.0"
 image = "0.25.9"
 blurhash = "0.2.3"
 symphonia = { version = "0.5.5", features = ["all"] }
+tauri-plugin-clipboard-manager = "2"
 
 [target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]
 tauri-plugin-single-instance = "2"

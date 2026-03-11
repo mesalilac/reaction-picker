@@ -108,6 +108,7 @@ pub fn run() {
         .expect("Failed to export typescript bindings");
 
     tauri::Builder::default()
+        .plugin(tauri_plugin_clipboard_manager::init())
         .manage(AppState { pool })
         .plugin(tauri_plugin_single_instance::init(|app, _args, _cwd| {
             let _ = app
