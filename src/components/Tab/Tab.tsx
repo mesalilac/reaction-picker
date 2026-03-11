@@ -42,7 +42,7 @@ export const Tab: VoidComponent<Props> = (props) => {
     return (
         <button
             class={clsx(
-                'cursor-pointer border-b-2 p-1 transition-colors duration-150 ease-out',
+                'flex cursor-pointer items-center gap-2 border-b-2 p-1 transition-colors duration-150 ease-out',
                 isActive()
                     ? 'text-blue-500'
                     : 'border-transparent hover:text-blue-500/50',
@@ -51,7 +51,10 @@ export const Tab: VoidComponent<Props> = (props) => {
             ref={props.ref}
             type='button'
         >
-            {props.type} ({count()})
+            {props.type}
+            <span class='inline-flex items-center justify-center rounded-full bg-neutral-100/10 px-1 font-medium text-neutral-100 text-xs'>
+                {count()}
+            </span>
         </button>
     );
 };
