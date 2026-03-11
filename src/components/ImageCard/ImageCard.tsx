@@ -41,7 +41,7 @@ export const ImageCard: VoidComponent<Props> = (props) => {
             class='flex flex-col gap-4 rounded-lg bg-neutral-900 p-4'
             ref={props.ref}
         >
-            <div class='h-80 w-80 self-center'>
+            <div class='h-80 w-full self-center'>
                 <Show when={!loaded()}>
                     <canvas class='h-full w-full' ref={canvasRef}></canvas>
                 </Show>
