@@ -107,7 +107,7 @@ export const Button: ParentComponent<Props> = (props) => {
                 >
                     {props.children}
                     <Show when={local.label}>
-                        <span class='inline-flex items-center justify-center rounded-full bg-neutral-100/30 px-1 font-medium text-neutral-100 text-xs'>
+                        <span class='inline-flex items-center justify-center rounded-full bg-neutral-100/10 px-1 font-medium text-neutral-100 text-xs'>
                             {local.label}
                         </span>
                     </Show>
