@@ -1,5 +1,11 @@
 import { createMemo, Show, type VoidComponent } from 'solid-js';
-import { IconAddPlus, IconSettings, Tab } from '@/components';
+import {
+    Button,
+    ButtonIcon,
+    IconAddPlus,
+    IconSettings,
+    Tab,
+} from '@/components';
 import { useGlobalData } from '@/store';
 
 type Props = {
@@ -40,18 +46,15 @@ export const Nav: VoidComponent<Props> = (props) => {
             </div>
             <div class='flex gap-5'>
                 <Show when={globalData.store.activeTab === 'Snippets'}>
-                    <button
-                        class='flex cursor-pointer items-center gap-2 rounded-md bg-blue-500 px-3 py-1'
-                        type='button'
-                    >
-                        <IconAddPlus class='size-6' />
+                    <Button variant='primary'>
+                        <IconAddPlus class='size-5' />
                         <span>New</span>
-                    </button>
+                    </Button>
                 </Show>
 
-                <button class='cursor-pointer' type='button'>
-                    <IconSettings class='size-6' />
-                </button>
+                <ButtonIcon>
+                    <IconSettings class='size-5' />
+                </ButtonIcon>
             </div>
         </div>
     );
