@@ -32,7 +32,9 @@ export const VideoCard: VoidComponent<Props> = (props) => {
                 </video>
             </div>
             <div class='flex flex-col gap-4'>
-                <span>{props.video.title}</span>
+                <div class='flex flex-col gap-2'>
+                    <span>{props.video.title}</span>
+                </div>
                 <div class='flex flex-row justify-between'>
                     <div class='flex flex-row gap-2'>
                         <Button onClick={handleCopy} variant='primary'>
