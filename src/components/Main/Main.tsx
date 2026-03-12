@@ -9,31 +9,35 @@ type Props = {
 export const Main: VoidComponent<Props> = (props) => {
     const globalData = useGlobalData();
 
+    const mediaTabActive = () => globalData.store.activeTab === 'Media';
+    const imagesTabActive = () => globalData.store.activeTab === 'Images';
+    const videosTabActive = () => globalData.store.activeTab === 'Videos';
+    const audioTabActive = () => globalData.store.activeTab === 'Audio';
+    const snippetsTabActive = () => globalData.store.activeTab === 'Snippets';
+
     return (
         <main
             class='grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-4'
             ref={props.ref}
         >
             <Switch>
-                <Match when={globalData.store.activeTab === 'Media'}>
-                    todo!
-                </Match>
-                <Match when={globalData.store.activeTab === 'Images'}>
+                <Match when={mediaTabActive()}>todo!</Match>
+                <Match when={imagesTabActive()}>
                     <For each={globalData.resources.images.get() || []}>
                         {(item) => <ImageCard image={item} />}
                     </For>
                 </Match>
-                <Match when={globalData.store.activeTab === 'Videos'}>
+                <Match when={videosTabActive()}>
                     <For each={globalData.resources.videos.get() || []}>
                         {(item) => <VideoCard video={item} />}
                     </For>
                 </Match>
-                <Match when={globalData.store.activeTab === 'Audio'}>
+                <Match when={audioTabActive()}>
                     <For each={globalData.resources.audio.get() || []}>
                         {(item) => <AudioCard audio={item} />}
                     </For>
                 </Match>
-                <Match when={globalData.store.activeTab === 'Snippets'}>
+                <Match when={snippetsTabActive()}>
                     <For each={globalData.resources.snippets.get() || []}>
                         {(item) => <SnippetCard snippet={item} />}
                     </For>
