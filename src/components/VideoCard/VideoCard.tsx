@@ -1,6 +1,7 @@
 import { convertFileSrc } from '@tauri-apps/api/core';
 import { onMount, type VoidComponent } from 'solid-js';
 import type { Video } from '@/bindings';
+import { Button, ButtonIcon, IconMoreVertical } from '@/components';
 
 type Props = {
     video: Video;
@@ -13,6 +14,8 @@ export const VideoCard: VoidComponent<Props> = (props) => {
     onMount(() => {
         if (videoRef) videoRef.volume = 0.1;
     });
+
+    const handleCopy = () => {};
 
     return (
         <div
@@ -28,8 +31,20 @@ export const VideoCard: VoidComponent<Props> = (props) => {
                     <track kind='captions' />
                 </video>
             </div>
-            <div class='flex flex-col'>
+            <div class='flex flex-col gap-4'>
                 <span>{props.video.title}</span>
+                <div class='flex flex-row justify-between'>
+                    <div class='flex flex-row gap-2'>
+                        <Button onClick={handleCopy} variant='primary'>
+                            Copy
+                        </Button>
+                    </div>
+                    <div class='flex flex-row gap-2'>
+                        <ButtonIcon>
+                            <IconMoreVertical />
+                        </ButtonIcon>
+                    </div>
+                </div>
             </div>
         </div>
     );
