@@ -33,7 +33,7 @@ export const VideoCard: VoidComponent<Props> = (props) => {
             </div>
             <div class='flex flex-col gap-4'>
                 <div class='flex flex-col gap-2'>
-                    <span>{props.video.title}</span>
+                    <span class='truncate'>{props.video.title}</span>
                 </div>
                 <div class='flex flex-row justify-between'>
                     <div class='flex flex-row gap-2'>

@@ -27,7 +27,7 @@ export const AudioCard: VoidComponent<Props> = (props) => {
                 <track kind='captions' />
             </audio>
             <div class='flex flex-col'>
-                <span>{props.audio.title}</span>
+                <span class='truncate'>{props.audio.title}</span>
             </div>
         </div>
     );

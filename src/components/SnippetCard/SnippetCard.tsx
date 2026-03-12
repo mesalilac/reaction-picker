@@ -19,7 +19,7 @@ export const SnippetCard: VoidComponent<Props> = (props) => {
                 />
             </div>
             <div class='flex flex-col'>
-                <span>{props.snippet.title}</span>
+                <span class='truncate'>{props.snippet.title}</span>
             </div>
         </div>
     );
