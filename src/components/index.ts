@@ -12,3 +12,4 @@ export * from './ImageCard';
 export * from './VideoCard';
 export * from './AudioCard';
 export * from './SnippetCard';
+export * from './Popover';
