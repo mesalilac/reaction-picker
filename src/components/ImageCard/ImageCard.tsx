@@ -74,16 +74,21 @@ export const ImageCard: VoidComponent<Props> = (props) => {
                     }}
                 />
             </div>
-            <div class='flex flex-row justify-between'>
-                <div class='flex flex-row gap-2'>
-                    <Button onClick={handleCopy} variant='primary'>
-                        Copy
-                    </Button>
+            <div class='flex flex-col gap-4'>
+                <div class='flex flex-col gap-2'>
+                    <span class='truncate'>{props.image.title}</span>
                 </div>
-                <div class='flex flex-row gap-2'>
-                    <ButtonIcon>
-                        <IconMoreVertical />
-                    </ButtonIcon>
+                <div class='flex flex-row justify-between'>
+                    <div class='flex flex-row gap-2'>
+                        <Button onClick={handleCopy} variant='primary'>
+                            Copy
+                        </Button>
+                    </div>
+                    <div class='flex flex-row gap-2'>
+                        <ButtonIcon>
+                            <IconMoreVertical />
+                        </ButtonIcon>
+                    </div>
                 </div>
             </div>
         </div>
