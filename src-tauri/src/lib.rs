@@ -93,7 +93,11 @@ pub fn run() {
         get_tags,
         get_settings,
         get_general_stats,
-        util_drop_files
+        util_drop_files,
+        util_copy_image,
+        util_copy_video,
+        util_copy_audio,
+        util_copy_snippet
     ]);
 
     #[cfg(debug_assertions)]
@@ -116,7 +120,7 @@ pub fn run() {
                 .set_focus();
         }))
         .plugin(tauri_plugin_opener::init())
-        .plugin(tauri_plugin_clipboard_manager::init())
+        .plugin(tauri_plugin_clipboard_next::init())
         .invoke_handler(specta_builder.invoke_handler())
         .setup(move |app| {
             specta_builder.mount_events(app);
