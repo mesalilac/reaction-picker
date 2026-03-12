@@ -1,6 +1,7 @@
 import { convertFileSrc } from '@tauri-apps/api/core';
 import { onMount, type VoidComponent } from 'solid-js';
 import type { Audio } from '@/bindings';
+import { Button, ButtonIcon, IconMoreVertical } from '@/components';
 
 type Props = {
     audio: Audio;
@@ -14,6 +15,8 @@ export const AudioCard: VoidComponent<Props> = (props) => {
         if (audioRef) audioRef.volume = 0.1;
     });
 
+    const handleCopy = () => {};
+
     return (
         <div
             class='flex h-80 flex-col gap-4 rounded-lg bg-neutral-900 p-4'
@@ -26,8 +29,22 @@ export const AudioCard: VoidComponent<Props> = (props) => {
                 />
                 <track kind='captions' />
             </audio>
-            <div class='flex flex-col'>
-                <span class='truncate'>{props.audio.title}</span>
+            <div class='flex flex-col gap-4'>
+                <div class='flex flex-col gap-2'>
+                    <span class='truncate'>{props.audio.title}</span>
+                </div>
+                <div class='flex flex-row justify-between'>
+                    <div class='flex flex-row gap-2'>
+                        <Button onClick={handleCopy} variant='primary'>
+                            Copy
+                        </Button>
+                    </div>
+                    <div class='flex flex-row gap-2'>
+                        <ButtonIcon>
+                            <IconMoreVertical />
+                        </ButtonIcon>
+                    </div>
+                </div>
             </div>
         </div>
     );
