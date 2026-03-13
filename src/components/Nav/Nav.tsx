@@ -1,12 +1,9 @@
 import { createMemo, Show, type VoidComponent } from 'solid-js';
-import {
-    Button,
-    ButtonIcon,
-    IconAddPlus,
-    IconSettings,
-    Tab,
-} from '@/components';
+
+import { Button, ButtonIcon, IconAddPlus, IconSettings } from '@/components';
 import { useGlobalData } from '@/store';
+
+import { Tab } from './Tab';
 
 type Props = {
     ref?: HTMLDivElement | ((el: HTMLDivElement) => void);
