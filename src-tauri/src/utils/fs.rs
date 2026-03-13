@@ -73,16 +73,3 @@ pub fn get_app_audio_dir() -> PathBuf {
 
     app_audio_dir
 }
-
-/// Returns the thumbnails directory.
-///
-/// Place to store thumbnails for videos
-pub fn get_app_thumbnails_dir() -> PathBuf {
-    let app_thumbnails_dir = get_app_media_dir().join("thumbnails");
-
-    if !app_thumbnails_dir.exists() {
-        std::fs::create_dir_all(&app_thumbnails_dir).expect("Failed to create thumbnails dir");
-    }
-
-    app_thumbnails_dir
-}
