@@ -1,6 +1,6 @@
 import { For, Match, Switch, type VoidComponent } from 'solid-js';
 
-import { Button } from '@/components';
+import { Button, Input } from '@/components';
 import { useGlobalData } from '@/store';
 
 import { AudioCard } from './AudioCard';
@@ -23,7 +23,7 @@ export const Main: VoidComponent<Props> = (props) => {
     return (
         <main class='flex flex-col gap-4' ref={props.ref}>
             <div class='flex justify-between'>
-                <input placeholder='Search...' type='search' />
+                <Input placeholder='Search...' type='search' />
 
                 <div class='flex gap-2'>
                     <Button variant='secondary'>Filter</Button>
