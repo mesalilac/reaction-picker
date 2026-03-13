@@ -1,6 +1,6 @@
 use super::prelude::*;
 use crate::utils::fs::{get_app_audio_dir, get_app_images_dir, get_app_videos_dir};
-use diesel::dsl::{exists, select};
+use diesel::dsl::{exists, select, update};
 use image::{EncodableLayout, ImageReader};
 use std::{io::Cursor, path::PathBuf};
 use symphonia::core::{
@@ -274,7 +274,7 @@ pub async fn util_copy_image(
     let mut conn = state.pool.get()?;
 
     let image_entity = images::table
-        .find(id)
+        .find(&id)
         .get_result::<ImageEntity>(&mut conn)?;
 
     let image = Image::from_entity(image_entity, Vec::new());
@@ -284,6 +284,14 @@ pub async fn util_copy_image(
     clipboard
         .write_image(image.file_path.to_string_lossy().to_string())
         .map_err(|e| CommandError::Clipboard(e.to_string()))?;
+
+    update(images::table.find(&id))
+        .set(images::use_counter.eq(image.use_counter + 1))
+        .execute(&mut conn)?;
+
+    update(images::table.find(&id))
+        .set(images::last_used_at.eq(Timestamp::now()))
+        .execute(&mut conn)?;
 
     Ok(())
 }
@@ -298,7 +306,7 @@ pub async fn util_copy_video(
     let mut conn = state.pool.get()?;
 
     let video_entity = videos::table
-        .find(id)
+        .find(&id)
         .get_result::<VideoEntity>(&mut conn)?;
 
     let video = Video::from_entity(video_entity, Vec::new());
@@ -308,6 +316,14 @@ pub async fn util_copy_video(
     clipboard
         .write_files(vec![video.file_path.to_string_lossy().to_string()])
         .map_err(|e| CommandError::Clipboard(e.to_string()))?;
+
+    update(videos::table.find(&id))
+        .set(videos::use_counter.eq(video.use_counter + 1))
+        .execute(&mut conn)?;
+
+    update(videos::table.find(&id))
+        .set(videos::last_used_at.eq(Timestamp::now()))
+        .execute(&mut conn)?;
 
     Ok(())
 }
@@ -321,7 +337,9 @@ pub async fn util_copy_audio(
 ) -> CommandResult<()> {
     let mut conn = state.pool.get()?;
 
-    let audio_entity = audio::table.find(id).get_result::<AudioEntity>(&mut conn)?;
+    let audio_entity = audio::table
+        .find(&id)
+        .get_result::<AudioEntity>(&mut conn)?;
 
     let audio = Audio::from_entity(audio_entity, Vec::new());
 
@@ -330,6 +348,14 @@ pub async fn util_copy_audio(
     clipboard
         .write_files(vec![audio.file_path.to_string_lossy().to_string()])
         .map_err(|e| CommandError::Clipboard(e.to_string()))?;
+
+    update(audio::table.find(&id))
+        .set(audio::use_counter.eq(audio.use_counter + 1))
+        .execute(&mut conn)?;
+
+    update(audio::table.find(&id))
+        .set(audio::last_used_at.eq(Timestamp::now()))
+        .execute(&mut conn)?;
 
     Ok(())
 }
@@ -344,7 +370,7 @@ pub async fn util_copy_snippet(
     let mut conn = state.pool.get()?;
 
     let snippet_entity = snippets::table
-        .find(id)
+        .find(&id)
         .get_result::<SnippetEntity>(&mut conn)?;
 
     let snippet = Snippet::from_entity(snippet_entity, Vec::new());
@@ -354,6 +380,14 @@ pub async fn util_copy_snippet(
     clipboard
         .write_text(snippet.content)
         .map_err(|e| CommandError::Clipboard(e.to_string()))?;
+
+    update(snippets::table.find(&id))
+        .set(snippets::use_counter.eq(snippet.use_counter + 1))
+        .execute(&mut conn)?;
+
+    update(snippets::table.find(&id))
+        .set(snippets::last_used_at.eq(Timestamp::now()))
+        .execute(&mut conn)?;
 
     Ok(())
 }
