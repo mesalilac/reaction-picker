@@ -12,7 +12,7 @@ function App() {
                 richColors
                 swipeDirections={['left', 'right']}
                 theme='dark'
-                visibleToasts={5}
+                visibleToasts={2}
             />
             <DragOverlay />
             <div class='flex flex-col gap-5'>
