@@ -1,7 +1,8 @@
 import { createVisibilityObserver } from '@solid-primitives/intersection-observer';
 import { convertFileSrc } from '@tauri-apps/api/core';
 import { createSignal, Show, type VoidComponent } from 'solid-js';
-import type { Video } from '@/bindings';
+import { toast } from 'solid-sonner';
+import { commands, type Video } from '@/bindings';
 import { Button, ButtonIcon, IconMoreVertical, Popover } from '@/components';
 
 type Props = {
@@ -21,7 +22,23 @@ export const VideoCard: VoidComponent<Props> = (props) => {
 
     const containerVisible = useVisibilityObserver(() => containerRef);
 
-    const handleCopy = () => {};
+    const handleCopy = async () => {
+        const res = await commands.utilCopyVideo(props.video.id).catch((e) => {
+            toast.error(e);
+        });
+
+        if (!res) return;
+
+        if (res.status === 'error') {
+            toast.error(res.error.kind, {
+                description: res.error.message,
+            });
+
+            return;
+        }
+
+        toast.success('Video copied to clipboard');
+    };
 
     const handleContextMenu = (e: MouseEvent) => {
         e.preventDefault();

@@ -1,6 +1,7 @@
 import { createVisibilityObserver } from '@solid-primitives/intersection-observer';
 import { createSignal, Show, type VoidComponent } from 'solid-js';
-import type { Snippet } from '@/bindings';
+import { toast } from 'solid-sonner';
+import { commands, type Snippet } from '@/bindings';
 import { Button, ButtonIcon, IconMoreVertical, Popover } from '@/components';
 
 type Props = {
@@ -20,7 +21,25 @@ export const SnippetCard: VoidComponent<Props> = (props) => {
 
     const containerVisible = useVisibilityObserver(() => containerRef);
 
-    const handleCopy = () => {};
+    const handleCopy = async () => {
+        const res = await commands
+            .utilCopySnippet(props.snippet.id)
+            .catch((e) => {
+                toast.error(e);
+            });
+
+        if (!res) return;
+
+        if (res.status === 'error') {
+            toast.error(res.error.kind, {
+                description: res.error.message,
+            });
+
+            return;
+        }
+
+        toast.success('Snippet copied to clipboard');
+    };
 
     const handleContextMenu = (e: MouseEvent) => {
         e.preventDefault();
