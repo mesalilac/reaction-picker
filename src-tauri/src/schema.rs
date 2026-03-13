@@ -58,6 +58,7 @@ diesel::table! {
     settings (id) {
         id -> Integer,
         minimize_on_copy -> Bool,
+        default_volume -> Nullable<Float>,
     }
 }
 

@@ -5,6 +5,7 @@ use super::prelude::*;
 pub struct SettingEntity {
     pub id: i32,
     pub minimize_on_copy: bool,
+    pub default_volume: Option<f32>,
 }
 
 #[derive(specta::Type, Serialize, Deserialize, Debug, Clone)]
@@ -12,6 +13,7 @@ pub struct SettingEntity {
 pub struct Setting {
     pub id: i32,
     pub minimize_on_copy: bool,
+    pub default_volume: Option<f32>,
 }
 
 impl Setting {
@@ -19,6 +21,7 @@ impl Setting {
         Self {
             id: entity.id,
             minimize_on_copy: entity.minimize_on_copy,
+            default_volume: entity.default_volume,
         }
     }
 }
