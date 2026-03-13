@@ -1,5 +1,11 @@
 import { For, Match, Switch, type VoidComponent } from 'solid-js';
-import { AudioCard, ImageCard, SnippetCard, VideoCard } from '@/components';
+import {
+    AudioCard,
+    Button,
+    ImageCard,
+    SnippetCard,
+    VideoCard,
+} from '@/components';
 import { useGlobalData } from '@/store';
 
 type Props = {
@@ -15,32 +21,40 @@ export const Main: VoidComponent<Props> = (props) => {
     const snippetsTabActive = () => globalData.store.activeTab === 'Snippets';
 
     return (
-        <main
-            class='grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-4'
-            ref={props.ref}
-        >
-            <Switch>
-                <Match when={imagesTabActive()}>
-                    <For each={globalData.resources.images.get() || []}>
-                        {(item) => <ImageCard image={item} />}
-                    </For>
-                </Match>
-                <Match when={videosTabActive()}>
-                    <For each={globalData.resources.videos.get() || []}>
-                        {(item) => <VideoCard video={item} />}
-                    </For>
-                </Match>
-                <Match when={audioTabActive()}>
-                    <For each={globalData.resources.audio.get() || []}>
-                        {(item) => <AudioCard audio={item} />}
-                    </For>
-                </Match>
-                <Match when={snippetsTabActive()}>
-                    <For each={globalData.resources.snippets.get() || []}>
-                        {(item) => <SnippetCard snippet={item} />}
-                    </For>
-                </Match>
-            </Switch>
+        <main class='flex flex-col gap-4' ref={props.ref}>
+            <div class='flex justify-between'>
+                <input placeholder='Search...' type='search' />
+
+                <div class='flex gap-2'>
+                    <Button variant='secondary'>Filter</Button>
+                    <Button variant='secondary'>Sort by</Button>
+                    <Button variant='secondary'>Sort direction</Button>
+                </div>
+            </div>
+            <div class='grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-4'>
+                <Switch>
+                    <Match when={imagesTabActive()}>
+                        <For each={globalData.resources.images.get() || []}>
+                            {(item) => <ImageCard image={item} />}
+                        </For>
+                    </Match>
+                    <Match when={videosTabActive()}>
+                        <For each={globalData.resources.videos.get() || []}>
+                            {(item) => <VideoCard video={item} />}
+                        </For>
+                    </Match>
+                    <Match when={audioTabActive()}>
+                        <For each={globalData.resources.audio.get() || []}>
+                            {(item) => <AudioCard audio={item} />}
+                        </For>
+                    </Match>
+                    <Match when={snippetsTabActive()}>
+                        <For each={globalData.resources.snippets.get() || []}>
+                            {(item) => <SnippetCard snippet={item} />}
+                        </For>
+                    </Match>
+                </Switch>
+            </div>
         </main>
     );
 };
