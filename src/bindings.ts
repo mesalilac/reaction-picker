@@ -137,6 +137,7 @@ export type Audio = {
     useCounter: number;
     lastUsedAt: Timestamp | null;
     filePath: string;
+    fileName: string;
     mimeType: string;
     fileSize: number;
     checksum: string;
@@ -166,6 +167,7 @@ export type Image = {
     useCounter: number;
     lastUsedAt: Timestamp | null;
     filePath: string;
+    fileName: string;
     mimeType: string;
     fileSize: number;
     checksum: string;
@@ -205,6 +207,7 @@ export type Video = {
     useCounter: number;
     lastUsedAt: Timestamp | null;
     filePath: string;
+    fileName: string;
     mimeType: string;
     fileSize: number;
     checksum: string;
