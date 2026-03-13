@@ -341,5 +341,19 @@ pub async fn util_copy_snippet(
     app_handle: tauri::AppHandle,
     id: String,
 ) -> CommandResult<()> {
+    let mut conn = state.pool.get()?;
+
+    let snippet_entity = snippets::table
+        .find(id)
+        .get_result::<SnippetEntity>(&mut conn)?;
+
+    let snippet = Snippet::from_entity(snippet_entity, Vec::new());
+
+    let clipboard = app_handle.clipboard_next();
+
+    clipboard
+        .write_text(snippet.content)
+        .map_err(|e| CommandError::Clipboard(e.to_string()))?;
+
     Ok(())
 }
