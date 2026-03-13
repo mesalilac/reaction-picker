@@ -59,6 +59,11 @@ export const DragOverlay: VoidComponent<Props> = (props) => {
                     return;
                 }
 
+                globalData.resources.images.refetch();
+                globalData.resources.videos.refetch();
+                globalData.resources.audio.refetch();
+                globalData.resources.generalStats.refetch();
+
                 toast.success(`File(s) processed: ${res.data}`, {
                     id: toastId,
                 });
