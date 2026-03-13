@@ -15,7 +15,13 @@ import {
     type VoidComponent,
 } from 'solid-js';
 
-import { Button, IconCaretDownMd, IconCheck, Popover } from '@/components';
+import {
+    Button,
+    IconCaretDownMd,
+    IconCheck,
+    Input,
+    Popover,
+} from '@/components';
 
 type Option = {
     /**
@@ -261,8 +267,8 @@ export const Select: VoidComponent<Props> = (rawProps) => {
                     >
                         <div class='flex flex-col flex-nowrap items-stretch gap-4'>
                             <Show when={props.searchable}>
-                                <input
-                                    class='grow rounded-lg border border-neutral-600 border-none bg-neutral-700 px-3 py-2.5 text-sm shadow-xs placeholder:text-neutral-500 focus:border-none focus:outline-2 focus:outline-blue-500'
+                                <Input
+                                    class='grow'
                                     onInput={(e) =>
                                         setSearchQuery(e.target.value)
                                     }
