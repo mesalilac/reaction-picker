@@ -2,6 +2,7 @@ import { createVisibilityObserver } from '@solid-primitives/intersection-observe
 import { openUrl } from '@tauri-apps/plugin-opener';
 import { createSignal, Show, type VoidComponent } from 'solid-js';
 import { toast } from 'solid-sonner';
+
 import { commands, type Snippet } from '@/bindings';
 import { Button, ButtonIcon, IconMoreVertical, Popover } from '@/components';
 

@@ -1,5 +1,7 @@
 import { Toaster } from 'solid-sonner';
+
 import { DragOverlay, Main, Nav } from '@/components';
+
 import { GlobalDataProvider } from './store';
 
 function App() {

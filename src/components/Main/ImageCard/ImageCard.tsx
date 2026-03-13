@@ -4,6 +4,7 @@ import { openUrl } from '@tauri-apps/plugin-opener';
 import { decode } from 'blurhash';
 import { createSignal, onMount, Show, type VoidComponent } from 'solid-js';
 import { toast } from 'solid-sonner';
+
 import { commands, type Image } from '@/bindings';
 import { Button, ButtonIcon, IconMoreVertical, Popover } from '@/components';
 
