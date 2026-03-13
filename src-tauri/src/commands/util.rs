@@ -1,5 +1,8 @@
 use super::prelude::*;
-use crate::utils::fs::{get_app_audio_dir, get_app_images_dir, get_app_videos_dir};
+use crate::{
+    events::FileProcessingProgress,
+    utils::fs::{get_app_audio_dir, get_app_images_dir, get_app_videos_dir},
+};
 use diesel::dsl::{exists, select, update};
 use image::{EncodableLayout, ImageReader};
 use std::{io::Cursor, path::PathBuf};
@@ -10,11 +13,16 @@ use symphonia::core::{
     probe::Hint,
 };
 use tauri_plugin_clipboard_next::ClipboardNextExt;
+use tauri_specta::Event;
 use walkdir::WalkDir;
 
 #[tauri::command]
 #[specta::specta]
-pub async fn util_drop_files(state: AppState<'_>, paths: Vec<PathBuf>) -> CommandResult<i32> {
+pub async fn util_drop_files(
+    state: AppState<'_>,
+    app_handle: tauri::AppHandle,
+    paths: Vec<PathBuf>,
+) -> CommandResult<i32> {
     let mut conn = state.pool.get()?;
     let mut total_processed_files = 0;
 
@@ -257,7 +265,12 @@ pub async fn util_drop_files(state: AppState<'_>, paths: Vec<PathBuf>) -> Comman
                 }
             }
 
-            total_processed_files += 1
+            total_processed_files += 1;
+
+            let _ = FileProcessingProgress {
+                current: total_processed_files,
+            }
+            .emit(&app_handle);
         }
     }
 
