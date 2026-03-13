@@ -83,7 +83,25 @@
 		"enabled": true,
 		"actions": {
 			"source": {
-				"organizeImports": "on",
+				"organizeImports": {
+					"level": "on",
+					"options": {
+						"groups": [
+							":NODE:",
+							":BUN:",
+							":BLANK_LINE:",
+							":PACKAGE_WITH_PROTOCOL:",
+							":PACKAGE:",
+							":URL:",
+							":BLANK_LINE:",
+							":ALIAS:",
+							":BLANK_LINE:",
+							":PATH:",
+							":BLANK_LINE:",
+							"**/*.css"
+						]
+					}
+				},
 				"useSortedAttributes": "on"
 			}
 		}
