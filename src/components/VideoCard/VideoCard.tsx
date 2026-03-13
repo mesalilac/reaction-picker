@@ -1,3 +1,4 @@
+import { createVisibilityObserver } from '@solid-primitives/intersection-observer';
 import { convertFileSrc } from '@tauri-apps/api/core';
 import { createSignal, onMount, Show, type VoidComponent } from 'solid-js';
 import type { Video } from '@/bindings';
@@ -5,14 +6,20 @@ import { Button, ButtonIcon, IconMoreVertical, Popover } from '@/components';
 
 type Props = {
     video: Video;
-    ref?: HTMLDivElement | ((el: HTMLDivElement) => void);
 };
 
 export const VideoCard: VoidComponent<Props> = (props) => {
     let popoverMenuRef!: HTMLButtonElement;
     let videoRef!: HTMLVideoElement;
+    let containerRef!: HTMLDivElement;
 
     const [showPopoverMenu, setShowPopoverMenu] = createSignal(false);
+
+    const useVisibilityObserver = createVisibilityObserver({
+        threshold: 0.2,
+    });
+
+    const containerVisible = useVisibilityObserver(() => containerRef);
 
     onMount(() => {
         if (videoRef) videoRef.volume = 0.1;
@@ -35,21 +42,23 @@ export const VideoCard: VoidComponent<Props> = (props) => {
         <div
             class='flex flex-col gap-4 rounded-lg bg-neutral-900 p-4'
             onContextMenu={handleContextMenu}
-            ref={props.ref}
+            ref={containerRef}
             role='none'
         >
             <div class='h-80 w-full self-center'>
-                <video
-                    class='h-full w-full rounded-lg focus:outline-none'
-                    controls
-                    ref={videoRef}
-                >
-                    <source
-                        src={convertFileSrc(props.video.filePath)}
-                        type={props.video.mimeType}
-                    />
-                    <track kind='captions' />
-                </video>
+                <Show when={containerVisible()}>
+                    <video
+                        class='h-full w-full rounded-lg focus:outline-none'
+                        controls
+                        ref={videoRef}
+                    >
+                        <source
+                            src={convertFileSrc(props.video.filePath)}
+                            type={props.video.mimeType}
+                        />
+                        <track kind='captions' />
+                    </video>
+                </Show>
             </div>
             <div class='flex flex-col gap-4'>
                 <div class='flex flex-col gap-2'>

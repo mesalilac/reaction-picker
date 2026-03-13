@@ -1,16 +1,23 @@
+import { createVisibilityObserver } from '@solid-primitives/intersection-observer';
 import { createSignal, Show, type VoidComponent } from 'solid-js';
 import type { Snippet } from '@/bindings';
 import { Button, ButtonIcon, IconMoreVertical, Popover } from '@/components';
 
 type Props = {
     snippet: Snippet;
-    ref?: HTMLDivElement | ((el: HTMLDivElement) => void);
 };
 
 export const SnippetCard: VoidComponent<Props> = (props) => {
     let popoverMenuRef!: HTMLButtonElement;
+    let containerRef!: HTMLDivElement;
 
     const [showPopoverMenu, setShowPopoverMenu] = createSignal(false);
+
+    const useVisibilityObserver = createVisibilityObserver({
+        threshold: 0.2,
+    });
+
+    const containerVisible = useVisibilityObserver(() => containerRef);
 
     const handleCopy = () => {};
 
@@ -29,15 +36,17 @@ export const SnippetCard: VoidComponent<Props> = (props) => {
         <div
             class='flex flex-col gap-4 rounded-lg bg-neutral-900 p-4'
             onContextMenu={handleContextMenu}
-            ref={props.ref}
+            ref={containerRef}
             role='none'
         >
             <div class='h-80 w-full self-center'>
-                <textarea
-                    class='pointer-events-none h-full w-full select-none resize-none overflow-hidden rounded-lg text-neutral-400 focus:outline-none'
-                    readOnly
-                    textContent={props.snippet.content}
-                />
+                <Show when={containerVisible()}>
+                    <textarea
+                        class='pointer-events-none h-full w-full select-none resize-none overflow-hidden rounded-lg text-neutral-400 focus:outline-none'
+                        readOnly
+                        textContent={props.snippet.content}
+                    />
+                </Show>
             </div>
             <div class='flex flex-col gap-4'>
                 <div class='flex flex-col gap-2'>

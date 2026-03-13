@@ -1,3 +1,4 @@
+import { createVisibilityObserver } from '@solid-primitives/intersection-observer';
 import { convertFileSrc } from '@tauri-apps/api/core';
 import { createSignal, onMount, Show, type VoidComponent } from 'solid-js';
 import type { Audio } from '@/bindings';
@@ -5,14 +6,20 @@ import { Button, ButtonIcon, IconMoreVertical, Popover } from '@/components';
 
 type Props = {
     audio: Audio;
-    ref?: HTMLDivElement | ((el: HTMLDivElement) => void);
 };
 
 export const AudioCard: VoidComponent<Props> = (props) => {
     let popoverMenuRef!: HTMLButtonElement;
     let audioRef!: HTMLAudioElement;
+    let containerRef!: HTMLDivElement;
 
     const [showPopoverMenu, setShowPopoverMenu] = createSignal(false);
+
+    const useVisibilityObserver = createVisibilityObserver({
+        threshold: 0.2,
+    });
+
+    const containerVisible = useVisibilityObserver(() => containerRef);
 
     onMount(() => {
         if (audioRef) audioRef.volume = 0.1;
@@ -35,17 +42,23 @@ export const AudioCard: VoidComponent<Props> = (props) => {
         <div
             class='flex h-80 flex-col gap-4 rounded-lg bg-neutral-900 p-4'
             onContextMenu={handleContextMenu}
-            ref={props.ref}
+            ref={containerRef}
             role='none'
         >
-            <audio class='w-full focus:outline-none' controls ref={audioRef}>
-                <source
-                    src={convertFileSrc(props.audio.filePath)}
-                    type={props.audio.mimeType}
-                />
-                <track kind='captions' />
-            </audio>
-            <div class='flex flex-col gap-4'>
+            <Show when={containerVisible()}>
+                <audio
+                    class='w-full focus:outline-none'
+                    controls
+                    ref={audioRef}
+                >
+                    <source
+                        src={convertFileSrc(props.audio.filePath)}
+                        type={props.audio.mimeType}
+                    />
+                    <track kind='captions' />
+                </audio>
+            </Show>
+            <div class='mt-auto flex flex-col gap-4'>
                 <div class='flex flex-col gap-2'>
                     <span class='truncate'>{props.audio.title}</span>
                 </div>
