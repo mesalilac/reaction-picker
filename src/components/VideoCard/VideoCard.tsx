@@ -48,8 +48,10 @@ export const VideoCard: VoidComponent<Props> = (props) => {
             <div class='h-80 w-full self-center'>
                 <Show when={containerVisible()}>
                     <video
+                        autoplay={!props.video.hasAudio}
                         class='h-full w-full rounded-lg focus:outline-none'
                         controls
+                        loop
                         ref={videoRef}
                     >
                         <source
