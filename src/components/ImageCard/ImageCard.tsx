@@ -72,7 +72,10 @@ export const ImageCard: VoidComponent<Props> = (props) => {
         setShowPopoverMenu(true);
     };
 
-    const handleViewDetails = () => {};
+    const handleViewDetails = () => {
+        setShowPopoverMenu(false);
+    };
+
     const handleOpenExternalLink = async () => {
         if (!props.image.externalLink) {
             toast.error('Image has no external link');
@@ -83,8 +86,14 @@ export const ImageCard: VoidComponent<Props> = (props) => {
 
         setShowPopoverMenu(false);
     };
-    const handleEditDetails = () => {};
-    const handleDelete = () => {};
+
+    const handleEditDetails = () => {
+        setShowPopoverMenu(false);
+    };
+
+    const handleDelete = () => {
+        setShowPopoverMenu(false);
+    };
 
     return (
         <div

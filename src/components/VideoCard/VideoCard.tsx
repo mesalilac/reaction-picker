@@ -47,7 +47,10 @@ export const VideoCard: VoidComponent<Props> = (props) => {
         setShowPopoverMenu(true);
     };
 
-    const handleViewDetails = () => {};
+    const handleViewDetails = () => {
+        setShowPopoverMenu(false);
+    };
+
     const handleOpenExternalLink = async () => {
         if (!props.video.externalLink) {
             toast.error('Video has no external link');
@@ -58,8 +61,14 @@ export const VideoCard: VoidComponent<Props> = (props) => {
 
         setShowPopoverMenu(false);
     };
-    const handleEditDetails = () => {};
-    const handleDelete = () => {};
+
+    const handleEditDetails = () => {
+        setShowPopoverMenu(false);
+    };
+
+    const handleDelete = () => {
+        setShowPopoverMenu(false);
+    };
 
     return (
         <div

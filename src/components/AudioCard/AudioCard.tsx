@@ -47,7 +47,10 @@ export const AudioCard: VoidComponent<Props> = (props) => {
         setShowPopoverMenu(true);
     };
 
-    const handleViewDetails = () => {};
+    const handleViewDetails = () => {
+        setShowPopoverMenu(false);
+    };
+
     const handleOpenExternalLink = async () => {
         if (!props.audio.externalLink) {
             toast.error('Audio has no external link');
@@ -58,8 +61,14 @@ export const AudioCard: VoidComponent<Props> = (props) => {
 
         setShowPopoverMenu(false);
     };
-    const handleEditDetails = () => {};
-    const handleDelete = () => {};
+
+    const handleEditDetails = () => {
+        setShowPopoverMenu(false);
+    };
+
+    const handleDelete = () => {
+        setShowPopoverMenu(false);
+    };
 
     return (
         <div

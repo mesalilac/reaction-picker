@@ -48,7 +48,10 @@ export const SnippetCard: VoidComponent<Props> = (props) => {
         setShowPopoverMenu(true);
     };
 
-    const handleViewDetails = () => {};
+    const handleViewDetails = () => {
+        setShowPopoverMenu(false);
+    };
+
     const handleOpenExternalLink = async () => {
         if (!props.snippet.externalLink) {
             toast.error('Snippet has no external link');
@@ -59,8 +62,14 @@ export const SnippetCard: VoidComponent<Props> = (props) => {
 
         setShowPopoverMenu(false);
     };
-    const handleEditDetails = () => {};
-    const handleDelete = () => {};
+
+    const handleEditDetails = () => {
+        setShowPopoverMenu(false);
+    };
+
+    const handleDelete = () => {
+        setShowPopoverMenu(false);
+    };
 
     return (
         <div
