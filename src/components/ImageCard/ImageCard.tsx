@@ -19,7 +19,8 @@ export const ImageCard: VoidComponent<Props> = (props) => {
     const [loaded, setLoaded] = createSignal(false);
 
     const useVisibilityObserver = createVisibilityObserver({
-        threshold: 0.2,
+        rootMargin: '600px 0px 600px 0px',
+        threshold: 0,
     });
 
     const containerVisible = useVisibilityObserver(() => containerRef);
