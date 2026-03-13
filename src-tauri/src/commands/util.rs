@@ -319,6 +319,18 @@ pub async fn util_copy_audio(
     app_handle: tauri::AppHandle,
     id: String,
 ) -> CommandResult<()> {
+    let mut conn = state.pool.get()?;
+
+    let audio_entity = audio::table.find(id).get_result::<AudioEntity>(&mut conn)?;
+
+    let audio = Audio::from_entity(audio_entity, Vec::new());
+
+    let clipboard = app_handle.clipboard_next();
+
+    clipboard
+        .write_files(vec![audio.file_path.to_string_lossy().to_string()])
+        .map_err(|e| CommandError::Clipboard(e.to_string()))?;
+
     Ok(())
 }
 
