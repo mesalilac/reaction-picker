@@ -39,14 +39,20 @@ export const DragOverlay: VoidComponent<Props> = (props) => {
                     duration: Number.POSITIVE_INFINITY,
                 });
 
-                events.fileProcessingProgress.listen((processingEvent) => {
-                    const current = processingEvent.payload.current;
-                    const total = processingEvent.payload.total;
+                const progressUnlisten =
+                    await events.fileProcessingProgress.listen(
+                        (processingEvent) => {
+                            const current = processingEvent.payload.current;
+                            const total = processingEvent.payload.total;
 
-                    toast.loading(`Processed ${current}/${total} file(s)`, {
-                        id: toastId,
-                    });
-                });
+                            toast.loading(
+                                `Processed ${current}/${total} file(s)`,
+                                {
+                                    id: toastId,
+                                },
+                            );
+                        },
+                    );
 
                 const res = await commands
                     .utilDropFiles(e.payload.paths)
@@ -79,6 +85,7 @@ export const DragOverlay: VoidComponent<Props> = (props) => {
                 });
 
                 setProcessingFiles(false);
+                progressUnlisten();
                 toast.dismiss(toastId);
             },
         );
