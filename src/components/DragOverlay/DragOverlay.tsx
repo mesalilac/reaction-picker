@@ -32,12 +32,12 @@ export const DragOverlay: VoidComponent<Props> = (props) => {
                 });
 
                 events.fileProcessingProgress.listen((processingEvent) => {
-                    toast.loading(
-                        `Processed ${processingEvent.payload.current} file(s)`,
-                        {
-                            id: toastId,
-                        },
-                    );
+                    const current = processingEvent.payload.current;
+                    const total = processingEvent.payload.total;
+
+                    toast.loading(`Processed ${current}/${total} file(s)`, {
+                        id: toastId,
+                    });
                 });
 
                 const res = await commands
