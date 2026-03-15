@@ -9,6 +9,7 @@ import { commands, type Image } from '@/bindings';
 import {
     Button,
     ButtonIcon,
+    CardField,
     IconMoreVertical,
     Menu,
     Popover,
@@ -136,7 +137,7 @@ export const ImageCard: VoidComponent<Props> = (props) => {
             </div>
             <div class='flex flex-col gap-4'>
                 <div class='flex flex-col gap-2'>
-                    <span class='truncate'>{props.image.title}</span>
+                    <CardField label='title'>{props.image.title}</CardField>
                 </div>
                 <div class='flex flex-row justify-between'>
                     <div class='flex flex-row gap-2'>
