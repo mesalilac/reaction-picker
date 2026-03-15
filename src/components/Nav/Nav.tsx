@@ -1,6 +1,12 @@
-import { createMemo, Show, type VoidComponent } from 'solid-js';
+import { createMemo, createSignal, Show, type VoidComponent } from 'solid-js';
 
-import { Button, ButtonIcon, IconAddPlus, IconSettings } from '@/components';
+import {
+    Button,
+    ButtonIcon,
+    IconAddPlus,
+    IconSettings,
+    Modal,
+} from '@/components';
 import { useGlobalData } from '@/store';
 
 import { Tab } from './Tab';
@@ -28,6 +34,10 @@ export const Nav: VoidComponent<Props> = (props) => {
         () => globalData.resources.snippets.get()?.length || 0,
     );
 
+    const [showSettingsModal, setShowSettingsModal] = createSignal(false);
+
+    const saveSettings = () => {};
+
     return (
         <div class='flex justify-between'>
             <div class='flex gap-3' ref={props.ref}>
@@ -44,9 +54,19 @@ export const Nav: VoidComponent<Props> = (props) => {
                     </Button>
                 </Show>
 
-                <ButtonIcon>
+                <ButtonIcon onClick={() => setShowSettingsModal(true)}>
                     <IconSettings />
                 </ButtonIcon>
+                <Show when={showSettingsModal()}>
+                    <Modal
+                        isOpen={showSettingsModal}
+                        onAction={saveSettings}
+                        setIsOpen={setShowSettingsModal}
+                    >
+                        Settings
+                        <div class='border border-neutral-800' />
+                    </Modal>
+                </Show>
             </div>
         </div>
     );
