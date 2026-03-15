@@ -95,7 +95,7 @@ export const Modal = (props: {
         <Portal>
             <Show when={shouldRender()}>
                 <div
-                    class='fixed inset-0 z-50 flex items-center justify-center bg-neutral-900/50'
+                    class='fixed inset-0 z-50 flex items-center justify-center bg-black/60'
                     onClick={close}
                     ref={modalOverlayRef}
                     role='none'
