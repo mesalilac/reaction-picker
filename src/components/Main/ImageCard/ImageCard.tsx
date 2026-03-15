@@ -125,6 +125,7 @@ export const ImageCard: VoidComponent<Props> = (props) => {
                     <img
                         aria-label={props.image.title || 'Image'}
                         class='h-full w-full object-contain'
+                        draggable={false}
                         onLoad={() => setLoaded(true)}
                         src={convertFileSrc(props.image.filePath)}
                         style={{
