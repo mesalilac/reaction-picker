@@ -13,12 +13,16 @@ import {
     Menu,
     Popover,
 } from '@/components';
+import { useGlobalData } from '@/store';
+import { minimizeWindow } from '@/utils';
 
 type Props = {
     image: Image;
 };
 
 export const ImageCard: VoidComponent<Props> = (props) => {
+    const globalData = useGlobalData();
+
     let popoverMenuRef!: HTMLButtonElement;
     let canvasRef!: HTMLCanvasElement;
     let containerRef!: HTMLDivElement;
@@ -71,6 +75,10 @@ export const ImageCard: VoidComponent<Props> = (props) => {
         }
 
         toast.success('Image copied to clipboard');
+
+        if (globalData.resources.settings.get()?.minimizeOnCopy) {
+            await minimizeWindow();
+        }
     };
 
     const handleContextMenu = (e: MouseEvent) => {
