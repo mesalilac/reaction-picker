@@ -7,7 +7,7 @@ import {
     type VoidComponent,
 } from 'solid-js';
 
-import { Label } from '@/components';
+import { CountLabel } from '@/components';
 import { type TabType, useGlobalData } from '@/store';
 
 export const Tab: VoidComponent<{
@@ -52,7 +52,7 @@ export const Tab: VoidComponent<{
             type='button'
         >
             {props.type}
-            <Label>{count()}</Label>
+            <CountLabel>{count()}</CountLabel>
         </button>
     );
 };
