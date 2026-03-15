@@ -107,7 +107,7 @@ export const Modal = (props: {
                             }}
                         >
                             {props.children}
-                            <div class='mt-auto border border-neutral-700' />
+                            <div class='mt-auto border border-neutral-800' />
                             <div class='flex flex-row gap-2 self-end'>
                                 <Button onClick={close} variant='secondary'>
                                     {props.dismiss || (
