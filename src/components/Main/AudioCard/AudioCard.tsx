@@ -51,6 +51,14 @@ export const AudioCard: VoidComponent<Props> = (props) => {
 
         toast.success('Audio copied to clipboard');
 
+        globalData.resources.audio.mutate((prev) => {
+            if (!prev) return;
+
+            return prev.map((item) =>
+                item.id === props.audio.id ? res.data : item,
+            );
+        });
+
         if (globalData.resources.settings.get()?.minimizeOnCopy) {
             await minimizeWindow();
         }

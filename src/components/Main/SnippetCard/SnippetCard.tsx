@@ -52,6 +52,14 @@ export const SnippetCard: VoidComponent<Props> = (props) => {
 
         toast.success('Snippet copied to clipboard');
 
+        globalData.resources.snippets.mutate((prev) => {
+            if (!prev) return;
+
+            return prev.map((item) =>
+                item.id === props.snippet.id ? res.data : item,
+            );
+        });
+
         if (globalData.resources.settings.get()?.minimizeOnCopy) {
             await minimizeWindow();
         }

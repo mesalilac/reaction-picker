@@ -51,6 +51,14 @@ export const VideoCard: VoidComponent<Props> = (props) => {
 
         toast.success('Video copied to clipboard');
 
+        globalData.resources.videos.mutate((prev) => {
+            if (!prev) return;
+
+            return prev.map((item) =>
+                item.id === props.video.id ? res.data : item,
+            );
+        });
+
         if (globalData.resources.settings.get()?.minimizeOnCopy) {
             await minimizeWindow();
         }

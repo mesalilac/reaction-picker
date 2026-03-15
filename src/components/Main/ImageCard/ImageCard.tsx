@@ -78,6 +78,14 @@ export const ImageCard: VoidComponent<Props> = (props) => {
 
         toast.success('Image copied to clipboard');
 
+        globalData.resources.images.mutate((prev) => {
+            if (!prev) return;
+
+            return prev.map((item) =>
+                item.id === props.image.id ? res.data : item,
+            );
+        });
+
         if (globalData.resources.settings.get()?.minimizeOnCopy) {
             await minimizeWindow();
         }
