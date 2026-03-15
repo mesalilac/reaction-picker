@@ -123,10 +123,7 @@ export const Modal = (props: {
                                     )}
                                 </Button>
                                 <Show when={props.onAction}>
-                                    <Button
-                                        onClick={props.onAction}
-                                        variant='primary'
-                                    >
+                                    <Button onClick={props.onAction}>
                                         {props.action || (
                                             <>
                                                 <IconSave /> Save

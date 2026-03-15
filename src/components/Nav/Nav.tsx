@@ -49,7 +49,7 @@ export const Nav: VoidComponent<Props> = (props) => {
             </div>
             <div class='flex gap-5'>
                 <Show when={globalData.store.activeTab === 'Snippets'}>
-                    <Button variant='primary'>
+                    <Button>
                         <IconAddPlus />
                         <span>New</span>
                     </Button>

@@ -2,6 +2,7 @@ import { clsx } from 'clsx';
 import {
     type JSX,
     Match,
+    mergeProps,
     type ParentComponent,
     Show,
     Switch,
@@ -21,13 +22,15 @@ type ButtonVariant =
     | 'ghost';
 
 interface Props extends JSX.ButtonHTMLAttributes<HTMLButtonElement> {
-    variant: ButtonVariant;
+    variant?: ButtonVariant;
     label?: JSX.Element;
     loading?: boolean;
     children: JSX.Element;
 }
 
-export const Button: ParentComponent<Props> = (props) => {
+export const Button: ParentComponent<Props> = (rawProps) => {
+    const props = mergeProps({ variant: 'primary' as ButtonVariant }, rawProps);
+
     const [local, others] = splitProps(props, [
         'class',
         'variant',

@@ -303,7 +303,6 @@ export const Select: VoidComponent<Props> = (rawProps) => {
                                         class='self-start'
                                         onClick={props.onSelectAll}
                                         title='Select all'
-                                        variant='primary'
                                     >
                                         Select All
                                     </Button>
@@ -313,7 +312,6 @@ export const Select: VoidComponent<Props> = (rawProps) => {
                                         class='self-start'
                                         onClick={props.onDeselectAll}
                                         title='Deselect All'
-                                        variant='primary'
                                     >
                                         Deselect All
                                     </Button>
@@ -330,7 +328,6 @@ export const Select: VoidComponent<Props> = (rawProps) => {
                                     class='self-start'
                                     onClick={props.onClearSelection}
                                     title='Clear selection'
-                                    variant='primary'
                                 >
                                     Clear Selection
                                 </Button>

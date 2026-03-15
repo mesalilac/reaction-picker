@@ -119,9 +119,7 @@ export const VideoCard: VoidComponent<Props> = (props) => {
                 </div>
                 <div class='flex flex-row justify-between'>
                     <div class='flex flex-row gap-2'>
-                        <Button onClick={handleCopy} variant='primary'>
-                            Copy
-                        </Button>
+                        <Button onClick={handleCopy}>Copy</Button>
                     </div>
                     <div class='flex flex-row gap-2'>
                         <ButtonIcon ref={popoverMenuRef}>
