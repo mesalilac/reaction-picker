@@ -5,6 +5,7 @@ use crate::{
 };
 use diesel::dsl::{exists, select, update};
 use image::{EncodableLayout, ImageReader};
+use nanoid::nanoid;
 use std::{io::Cursor, path::PathBuf};
 use symphonia::core::{
     formats::FormatOptions,
@@ -19,7 +20,7 @@ use walkdir::WalkDir;
 struct FileQueue {
     path: PathBuf,
     file_type: infer::Type,
-    file_name: String,
+    new_file_name: String,
     cursor: Cursor<Vec<u8>>,
     file_size: i64,
     checksum: String,
@@ -44,12 +45,22 @@ pub async fn util_drop_files(
             let entry_path = entry.path();
             let file_bytes = std::fs::read(entry_path)?;
             let cursor = Cursor::new(file_bytes.clone());
+
             let Some(file_name) = entry_path
-                .file_name()
+                .file_stem()
                 .map(|s| s.to_string_lossy().to_string())
             else {
                 continue;
             };
+
+            let Some(file_ext) = entry_path
+                .extension()
+                .map(|s| s.to_string_lossy().to_string())
+            else {
+                continue;
+            };
+
+            let new_file_name = format!("{file_name}__{}.{file_ext}", nanoid!());
 
             let Some(file_type) = infer::get(&file_bytes) else {
                 continue;
@@ -73,7 +84,7 @@ pub async fn util_drop_files(
                 files.push(FileQueue {
                     path: entry_path.to_path_buf(),
                     file_type,
-                    file_name,
+                    new_file_name,
                     cursor,
                     file_size,
                     checksum,
@@ -93,7 +104,7 @@ pub async fn util_drop_files(
                 files.push(FileQueue {
                     path: entry_path.to_path_buf(),
                     file_type,
-                    file_name,
+                    new_file_name,
                     cursor,
                     file_size,
                     checksum,
@@ -113,7 +124,7 @@ pub async fn util_drop_files(
                 files.push(FileQueue {
                     path: entry_path.to_path_buf(),
                     file_type,
-                    file_name,
+                    new_file_name,
                     cursor,
                     file_size,
                     checksum,
@@ -150,10 +161,10 @@ pub async fn util_drop_files(
                 continue;
             };
 
-            let dest_file_path = get_app_images_dir().join(PathBuf::from(&item.file_name));
+            let dest_file_path = get_app_images_dir().join(PathBuf::from(&item.new_file_name));
 
             let mut image_entity = ImageEntity::from_metadata(ImageMetadata {
-                file_name: item.file_name.clone(),
+                file_name: item.new_file_name.clone(),
                 mime_type: item.file_type.mime_type().to_string(),
                 file_size: item.file_size,
                 checksum: item.checksum,
@@ -162,7 +173,7 @@ pub async fn util_drop_files(
                 blur_hash,
             });
 
-            image_entity.title = Some(item.file_name);
+            image_entity.title = Some(item.new_file_name);
 
             match diesel::insert_into(images::table)
                 .values(&image_entity)
@@ -203,7 +214,7 @@ pub async fn util_drop_files(
 
             let mut format = probed.format;
 
-            let mut title: Option<String> = Some(item.file_name.clone());
+            let mut title: Option<String> = Some(item.new_file_name.clone());
             let mut has_audio: bool = false;
             let mut duration = 0;
 
@@ -232,10 +243,10 @@ pub async fn util_drop_files(
                 }
             }
 
-            let dest_file_path = get_app_videos_dir().join(PathBuf::from(&item.file_name));
+            let dest_file_path = get_app_videos_dir().join(PathBuf::from(&item.new_file_name));
 
             let mut video_entity = VideoEntity::from_metadata(VideoMetadata {
-                file_name: item.file_name.clone(),
+                file_name: item.new_file_name.clone(),
                 mime_type: item.file_type.mime_type().to_string(),
                 file_size: item.file_size,
                 checksum: item.checksum,
@@ -284,7 +295,7 @@ pub async fn util_drop_files(
 
             let mut format = probed.format;
 
-            let mut title: Option<String> = Some(item.file_name.clone());
+            let mut title: Option<String> = Some(item.new_file_name.clone());
             let mut duration = 0;
 
             if let Some(metadata) = format.metadata().current() {
@@ -308,10 +319,10 @@ pub async fn util_drop_files(
                 }
             }
 
-            let dest_file_path = get_app_audio_dir().join(PathBuf::from(&item.file_name));
+            let dest_file_path = get_app_audio_dir().join(PathBuf::from(&item.new_file_name));
 
             let mut audio_entity = AudioEntity::from_metadata(AudioMetadata {
-                file_name: item.file_name.clone(),
+                file_name: item.new_file_name.clone(),
                 mime_type: item.file_type.mime_type().to_string(),
                 file_size: item.file_size,
                 checksum: item.checksum,
