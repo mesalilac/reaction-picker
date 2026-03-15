@@ -77,7 +77,7 @@ export const commands = {
             else return { status: 'error', error: e as any };
         }
     },
-    async utilCopyImage(id: string): Promise<Result<null, CommandError>> {
+    async utilCopyImage(id: string): Promise<Result<Image, CommandError>> {
         try {
             return {
                 status: 'ok',
@@ -88,7 +88,7 @@ export const commands = {
             else return { status: 'error', error: e as any };
         }
     },
-    async utilCopyVideo(id: string): Promise<Result<null, CommandError>> {
+    async utilCopyVideo(id: string): Promise<Result<Video, CommandError>> {
         try {
             return {
                 status: 'ok',
@@ -99,7 +99,7 @@ export const commands = {
             else return { status: 'error', error: e as any };
         }
     },
-    async utilCopyAudio(id: string): Promise<Result<null, CommandError>> {
+    async utilCopyAudio(id: string): Promise<Result<Audio, CommandError>> {
         try {
             return {
                 status: 'ok',
@@ -110,7 +110,7 @@ export const commands = {
             else return { status: 'error', error: e as any };
         }
     },
-    async utilCopySnippet(id: string): Promise<Result<null, CommandError>> {
+    async utilCopySnippet(id: string): Promise<Result<Snippet, CommandError>> {
         try {
             return {
                 status: 'ok',
