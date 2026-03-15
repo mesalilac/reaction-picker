@@ -3,7 +3,13 @@ import type { Accessor, JSX, Setter } from 'solid-js';
 import { createEffect, createSignal, onCleanup, Show } from 'solid-js';
 import { Portal } from 'solid-js/web';
 
-import { Button, IconCloseMd, IconSave, ModalContext } from '@/components';
+import {
+    Button,
+    IconCloseMd,
+    IconSave,
+    ModalContext,
+    Separator,
+} from '@/components';
 
 export const Modal = (props: {
     isOpen: Accessor<boolean>;
@@ -107,7 +113,7 @@ export const Modal = (props: {
                             }}
                         >
                             {props.children}
-                            <div class='mt-auto border border-neutral-800' />
+                            <Separator class='mt-auto' />
                             <div class='flex flex-row gap-2 self-end'>
                                 <Button onClick={close} variant='secondary'>
                                     {props.dismiss || (

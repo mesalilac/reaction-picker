@@ -6,6 +6,7 @@ import {
     IconAddPlus,
     IconSettings,
     Modal,
+    Separator,
 } from '@/components';
 import { useGlobalData } from '@/store';
 
@@ -64,7 +65,7 @@ export const Nav: VoidComponent<Props> = (props) => {
                         setIsOpen={setShowSettingsModal}
                     >
                         Settings
-                        <div class='border border-neutral-800' />
+                        <Separator />
                     </Modal>
                 </Show>
             </div>

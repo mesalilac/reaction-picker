@@ -7,7 +7,7 @@ import {
 } from 'solid-js';
 import { twMerge } from 'tailwind-merge';
 
-import { Button } from '@/components';
+import { Button, Separator } from '@/components';
 
 const MenuContext = createContext<{
     open: boolean;
@@ -73,5 +73,5 @@ Menu.Item = (props: ItemProps) => {
 };
 
 Menu.Separator = () => {
-    return <div class='my-2 border border-neutral-700' />;
+    return <Separator class='-mx-2 my-2 border-neutral-700' />;
 };

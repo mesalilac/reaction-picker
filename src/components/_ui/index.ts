@@ -8,3 +8,4 @@ export * from './Select';
 export * from './Input';
 export * from './Menu';
 export * from './Modal';
+export * from './Separator';

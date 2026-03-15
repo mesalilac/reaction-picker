@@ -21,6 +21,7 @@ import {
     IconCheck,
     Input,
     Popover,
+    Separator,
 } from '@/components';
 
 type Option = {
@@ -335,7 +336,7 @@ export const Select: VoidComponent<Props> = (rawProps) => {
                                 </Button>
                             </Show>
                         </div>
-                        <div class='my-4 border border-neutral-700' />
+                        <Separator class='my-4' />
                     </Show>
                     <div class='flex flex-col flex-nowrap overflow-y-auto'>
                         <Switch>
