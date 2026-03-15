@@ -8,6 +8,7 @@
   "permissions": [
     "core:default",
     "opener:default",
-    "clipboard-next:default"
+    "clipboard-next:default",
+    "core:window:allow-minimize"
   ]
 }

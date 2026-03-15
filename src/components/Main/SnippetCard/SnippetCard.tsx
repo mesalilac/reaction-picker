@@ -11,12 +11,16 @@ import {
     Menu,
     Popover,
 } from '@/components';
+import { useGlobalData } from '@/store';
+import { minimizeWindow } from '@/utils';
 
 type Props = {
     snippet: Snippet;
 };
 
 export const SnippetCard: VoidComponent<Props> = (props) => {
+    const globalData = useGlobalData();
+
     let popoverMenuRef!: HTMLButtonElement;
     let containerRef!: HTMLDivElement;
 
@@ -47,6 +51,10 @@ export const SnippetCard: VoidComponent<Props> = (props) => {
         }
 
         toast.success('Snippet copied to clipboard');
+
+        if (globalData.resources.settings.get()?.minimizeOnCopy) {
+            await minimizeWindow();
+        }
     };
 
     const handleContextMenu = (e: MouseEvent) => {

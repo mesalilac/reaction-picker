@@ -13,6 +13,7 @@ import {
     Popover,
 } from '@/components';
 import { useGlobalData } from '@/store';
+import { minimizeWindow } from '@/utils';
 
 type Props = {
     audio: Audio;
@@ -49,6 +50,10 @@ export const AudioCard: VoidComponent<Props> = (props) => {
         }
 
         toast.success('Audio copied to clipboard');
+
+        if (globalData.resources.settings.get()?.minimizeOnCopy) {
+            await minimizeWindow();
+        }
     };
 
     const handleContextMenu = (e: MouseEvent) => {
