@@ -215,7 +215,7 @@ export const Select: VoidComponent<Props> = (rawProps) => {
             <Button
                 aria-expanded={isOpen()}
                 class={clsx(
-                    'justify-between rounded-lg border-2 px-3 text-white',
+                    'justify-between rounded-lg border-2 px-3 text-white capitalize',
                 )}
                 disabled={props.disabled}
                 ref={popoverTriggerRef}
