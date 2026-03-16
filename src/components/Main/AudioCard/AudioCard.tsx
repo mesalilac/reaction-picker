@@ -1,6 +1,7 @@
 import { createVisibilityObserver } from '@solid-primitives/intersection-observer';
 import { convertFileSrc } from '@tauri-apps/api/core';
 import { openUrl } from '@tauri-apps/plugin-opener';
+import clsx from 'clsx';
 import { filesize } from 'filesize';
 import { createSignal, Show, type VoidComponent } from 'solid-js';
 import { toast } from 'solid-sonner';
@@ -10,6 +11,7 @@ import {
     Button,
     ButtonIcon,
     CardField,
+    IconHeart01,
     IconMoreVertical,
     Menu,
     Popover,
@@ -35,6 +37,34 @@ export const AudioCard: VoidComponent<Props> = (props) => {
     });
 
     const containerVisible = useVisibilityObserver(() => containerRef);
+
+    const handleToggleFavorite = async () => {
+        const res = await commands
+            .updateAudio(props.audio.id, {
+                isFavorite: !props.audio.isFavorite,
+            })
+            .catch((e) => {
+                toast.error(e);
+            });
+
+        if (!res) return;
+
+        if (res.status === 'error') {
+            toast.error(res.error.kind, {
+                description: res.error.message,
+            });
+
+            return;
+        }
+
+        globalData.resources.audio.mutate((prev) => {
+            if (!prev) return;
+
+            return prev.map((item) =>
+                item.id === props.audio.id ? res.data : item,
+            );
+        });
+    };
 
     const handleCopy = async () => {
         const res = await commands.utilCopyAudio(props.audio.id).catch((e) => {
@@ -254,6 +284,14 @@ export const AudioCard: VoidComponent<Props> = (props) => {
                         <Button onClick={handleCopy}>Copy</Button>
                     </div>
                     <div class='flex flex-row gap-2'>
+                        <ButtonIcon onClick={handleToggleFavorite}>
+                            <IconHeart01
+                                class={clsx({
+                                    'fill-red-500 text-red-500':
+                                        props.audio.isFavorite,
+                                })}
+                            />
+                        </ButtonIcon>
                         <ButtonIcon ref={popoverMenuRef}>
                             <IconMoreVertical />
                         </ButtonIcon>

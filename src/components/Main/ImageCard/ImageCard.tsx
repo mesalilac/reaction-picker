@@ -2,6 +2,7 @@ import { createVisibilityObserver } from '@solid-primitives/intersection-observe
 import { convertFileSrc } from '@tauri-apps/api/core';
 import { openUrl } from '@tauri-apps/plugin-opener';
 import { decode } from 'blurhash';
+import { clsx } from 'clsx';
 import { filesize } from 'filesize';
 import { createSignal, onMount, Show, type VoidComponent } from 'solid-js';
 import { toast } from 'solid-sonner';
@@ -11,6 +12,7 @@ import {
     Button,
     ButtonIcon,
     CardField,
+    IconHeart01,
     IconMoreVertical,
     Menu,
     Popover,
@@ -60,6 +62,34 @@ export const ImageCard: VoidComponent<Props> = (props) => {
             ctx.putImageData(imageData, 0, 0);
         }
     });
+
+    const handleToggleFavorite = async () => {
+        const res = await commands
+            .updateImage(props.image.id, {
+                isFavorite: !props.image.isFavorite,
+            })
+            .catch((e) => {
+                toast.error(e);
+            });
+
+        if (!res) return;
+
+        if (res.status === 'error') {
+            toast.error(res.error.kind, {
+                description: res.error.message,
+            });
+
+            return;
+        }
+
+        globalData.resources.images.mutate((prev) => {
+            if (!prev) return;
+
+            return prev.map((item) =>
+                item.id === props.image.id ? res.data : item,
+            );
+        });
+    };
 
     const handleCopy = async () => {
         const res = await commands.utilCopyImage(props.image.id).catch((e) => {
@@ -284,6 +314,14 @@ export const ImageCard: VoidComponent<Props> = (props) => {
                         <Button onClick={handleCopy}>Copy</Button>
                     </div>
                     <div class='flex flex-row gap-2'>
+                        <ButtonIcon onClick={handleToggleFavorite}>
+                            <IconHeart01
+                                class={clsx({
+                                    'fill-red-500 text-red-500':
+                                        props.image.isFavorite,
+                                })}
+                            />
+                        </ButtonIcon>
                         <ButtonIcon ref={popoverMenuRef}>
                             <IconMoreVertical />
                         </ButtonIcon>
