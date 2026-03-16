@@ -28,7 +28,12 @@ type Props = {
 const FILTERS_LIST = ['Favorites', 'Discord Free limit', 'Deleted'] as const;
 type FilterType = (typeof FILTERS_LIST)[number];
 
-const SORT_BY_LIST = ['Recently used', 'Most used', 'Newly added'] as const;
+const SORT_BY_LIST = [
+    'Recently used',
+    'Most used',
+    'Newly added',
+    'Size',
+] as const;
 type SortByType = (typeof SORT_BY_LIST)[number];
 
 const SORT_DIR_LIST = ['Asc', 'Desc'] as const;
@@ -96,6 +101,9 @@ export const Main: VoidComponent<Props> = (props) => {
                 case 'Newly added':
                     result = (a.createdAt || 0) - (b.createdAt || 0);
                     break;
+                case 'Size':
+                    result = a.fileSize - b.fileSize;
+                    break;
             }
 
             return sortDir() === 'Asc' ? result : -result;
@@ -162,6 +170,9 @@ export const Main: VoidComponent<Props> = (props) => {
                     break;
                 case 'Newly added':
                     result = (a.createdAt || 0) - (b.createdAt || 0);
+                    break;
+                case 'Size':
+                    result = a.content.length - b.content.length;
                     break;
             }
 
