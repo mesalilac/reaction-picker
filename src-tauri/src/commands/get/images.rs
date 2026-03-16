@@ -5,9 +5,7 @@ use super::prelude::*;
 pub async fn get_images(state: AppState<'_>) -> CommandResult<Vec<Image>> {
     let mut conn = state.pool.get()?;
 
-    let image_entities = images::table
-        .filter(images::deleted_at.is_null())
-        .load::<ImageEntity>(&mut conn)?;
+    let image_entities = images::table.load::<ImageEntity>(&mut conn)?;
 
     let tag_entities = ImageTagEntity::belonging_to(&image_entities)
         .inner_join(tags::table)

@@ -5,9 +5,7 @@ use super::prelude::*;
 pub async fn get_audio(state: AppState<'_>) -> CommandResult<Vec<Audio>> {
     let mut conn = state.pool.get()?;
 
-    let audio_entities = audio::table
-        .filter(audio::deleted_at.is_null())
-        .load::<AudioEntity>(&mut conn)?;
+    let audio_entities = audio::table.load::<AudioEntity>(&mut conn)?;
 
     let tag_entities = AudioTagEntity::belonging_to(&audio_entities)
         .inner_join(tags::table)

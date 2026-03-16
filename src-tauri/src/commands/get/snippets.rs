@@ -5,9 +5,7 @@ use super::prelude::*;
 pub async fn get_snippets(state: AppState<'_>) -> CommandResult<Vec<Snippet>> {
     let mut conn = state.pool.get()?;
 
-    let snippet_entities = snippets::table
-        .filter(snippets::deleted_at.is_null())
-        .load::<SnippetEntity>(&mut conn)?;
+    let snippet_entities = snippets::table.load::<SnippetEntity>(&mut conn)?;
 
     let tag_entities = SnippetTagEntity::belonging_to(&snippet_entities)
         .inner_join(tags::table)

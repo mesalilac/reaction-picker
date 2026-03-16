@@ -5,9 +5,7 @@ use super::prelude::*;
 pub async fn get_videos(state: AppState<'_>) -> CommandResult<Vec<Video>> {
     let mut conn = state.pool.get()?;
 
-    let video_entities = videos::table
-        .filter(videos::deleted_at.is_null())
-        .load::<VideoEntity>(&mut conn)?;
+    let video_entities = videos::table.load::<VideoEntity>(&mut conn)?;
 
     let tag_entities = VideoTagEntity::belonging_to(&video_entities)
         .inner_join(tags::table)
