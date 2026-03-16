@@ -47,6 +47,7 @@ infer = "0.19.0"
 image = "0.25.9"
 blurhash = "0.2.3"
 symphonia = { version = "0.5.5", features = ["all"] }
+diesel-derive-newtype = "2.1.0"
 tauri-plugin-clipboard-next = "0.2.4"
 
 [target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]
