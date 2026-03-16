@@ -26,6 +26,11 @@ export const Main: VoidComponent<Props> = (props) => {
 
     const [searchQuery, setSearchQuery] = createSignal('');
 
+    const imagesTabActive = () => globalData.store.activeTab === 'Images';
+    const videosTabActive = () => globalData.store.activeTab === 'Videos';
+    const audioTabActive = () => globalData.store.activeTab === 'Audio';
+    const snippetsTabActive = () => globalData.store.activeTab === 'Snippets';
+
     const filterList = (item: Image | Video | Audio) => {
         const query = searchQuery().toLowerCase();
 
@@ -82,11 +87,6 @@ export const Main: VoidComponent<Props> = (props) => {
 
         return filtered;
     });
-
-    const imagesTabActive = () => globalData.store.activeTab === 'Images';
-    const videosTabActive = () => globalData.store.activeTab === 'Videos';
-    const audioTabActive = () => globalData.store.activeTab === 'Audio';
-    const snippetsTabActive = () => globalData.store.activeTab === 'Snippets';
 
     const itemsCount = () => {
         switch (globalData.store.activeTab) {
