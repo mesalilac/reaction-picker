@@ -25,12 +25,7 @@ type Props = {
     ref?: HTMLElement | ((el: HTMLElement) => void);
 };
 
-const filtersList = [
-    'All',
-    'Favorites',
-    'Discord Free limit',
-    'Deleted',
-] as const;
+const filtersList = ['Favorites', 'Discord Free limit', 'Deleted'] as const;
 
 type FilterType = (typeof filtersList)[number];
 
@@ -39,7 +34,7 @@ export const Main: VoidComponent<Props> = (props) => {
 
     const [searchQuery, setSearchQuery] = createSignal('');
 
-    const [filter, setFilter] = createSignal<FilterType>('All');
+    const [filter, setFilter] = createSignal<FilterType[]>([]);
 
     const imagesTabActive = () => globalData.store.activeTab === 'Images';
     const videosTabActive = () => globalData.store.activeTab === 'Videos';
@@ -65,15 +60,14 @@ export const Main: VoidComponent<Props> = (props) => {
 
         if (!matchesSearch) return false;
 
-        switch (filter()) {
-            case 'Favorites':
-                return isFavorite && !deleted;
-            case 'Discord Free limit':
-                return belowDiscordFreeLimit && !deleted;
-            case 'Deleted':
-                return deleted;
-            default:
-                return !deleted;
+        if (filter().includes('Favorites')) {
+            return isFavorite && !deleted;
+        } else if (filter().includes('Discord Free limit')) {
+            return belowDiscordFreeLimit && !deleted;
+        } else if (filter().includes('Deleted')) {
+            return deleted;
+        } else {
+            return !deleted;
         }
     };
 
@@ -122,15 +116,14 @@ export const Main: VoidComponent<Props> = (props) => {
 
             if (!matchesSearch) return false;
 
-            switch (filter()) {
-                case 'Favorites':
-                    return isFavorite && !deleted;
-                case 'Discord Free limit':
-                    return belowDiscordFreeLimit && !deleted;
-                case 'Deleted':
-                    return deleted;
-                default:
-                    return !deleted;
+            if (filter().includes('Favorites')) {
+                return isFavorite && !deleted;
+            } else if (filter().includes('Discord Free limit')) {
+                return belowDiscordFreeLimit && !deleted;
+            } else if (filter().includes('Deleted')) {
+                return deleted;
+            } else {
+                return !deleted;
             }
         });
 
@@ -164,15 +157,23 @@ export const Main: VoidComponent<Props> = (props) => {
 
                 <div class='flex gap-2'>
                     <Select
-                        onChange={(v) => setFilter(v as FilterType)}
+                        onChange={(v) => {
+                            if (filter().includes(v as FilterType)) {
+                                setFilter(filter().filter((i) => i !== v));
+                                return;
+                            }
+
+                            setFilter([...filter(), v as FilterType]);
+                        }}
                         options={filtersList.map((i) => ({ value: i }))}
+                        placeholder='Filter'
                         selected={filter()}
                     />
                     <Button variant='secondary'>Sort by</Button>
                     <Button variant='secondary'>Sort direction</Button>
                 </div>
             </div>
-            <Show when={searchQuery() || filter() !== 'All'}>
+            <Show when={searchQuery() || filter().length > 0}>
                 <span>Found {itemsCount()} Results</span>
             </Show>
             <div class='grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-4'>
