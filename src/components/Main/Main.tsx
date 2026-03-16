@@ -9,7 +9,7 @@ import {
 } from 'solid-js';
 
 import type { Audio, Image, Video } from '@/bindings';
-import { Button, Input, Select } from '@/components';
+import { Input, Select } from '@/components';
 import {
     DISCORD_FREE_FILE_UPLOAD_LIMIT,
     DISCORD_FREE_MAX_CHAR_LIMIT,
@@ -25,9 +25,14 @@ type Props = {
     ref?: HTMLElement | ((el: HTMLElement) => void);
 };
 
-const filtersList = ['Favorites', 'Discord Free limit', 'Deleted'] as const;
+const FILTERS_LIST = ['Favorites', 'Discord Free limit', 'Deleted'] as const;
+type FilterType = (typeof FILTERS_LIST)[number];
 
-type FilterType = (typeof filtersList)[number];
+const SORT_BY_LIST = ['Recently used', 'Most used', 'Newly added'] as const;
+type SortByType = (typeof SORT_BY_LIST)[number];
+
+const SORT_DIR_LIST = ['Asc', 'Desc'] as const;
+type SortDirType = (typeof SORT_DIR_LIST)[number];
 
 export const Main: VoidComponent<Props> = (props) => {
     const globalData = useGlobalData();
@@ -35,6 +40,8 @@ export const Main: VoidComponent<Props> = (props) => {
     const [searchQuery, setSearchQuery] = createSignal('');
 
     const [filter, setFilter] = createSignal<FilterType[]>([]);
+    const [sortBy, setSortBy] = createSignal<SortByType>('Recently used');
+    const [sortDir, setSortDir] = createSignal<SortDirType>('Desc');
 
     const imagesTabActive = () => globalData.store.activeTab === 'Images';
     const videosTabActive = () => globalData.store.activeTab === 'Videos';
@@ -76,7 +83,23 @@ export const Main: VoidComponent<Props> = (props) => {
 
         const filtered = list.filter(filterList);
 
-        return filtered;
+        return filtered.sort((a, b) => {
+            let result = 0;
+
+            switch (sortBy()) {
+                case 'Recently used':
+                    result = (a.lastUsedAt || 0) - (b.lastUsedAt || 0);
+                    break;
+                case 'Most used':
+                    result = a.useCounter - b.useCounter;
+                    break;
+                case 'Newly added':
+                    result = (a.createdAt || 0) - (b.createdAt || 0);
+                    break;
+            }
+
+            return sortDir() === 'Asc' ? result : -result;
+        });
     });
 
     const sortedVideos = createMemo(() => {
@@ -127,7 +150,23 @@ export const Main: VoidComponent<Props> = (props) => {
             }
         });
 
-        return filtered;
+        return filtered.sort((a, b) => {
+            let result = 0;
+
+            switch (sortBy()) {
+                case 'Recently used':
+                    result = (a.lastUsedAt || 0) - (b.lastUsedAt || 0);
+                    break;
+                case 'Most used':
+                    result = a.useCounter - b.useCounter;
+                    break;
+                case 'Newly added':
+                    result = (a.createdAt || 0) - (b.createdAt || 0);
+                    break;
+            }
+
+            return sortDir() === 'Asc' ? result : -result;
+        });
     });
 
     const itemsCount = () => {
@@ -165,12 +204,24 @@ export const Main: VoidComponent<Props> = (props) => {
 
                             setFilter([...filter(), v as FilterType]);
                         }}
-                        options={filtersList.map((i) => ({ value: i }))}
+                        options={FILTERS_LIST.map((i) => ({ value: i }))}
                         placeholder='Filter'
                         selected={filter()}
                     />
-                    <Button variant='secondary'>Sort by</Button>
-                    <Button variant='secondary'>Sort direction</Button>
+                    <Select
+                        onChange={(v) => {
+                            setSortBy(v as SortByType);
+                        }}
+                        options={SORT_BY_LIST.map((i) => ({ value: i }))}
+                        selected={sortBy()}
+                    />
+                    <Select
+                        onChange={(v) => {
+                            setSortDir(v as SortDirType);
+                        }}
+                        options={SORT_DIR_LIST.map((i) => ({ value: i }))}
+                        selected={sortDir()}
+                    />
                 </div>
             </div>
             <Show when={searchQuery() || filter().length > 0}>
