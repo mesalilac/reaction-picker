@@ -369,11 +369,15 @@ export const Select: VoidComponent<Props> = (rawProps) => {
                                                 {option.icon ?? null}
                                                 {option.label ?? option.value}
                                             </div>
-                                            <Show
-                                                when={isSelected(option.value)}
-                                            >
-                                                <IconCheck />
-                                            </Show>
+                                            <IconCheck
+                                                style={{
+                                                    visibility: isSelected(
+                                                        option.value,
+                                                    )
+                                                        ? 'visible'
+                                                        : 'hidden',
+                                                }}
+                                            />
                                         </Button>
                                     )}
                                 </For>
