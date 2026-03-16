@@ -21,7 +21,7 @@ type Props = {
     ref?: HTMLElement | ((el: HTMLElement) => void);
 };
 
-const filtersList = ['All', 'Deleted'] as const;
+const filtersList = ['All', 'Favorites', 'Deleted'] as const;
 
 type FilterType = (typeof filtersList)[number];
 
@@ -44,13 +44,15 @@ export const Main: VoidComponent<Props> = (props) => {
         const description = item.description?.toLowerCase();
         const fileName = item.fileName.toLowerCase();
         const deleted = item.deletedAt !== null;
+        const isFavorite = item.isFavorite;
 
-        return (
-            (title?.includes(query) ||
-                description?.includes(query) ||
-                fileName.includes(query)) &&
-            (filter() === 'Deleted' ? deleted : !deleted)
-        );
+        return (title?.includes(query) ||
+            description?.includes(query) ||
+            fileName.includes(query)) &&
+            (filter() === 'Deleted' ? deleted : !deleted) &&
+            filter() === 'Favorites'
+            ? isFavorite
+            : !isFavorite;
     };
 
     const sortedImages = createMemo(() => {
