@@ -64,6 +64,74 @@ export const commands = {
             else return { status: 'error', error: e as any };
         }
     },
+    async removeDeleteImage(
+        id: string,
+        payload: DeleteRequest,
+    ): Promise<Result<Image, CommandError>> {
+        try {
+            return {
+                status: 'ok',
+                data: await TAURI_INVOKE('remove_delete_image', {
+                    id,
+                    payload,
+                }),
+            };
+        } catch (e) {
+            if (e instanceof Error) throw e;
+            else return { status: 'error', error: e as any };
+        }
+    },
+    async removeDeleteVideo(
+        id: string,
+        payload: DeleteRequest,
+    ): Promise<Result<Video, CommandError>> {
+        try {
+            return {
+                status: 'ok',
+                data: await TAURI_INVOKE('remove_delete_video', {
+                    id,
+                    payload,
+                }),
+            };
+        } catch (e) {
+            if (e instanceof Error) throw e;
+            else return { status: 'error', error: e as any };
+        }
+    },
+    async removeDeleteAudio(
+        id: string,
+        payload: DeleteRequest,
+    ): Promise<Result<Audio, CommandError>> {
+        try {
+            return {
+                status: 'ok',
+                data: await TAURI_INVOKE('remove_delete_audio', {
+                    id,
+                    payload,
+                }),
+            };
+        } catch (e) {
+            if (e instanceof Error) throw e;
+            else return { status: 'error', error: e as any };
+        }
+    },
+    async removeDeleteSnippet(
+        id: string,
+        payload: DeleteRequest,
+    ): Promise<Result<Snippet, CommandError>> {
+        try {
+            return {
+                status: 'ok',
+                data: await TAURI_INVOKE('remove_delete_snippet', {
+                    id,
+                    payload,
+                }),
+            };
+        } catch (e) {
+            if (e instanceof Error) throw e;
+            else return { status: 'error', error: e as any };
+        }
+    },
     async updateImage(
         id: string,
         payload: UpdateImageRequest,
@@ -241,6 +309,7 @@ export type CommandError =
     | { kind: 'Io'; message: string }
     | { kind: 'Clipboard'; message: string }
     | { kind: 'Unknown'; message: string };
+export type DeleteRequest = { permanent?: boolean | null };
 export type FileProcessingProgress = { current: number; total: number };
 export type GeneralStats = {
     imageCount: number;
