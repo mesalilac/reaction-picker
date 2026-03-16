@@ -116,6 +116,10 @@ export const ImageCard: VoidComponent<Props> = (props) => {
         setShowPopoverMenu(false);
     };
 
+    const handleRestore = () => {
+        setShowPopoverMenu(false);
+    };
+
     const handleDelete = () => {
         setShowPopoverMenu(false);
     };
@@ -246,11 +250,21 @@ export const ImageCard: VoidComponent<Props> = (props) => {
                                     </Menu.Item>
                                 </Show>
                                 <Menu.Separator />
+                                <Show when={props.image.deletedAt !== null}>
+                                    <Menu.Item
+                                        class='text-blue-500'
+                                        onClick={handleRestore}
+                                    >
+                                        restore
+                                    </Menu.Item>
+                                </Show>
                                 <Menu.Item
                                     class='text-red-500'
                                     onClick={handleDelete}
                                 >
-                                    delete
+                                    {props.image.deletedAt !== null
+                                        ? 'permanently delete'
+                                        : 'delete'}
                                 </Menu.Item>
                             </Menu>
                         </Popover>
