@@ -96,6 +96,7 @@ pub fn run() {
             get_tags,
             get_settings,
             get_general_stats,
+            remove_tag,
             remove_delete_image,
             remove_delete_video,
             remove_delete_audio,
