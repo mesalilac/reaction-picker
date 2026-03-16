@@ -15,7 +15,7 @@ pub struct ImageMetadata {
 #[derive(Queryable, Selectable, Insertable, Identifiable, Debug, Clone)]
 #[diesel(table_name = images)]
 pub struct ImageEntity {
-    pub id: String,
+    pub id: ImageId,
     pub title: Option<String>,
     pub description: Option<String>,
     pub external_link: Option<String>,
@@ -36,7 +36,7 @@ pub struct ImageEntity {
 impl ImageEntity {
     pub fn from_metadata(metadata: ImageMetadata) -> Self {
         Self {
-            id: nanoid!(),
+            id: ImageId(nanoid!()),
             title: None,
             description: None,
             external_link: None,
@@ -59,7 +59,7 @@ impl ImageEntity {
 #[derive(specta::Type, Serialize, Deserialize, Debug, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct Image {
-    pub id: String,
+    pub id: ImageId,
     pub title: Option<String>,
     pub description: Option<String>,
     pub external_link: Option<String>,

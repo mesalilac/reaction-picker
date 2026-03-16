@@ -14,7 +14,6 @@ use serde::{Deserialize, Serialize};
     PartialOrd,
     Ord,
 )]
-#[serde(transparent)]
 pub struct Timestamp(pub i64);
 
 impl Timestamp {
@@ -28,3 +27,28 @@ impl Timestamp {
         Self(ms)
     }
 }
+
+#[derive(
+    specta::Type, DieselNewType, Eq, PartialEq, Hash, Debug, Clone, Serialize, Deserialize,
+)]
+pub struct ImageId(pub String);
+
+#[derive(
+    specta::Type, DieselNewType, Eq, PartialEq, Hash, Debug, Clone, Serialize, Deserialize,
+)]
+pub struct VideoId(pub String);
+
+#[derive(
+    specta::Type, DieselNewType, Eq, PartialEq, Hash, Debug, Clone, Serialize, Deserialize,
+)]
+pub struct AudioId(pub String);
+
+#[derive(
+    specta::Type, DieselNewType, Eq, PartialEq, Hash, Debug, Clone, Serialize, Deserialize,
+)]
+pub struct SnippetId(pub String);
+
+#[derive(
+    specta::Type, DieselNewType, Eq, PartialEq, Hash, Debug, Clone, Serialize, Deserialize,
+)]
+pub struct TagId(pub String);

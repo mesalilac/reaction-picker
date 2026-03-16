@@ -13,7 +13,7 @@ pub struct AudioMetadata {
 #[derive(Queryable, Selectable, Insertable, Identifiable, Debug, Clone)]
 #[diesel(table_name = audio)]
 pub struct AudioEntity {
-    pub id: String,
+    pub id: AudioId,
     pub title: Option<String>,
     pub description: Option<String>,
     pub external_link: Option<String>,
@@ -32,7 +32,7 @@ pub struct AudioEntity {
 impl AudioEntity {
     pub fn from_metadata(metadata: AudioMetadata) -> Self {
         Self {
-            id: nanoid!(),
+            id: AudioId(nanoid!()),
             title: None,
             description: None,
             external_link: None,
@@ -53,7 +53,7 @@ impl AudioEntity {
 #[derive(specta::Type, Serialize, Deserialize, Debug, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct Audio {
-    pub id: String,
+    pub id: AudioId,
     pub title: Option<String>,
     pub description: Option<String>,
     pub external_link: Option<String>,

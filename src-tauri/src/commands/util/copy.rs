@@ -6,7 +6,7 @@ use tauri_plugin_clipboard_next::ClipboardNextExt;
 pub async fn util_copy_image(
     state: AppState<'_>,
     app_handle: tauri::AppHandle,
-    id: String,
+    id: ImageId,
 ) -> CommandResult<Image> {
     let mut conn = state.pool.get()?;
 
@@ -51,7 +51,7 @@ pub async fn util_copy_image(
 pub async fn util_copy_video(
     state: AppState<'_>,
     app_handle: tauri::AppHandle,
-    id: String,
+    id: VideoId,
 ) -> CommandResult<Video> {
     let mut conn = state.pool.get()?;
 
@@ -96,7 +96,7 @@ pub async fn util_copy_video(
 pub async fn util_copy_audio(
     state: AppState<'_>,
     app_handle: tauri::AppHandle,
-    id: String,
+    id: AudioId,
 ) -> CommandResult<Audio> {
     let mut conn = state.pool.get()?;
 
@@ -141,7 +141,7 @@ pub async fn util_copy_audio(
 pub async fn util_copy_snippet(
     state: AppState<'_>,
     app_handle: tauri::AppHandle,
-    id: String,
+    id: SnippetId,
 ) -> CommandResult<Snippet> {
     let mut conn = state.pool.get()?;
 

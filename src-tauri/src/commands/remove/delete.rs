@@ -12,7 +12,7 @@ pub struct DeleteRequest {
 #[specta::specta]
 pub async fn remove_delete_image(
     state: AppState<'_>,
-    id: String,
+    id: ImageId,
     payload: DeleteRequest,
 ) -> CommandResult<Image> {
     let mut conn = state.pool.get()?;
@@ -42,7 +42,7 @@ pub async fn remove_delete_image(
 #[specta::specta]
 pub async fn remove_delete_video(
     state: AppState<'_>,
-    id: String,
+    id: VideoId,
     payload: DeleteRequest,
 ) -> CommandResult<Video> {
     let mut conn = state.pool.get()?;
@@ -72,7 +72,7 @@ pub async fn remove_delete_video(
 #[specta::specta]
 pub async fn remove_delete_audio(
     state: AppState<'_>,
-    id: String,
+    id: AudioId,
     payload: DeleteRequest,
 ) -> CommandResult<Audio> {
     let mut conn = state.pool.get()?;
@@ -102,7 +102,7 @@ pub async fn remove_delete_audio(
 #[specta::specta]
 pub async fn remove_delete_snippet(
     state: AppState<'_>,
-    id: String,
+    id: SnippetId,
     payload: DeleteRequest,
 ) -> CommandResult<Snippet> {
     let mut conn = state.pool.get()?;

@@ -39,6 +39,7 @@ libsqlite3-sys = { version = "0.30", features = [
 ] } # Provides "sqlite3.lib"
 thiserror = "2.0.18"
 anyhow = "1.0.100"
+# TODO: use specta-typescript branded macro, which is available only in 0.0.10
 specta = "2.0.0-rc.21"
 specta-typescript = "0.0.9"
 tauri-specta = { version = "=2.0.0-rc.21", features = ["derive", "typescript"] }

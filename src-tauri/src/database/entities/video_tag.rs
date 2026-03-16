@@ -7,12 +7,12 @@ use super::{TagEntity, VideoEntity};
 #[diesel(table_name = videos_tags)]
 #[diesel(primary_key(video_id, tag_id))]
 pub struct VideoTagEntity {
-    pub video_id: String,
-    pub tag_id: String,
+    pub video_id: VideoId,
+    pub tag_id: TagId,
 }
 
 impl VideoTagEntity {
-    pub fn new(video_id: String, tag_id: String) -> Self {
+    pub fn new(video_id: VideoId, tag_id: TagId) -> Self {
         Self { video_id, tag_id }
     }
 }

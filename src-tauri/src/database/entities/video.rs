@@ -14,7 +14,7 @@ pub struct VideoMetadata {
 #[derive(Queryable, Selectable, Insertable, Identifiable, Debug, Clone)]
 #[diesel(table_name = videos)]
 pub struct VideoEntity {
-    pub id: String,
+    pub id: VideoId,
     pub title: Option<String>,
     pub description: Option<String>,
     pub external_link: Option<String>,
@@ -34,7 +34,7 @@ pub struct VideoEntity {
 impl VideoEntity {
     pub fn from_metadata(metadata: VideoMetadata) -> Self {
         Self {
-            id: nanoid!(),
+            id: VideoId(nanoid!()),
             title: None,
             description: None,
             external_link: None,
@@ -56,7 +56,7 @@ impl VideoEntity {
 #[derive(specta::Type, Serialize, Deserialize, Debug, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct Video {
-    pub id: String,
+    pub id: VideoId,
     pub title: Option<String>,
     pub description: Option<String>,
     pub external_link: Option<String>,

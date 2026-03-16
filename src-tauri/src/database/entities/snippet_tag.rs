@@ -7,12 +7,12 @@ use super::{SnippetEntity, TagEntity};
 #[diesel(table_name = snippets_tags)]
 #[diesel(primary_key(snippet_id, tag_id))]
 pub struct SnippetTagEntity {
-    pub snippet_id: String,
-    pub tag_id: String,
+    pub snippet_id: SnippetId,
+    pub tag_id: TagId,
 }
 
 impl SnippetTagEntity {
-    pub fn new(snippet_id: String, tag_id: String) -> Self {
+    pub fn new(snippet_id: SnippetId, tag_id: TagId) -> Self {
         Self { snippet_id, tag_id }
     }
 }

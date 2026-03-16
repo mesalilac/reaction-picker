@@ -3,7 +3,7 @@ use super::prelude::*;
 #[derive(Queryable, Selectable, Insertable, Identifiable, Debug, Clone)]
 #[diesel(table_name = tags)]
 pub struct TagEntity {
-    pub id: String,
+    pub id: TagId,
     pub name: String,
     pub created_at: Timestamp,
 }
@@ -11,7 +11,7 @@ pub struct TagEntity {
 impl TagEntity {
     pub fn new(name: String) -> Self {
         Self {
-            id: nanoid!(),
+            id: TagId(nanoid!()),
             name: name.trim().to_lowercase(),
             created_at: Timestamp::now(),
         }
@@ -21,7 +21,7 @@ impl TagEntity {
 #[derive(specta::Type, Serialize, Deserialize, Debug, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct Tag {
-    pub id: String,
+    pub id: TagId,
     pub name: String,
     pub created_at: Timestamp,
 }

@@ -35,14 +35,14 @@ pub struct UpdateAudioRequest {
     pub is_favorite: Option<bool>,
     #[specta(optional)]
     #[serde(default)]
-    pub tag_ids: Option<Vec<String>>,
+    pub tag_ids: Option<Vec<TagId>>,
 }
 
 #[tauri::command]
 #[specta::specta]
 pub async fn update_audio(
     state: AppState<'_>,
-    id: String,
+    id: AudioId,
     payload: UpdateAudioRequest,
 ) -> CommandResult<Audio> {
     let mut conn = state.pool.get()?;
@@ -88,7 +88,7 @@ pub async fn update_audio(
 
 #[tauri::command]
 #[specta::specta]
-pub async fn update_restore_audio(state: AppState<'_>, id: String) -> CommandResult<Audio> {
+pub async fn update_restore_audio(state: AppState<'_>, id: AudioId) -> CommandResult<Audio> {
     let mut conn = state.pool.get()?;
 
     update(audio::table.find(&id))

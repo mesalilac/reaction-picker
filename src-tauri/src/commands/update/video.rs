@@ -35,14 +35,14 @@ pub struct UpdateVideoRequest {
     pub is_favorite: Option<bool>,
     #[specta(optional)]
     #[serde(default)]
-    pub tag_ids: Option<Vec<String>>,
+    pub tag_ids: Option<Vec<TagId>>,
 }
 
 #[tauri::command]
 #[specta::specta]
 pub async fn update_video(
     state: AppState<'_>,
-    id: String,
+    id: VideoId,
     payload: UpdateVideoRequest,
 ) -> CommandResult<Video> {
     let mut conn = state.pool.get()?;
@@ -88,7 +88,7 @@ pub async fn update_video(
 
 #[tauri::command]
 #[specta::specta]
-pub async fn update_restore_video(state: AppState<'_>, id: String) -> CommandResult<Video> {
+pub async fn update_restore_video(state: AppState<'_>, id: VideoId) -> CommandResult<Video> {
     let mut conn = state.pool.get()?;
 
     update(videos::table.find(&id))

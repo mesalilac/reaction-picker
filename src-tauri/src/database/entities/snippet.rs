@@ -5,7 +5,7 @@ use super::prelude::*;
 #[derive(Queryable, Selectable, Insertable, Identifiable, Debug, Clone)]
 #[diesel(table_name = snippets)]
 pub struct SnippetEntity {
-    pub id: String,
+    pub id: SnippetId,
     pub title: Option<String>,
     pub description: Option<String>,
     pub content: String,
@@ -20,7 +20,7 @@ pub struct SnippetEntity {
 impl SnippetEntity {
     pub fn new(content: String) -> Self {
         Self {
-            id: nanoid!(),
+            id: SnippetId(nanoid!()),
             title: None,
             description: None,
             content,
@@ -37,7 +37,7 @@ impl SnippetEntity {
 #[derive(specta::Type, Serialize, Deserialize, Debug, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct Snippet {
-    pub id: String,
+    pub id: SnippetId,
     pub title: Option<String>,
     pub description: Option<String>,
     pub content: String,

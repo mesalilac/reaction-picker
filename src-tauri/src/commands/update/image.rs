@@ -35,14 +35,14 @@ pub struct UpdateImageRequest {
     pub is_favorite: Option<bool>,
     #[specta(optional)]
     #[serde(default)]
-    pub tag_ids: Option<Vec<String>>,
+    pub tag_ids: Option<Vec<TagId>>,
 }
 
 #[tauri::command]
 #[specta::specta]
 pub async fn update_image(
     state: AppState<'_>,
-    id: String,
+    id: ImageId,
     payload: UpdateImageRequest,
 ) -> CommandResult<Image> {
     let mut conn = state.pool.get()?;
@@ -88,7 +88,7 @@ pub async fn update_image(
 
 #[tauri::command]
 #[specta::specta]
-pub async fn update_restore_image(state: AppState<'_>, id: String) -> CommandResult<Image> {
+pub async fn update_restore_image(state: AppState<'_>, id: ImageId) -> CommandResult<Image> {
     let mut conn = state.pool.get()?;
 
     update(images::table.find(&id))

@@ -35,14 +35,14 @@ pub struct UpdateSnippetRequest {
     pub is_favorite: Option<bool>,
     #[specta(optional)]
     #[serde(default)]
-    pub tag_ids: Option<Vec<String>>,
+    pub tag_ids: Option<Vec<TagId>>,
 }
 
 #[tauri::command]
 #[specta::specta]
 pub async fn update_snippet(
     state: AppState<'_>,
-    id: String,
+    id: SnippetId,
     payload: UpdateSnippetRequest,
 ) -> CommandResult<Snippet> {
     let mut conn = state.pool.get()?;
@@ -89,7 +89,7 @@ pub async fn update_snippet(
 
 #[tauri::command]
 #[specta::specta]
-pub async fn update_restore_snippet(state: AppState<'_>, id: String) -> CommandResult<Snippet> {
+pub async fn update_restore_snippet(state: AppState<'_>, id: SnippetId) -> CommandResult<Snippet> {
     let mut conn = state.pool.get()?;
 
     update(snippets::table.find(&id))

@@ -24,7 +24,7 @@ pub struct UpdateTagRequest {
 #[specta::specta]
 pub async fn update_tag(
     state: AppState<'_>,
-    id: String,
+    id: TagId,
     payload: UpdateTagRequest,
 ) -> CommandResult<Tag> {
     let mut conn = state.pool.get()?;

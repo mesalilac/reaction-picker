@@ -64,7 +64,7 @@ export const commands = {
             else return { status: 'error', error: e as any };
         }
     },
-    async removeTag(id: string): Promise<Result<Tag, CommandError>> {
+    async removeTag(id: TagId): Promise<Result<Tag, CommandError>> {
         try {
             return {
                 status: 'ok',
@@ -76,7 +76,7 @@ export const commands = {
         }
     },
     async removeDeleteImage(
-        id: string,
+        id: ImageId,
         payload: DeleteRequest,
     ): Promise<Result<Image, CommandError>> {
         try {
@@ -93,7 +93,7 @@ export const commands = {
         }
     },
     async removeDeleteVideo(
-        id: string,
+        id: VideoId,
         payload: DeleteRequest,
     ): Promise<Result<Video, CommandError>> {
         try {
@@ -110,7 +110,7 @@ export const commands = {
         }
     },
     async removeDeleteAudio(
-        id: string,
+        id: AudioId,
         payload: DeleteRequest,
     ): Promise<Result<Audio, CommandError>> {
         try {
@@ -127,7 +127,7 @@ export const commands = {
         }
     },
     async removeDeleteSnippet(
-        id: string,
+        id: SnippetId,
         payload: DeleteRequest,
     ): Promise<Result<Snippet, CommandError>> {
         try {
@@ -144,7 +144,7 @@ export const commands = {
         }
     },
     async updateImage(
-        id: string,
+        id: ImageId,
         payload: UpdateImageRequest,
     ): Promise<Result<Image, CommandError>> {
         try {
@@ -157,7 +157,9 @@ export const commands = {
             else return { status: 'error', error: e as any };
         }
     },
-    async updateRestoreImage(id: string): Promise<Result<Image, CommandError>> {
+    async updateRestoreImage(
+        id: ImageId,
+    ): Promise<Result<Image, CommandError>> {
         try {
             return {
                 status: 'ok',
@@ -169,7 +171,7 @@ export const commands = {
         }
     },
     async updateVideo(
-        id: string,
+        id: VideoId,
         payload: UpdateVideoRequest,
     ): Promise<Result<Video, CommandError>> {
         try {
@@ -182,7 +184,9 @@ export const commands = {
             else return { status: 'error', error: e as any };
         }
     },
-    async updateRestoreVideo(id: string): Promise<Result<Video, CommandError>> {
+    async updateRestoreVideo(
+        id: VideoId,
+    ): Promise<Result<Video, CommandError>> {
         try {
             return {
                 status: 'ok',
@@ -194,7 +198,7 @@ export const commands = {
         }
     },
     async updateAudio(
-        id: string,
+        id: AudioId,
         payload: UpdateAudioRequest,
     ): Promise<Result<Audio, CommandError>> {
         try {
@@ -207,7 +211,9 @@ export const commands = {
             else return { status: 'error', error: e as any };
         }
     },
-    async updateRestoreAudio(id: string): Promise<Result<Audio, CommandError>> {
+    async updateRestoreAudio(
+        id: AudioId,
+    ): Promise<Result<Audio, CommandError>> {
         try {
             return {
                 status: 'ok',
@@ -219,7 +225,7 @@ export const commands = {
         }
     },
     async updateSnippet(
-        id: string,
+        id: SnippetId,
         payload: UpdateSnippetRequest,
     ): Promise<Result<Snippet, CommandError>> {
         try {
@@ -233,7 +239,7 @@ export const commands = {
         }
     },
     async updateRestoreSnippet(
-        id: string,
+        id: SnippetId,
     ): Promise<Result<Snippet, CommandError>> {
         try {
             return {
@@ -246,7 +252,7 @@ export const commands = {
         }
     },
     async updateTag(
-        id: string,
+        id: TagId,
         payload: UpdateTagRequest,
     ): Promise<Result<Tag, CommandError>> {
         try {
@@ -285,7 +291,7 @@ export const commands = {
             else return { status: 'error', error: e as any };
         }
     },
-    async utilCopyImage(id: string): Promise<Result<Image, CommandError>> {
+    async utilCopyImage(id: ImageId): Promise<Result<Image, CommandError>> {
         try {
             return {
                 status: 'ok',
@@ -296,7 +302,7 @@ export const commands = {
             else return { status: 'error', error: e as any };
         }
     },
-    async utilCopyVideo(id: string): Promise<Result<Video, CommandError>> {
+    async utilCopyVideo(id: VideoId): Promise<Result<Video, CommandError>> {
         try {
             return {
                 status: 'ok',
@@ -307,7 +313,7 @@ export const commands = {
             else return { status: 'error', error: e as any };
         }
     },
-    async utilCopyAudio(id: string): Promise<Result<Audio, CommandError>> {
+    async utilCopyAudio(id: AudioId): Promise<Result<Audio, CommandError>> {
         try {
             return {
                 status: 'ok',
@@ -318,7 +324,9 @@ export const commands = {
             else return { status: 'error', error: e as any };
         }
     },
-    async utilCopySnippet(id: string): Promise<Result<Snippet, CommandError>> {
+    async utilCopySnippet(
+        id: SnippetId,
+    ): Promise<Result<Snippet, CommandError>> {
         try {
             return {
                 status: 'ok',
@@ -344,7 +352,7 @@ export const events = __makeEvents__<{
 /** user-defined types **/
 
 export type Audio = {
-    id: string;
+    id: AudioId;
     title: string | null;
     description: string | null;
     externalLink: string | null;
@@ -361,6 +369,7 @@ export type Audio = {
     deletedAt: Timestamp | null;
     createdAt: Timestamp;
 };
+export type AudioId = string;
 export type CommandError =
     | { kind: 'Database'; message: string }
     | { kind: 'Io'; message: string }
@@ -376,7 +385,7 @@ export type GeneralStats = {
     tagCount: number;
 };
 export type Image = {
-    id: string;
+    id: ImageId;
     title: string | null;
     description: string | null;
     externalLink: string | null;
@@ -395,13 +404,14 @@ export type Image = {
     deletedAt: Timestamp | null;
     createdAt: Timestamp;
 };
+export type ImageId = string;
 export type Setting = {
     id: number;
     minimizeOnCopy: boolean;
     defaultVolume: number | null;
 };
 export type Snippet = {
-    id: string;
+    id: SnippetId;
     title: string | null;
     description: string | null;
     content: string;
@@ -413,21 +423,23 @@ export type Snippet = {
     deletedAt: Timestamp | null;
     createdAt: Timestamp;
 };
-export type Tag = { id: string; name: string; createdAt: Timestamp };
+export type SnippetId = string;
+export type Tag = { id: TagId; name: string; createdAt: Timestamp };
+export type TagId = string;
 export type Timestamp = number;
 export type UpdateAudioRequest = {
     title?: string | null;
     description?: string | null;
     externalLink?: string | null;
     isFavorite?: boolean | null;
-    tagIds?: string[] | null;
+    tagIds?: TagId[] | null;
 };
 export type UpdateImageRequest = {
     title?: string | null;
     description?: string | null;
     externalLink?: string | null;
     isFavorite?: boolean | null;
-    tagIds?: string[] | null;
+    tagIds?: TagId[] | null;
 };
 export type UpdateSettingsRequest = {
     minimizeOnCopy?: boolean | null;
@@ -438,7 +450,7 @@ export type UpdateSnippetRequest = {
     description?: string | null;
     externalLink?: string | null;
     isFavorite?: boolean | null;
-    tagIds?: string[] | null;
+    tagIds?: TagId[] | null;
 };
 export type UpdateTagRequest = { name?: string | null };
 export type UpdateVideoRequest = {
@@ -446,10 +458,10 @@ export type UpdateVideoRequest = {
     description?: string | null;
     externalLink?: string | null;
     isFavorite?: boolean | null;
-    tagIds?: string[] | null;
+    tagIds?: TagId[] | null;
 };
 export type Video = {
-    id: string;
+    id: VideoId;
     title: string | null;
     description: string | null;
     externalLink: string | null;
@@ -467,6 +479,7 @@ export type Video = {
     deletedAt: Timestamp | null;
     createdAt: Timestamp;
 };
+export type VideoId = string;
 
 /** tauri-specta globals **/
 

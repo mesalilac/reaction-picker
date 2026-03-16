@@ -7,12 +7,12 @@ use super::{ImageEntity, TagEntity};
 #[diesel(table_name = images_tags)]
 #[diesel(primary_key(image_id, tag_id))]
 pub struct ImageTagEntity {
-    pub image_id: String,
-    pub tag_id: String,
+    pub image_id: ImageId,
+    pub tag_id: TagId,
 }
 
 impl ImageTagEntity {
-    pub fn new(image_id: String, tag_id: String) -> Self {
+    pub fn new(image_id: ImageId, tag_id: TagId) -> Self {
         Self { image_id, tag_id }
     }
 }

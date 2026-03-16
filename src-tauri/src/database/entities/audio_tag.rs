@@ -7,12 +7,12 @@ use super::{AudioEntity, TagEntity};
 #[diesel(table_name = audio_tags)]
 #[diesel(primary_key(audio_id, tag_id))]
 pub struct AudioTagEntity {
-    pub audio_id: String,
-    pub tag_id: String,
+    pub audio_id: AudioId,
+    pub tag_id: TagId,
 }
 
 impl AudioTagEntity {
-    pub fn new(audio_id: String, tag_id: String) -> Self {
+    pub fn new(audio_id: AudioId, tag_id: TagId) -> Self {
         Self { audio_id, tag_id }
     }
 }
