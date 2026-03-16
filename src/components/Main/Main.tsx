@@ -83,31 +83,33 @@ export const Main: VoidComponent<Props> = (props) => {
         }
     };
 
+    const sortList = (a: Image | Video | Audio, b: Image | Video | Audio) => {
+        let result = 0;
+
+        switch (sortBy()) {
+            case 'Recently used':
+                result = (a.lastUsedAt || 0) - (b.lastUsedAt || 0);
+                break;
+            case 'Most used':
+                result = a.useCounter - b.useCounter;
+                break;
+            case 'Newly added':
+                result = (a.createdAt || 0) - (b.createdAt || 0);
+                break;
+            case 'Size':
+                result = a.fileSize - b.fileSize;
+                break;
+        }
+
+        return sortDir() === 'Asc' ? result : -result;
+    };
+
     const sortedImages = createMemo(() => {
         const list = [...(globalData.resources.images.get() || [])];
 
         const filtered = list.filter(filterList);
 
-        return filtered.sort((a, b) => {
-            let result = 0;
-
-            switch (sortBy()) {
-                case 'Recently used':
-                    result = (a.lastUsedAt || 0) - (b.lastUsedAt || 0);
-                    break;
-                case 'Most used':
-                    result = a.useCounter - b.useCounter;
-                    break;
-                case 'Newly added':
-                    result = (a.createdAt || 0) - (b.createdAt || 0);
-                    break;
-                case 'Size':
-                    result = a.fileSize - b.fileSize;
-                    break;
-            }
-
-            return sortDir() === 'Asc' ? result : -result;
-        });
+        return filtered.sort(sortList);
     });
 
     const sortedVideos = createMemo(() => {
@@ -115,7 +117,7 @@ export const Main: VoidComponent<Props> = (props) => {
 
         const filtered = list.filter(filterList);
 
-        return filtered;
+        return filtered.sort(sortList);
     });
 
     const sortedAudio = createMemo(() => {
@@ -123,7 +125,7 @@ export const Main: VoidComponent<Props> = (props) => {
 
         const filtered = list.filter(filterList);
 
-        return filtered;
+        return filtered.sort(sortList);
     });
 
     const sortedSnippets = createMemo(() => {
