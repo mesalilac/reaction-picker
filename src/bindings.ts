@@ -64,6 +64,89 @@ export const commands = {
             else return { status: 'error', error: e as any };
         }
     },
+    async updateImage(
+        id: string,
+        payload: UpdateImageRequest,
+    ): Promise<Result<Image, CommandError>> {
+        try {
+            return {
+                status: 'ok',
+                data: await TAURI_INVOKE('update_image', { id, payload }),
+            };
+        } catch (e) {
+            if (e instanceof Error) throw e;
+            else return { status: 'error', error: e as any };
+        }
+    },
+    async updateVideo(
+        id: string,
+        payload: UpdateVideoRequest,
+    ): Promise<Result<Video, CommandError>> {
+        try {
+            return {
+                status: 'ok',
+                data: await TAURI_INVOKE('update_video', { id, payload }),
+            };
+        } catch (e) {
+            if (e instanceof Error) throw e;
+            else return { status: 'error', error: e as any };
+        }
+    },
+    async updateAudio(
+        id: string,
+        payload: UpdateAudioRequest,
+    ): Promise<Result<Audio, CommandError>> {
+        try {
+            return {
+                status: 'ok',
+                data: await TAURI_INVOKE('update_audio', { id, payload }),
+            };
+        } catch (e) {
+            if (e instanceof Error) throw e;
+            else return { status: 'error', error: e as any };
+        }
+    },
+    async updateSnippet(
+        id: string,
+        payload: UpdateSnippetRequest,
+    ): Promise<Result<Snippet, CommandError>> {
+        try {
+            return {
+                status: 'ok',
+                data: await TAURI_INVOKE('update_snippet', { id, payload }),
+            };
+        } catch (e) {
+            if (e instanceof Error) throw e;
+            else return { status: 'error', error: e as any };
+        }
+    },
+    async updateTag(
+        id: string,
+        payload: UpdateTagRequest,
+    ): Promise<Result<Tag, CommandError>> {
+        try {
+            return {
+                status: 'ok',
+                data: await TAURI_INVOKE('update_tag', { id, payload }),
+            };
+        } catch (e) {
+            if (e instanceof Error) throw e;
+            else return { status: 'error', error: e as any };
+        }
+    },
+    async updateSettings(
+        payload: UpdateSettingsRequest,
+    ): Promise<Result<Setting, CommandError>> {
+        try {
+            return {
+                status: 'ok',
+                data: await TAURI_INVOKE('update_settings', { payload }),
+            };
+        } catch (e) {
+            if (e instanceof Error) throw e;
+            else return { status: 'error', error: e as any };
+        }
+    },
     async utilDropFiles(
         paths: string[],
     ): Promise<Result<number, CommandError>> {
@@ -206,6 +289,39 @@ export type Snippet = {
 };
 export type Tag = { id: string; name: string; createdAt: Timestamp };
 export type Timestamp = number;
+export type UpdateAudioRequest = {
+    title?: string | null;
+    description?: string | null;
+    externalLink?: string | null;
+    isFavorite?: boolean | null;
+    tagIds?: string[] | null;
+};
+export type UpdateImageRequest = {
+    title?: string | null;
+    description?: string | null;
+    externalLink?: string | null;
+    isFavorite?: boolean | null;
+    tagIds?: string[] | null;
+};
+export type UpdateSettingsRequest = {
+    minimizeOnCopy?: boolean | null;
+    defaultVolume?: number | null;
+};
+export type UpdateSnippetRequest = {
+    title?: string | null;
+    description?: string | null;
+    externalLink?: string | null;
+    isFavorite?: boolean | null;
+    tagIds?: string[] | null;
+};
+export type UpdateTagRequest = { name?: string | null };
+export type UpdateVideoRequest = {
+    title?: string | null;
+    description?: string | null;
+    externalLink?: string | null;
+    isFavorite?: boolean | null;
+    tagIds?: string[] | null;
+};
 export type Video = {
     id: string;
     title: string | null;

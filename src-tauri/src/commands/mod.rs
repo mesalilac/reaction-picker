@@ -49,12 +49,14 @@ impl From<tauri_plugin_opener::Error> for CommandError {
 pub type CommandResult<T> = Result<T, CommandError>;
 
 pub mod prelude {
-    pub use crate::bridge::{dto::*, requests::*};
+    pub use crate::bridge::dto::*;
     pub use crate::commands::{CommandError, CommandResult};
     pub use crate::database::{entities::*, types::*};
     pub use crate::schema::*;
+    pub use crate::utils::db::normalize_optional_string;
     pub use diesel::prelude::*;
-    pub use serde::Serialize;
+    pub use diesel::{dsl::delete, insert_into, update};
+    pub use serde::{Deserialize, Serialize};
     use tauri::State;
 
     pub type AppState<'a> = State<'a, crate::AppState>;
