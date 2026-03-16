@@ -20,8 +20,8 @@ export const IconUserRemove = (props: IconProps) => {
         <svg
             role='img'
             aria-label='User Remove'
-            width={pickedProps.size || '1.25rem'}
-            height={pickedProps.size || '1.25rem'}
+            width={pickedProps.size || '1.5rem'}
+            height={pickedProps.size || '1.5rem'}
             viewBox='0 0 24 24'
             fill='none'
             {...otherProps}

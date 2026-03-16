@@ -20,8 +20,8 @@ export const IconLineXl = (props: IconProps) => {
         <svg
             role='img'
             aria-label='Line Xl'
-            width={pickedProps.size || '1.25rem'}
-            height={pickedProps.size || '1.25rem'}
+            width={pickedProps.size || '1.5rem'}
+            height={pickedProps.size || '1.5rem'}
             viewBox='0 0 24 24'
             fill='none'
             {...otherProps}
