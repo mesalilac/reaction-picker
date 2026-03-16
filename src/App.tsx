@@ -1,3 +1,4 @@
+import { gsap } from 'gsap';
 import { Flip } from 'gsap/Flip';
 import { Toaster } from 'solid-sonner';
 
