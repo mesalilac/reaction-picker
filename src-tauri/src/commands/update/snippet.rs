@@ -86,3 +86,26 @@ pub async fn update_snippet(
 
     Ok(snippet)
 }
+
+#[tauri::command]
+#[specta::specta]
+pub async fn update_restore_snippet(state: AppState<'_>, id: String) -> CommandResult<Snippet> {
+    let mut conn = state.pool.get()?;
+
+    update(snippets::table.find(&id))
+        .set(snippets::deleted_at.eq(None::<i64>))
+        .execute(&mut conn)?;
+
+    let entity = snippets::table
+        .find(&id)
+        .get_result::<SnippetEntity>(&mut conn)?;
+
+    let tags = SnippetTagEntity::belonging_to(&entity)
+        .inner_join(tags::table)
+        .select(TagEntity::as_select())
+        .load::<TagEntity>(&mut conn)?;
+
+    let snippet = Snippet::from_entity(entity, tags);
+
+    Ok(snippet)
+}

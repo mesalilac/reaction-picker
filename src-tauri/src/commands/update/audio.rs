@@ -85,3 +85,26 @@ pub async fn update_audio(
 
     Ok(audio)
 }
+
+#[tauri::command]
+#[specta::specta]
+pub async fn update_restore_audio(state: AppState<'_>, id: String) -> CommandResult<Audio> {
+    let mut conn = state.pool.get()?;
+
+    update(audio::table.find(&id))
+        .set(audio::deleted_at.eq(None::<i64>))
+        .execute(&mut conn)?;
+
+    let entity = audio::table
+        .find(&id)
+        .get_result::<AudioEntity>(&mut conn)?;
+
+    let tags = AudioTagEntity::belonging_to(&entity)
+        .inner_join(tags::table)
+        .select(TagEntity::as_select())
+        .load::<TagEntity>(&mut conn)?;
+
+    let audio = Audio::from_entity(entity, tags);
+
+    Ok(audio)
+}

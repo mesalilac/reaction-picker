@@ -85,3 +85,26 @@ pub async fn update_video(
 
     Ok(video)
 }
+
+#[tauri::command]
+#[specta::specta]
+pub async fn update_restore_video(state: AppState<'_>, id: String) -> CommandResult<Video> {
+    let mut conn = state.pool.get()?;
+
+    update(videos::table.find(&id))
+        .set(videos::deleted_at.eq(None::<i64>))
+        .execute(&mut conn)?;
+
+    let entity = videos::table
+        .find(&id)
+        .get_result::<VideoEntity>(&mut conn)?;
+
+    let tags = VideoTagEntity::belonging_to(&entity)
+        .inner_join(tags::table)
+        .select(TagEntity::as_select())
+        .load::<TagEntity>(&mut conn)?;
+
+    let video = Video::from_entity(entity, tags);
+
+    Ok(video)
+}

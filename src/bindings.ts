@@ -157,6 +157,17 @@ export const commands = {
             else return { status: 'error', error: e as any };
         }
     },
+    async updateRestoreImage(id: string): Promise<Result<Image, CommandError>> {
+        try {
+            return {
+                status: 'ok',
+                data: await TAURI_INVOKE('update_restore_image', { id }),
+            };
+        } catch (e) {
+            if (e instanceof Error) throw e;
+            else return { status: 'error', error: e as any };
+        }
+    },
     async updateVideo(
         id: string,
         payload: UpdateVideoRequest,
@@ -165,6 +176,17 @@ export const commands = {
             return {
                 status: 'ok',
                 data: await TAURI_INVOKE('update_video', { id, payload }),
+            };
+        } catch (e) {
+            if (e instanceof Error) throw e;
+            else return { status: 'error', error: e as any };
+        }
+    },
+    async updateRestoreVideo(id: string): Promise<Result<Video, CommandError>> {
+        try {
+            return {
+                status: 'ok',
+                data: await TAURI_INVOKE('update_restore_video', { id }),
             };
         } catch (e) {
             if (e instanceof Error) throw e;
@@ -185,6 +207,17 @@ export const commands = {
             else return { status: 'error', error: e as any };
         }
     },
+    async updateRestoreAudio(id: string): Promise<Result<Audio, CommandError>> {
+        try {
+            return {
+                status: 'ok',
+                data: await TAURI_INVOKE('update_restore_audio', { id }),
+            };
+        } catch (e) {
+            if (e instanceof Error) throw e;
+            else return { status: 'error', error: e as any };
+        }
+    },
     async updateSnippet(
         id: string,
         payload: UpdateSnippetRequest,
@@ -193,6 +226,19 @@ export const commands = {
             return {
                 status: 'ok',
                 data: await TAURI_INVOKE('update_snippet', { id, payload }),
+            };
+        } catch (e) {
+            if (e instanceof Error) throw e;
+            else return { status: 'error', error: e as any };
+        }
+    },
+    async updateRestoreSnippet(
+        id: string,
+    ): Promise<Result<Snippet, CommandError>> {
+        try {
+            return {
+                status: 'ok',
+                data: await TAURI_INVOKE('update_restore_snippet', { id }),
             };
         } catch (e) {
             if (e instanceof Error) throw e;

@@ -85,3 +85,26 @@ pub async fn update_image(
 
     Ok(image)
 }
+
+#[tauri::command]
+#[specta::specta]
+pub async fn update_restore_image(state: AppState<'_>, id: String) -> CommandResult<Image> {
+    let mut conn = state.pool.get()?;
+
+    update(images::table.find(&id))
+        .set(images::deleted_at.eq(None::<i64>))
+        .execute(&mut conn)?;
+
+    let entity = images::table
+        .find(&id)
+        .get_result::<ImageEntity>(&mut conn)?;
+
+    let tags = ImageTagEntity::belonging_to(&entity)
+        .inner_join(tags::table)
+        .select(TagEntity::as_select())
+        .load::<TagEntity>(&mut conn)?;
+
+    let image = Image::from_entity(entity, tags);
+
+    Ok(image)
+}
