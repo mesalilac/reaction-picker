@@ -1,8 +1,11 @@
+import { Flip } from 'gsap/Flip';
 import { Toaster } from 'solid-sonner';
 
 import { DragOverlay, Main, Nav } from '@/components';
 
 import { GlobalDataProvider } from './store';
+
+gsap.registerPlugin(Flip);
 
 function App() {
     return (
