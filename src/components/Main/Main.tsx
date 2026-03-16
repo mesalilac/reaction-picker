@@ -88,13 +88,15 @@ export const Main: VoidComponent<Props> = (props) => {
             const description = item.description?.toLowerCase();
             const content = item.content.toLowerCase();
             const deleted = item.deletedAt !== null;
+            const isFavorite = item.isFavorite;
 
-            return (
-                (title?.includes(query) ||
-                    description?.includes(query) ||
-                    content.includes(query)) &&
-                (filter() === 'Deleted' ? deleted : !deleted)
-            );
+            return (title?.includes(query) ||
+                description?.includes(query) ||
+                content.includes(query)) &&
+                (filter() === 'Deleted' ? deleted : !deleted) &&
+                filter() === 'Favorites'
+                ? isFavorite
+                : !isFavorite;
         });
 
         return filtered;
