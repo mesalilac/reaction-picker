@@ -55,11 +55,14 @@ pub mod prelude {
     pub use crate::schema::*;
     pub use crate::utils::db::normalize_optional_string;
     pub use diesel::prelude::*;
-    pub use diesel::{dsl::delete, insert_into, update};
+    pub use diesel::{
+        dsl::{delete, exists},
+        insert_into, select, update,
+    };
+    pub use nanoid::nanoid;
     pub use serde::{Deserialize, Serialize};
-    use tauri::State;
 
-    pub type AppState<'a> = State<'a, crate::AppState>;
+    pub type AppState<'a> = tauri::State<'a, crate::AppState>;
 }
 
 mod create;
