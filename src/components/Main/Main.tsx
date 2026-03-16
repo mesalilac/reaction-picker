@@ -10,6 +10,10 @@ import {
 
 import type { Audio, Image, Video } from '@/bindings';
 import { Button, Input, Select } from '@/components';
+import {
+    DISCORD_FREE_FILE_UPLOAD_LIMIT,
+    DISCORD_FREE_MAX_CHAR_LIMIT,
+} from '@/consts';
 import { useGlobalData } from '@/store';
 
 import { AudioCard } from './AudioCard';
@@ -21,7 +25,12 @@ type Props = {
     ref?: HTMLElement | ((el: HTMLElement) => void);
 };
 
-const filtersList = ['All', 'Favorites', 'Deleted'] as const;
+const filtersList = [
+    'All',
+    'Favorites',
+    'Discord Free limit',
+    'Deleted',
+] as const;
 
 type FilterType = (typeof filtersList)[number];
 
@@ -45,14 +54,27 @@ export const Main: VoidComponent<Props> = (props) => {
         const fileName = item.fileName.toLowerCase();
         const deleted = item.deletedAt !== null;
         const isFavorite = item.isFavorite;
+        const belowDiscordFreeLimit =
+            item.fileSize <= DISCORD_FREE_FILE_UPLOAD_LIMIT;
 
-        return (title?.includes(query) ||
+        const matchesSearch =
+            !query ||
+            title?.includes(query) ||
             description?.includes(query) ||
-            fileName.includes(query)) &&
-            (filter() === 'Deleted' ? deleted : !deleted) &&
-            filter() === 'Favorites'
-            ? isFavorite
-            : !isFavorite;
+            fileName.includes(query);
+
+        if (!matchesSearch) return false;
+
+        switch (filter()) {
+            case 'Favorites':
+                return isFavorite && !deleted;
+            case 'Discord Free limit':
+                return belowDiscordFreeLimit && !deleted;
+            case 'Deleted':
+                return deleted;
+            default:
+                return !deleted;
+        }
     };
 
     const sortedImages = createMemo(() => {
@@ -89,14 +111,27 @@ export const Main: VoidComponent<Props> = (props) => {
             const content = item.content.toLowerCase();
             const deleted = item.deletedAt !== null;
             const isFavorite = item.isFavorite;
+            const belowDiscordFreeLimit =
+                item.content.length <= DISCORD_FREE_MAX_CHAR_LIMIT;
 
-            return (title?.includes(query) ||
+            const matchesSearch =
+                !query ||
+                title?.includes(query) ||
                 description?.includes(query) ||
-                content.includes(query)) &&
-                (filter() === 'Deleted' ? deleted : !deleted) &&
-                filter() === 'Favorites'
-                ? isFavorite
-                : !isFavorite;
+                content.includes(query);
+
+            if (!matchesSearch) return false;
+
+            switch (filter()) {
+                case 'Favorites':
+                    return isFavorite && !deleted;
+                case 'Discord Free limit':
+                    return belowDiscordFreeLimit && !deleted;
+                case 'Deleted':
+                    return deleted;
+                default:
+                    return !deleted;
+            }
         });
 
         return filtered;
