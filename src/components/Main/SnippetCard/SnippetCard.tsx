@@ -92,12 +92,74 @@ export const SnippetCard: VoidComponent<Props> = (props) => {
         setShowPopoverMenu(false);
     };
 
-    const handleRestore = () => {
+    const handleRestore = async () => {
         setShowPopoverMenu(false);
+
+        const res = await commands
+            .updateRestoreSnippet(props.snippet.id)
+            .catch((e) => {
+                toast.error(e);
+            });
+
+        if (!res) return;
+
+        if (res.status === 'error') {
+            toast.error(res.error.kind, {
+                description: res.error.message,
+            });
+
+            return;
+        }
+
+        toast.success('Snippet restored successfully');
+
+        globalData.resources.snippets.mutate((prev) => {
+            if (!prev) return;
+
+            return prev.map((item) =>
+                item.id === props.snippet.id ? res.data : item,
+            );
+        });
     };
 
-    const handleDelete = () => {
+    const handleDelete = async () => {
         setShowPopoverMenu(false);
+
+        const alreadyDeleted = props.snippet.deletedAt !== null;
+
+        const res = await commands
+            .removeDeleteSnippet(props.snippet.id, {
+                permanent: alreadyDeleted,
+            })
+            .catch((e) => {
+                toast.error(e);
+            });
+
+        if (!res) return;
+
+        if (res.status === 'error') {
+            toast.error(res.error.kind, {
+                description: res.error.message,
+            });
+
+            return;
+        }
+
+        toast.success(
+            `Snippet ${alreadyDeleted ? 'permanently deleted' : 'deleted'} successfully`,
+        );
+
+        globalData.resources.snippets.mutate((prev) => {
+            if (!prev) return;
+
+            if (alreadyDeleted)
+                return prev.filter((item) => item.id !== props.snippet.id);
+            else {
+                return prev.map((item) =>
+                    item.id === props.snippet.id ? res.data : item,
+                );
+            }
+        });
     };
 
     return (

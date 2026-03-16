@@ -91,12 +91,72 @@ export const VideoCard: VoidComponent<Props> = (props) => {
         setShowPopoverMenu(false);
     };
 
-    const handleRestore = () => {
+    const handleRestore = async () => {
         setShowPopoverMenu(false);
+
+        const res = await commands
+            .updateRestoreVideo(props.video.id)
+            .catch((e) => {
+                toast.error(e);
+            });
+
+        if (!res) return;
+
+        if (res.status === 'error') {
+            toast.error(res.error.kind, {
+                description: res.error.message,
+            });
+
+            return;
+        }
+
+        toast.success('Video restored successfully');
+
+        globalData.resources.videos.mutate((prev) => {
+            if (!prev) return;
+
+            return prev.map((item) =>
+                item.id === props.video.id ? res.data : item,
+            );
+        });
     };
 
-    const handleDelete = () => {
+    const handleDelete = async () => {
         setShowPopoverMenu(false);
+
+        const alreadyDeleted = props.video.deletedAt !== null;
+
+        const res = await commands
+            .removeDeleteVideo(props.video.id, { permanent: alreadyDeleted })
+            .catch((e) => {
+                toast.error(e);
+            });
+
+        if (!res) return;
+
+        if (res.status === 'error') {
+            toast.error(res.error.kind, {
+                description: res.error.message,
+            });
+
+            return;
+        }
+
+        toast.success(
+            `Video ${alreadyDeleted ? 'permanently deleted' : 'deleted'} successfully`,
+        );
+
+        globalData.resources.videos.mutate((prev) => {
+            if (!prev) return;
+
+            if (alreadyDeleted)
+                return prev.filter((item) => item.id !== props.video.id);
+            else {
+                return prev.map((item) =>
+                    item.id === props.video.id ? res.data : item,
+                );
+            }
+        });
     };
 
     return (

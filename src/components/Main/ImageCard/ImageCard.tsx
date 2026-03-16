@@ -116,12 +116,72 @@ export const ImageCard: VoidComponent<Props> = (props) => {
         setShowPopoverMenu(false);
     };
 
-    const handleRestore = () => {
+    const handleRestore = async () => {
         setShowPopoverMenu(false);
+
+        const res = await commands
+            .updateRestoreImage(props.image.id)
+            .catch((e) => {
+                toast.error(e);
+            });
+
+        if (!res) return;
+
+        if (res.status === 'error') {
+            toast.error(res.error.kind, {
+                description: res.error.message,
+            });
+
+            return;
+        }
+
+        toast.success('Image restored successfully');
+
+        globalData.resources.images.mutate((prev) => {
+            if (!prev) return;
+
+            return prev.map((item) =>
+                item.id === props.image.id ? res.data : item,
+            );
+        });
     };
 
-    const handleDelete = () => {
+    const handleDelete = async () => {
         setShowPopoverMenu(false);
+
+        const alreadyDeleted = props.image.deletedAt !== null;
+
+        const res = await commands
+            .removeDeleteImage(props.image.id, { permanent: alreadyDeleted })
+            .catch((e) => {
+                toast.error(e);
+            });
+
+        if (!res) return;
+
+        if (res.status === 'error') {
+            toast.error(res.error.kind, {
+                description: res.error.message,
+            });
+
+            return;
+        }
+
+        toast.success(
+            `Image ${alreadyDeleted ? 'permanently deleted' : 'deleted'} successfully`,
+        );
+
+        globalData.resources.images.mutate((prev) => {
+            if (!prev) return;
+
+            if (alreadyDeleted)
+                return prev.filter((item) => item.id !== props.image.id);
+            else {
+                return prev.map((item) =>
+                    item.id === props.image.id ? res.data : item,
+                );
+            }
+        });
     };
 
     return (

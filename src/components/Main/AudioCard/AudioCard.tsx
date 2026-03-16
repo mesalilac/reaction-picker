@@ -91,12 +91,72 @@ export const AudioCard: VoidComponent<Props> = (props) => {
         setShowPopoverMenu(false);
     };
 
-    const handleRestore = () => {
+    const handleRestore = async () => {
         setShowPopoverMenu(false);
+
+        const res = await commands
+            .updateRestoreAudio(props.audio.id)
+            .catch((e) => {
+                toast.error(e);
+            });
+
+        if (!res) return;
+
+        if (res.status === 'error') {
+            toast.error(res.error.kind, {
+                description: res.error.message,
+            });
+
+            return;
+        }
+
+        toast.success('Audio restored successfully');
+
+        globalData.resources.audio.mutate((prev) => {
+            if (!prev) return;
+
+            return prev.map((item) =>
+                item.id === props.audio.id ? res.data : item,
+            );
+        });
     };
 
-    const handleDelete = () => {
+    const handleDelete = async () => {
         setShowPopoverMenu(false);
+
+        const alreadyDeleted = props.audio.deletedAt !== null;
+
+        const res = await commands
+            .removeDeleteAudio(props.audio.id, { permanent: alreadyDeleted })
+            .catch((e) => {
+                toast.error(e);
+            });
+
+        if (!res) return;
+
+        if (res.status === 'error') {
+            toast.error(res.error.kind, {
+                description: res.error.message,
+            });
+
+            return;
+        }
+
+        toast.success(
+            `Audio ${alreadyDeleted ? 'permanently deleted' : 'deleted'} successfully`,
+        );
+
+        globalData.resources.audio.mutate((prev) => {
+            if (!prev) return;
+
+            if (alreadyDeleted)
+                return prev.filter((item) => item.id !== props.audio.id);
+            else {
+                return prev.map((item) =>
+                    item.id === props.audio.id ? res.data : item,
+                );
+            }
+        });
     };
 
     return (
