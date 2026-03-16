@@ -196,6 +196,124 @@ export const AudioCard: VoidComponent<Props> = (props) => {
             ref={containerRef}
             role='none'
         >
+            <div class='flex flex-row justify-between'>
+                <div class='flex flex-row gap-2'>
+                    <Button onClick={handleCopy}>Copy</Button>
+                </div>
+                <div class='flex flex-row gap-2'>
+                    <ButtonIcon onClick={handleToggleFavorite}>
+                        <IconHeart01
+                            class={clsx({
+                                'fill-red-500 text-red-500':
+                                    props.audio.isFavorite,
+                            })}
+                        />
+                    </ButtonIcon>
+                    <ButtonIcon ref={popoverMenuRef}>
+                        <IconMoreVertical />
+                    </ButtonIcon>
+                    <Popover
+                        onOpenChange={setShowPopoverMenu}
+                        open={showPopoverMenu()}
+                        targetPositionArea='top center'
+                        triggerElement={popoverMenuRef}
+                    >
+                        <Menu
+                            open={showPopoverMenu()}
+                            setOpen={setShowPopoverMenu}
+                        >
+                            <Menu.Item onClick={handleViewDetails}>
+                                view details
+                            </Menu.Item>
+                            <Menu.Item onClick={handleEditDetails}>
+                                edit details
+                            </Menu.Item>
+                            <Show when={props.audio.externalLink}>
+                                <Menu.Separator />
+                                <Menu.Item onClick={handleOpenExternalLink}>
+                                    open external link
+                                </Menu.Item>
+                            </Show>
+                            <Menu.Separator />
+                            <Show when={props.audio.deletedAt !== null}>
+                                <Menu.Item
+                                    class='text-blue-500'
+                                    onClick={handleRestore}
+                                >
+                                    restore
+                                </Menu.Item>
+                            </Show>
+                            <Menu.Item
+                                class='text-red-500'
+                                onClick={handleDelete}
+                            >
+                                {props.audio.deletedAt !== null
+                                    ? 'permanently delete'
+                                    : 'delete'}
+                            </Menu.Item>
+                        </Menu>
+                    </Popover>
+                </div>
+            </div>
+            <div class='flex flex-row justify-between'>
+                <div class='flex flex-row gap-2'>
+                    <Button onClick={handleCopy}>Copy</Button>
+                </div>
+                <div class='flex flex-row gap-2'>
+                    <ButtonIcon onClick={handleToggleFavorite}>
+                        <IconHeart01
+                            class={clsx({
+                                'fill-red-500 text-red-500':
+                                    props.audio.isFavorite,
+                            })}
+                        />
+                    </ButtonIcon>
+                    <ButtonIcon ref={popoverMenuRef}>
+                        <IconMoreVertical />
+                    </ButtonIcon>
+                    <Popover
+                        onOpenChange={setShowPopoverMenu}
+                        open={showPopoverMenu()}
+                        targetPositionArea='top center'
+                        triggerElement={popoverMenuRef}
+                    >
+                        <Menu
+                            open={showPopoverMenu()}
+                            setOpen={setShowPopoverMenu}
+                        >
+                            <Menu.Item onClick={handleViewDetails}>
+                                view details
+                            </Menu.Item>
+                            <Menu.Item onClick={handleEditDetails}>
+                                edit details
+                            </Menu.Item>
+                            <Show when={props.audio.externalLink}>
+                                <Menu.Separator />
+                                <Menu.Item onClick={handleOpenExternalLink}>
+                                    open external link
+                                </Menu.Item>
+                            </Show>
+                            <Menu.Separator />
+                            <Show when={props.audio.deletedAt !== null}>
+                                <Menu.Item
+                                    class='text-blue-500'
+                                    onClick={handleRestore}
+                                >
+                                    restore
+                                </Menu.Item>
+                            </Show>
+                            <Menu.Item
+                                class='text-red-500'
+                                onClick={handleDelete}
+                            >
+                                {props.audio.deletedAt !== null
+                                    ? 'permanently delete'
+                                    : 'delete'}
+                            </Menu.Item>
+                        </Menu>
+                    </Popover>
+                </div>
+            </div>
             <div class='w-full self-center'>
                 <Show when={containerVisible()}>
                     <audio
@@ -278,65 +396,6 @@ export const AudioCard: VoidComponent<Props> = (props) => {
                     <CardField label='added at'>
                         {new Date(props.audio.createdAt).toLocaleString()}
                     </CardField>
-                </div>
-                <div class='flex flex-row justify-between'>
-                    <div class='flex flex-row gap-2'>
-                        <Button onClick={handleCopy}>Copy</Button>
-                    </div>
-                    <div class='flex flex-row gap-2'>
-                        <ButtonIcon onClick={handleToggleFavorite}>
-                            <IconHeart01
-                                class={clsx({
-                                    'fill-red-500 text-red-500':
-                                        props.audio.isFavorite,
-                                })}
-                            />
-                        </ButtonIcon>
-                        <ButtonIcon ref={popoverMenuRef}>
-                            <IconMoreVertical />
-                        </ButtonIcon>
-                        <Popover
-                            onOpenChange={setShowPopoverMenu}
-                            open={showPopoverMenu()}
-                            targetPositionArea='top center'
-                            triggerElement={popoverMenuRef}
-                        >
-                            <Menu
-                                open={showPopoverMenu()}
-                                setOpen={setShowPopoverMenu}
-                            >
-                                <Menu.Item onClick={handleViewDetails}>
-                                    view details
-                                </Menu.Item>
-                                <Menu.Item onClick={handleEditDetails}>
-                                    edit details
-                                </Menu.Item>
-                                <Show when={props.audio.externalLink}>
-                                    <Menu.Separator />
-                                    <Menu.Item onClick={handleOpenExternalLink}>
-                                        open external link
-                                    </Menu.Item>
-                                </Show>
-                                <Menu.Separator />
-                                <Show when={props.audio.deletedAt !== null}>
-                                    <Menu.Item
-                                        class='text-blue-500'
-                                        onClick={handleRestore}
-                                    >
-                                        restore
-                                    </Menu.Item>
-                                </Show>
-                                <Menu.Item
-                                    class='text-red-500'
-                                    onClick={handleDelete}
-                                >
-                                    {props.audio.deletedAt !== null
-                                        ? 'permanently delete'
-                                        : 'delete'}
-                                </Menu.Item>
-                            </Menu>
-                        </Popover>
-                    </div>
                 </div>
             </div>
         </div>
