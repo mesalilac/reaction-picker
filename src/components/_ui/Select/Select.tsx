@@ -17,6 +17,7 @@ import {
 
 import {
     Button,
+    CountLabel,
     IconCaretDownMd,
     IconCheck,
     Input,
@@ -229,9 +230,7 @@ export const Select: VoidComponent<Props> = (rawProps) => {
                             when={props.placeholder}
                         >
                             <span>{props.placeholder}</span>
-                            <span class='rounded-lg bg-neutral-700/50 px-4'>
-                                {props.selected.length}
-                            </span>
+                            <CountLabel>{props.selected.length}</CountLabel>
                         </Show>
                     </Match>
                     <Match when={!isMultiSelect() && props.selected}>
