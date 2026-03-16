@@ -1,6 +1,7 @@
 import { createVisibilityObserver } from '@solid-primitives/intersection-observer';
 import { convertFileSrc } from '@tauri-apps/api/core';
 import { openUrl } from '@tauri-apps/plugin-opener';
+import { filesize } from 'filesize';
 import { createSignal, Show, type VoidComponent } from 'solid-js';
 import { toast } from 'solid-sonner';
 
@@ -8,6 +9,7 @@ import { type Audio, commands } from '@/bindings';
 import {
     Button,
     ButtonIcon,
+    CardField,
     IconMoreVertical,
     Menu,
     Popover,
@@ -95,31 +97,93 @@ export const AudioCard: VoidComponent<Props> = (props) => {
 
     return (
         <div
-            class='flex h-80 flex-col gap-4 rounded-lg bg-neutral-900 p-4'
+            class='flex flex-col gap-4 rounded-lg bg-neutral-900 p-4'
             onContextMenu={handleContextMenu}
             ref={containerRef}
             role='none'
         >
-            <Show when={containerVisible()}>
-                <audio
-                    class='w-full focus:outline-none'
-                    controls
-                    ref={(el) => {
-                        el.volume =
-                            globalData.resources.settings.get()
-                                ?.defaultVolume || 0.1;
-                    }}
-                >
-                    <source
-                        src={convertFileSrc(props.audio.filePath)}
-                        type={props.audio.mimeType}
-                    />
-                    <track kind='captions' />
-                </audio>
-            </Show>
-            <div class='mt-auto flex flex-col gap-4'>
+            <div class='w-full self-center'>
+                <Show when={containerVisible()}>
+                    <audio
+                        class='w-full focus:outline-none'
+                        controls
+                        ref={(el) => {
+                            el.volume =
+                                globalData.resources.settings.get()
+                                    ?.defaultVolume || 0.1;
+                        }}
+                    >
+                        <source
+                            src={convertFileSrc(props.audio.filePath)}
+                            type={props.audio.mimeType}
+                        />
+                        <track kind='captions' />
+                    </audio>
+                </Show>
+            </div>
+            <div class='flex flex-col gap-4'>
                 <div class='flex flex-col gap-2'>
-                    <span class='truncate'>{props.audio.title}</span>
+                    <CardField label='title'>
+                        <span title={props.audio.title ?? undefined}>
+                            {props.audio.title}
+                        </span>
+                    </CardField>
+                    <CardField label='description'>
+                        <span title={props.audio.description ?? undefined}>
+                            {props.audio.description}
+                        </span>
+                    </CardField>
+                    <CardField label='file path'>
+                        <span title={props.audio.fileName ?? undefined}>
+                            {props.audio.fileName}
+                        </span>
+                    </CardField>
+                    <CardField label='total uses'>
+                        <span
+                            title={
+                                props.audio.lastUsedAt
+                                    ? new Date(
+                                          props.audio.lastUsedAt,
+                                      ).toLocaleString()
+                                    : undefined
+                            }
+                        >
+                            {props.audio.useCounter}
+                        </span>
+                    </CardField>
+                    <CardField label='file size'>
+                        <span title={props.audio.fileSize.toString()}>
+                            {filesize(props.audio.fileSize)}
+                        </span>
+                    </CardField>
+                    <CardField label='tags'>
+                        {props.audio.tags.length > 0 ? (
+                            <span
+                                title={props.audio.tags
+                                    .map((tag) => tag.name)
+                                    .join(', ')}
+                            >
+                                {props.audio.tags
+                                    .map((tag) => tag.name)
+                                    .join(', ')}
+                            </span>
+                        ) : undefined}
+                    </CardField>
+                    <CardField
+                        label='deleted at'
+                        show={props.audio.deletedAt !== null}
+                    >
+                        {props.audio.deletedAt ? (
+                            <span class='text-red-500'>
+                                {new Date(
+                                    props.audio.deletedAt,
+                                ).toLocaleString()}
+                            </span>
+                        ) : undefined}
+                    </CardField>
+                    <CardField label='added at'>
+                        {new Date(props.audio.createdAt).toLocaleString()}
+                    </CardField>
                 </div>
                 <div class='flex flex-row justify-between'>
                     <div class='flex flex-row gap-2'>

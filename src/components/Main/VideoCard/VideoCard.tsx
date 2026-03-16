@@ -1,6 +1,7 @@
 import { createVisibilityObserver } from '@solid-primitives/intersection-observer';
 import { convertFileSrc } from '@tauri-apps/api/core';
 import { openUrl } from '@tauri-apps/plugin-opener';
+import { filesize } from 'filesize';
 import { createSignal, Show, type VoidComponent } from 'solid-js';
 import { toast } from 'solid-sonner';
 
@@ -8,6 +9,7 @@ import { commands, type Video } from '@/bindings';
 import {
     Button,
     ButtonIcon,
+    CardField,
     IconMoreVertical,
     Menu,
     Popover,
@@ -123,7 +125,67 @@ export const VideoCard: VoidComponent<Props> = (props) => {
             </div>
             <div class='flex flex-col gap-4'>
                 <div class='flex flex-col gap-2'>
-                    <span class='truncate'>{props.video.title}</span>
+                    <CardField label='title'>
+                        <span title={props.video.title ?? undefined}>
+                            {props.video.title}
+                        </span>
+                    </CardField>
+                    <CardField label='description'>
+                        <span title={props.video.description ?? undefined}>
+                            {props.video.description}
+                        </span>
+                    </CardField>
+                    <CardField label='file name'>
+                        <span title={props.video.fileName ?? undefined}>
+                            {props.video.fileName}
+                        </span>
+                    </CardField>
+                    <CardField label='total uses'>
+                        <span
+                            title={
+                                props.video.lastUsedAt
+                                    ? new Date(
+                                          props.video.lastUsedAt,
+                                      ).toLocaleString()
+                                    : undefined
+                            }
+                        >
+                            {props.video.useCounter}
+                        </span>
+                    </CardField>
+                    <CardField label='file size'>
+                        <span title={props.video.fileSize.toString()}>
+                            {filesize(props.video.fileSize)}
+                        </span>
+                    </CardField>
+                    <CardField label='tags'>
+                        {props.video.tags.length > 0 ? (
+                            <span
+                                title={props.video.tags
+                                    .map((tag) => tag.name)
+                                    .join(', ')}
+                            >
+                                {props.video.tags
+                                    .map((tag) => tag.name)
+                                    .join(', ')}
+                            </span>
+                        ) : undefined}
+                    </CardField>
+                    <CardField
+                        label='deleted at'
+                        show={props.video.deletedAt !== null}
+                    >
+                        {props.video.deletedAt ? (
+                            <span class='text-red-500'>
+                                {new Date(
+                                    props.video.deletedAt,
+                                ).toLocaleString()}
+                            </span>
+                        ) : undefined}
+                    </CardField>
+                    <CardField label='added at'>
+                        {new Date(props.video.createdAt).toLocaleString()}
+                    </CardField>
                 </div>
                 <div class='flex flex-row justify-between'>
                     <div class='flex flex-row gap-2'>
