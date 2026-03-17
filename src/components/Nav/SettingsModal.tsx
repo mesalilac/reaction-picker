@@ -1,9 +1,4 @@
-import {
-    type Accessor,
-    createSignal,
-    type Setter,
-    type VoidComponent,
-} from 'solid-js';
+import type { Accessor, Setter, VoidComponent } from 'solid-js';
 import { createStore } from 'solid-js/store';
 import { toast } from 'solid-sonner';
 
@@ -18,13 +13,6 @@ type Props = {
 
 export const SettingsModal: VoidComponent<Props> = (props) => {
     const globalCtx = useGlobalContext();
-
-    const [minimizeOnCopy, setMinimizeOnCopy] = createSignal<boolean>(
-        globalCtx.resources.settings.get()?.minimizeOnCopy || false,
-    );
-    const [defaultVolume, setDefaultVolume] = createSignal<number>(
-        globalCtx.resources.settings.get()?.defaultVolume || 0.1,
-    );
 
     const [store, setStore] = createStore<{
         minimizeOnCopy?: boolean;
@@ -42,7 +30,7 @@ export const SettingsModal: VoidComponent<Props> = (props) => {
         }
 
         if (
-            store.defaultVolume &&
+            store.defaultVolume !== undefined &&
             (store.defaultVolume < 0 || store.defaultVolume > 1)
         ) {
             toast.error('Default volume must be between 0 and 1');
@@ -91,13 +79,17 @@ export const SettingsModal: VoidComponent<Props> = (props) => {
             <Separator />
             <div class='flex flex-col gap-4'>
                 <Checkbox
-                    checked={minimizeOnCopy()}
+                    checked={
+                        store.minimizeOnCopy !== undefined
+                            ? store.minimizeOnCopy
+                            : globalCtx.resources.settings.get()
+                                  ?.minimizeOnCopy || false
+                    }
                     label='Minimize on copy'
                     onChange={() => {
-                        const newState = !minimizeOnCopy();
+                        const newState = !store.minimizeOnCopy;
 
                         setStore('minimizeOnCopy', newState);
-                        setMinimizeOnCopy(newState);
                     }}
                 />
                 <div class='flex items-center gap-2'>
@@ -109,11 +101,15 @@ export const SettingsModal: VoidComponent<Props> = (props) => {
                             const value = Number(e.target.value);
 
                             setStore('defaultVolume', value);
-                            setDefaultVolume(value);
                         }}
                         step={0.1}
                         type='number'
-                        value={defaultVolume()}
+                        value={
+                            store.defaultVolume !== undefined
+                                ? store.defaultVolume
+                                : globalCtx.resources.settings.get()
+                                      ?.defaultVolume || undefined
+                        }
                     />
                 </div>
             </div>
