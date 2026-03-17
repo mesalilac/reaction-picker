@@ -14,6 +14,8 @@ type Props = {
 export const SettingsModal: VoidComponent<Props> = (props) => {
     const globalCtx = useGlobalContext();
 
+    const settings = globalCtx.resources.settings.get();
+
     const [store, setStore] = createStore<{
         minimizeOnCopy?: boolean;
         defaultVolume?: number;
@@ -82,8 +84,7 @@ export const SettingsModal: VoidComponent<Props> = (props) => {
                     checked={
                         store.minimizeOnCopy !== undefined
                             ? store.minimizeOnCopy
-                            : globalCtx.resources.settings.get()
-                                  ?.minimizeOnCopy || false
+                            : settings?.minimizeOnCopy || false
                     }
                     label='Minimize on copy'
                     onChange={() => {
@@ -107,8 +108,7 @@ export const SettingsModal: VoidComponent<Props> = (props) => {
                         value={
                             store.defaultVolume !== undefined
                                 ? store.defaultVolume
-                                : (globalCtx.resources.settings.get()
-                                      ?.defaultVolume ?? undefined)
+                                : (settings?.defaultVolume ?? undefined)
                         }
                     />
                 </div>
