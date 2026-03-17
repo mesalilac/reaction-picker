@@ -10,3 +10,13 @@ export const minimizeWindow = async () => {
         toast.error(e as string);
     }
 };
+
+export const unminimizeWindow = async () => {
+    try {
+        const window = await getCurrentWindow();
+        window.unminimize();
+    } catch (e) {
+        console.error(e);
+        toast.error(e as string);
+    }
+};

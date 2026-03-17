@@ -16,7 +16,7 @@ import {
     Popover,
 } from '@/components';
 import { useGlobalContext } from '@/store';
-import { minimizeWindow } from '@/utils';
+import { minimizeWindow, unminimizeWindow } from '@/utils';
 
 type Props = {
     snippet: Snippet;
@@ -66,18 +66,32 @@ export const SnippetCard: VoidComponent<Props> = (props) => {
     };
 
     const handleCopy = async () => {
+        if (globalCtx.resources.settings.get()?.minimizeOnCopy) {
+            await minimizeWindow();
+        }
+
         const res = await commands
             .utilCopySnippet(props.snippet.id)
             .catch((e) => {
                 toast.error(e);
             });
 
-        if (!res) return;
+        if (!res) {
+            if (globalCtx.resources.settings.get()?.minimizeOnCopy) {
+                await unminimizeWindow();
+            }
+
+            return;
+        }
 
         if (res.status === 'error') {
             toast.error(res.error.kind, {
                 description: res.error.message,
             });
+
+            if (globalCtx.resources.settings.get()?.minimizeOnCopy) {
+                await unminimizeWindow();
+            }
 
             return;
         }
@@ -91,10 +105,6 @@ export const SnippetCard: VoidComponent<Props> = (props) => {
                 item.id === props.snippet.id ? res.data : item,
             );
         });
-
-        if (globalCtx.resources.settings.get()?.minimizeOnCopy) {
-            await minimizeWindow();
-        }
     };
 
     const handleContextMenu = (e: MouseEvent) => {

@@ -17,7 +17,7 @@ import {
     Popover,
 } from '@/components';
 import { useGlobalContext } from '@/store';
-import { minimizeWindow } from '@/utils';
+import { minimizeWindow, unminimizeWindow } from '@/utils';
 
 type Props = {
     audio: Audio;
@@ -67,16 +67,30 @@ export const AudioCard: VoidComponent<Props> = (props) => {
     };
 
     const handleCopy = async () => {
+        if (globalCtx.resources.settings.get()?.minimizeOnCopy) {
+            await minimizeWindow();
+        }
+
         const res = await commands.utilCopyAudio(props.audio.id).catch((e) => {
             toast.error(e);
         });
 
-        if (!res) return;
+        if (!res) {
+            if (globalCtx.resources.settings.get()?.minimizeOnCopy) {
+                await unminimizeWindow();
+            }
+
+            return;
+        }
 
         if (res.status === 'error') {
             toast.error(res.error.kind, {
                 description: res.error.message,
             });
+
+            if (globalCtx.resources.settings.get()?.minimizeOnCopy) {
+                await unminimizeWindow();
+            }
 
             return;
         }
@@ -90,10 +104,6 @@ export const AudioCard: VoidComponent<Props> = (props) => {
                 item.id === props.audio.id ? res.data : item,
             );
         });
-
-        if (globalCtx.resources.settings.get()?.minimizeOnCopy) {
-            await minimizeWindow();
-        }
     };
 
     const handleContextMenu = (e: MouseEvent) => {

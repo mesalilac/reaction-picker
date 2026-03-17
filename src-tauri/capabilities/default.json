@@ -9,6 +9,7 @@
     "core:default",
     "opener:default",
     "clipboard-next:default",
-    "core:window:allow-minimize"
+    "core:window:allow-minimize",
+    "core:window:allow-unminimize"
   ]
 }
