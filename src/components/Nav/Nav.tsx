@@ -6,10 +6,10 @@ import {
     IconAddPlus,
     IconSettings,
     Modal,
-    Separator,
 } from '@/components';
 import { useGlobalData } from '@/store';
 
+import { NewSnippetModal } from './NewSnippetModal';
 import { Tab } from './Tab';
 
 type Props = {
@@ -64,8 +64,7 @@ export const Nav: VoidComponent<Props> = (props) => {
                         onAction={saveSettings}
                         setIsOpen={setShowSettingsModal}
                     >
-                        Settings
-                        <Separator />
+                        <NewSnippetModal />
                     </Modal>
                 </Show>
             </div>
