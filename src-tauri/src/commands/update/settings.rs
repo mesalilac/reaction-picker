@@ -5,7 +5,7 @@ use crate::APP_SETTINGS_ID;
 #[diesel(table_name = settings)]
 struct SettingsChangeset {
     pub minimize_on_copy: Option<bool>,
-    pub default_volume: Option<f32>,
+    pub default_volume: Option<f64>,
 }
 
 impl SettingsChangeset {
@@ -22,7 +22,7 @@ pub struct UpdateSettingsRequest {
     pub minimize_on_copy: Option<bool>,
     #[specta(optional)]
     #[serde(default)]
-    pub default_volume: Option<f32>,
+    pub default_volume: Option<f64>,
 }
 
 #[tauri::command]
