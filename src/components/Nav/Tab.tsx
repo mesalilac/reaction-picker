@@ -8,14 +8,14 @@ import {
 } from 'solid-js';
 
 import { CountLabel } from '@/components';
-import { type TabType, useGlobalData } from '@/store';
+import { type TabType, useGlobalContext } from '@/store';
 
 export const Tab: VoidComponent<{
     type: TabType;
     count: number;
     ref?: HTMLButtonElement | ((el: HTMLButtonElement) => void);
 }> = (props) => {
-    const globalData = useGlobalData();
+    const globalCtx = useGlobalContext();
 
     const counter = {
         val: 0,
@@ -23,7 +23,7 @@ export const Tab: VoidComponent<{
 
     const [count, setCount] = createSignal(0);
 
-    const isActive = () => globalData.store.activeTab === props.type;
+    const isActive = () => globalCtx.store.activeTab === props.type;
 
     createEffect(() => {
         const total = props.count;
@@ -47,7 +47,7 @@ export const Tab: VoidComponent<{
                     ? 'text-blue-500'
                     : 'border-transparent hover:text-blue-500/50',
             )}
-            onClick={() => globalData.setStore('activeTab', props.type)}
+            onClick={() => globalCtx.setStore('activeTab', props.type)}
             ref={props.ref}
             type='button'
         >

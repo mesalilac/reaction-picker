@@ -27,13 +27,13 @@ export type ManagedResource<T> = {
 
 export type TabType = 'Images' | 'Videos' | 'Audio' | 'Snippets';
 
-export type GlobalStore = {
+export type GlobalContextStoreType = {
     activeTab: TabType;
 };
 
-export type GlobalData = {
-    store: GlobalStore;
-    setStore: SetStoreFunction<GlobalStore>;
+export type GlobalContextType = {
+    store: GlobalContextStoreType;
+    setStore: SetStoreFunction<GlobalContextStoreType>;
 
     resources: {
         images: ManagedResource<Image[]>;
@@ -46,8 +46,8 @@ export type GlobalData = {
     };
 };
 
-const createGlobalData = (): GlobalData => {
-    const [store, setStore] = createStore<GlobalStore>({
+const createGlobalContext = (): GlobalContextType => {
+    const [store, setStore] = createStore<GlobalContextStoreType>({
         activeTab: 'Images',
     });
 
@@ -137,25 +137,23 @@ const createGlobalData = (): GlobalData => {
     };
 };
 
-const GlobalContext = createContext<GlobalData>();
+const GlobalContext = createContext<GlobalContextType>();
 
-export const useGlobalData = () => {
+export const useGlobalContext = () => {
     const context = useContext(GlobalContext);
 
     if (!context) {
-        throw new Error(
-            'useGlobalData must be used within a GlobalDataProvider',
-        );
+        throw new Error('useGlobalCtx must be used within a GlobalCtxProvider');
     }
 
     return context;
 };
 
-export function GlobalDataProvider(props: { children: JSX.Element }) {
-    const globalData = createGlobalData();
+export function GlobalContextProvider(props: { children: JSX.Element }) {
+    const globalCtx = createGlobalContext();
 
     return (
-        <GlobalContext.Provider value={globalData}>
+        <GlobalContext.Provider value={globalCtx}>
             {props.children}
         </GlobalContext.Provider>
     );

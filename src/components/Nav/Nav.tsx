@@ -7,7 +7,7 @@ import {
     IconSettings,
     Modal,
 } from '@/components';
-import { useGlobalData } from '@/store';
+import { useGlobalContext } from '@/store';
 
 import { NewSnippetModal } from './NewSnippetModal';
 import { Tab } from './Tab';
@@ -17,22 +17,22 @@ type Props = {
 };
 
 export const Nav: VoidComponent<Props> = (props) => {
-    const globalData = useGlobalData();
+    const globalCtx = useGlobalContext();
 
     const imagesCount = createMemo(
-        () => globalData.resources.images.get()?.length || 0,
+        () => globalCtx.resources.images.get()?.length || 0,
     );
 
     const videosCount = createMemo(
-        () => globalData.resources.videos.get()?.length || 0,
+        () => globalCtx.resources.videos.get()?.length || 0,
     );
 
     const audioCount = createMemo(
-        () => globalData.resources.audio.get()?.length || 0,
+        () => globalCtx.resources.audio.get()?.length || 0,
     );
 
     const snippetsCount = createMemo(
-        () => globalData.resources.snippets.get()?.length || 0,
+        () => globalCtx.resources.snippets.get()?.length || 0,
     );
 
     const [showSettingsModal, setShowSettingsModal] = createSignal(false);
@@ -48,7 +48,7 @@ export const Nav: VoidComponent<Props> = (props) => {
                 <Tab count={snippetsCount()} type='Snippets' />
             </div>
             <div class='flex gap-5'>
-                <Show when={globalData.store.activeTab === 'Snippets'}>
+                <Show when={globalCtx.store.activeTab === 'Snippets'}>
                     <Button>
                         <IconAddPlus />
                         <span>New</span>

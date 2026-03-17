@@ -14,7 +14,7 @@ import {
     DISCORD_FREE_FILE_UPLOAD_LIMIT,
     DISCORD_FREE_MAX_CHAR_LIMIT,
 } from '@/consts';
-import { useGlobalData } from '@/store';
+import { useGlobalContext } from '@/store';
 
 import { AudioCard } from './AudioCard';
 import { ImageCard } from './ImageCard';
@@ -40,7 +40,7 @@ const SORT_DIR_LIST = ['Asc', 'Desc'] as const;
 type SortDirType = (typeof SORT_DIR_LIST)[number];
 
 export const Main: VoidComponent<Props> = (props) => {
-    const globalData = useGlobalData();
+    const globalCtx = useGlobalContext();
 
     const [searchQuery, setSearchQuery] = createSignal('');
 
@@ -48,10 +48,10 @@ export const Main: VoidComponent<Props> = (props) => {
     const [sortBy, setSortBy] = createSignal<SortByType>('Recently used');
     const [sortDir, setSortDir] = createSignal<SortDirType>('Desc');
 
-    const imagesTabActive = () => globalData.store.activeTab === 'Images';
-    const videosTabActive = () => globalData.store.activeTab === 'Videos';
-    const audioTabActive = () => globalData.store.activeTab === 'Audio';
-    const snippetsTabActive = () => globalData.store.activeTab === 'Snippets';
+    const imagesTabActive = () => globalCtx.store.activeTab === 'Images';
+    const videosTabActive = () => globalCtx.store.activeTab === 'Videos';
+    const audioTabActive = () => globalCtx.store.activeTab === 'Audio';
+    const snippetsTabActive = () => globalCtx.store.activeTab === 'Snippets';
 
     const filterList = (item: Image | Video | Audio) => {
         const query = searchQuery().toLowerCase();
@@ -105,7 +105,7 @@ export const Main: VoidComponent<Props> = (props) => {
     };
 
     const sortedImages = createMemo(() => {
-        const list = [...(globalData.resources.images.get() || [])];
+        const list = [...(globalCtx.resources.images.get() || [])];
 
         const filtered = list.filter(filterList);
 
@@ -113,7 +113,7 @@ export const Main: VoidComponent<Props> = (props) => {
     });
 
     const sortedVideos = createMemo(() => {
-        const list = [...(globalData.resources.videos.get() || [])];
+        const list = [...(globalCtx.resources.videos.get() || [])];
 
         const filtered = list.filter(filterList);
 
@@ -121,7 +121,7 @@ export const Main: VoidComponent<Props> = (props) => {
     });
 
     const sortedAudio = createMemo(() => {
-        const list = [...(globalData.resources.audio.get() || [])];
+        const list = [...(globalCtx.resources.audio.get() || [])];
 
         const filtered = list.filter(filterList);
 
@@ -129,7 +129,7 @@ export const Main: VoidComponent<Props> = (props) => {
     });
 
     const sortedSnippets = createMemo(() => {
-        const list = [...(globalData.resources.snippets.get() || [])];
+        const list = [...(globalCtx.resources.snippets.get() || [])];
         const query = searchQuery().toLowerCase();
 
         const filtered = list.filter((item) => {
@@ -183,7 +183,7 @@ export const Main: VoidComponent<Props> = (props) => {
     });
 
     const itemsCount = () => {
-        switch (globalData.store.activeTab) {
+        switch (globalCtx.store.activeTab) {
             case 'Images':
                 return sortedImages().length;
             case 'Videos':

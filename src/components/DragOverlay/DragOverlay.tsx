@@ -7,14 +7,14 @@ import { Portal } from 'solid-js/web';
 import { toast } from 'solid-sonner';
 
 import { commands, events } from '@/bindings';
-import { useGlobalData } from '@/store';
+import { useGlobalContext } from '@/store';
 
 type Props = {
     ref?: HTMLDivElement | ((el: HTMLDivElement) => void);
 };
 
 export const DragOverlay: VoidComponent<Props> = (props) => {
-    const globalData = useGlobalData();
+    const globalCtx = useGlobalContext();
 
     const [isDragActive, setIsDragActive] = createSignal(false);
     const [filesCount, setFilesCount] = createSignal(0);
@@ -75,10 +75,10 @@ export const DragOverlay: VoidComponent<Props> = (props) => {
                     return;
                 }
 
-                globalData.resources.images.refetch();
-                globalData.resources.videos.refetch();
-                globalData.resources.audio.refetch();
-                globalData.resources.generalStats.refetch();
+                globalCtx.resources.images.refetch();
+                globalCtx.resources.videos.refetch();
+                globalCtx.resources.audio.refetch();
+                globalCtx.resources.generalStats.refetch();
 
                 toast.success(`File(s) processed: ${res.data}`, {
                     id: toastId,

@@ -15,7 +15,7 @@ import {
     Menu,
     Popover,
 } from '@/components';
-import { useGlobalData } from '@/store';
+import { useGlobalContext } from '@/store';
 import { minimizeWindow } from '@/utils';
 
 type Props = {
@@ -23,7 +23,7 @@ type Props = {
 };
 
 export const SnippetCard: VoidComponent<Props> = (props) => {
-    const globalData = useGlobalData();
+    const globalCtx = useGlobalContext();
 
     let popoverMenuRef!: HTMLButtonElement;
     let containerRef!: HTMLDivElement;
@@ -56,7 +56,7 @@ export const SnippetCard: VoidComponent<Props> = (props) => {
             return;
         }
 
-        globalData.resources.snippets.mutate((prev) => {
+        globalCtx.resources.snippets.mutate((prev) => {
             if (!prev) return;
 
             return prev.map((item) =>
@@ -84,7 +84,7 @@ export const SnippetCard: VoidComponent<Props> = (props) => {
 
         toast.success('Snippet copied to clipboard');
 
-        globalData.resources.snippets.mutate((prev) => {
+        globalCtx.resources.snippets.mutate((prev) => {
             if (!prev) return;
 
             return prev.map((item) =>
@@ -92,7 +92,7 @@ export const SnippetCard: VoidComponent<Props> = (props) => {
             );
         });
 
-        if (globalData.resources.settings.get()?.minimizeOnCopy) {
+        if (globalCtx.resources.settings.get()?.minimizeOnCopy) {
             await minimizeWindow();
         }
     };
@@ -143,7 +143,7 @@ export const SnippetCard: VoidComponent<Props> = (props) => {
 
         toast.success('Snippet restored successfully');
 
-        globalData.resources.snippets.mutate((prev) => {
+        globalCtx.resources.snippets.mutate((prev) => {
             if (!prev) return;
 
             return prev.map((item) =>
@@ -179,7 +179,7 @@ export const SnippetCard: VoidComponent<Props> = (props) => {
             `Snippet ${alreadyDeleted ? 'permanently deleted' : 'deleted'} successfully`,
         );
 
-        globalData.resources.snippets.mutate((prev) => {
+        globalCtx.resources.snippets.mutate((prev) => {
             if (!prev) return;
 
             if (alreadyDeleted)

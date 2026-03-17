@@ -4,13 +4,13 @@ import { Toaster } from 'solid-sonner';
 
 import { DragOverlay, Main, Nav } from '@/components';
 
-import { GlobalDataProvider } from './store';
+import { GlobalContextProvider } from './store';
 
 gsap.registerPlugin(Flip);
 
 function App() {
     return (
-        <GlobalDataProvider>
+        <GlobalContextProvider>
             <Toaster
                 containerAriaLabel='Notifications'
                 expand
@@ -25,7 +25,7 @@ function App() {
                 <Nav />
                 <Main />
             </div>
-        </GlobalDataProvider>
+        </GlobalContextProvider>
     );
 }
 

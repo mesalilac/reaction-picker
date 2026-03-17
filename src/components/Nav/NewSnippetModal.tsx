@@ -1,10 +1,10 @@
 import type { VoidComponent } from 'solid-js';
 
 import { Separator, useModalContext } from '@/components';
-import { useGlobalData } from '@/store';
+import { useGlobalContext } from '@/store';
 
 export const NewSnippetModal: VoidComponent = () => {
-    const globalData = useGlobalData();
+    const globalCtx = useGlobalContext();
     const { setIsOpen } = useModalContext();
 
     return (

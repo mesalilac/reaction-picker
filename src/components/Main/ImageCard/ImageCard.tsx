@@ -17,7 +17,7 @@ import {
     Menu,
     Popover,
 } from '@/components';
-import { useGlobalData } from '@/store';
+import { useGlobalContext } from '@/store';
 import { minimizeWindow } from '@/utils';
 
 type Props = {
@@ -25,7 +25,7 @@ type Props = {
 };
 
 export const ImageCard: VoidComponent<Props> = (props) => {
-    const globalData = useGlobalData();
+    const globalCtx = useGlobalContext();
 
     let popoverMenuRef!: HTMLButtonElement;
     let canvasRef!: HTMLCanvasElement;
@@ -82,7 +82,7 @@ export const ImageCard: VoidComponent<Props> = (props) => {
             return;
         }
 
-        globalData.resources.images.mutate((prev) => {
+        globalCtx.resources.images.mutate((prev) => {
             if (!prev) return;
 
             return prev.map((item) =>
@@ -108,7 +108,7 @@ export const ImageCard: VoidComponent<Props> = (props) => {
 
         toast.success('Image copied to clipboard');
 
-        globalData.resources.images.mutate((prev) => {
+        globalCtx.resources.images.mutate((prev) => {
             if (!prev) return;
 
             return prev.map((item) =>
@@ -116,7 +116,7 @@ export const ImageCard: VoidComponent<Props> = (props) => {
             );
         });
 
-        if (globalData.resources.settings.get()?.minimizeOnCopy) {
+        if (globalCtx.resources.settings.get()?.minimizeOnCopy) {
             await minimizeWindow();
         }
     };
@@ -167,7 +167,7 @@ export const ImageCard: VoidComponent<Props> = (props) => {
 
         toast.success('Image restored successfully');
 
-        globalData.resources.images.mutate((prev) => {
+        globalCtx.resources.images.mutate((prev) => {
             if (!prev) return;
 
             return prev.map((item) =>
@@ -201,7 +201,7 @@ export const ImageCard: VoidComponent<Props> = (props) => {
             `Image ${alreadyDeleted ? 'permanently deleted' : 'deleted'} successfully`,
         );
 
-        globalData.resources.images.mutate((prev) => {
+        globalCtx.resources.images.mutate((prev) => {
             if (!prev) return;
 
             if (alreadyDeleted)

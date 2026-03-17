@@ -16,7 +16,7 @@ import {
     Menu,
     Popover,
 } from '@/components';
-import { useGlobalData } from '@/store';
+import { useGlobalContext } from '@/store';
 import { minimizeWindow } from '@/utils';
 
 type Props = {
@@ -24,7 +24,7 @@ type Props = {
 };
 
 export const VideoCard: VoidComponent<Props> = (props) => {
-    const globalData = useGlobalData();
+    const globalCtx = useGlobalContext();
 
     let popoverMenuRef!: HTMLButtonElement;
     let containerRef!: HTMLDivElement;
@@ -57,7 +57,7 @@ export const VideoCard: VoidComponent<Props> = (props) => {
             return;
         }
 
-        globalData.resources.videos.mutate((prev) => {
+        globalCtx.resources.videos.mutate((prev) => {
             if (!prev) return;
 
             return prev.map((item) =>
@@ -83,7 +83,7 @@ export const VideoCard: VoidComponent<Props> = (props) => {
 
         toast.success('Video copied to clipboard');
 
-        globalData.resources.videos.mutate((prev) => {
+        globalCtx.resources.videos.mutate((prev) => {
             if (!prev) return;
 
             return prev.map((item) =>
@@ -91,7 +91,7 @@ export const VideoCard: VoidComponent<Props> = (props) => {
             );
         });
 
-        if (globalData.resources.settings.get()?.minimizeOnCopy) {
+        if (globalCtx.resources.settings.get()?.minimizeOnCopy) {
             await minimizeWindow();
         }
     };
@@ -142,7 +142,7 @@ export const VideoCard: VoidComponent<Props> = (props) => {
 
         toast.success('Video restored successfully');
 
-        globalData.resources.videos.mutate((prev) => {
+        globalCtx.resources.videos.mutate((prev) => {
             if (!prev) return;
 
             return prev.map((item) =>
@@ -176,7 +176,7 @@ export const VideoCard: VoidComponent<Props> = (props) => {
             `Video ${alreadyDeleted ? 'permanently deleted' : 'deleted'} successfully`,
         );
 
-        globalData.resources.videos.mutate((prev) => {
+        globalCtx.resources.videos.mutate((prev) => {
             if (!prev) return;
 
             if (alreadyDeleted)
@@ -264,7 +264,7 @@ export const VideoCard: VoidComponent<Props> = (props) => {
                         loop
                         ref={(el) => {
                             el.volume =
-                                globalData.resources.settings.get()
+                                globalCtx.resources.settings.get()
                                     ?.defaultVolume || 0.1;
                         }}
                     >
