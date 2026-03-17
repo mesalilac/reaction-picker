@@ -17,7 +17,7 @@ use tauri::Manager;
 use tauri_specta::{collect_commands, collect_events, Builder};
 
 const MIGRATIONS: EmbeddedMigrations = embed_migrations!("migrations");
-const APP_NAME: &str = "com.mesalilac.reaction-manager";
+const APP_NAME: &str = "com.mesalilac.reaction-picker";
 const APP_SETTINGS_ID: i32 = 1;
 
 pub type DbPool = diesel::r2d2::Pool<diesel::r2d2::ConnectionManager<diesel::SqliteConnection>>;

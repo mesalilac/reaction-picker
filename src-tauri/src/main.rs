@@ -2,5 +2,5 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 fn main() {
-    reaction_manager_lib::run()
+    reaction_picker_lib::run()
 }

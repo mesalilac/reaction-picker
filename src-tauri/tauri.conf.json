@@ -1,8 +1,8 @@
 {
     "$schema": "https://schema.tauri.app/config/2",
-    "productName": "Reaction Manager",
+    "productName": "Reaction Picker",
     "version": "0.1.0",
-    "identifier": "com.mesalilac.reaction-manager",
+    "identifier": "com.mesalilac.reaction-picker",
     "build": {
         "beforeDevCommand": "pnpm dev",
         "devUrl": "http://localhost:1420",
@@ -12,7 +12,7 @@
     "app": {
         "windows": [
             {
-                "title": "Reaction Manager",
+                "title": "Reaction Picker",
                 "width": 900,
                 "height": 600,
                 "minWidth": 900,
