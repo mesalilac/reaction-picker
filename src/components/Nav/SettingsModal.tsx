@@ -107,8 +107,8 @@ export const SettingsModal: VoidComponent<Props> = (props) => {
                         value={
                             store.defaultVolume !== undefined
                                 ? store.defaultVolume
-                                : globalCtx.resources.settings.get()
-                                      ?.defaultVolume || undefined
+                                : (globalCtx.resources.settings.get()
+                                      ?.defaultVolume ?? undefined)
                         }
                     />
                 </div>
