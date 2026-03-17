@@ -9,7 +9,7 @@ export const Input: VoidComponent<Props> = (props) => {
     return (
         <input
             class={twMerge(
-                'rounded-lg border border-neutral-600 border-none bg-neutral-700/50 px-3 py-2.5 text-sm shadow-xs placeholder:text-neutral-500 focus:border-none focus:outline-2 focus:outline-blue-500',
+                'rounded-lg border border-neutral-600 border-none bg-neutral-700/50 px-3 py-2.5 text-sm shadow-xs placeholder:text-neutral-500 invalid:outline-2 invalid:outline-red-500 focus:border-none focus:outline-2 focus:outline-blue-500',
                 local.class,
             )}
             {...others}
