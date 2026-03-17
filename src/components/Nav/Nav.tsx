@@ -1,15 +1,9 @@
 import { createMemo, createSignal, Show, type VoidComponent } from 'solid-js';
 
-import {
-    Button,
-    ButtonIcon,
-    IconAddPlus,
-    IconSettings,
-    Modal,
-} from '@/components';
+import { Button, ButtonIcon, IconAddPlus, IconSettings } from '@/components';
 import { useGlobalContext } from '@/store';
 
-import { NewSnippetModal } from './NewSnippetModal';
+import { SettingsModal } from './SettingsModal';
 import { Tab } from './Tab';
 
 type Props = {
@@ -37,8 +31,6 @@ export const Nav: VoidComponent<Props> = (props) => {
 
     const [showSettingsModal, setShowSettingsModal] = createSignal(false);
 
-    const saveSettings = () => {};
-
     return (
         <div class='flex justify-between'>
             <div class='flex gap-3' ref={props.ref}>
@@ -59,13 +51,10 @@ export const Nav: VoidComponent<Props> = (props) => {
                     <IconSettings />
                 </ButtonIcon>
                 <Show when={showSettingsModal()}>
-                    <Modal
+                    <SettingsModal
                         isOpen={showSettingsModal}
-                        onAction={saveSettings}
                         setIsOpen={setShowSettingsModal}
-                    >
-                        <NewSnippetModal />
-                    </Modal>
+                    />
                 </Show>
             </div>
         </div>
