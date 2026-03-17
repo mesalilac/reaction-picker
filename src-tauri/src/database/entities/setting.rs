@@ -5,7 +5,7 @@ use super::prelude::*;
 pub struct SettingEntity {
     pub id: i32,
     pub minimize_on_copy: bool,
-    pub default_volume: Option<f32>,
+    pub default_volume: Option<f64>,
 }
 
 #[derive(specta::Type, Serialize, Deserialize, Debug, Clone)]
@@ -13,7 +13,7 @@ pub struct SettingEntity {
 pub struct Setting {
     pub id: i32,
     pub minimize_on_copy: bool,
-    pub default_volume: Option<f32>,
+    pub default_volume: Option<f64>,
 }
 
 impl Setting {
