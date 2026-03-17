@@ -9,3 +9,4 @@ export * from './Input';
 export * from './Menu';
 export * from './Modal';
 export * from './Separator';
+export * from './Checkbox';
