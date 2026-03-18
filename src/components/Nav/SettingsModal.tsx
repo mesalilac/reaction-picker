@@ -3,13 +3,7 @@ import { createStore } from 'solid-js/store';
 import { toast } from 'solid-sonner';
 
 import { commands } from '@/bindings';
-import {
-    Checkbox,
-    Input,
-    Modal,
-    type ModalWrapperProps,
-    Separator,
-} from '@/components';
+import { Checkbox, Input, Modal, type ModalWrapperProps } from '@/components';
 import { useGlobalContext } from '@/store';
 
 export const SettingsModal: VoidComponent<ModalWrapperProps> = (props) => {
