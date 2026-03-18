@@ -3,7 +3,7 @@ import { Show, type VoidComponent } from 'solid-js';
 
 type Props = {
     checked: boolean;
-    onChange: () => void;
+    onChange: (checked: boolean) => void;
     label: string;
 };
 
@@ -11,7 +11,7 @@ export const Checkbox: VoidComponent<Props> = (props) => {
     return (
         <div
             class='flex items-center gap-2'
-            onClick={props.onChange}
+            onClick={() => props.onChange(!props.checked)}
             role='none'
         >
             <div
