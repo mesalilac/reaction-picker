@@ -16,7 +16,7 @@ export const Checkbox: VoidComponent<Props> = (props) => {
         >
             <div
                 class={clsx(
-                    'flex size-4 items-center rounded-sm border transition-colors duration-100',
+                    'flex size-4 cursor-pointer items-center rounded-sm border transition-colors duration-100',
                     props.checked
                         ? 'border-blue-600 bg-blue-600'
                         : 'border-neutral-300',
