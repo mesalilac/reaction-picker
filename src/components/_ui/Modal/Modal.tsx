@@ -9,6 +9,7 @@ import {
     IconSave,
     ModalContext,
     Separator,
+    useModalContext,
 } from '@/components';
 
 export type ModalWrapperProps = {
@@ -19,9 +20,6 @@ export type ModalWrapperProps = {
 export const Modal = (props: {
     open: boolean;
     onOpenChange: (open: boolean) => void;
-    onAction?: () => void;
-    dismiss?: JSX.Element;
-    action?: JSX.Element;
     children: JSX.Element;
 }) => {
     let modalOverlayRef: HTMLDivElement | undefined;
@@ -48,11 +46,11 @@ export const Modal = (props: {
         }).to(modalOverlayRef, { autoAlpha: 0, duration: 0.2 }, '-=0.1');
     };
 
-    const close = () => animateOut();
+    const closeModal = () => animateOut();
 
     const handleKeydown = (e: KeyboardEvent) => {
         if (e.key === 'Escape') {
-            close();
+            closeModal();
         }
     };
 
@@ -101,7 +99,7 @@ export const Modal = (props: {
             <Show when={shouldRender()}>
                 <div
                     class='fixed inset-0 z-50 flex items-center justify-center bg-black/60'
-                    onClick={close}
+                    onClick={closeModal}
                     ref={modalOverlayRef}
                     role='none'
                 >
@@ -114,29 +112,10 @@ export const Modal = (props: {
                         <ModalContext.Provider
                             value={{
                                 open: props.open,
-                                close,
+                                closeModal: closeModal,
                             }}
                         >
                             {props.children}
-                            <Separator class='mt-auto' />
-                            <div class='flex flex-row gap-2 self-end'>
-                                <Button onClick={close} variant='secondary'>
-                                    {props.dismiss || (
-                                        <>
-                                            <IconCloseMd /> Cancel
-                                        </>
-                                    )}
-                                </Button>
-                                <Show when={props.onAction}>
-                                    <Button onClick={props.onAction}>
-                                        {props.action || (
-                                            <>
-                                                <IconSave /> Save
-                                            </>
-                                        )}
-                                    </Button>
-                                </Show>
-                            </div>
                         </ModalContext.Provider>
                     </div>
                 </div>
@@ -150,6 +129,38 @@ Modal.title = (props: { title: JSX.Element }) => {
         <>
             <span class='text-xl'>{props.title}</span>
             <Separator class='mb-4' />
+        </>
+    );
+};
+
+Modal.footer = (props: {
+    dismiss?: JSX.Element;
+    action?: JSX.Element;
+    onAction?: () => void;
+}) => {
+    const { closeModal } = useModalContext();
+
+    return (
+        <>
+            <Separator class='mt-auto' />
+            <div class='flex flex-row gap-2 self-end'>
+                <Button onClick={closeModal} variant='secondary'>
+                    {props.dismiss || (
+                        <>
+                            <IconCloseMd size='1rem' /> Cancel
+                        </>
+                    )}
+                </Button>
+                <Show when={props.onAction}>
+                    <Button onClick={props.onAction}>
+                        {props.action || (
+                            <>
+                                <IconSave size='1rem' /> Save
+                            </>
+                        )}
+                    </Button>
+                </Show>
+            </div>
         </>
     );
 };

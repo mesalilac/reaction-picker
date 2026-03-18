@@ -73,11 +73,7 @@ export const SettingsModal: VoidComponent<ModalWrapperProps> = (props) => {
     };
 
     return (
-        <Modal
-            onAction={saveSettings}
-            onOpenChange={props.onOpenChange}
-            open={props.open}
-        >
+        <Modal onOpenChange={props.onOpenChange} open={props.open}>
             <Modal.title title='Settings' />
             <div class='flex flex-col gap-4'>
                 <Checkbox
@@ -111,6 +107,7 @@ export const SettingsModal: VoidComponent<ModalWrapperProps> = (props) => {
                     />
                 </div>
             </div>
+            <Modal.footer onAction={saveSettings} />
         </Modal>
     );
 };

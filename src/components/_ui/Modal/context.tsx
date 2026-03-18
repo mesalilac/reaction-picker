@@ -2,7 +2,7 @@ import { createContext, useContext } from 'solid-js';
 
 export type ModalContextData = {
     open?: boolean;
-    close: () => void;
+    closeModal: () => void;
 };
 
 export const ModalContext = createContext<ModalContextData>();
