@@ -128,7 +128,7 @@ Modal.title = (props: { title: JSX.Element }) => {
     return (
         <>
             <span class='text-xl'>{props.title}</span>
-            <Separator class='mb-4' />
+            <Separator class='-mx-4 mb-4' />
         </>
     );
 };
@@ -142,7 +142,7 @@ Modal.footer = (props: {
 
     return (
         <>
-            <Separator class='mt-auto' />
+            <Separator class='-mx-4 mt-auto' />
             <div class='flex flex-row gap-2 self-end'>
                 <Button onClick={closeModal} variant='secondary'>
                     {props.dismiss || (
