@@ -78,8 +78,7 @@ export const SettingsModal: VoidComponent<ModalWrapperProps> = (props) => {
             onOpenChange={props.onOpenChange}
             open={props.open}
         >
-            Settings
-            <Separator />
+            <Modal.title title='Settings' />
             <div class='flex flex-col gap-4'>
                 <Checkbox
                     checked={

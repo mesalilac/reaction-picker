@@ -144,3 +144,12 @@ export const Modal = (props: {
         </Portal>
     );
 };
+
+Modal.title = (props: { title: JSX.Element }) => {
+    return (
+        <>
+            <span class='text-xl'>{props.title}</span>
+            <Separator class='mb-4' />
+        </>
+    );
+};
