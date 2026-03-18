@@ -1,17 +1,18 @@
-import type { Accessor, Setter, VoidComponent } from 'solid-js';
+import type { VoidComponent } from 'solid-js';
 import { createStore } from 'solid-js/store';
 import { toast } from 'solid-sonner';
 
 import { commands } from '@/bindings';
-import { Checkbox, Input, Modal, Separator } from '@/components';
+import {
+    Checkbox,
+    Input,
+    Modal,
+    type ModalWrapperProps,
+    Separator,
+} from '@/components';
 import { useGlobalContext } from '@/store';
 
-type Props = {
-    isOpen: Accessor<boolean>;
-    setIsOpen: Setter<boolean>;
-};
-
-export const SettingsModal: VoidComponent<Props> = (props) => {
+export const SettingsModal: VoidComponent<ModalWrapperProps> = (props) => {
     const globalCtx = useGlobalContext();
 
     const settings = globalCtx.resources.settings.get();
@@ -26,7 +27,7 @@ export const SettingsModal: VoidComponent<Props> = (props) => {
             store.minimizeOnCopy === undefined &&
             store.defaultVolume === undefined
         ) {
-            props.setIsOpen(false);
+            props.onOpenChange(!props.open);
 
             return;
         }
@@ -68,14 +69,14 @@ export const SettingsModal: VoidComponent<Props> = (props) => {
             };
         });
 
-        props.setIsOpen(false);
+        props.onOpenChange?.(props.open !== undefined ? !props.open : false);
     };
 
     return (
         <Modal
-            isOpen={props.isOpen}
             onAction={saveSettings}
-            setIsOpen={props.setIsOpen}
+            onOpenChange={props.onOpenChange}
+            open={props.open}
         >
             Settings
             <Separator />

@@ -1,5 +1,5 @@
 import gsap from 'gsap';
-import type { Accessor, JSX, Setter } from 'solid-js';
+import type { JSX } from 'solid-js';
 import { createEffect, createSignal, onCleanup, Show } from 'solid-js';
 import { Portal } from 'solid-js/web';
 
@@ -11,9 +11,14 @@ import {
     Separator,
 } from '@/components';
 
+export type ModalWrapperProps = {
+    open: boolean;
+    onOpenChange: (open: boolean) => void;
+};
+
 export const Modal = (props: {
-    isOpen: Accessor<boolean>;
-    setIsOpen: Setter<boolean>;
+    open: boolean;
+    onOpenChange: (open: boolean) => void;
     onAction?: () => void;
     dismiss?: JSX.Element;
     action?: JSX.Element;
@@ -30,7 +35,7 @@ export const Modal = (props: {
         const tl = gsap.timeline({
             onComplete: () => {
                 setShouldRender(false);
-                props.setIsOpen(false);
+                props.onOpenChange(!props.open);
             },
         });
 
@@ -52,7 +57,7 @@ export const Modal = (props: {
     };
 
     createEffect(() => {
-        if (props.isOpen()) {
+        if (props.open) {
             setShouldRender(true);
             requestAnimationFrame(() => {
                 if (modalOverlayRef && modalContentRef) {
@@ -108,8 +113,8 @@ export const Modal = (props: {
                     >
                         <ModalContext.Provider
                             value={{
-                                isOpen: props.isOpen,
-                                setIsOpen: props.setIsOpen,
+                                open: props.open,
+                                close,
                             }}
                         >
                             {props.children}
