@@ -7,17 +7,11 @@ import { createSignal, Show, type VoidComponent } from 'solid-js';
 import { toast } from 'solid-sonner';
 
 import { commands, type Video } from '@/bindings';
-import {
-    Button,
-    ButtonIcon,
-    CardField,
-    IconHeart01,
-    IconMoreVertical,
-    Menu,
-    Popover,
-} from '@/components';
+import { Button, ButtonIcon, CardField, IconHeart01 } from '@/components';
 import { useGlobalContext } from '@/store';
 import { minimizeWindow, unminimizeWindow } from '@/utils';
+
+import { CardMenu } from './CardMenu';
 
 type Props = {
     video: Video;
@@ -26,7 +20,6 @@ type Props = {
 export const VideoCard: VoidComponent<Props> = (props) => {
     const globalCtx = useGlobalContext();
 
-    let popoverMenuRef!: HTMLButtonElement;
     let containerRef!: HTMLDivElement;
 
     const [showPopoverMenu, setShowPopoverMenu] = createSignal(false);
@@ -219,50 +212,17 @@ export const VideoCard: VoidComponent<Props> = (props) => {
                             })}
                         />
                     </ButtonIcon>
-                    <ButtonIcon ref={popoverMenuRef}>
-                        <IconMoreVertical class='size-5' />
-                    </ButtonIcon>
-                    <Popover
+                    <CardMenu
+                        deletedAt={props.video.deletedAt}
+                        externalLink={props.video.externalLink}
+                        handleDelete={handleDelete}
+                        handleEditDetails={handleEditDetails}
+                        handleOpenExternalLink={handleOpenExternalLink}
+                        handleRestore={handleRestore}
+                        handleViewDetails={handleViewDetails}
                         onOpenChange={setShowPopoverMenu}
                         open={showPopoverMenu()}
-                        targetPositionArea='bottom center'
-                        triggerElement={popoverMenuRef}
-                    >
-                        <Menu
-                            open={showPopoverMenu()}
-                            setOpen={setShowPopoverMenu}
-                        >
-                            <Menu.Item onClick={handleViewDetails}>
-                                view details
-                            </Menu.Item>
-                            <Menu.Item onClick={handleEditDetails}>
-                                edit details
-                            </Menu.Item>
-                            <Show when={props.video.externalLink}>
-                                <Menu.Separator />
-                                <Menu.Item onClick={handleOpenExternalLink}>
-                                    open external link
-                                </Menu.Item>
-                            </Show>
-                            <Menu.Separator />
-                            <Show when={props.video.deletedAt !== null}>
-                                <Menu.Item
-                                    class='text-blue-500'
-                                    onClick={handleRestore}
-                                >
-                                    restore
-                                </Menu.Item>
-                            </Show>
-                            <Menu.Item
-                                class='text-red-500'
-                                onClick={handleDelete}
-                            >
-                                {props.video.deletedAt !== null
-                                    ? 'permanently delete'
-                                    : 'delete'}
-                            </Menu.Item>
-                        </Menu>
-                    </Popover>
+                    />
                 </div>
             </div>
             <div class='h-80 w-full self-center'>

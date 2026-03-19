@@ -1,17 +1,11 @@
-import {
-    createContext,
-    type JSX,
-    type Setter,
-    splitProps,
-    useContext,
-} from 'solid-js';
+import { createContext, type JSX, splitProps, useContext } from 'solid-js';
 import { twMerge } from 'tailwind-merge';
 
 import { Button, Separator } from '@/components';
 
 const MenuContext = createContext<{
     open: boolean;
-    setOpen: Setter<boolean>;
+    onOpenChange: (open: boolean) => void;
 }>();
 
 const useMenuContext = () => {
@@ -28,7 +22,7 @@ const useMenuContext = () => {
 
 type Props = {
     open: boolean;
-    setOpen: Setter<boolean>;
+    onOpenChange: (open: boolean) => void;
     children: JSX.Element;
 };
 
@@ -40,7 +34,7 @@ interface ItemProps extends JSX.ButtonHTMLAttributes<HTMLButtonElement> {
 export const Menu = (props: Props) => {
     return (
         <MenuContext.Provider
-            value={{ open: props.open, setOpen: props.setOpen }}
+            value={{ open: props.open, onOpenChange: props.onOpenChange }}
         >
             <div class='min-w-40 rounded-lg bg-neutral-800 p-2 text-white'>
                 {props.children}
@@ -57,7 +51,7 @@ Menu.Item = (props: ItemProps) => {
     const handleClick = () => {
         local.onClick?.();
 
-        menuContext.setOpen(false);
+        menuContext.onOpenChange(!menuContext.open);
     };
 
     return (
