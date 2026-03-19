@@ -2,6 +2,7 @@ import {
     createMemo,
     createSignal,
     For,
+    Index,
     Match,
     Show,
     Switch,
@@ -243,24 +244,24 @@ export const Main: VoidComponent<Props> = (props) => {
             <div class='grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-4'>
                 <Switch>
                     <Match when={imagesTabActive()}>
-                        <For each={sortedImages()}>
-                            {(item) => <ImageCard image={item} />}
-                        </For>
+                        <Index each={sortedImages()}>
+                            {(item) => <ImageCard image={item()} />}
+                        </Index>
                     </Match>
                     <Match when={videosTabActive()}>
-                        <For each={sortedVideos()}>
-                            {(item) => <VideoCard video={item} />}
-                        </For>
+                        <Index each={sortedVideos()}>
+                            {(item) => <VideoCard video={item()} />}
+                        </Index>
                     </Match>
                     <Match when={audioTabActive()}>
-                        <For each={sortedAudio()}>
-                            {(item) => <AudioCard audio={item} />}
-                        </For>
+                        <Index each={sortedAudio()}>
+                            {(item) => <AudioCard audio={item()} />}
+                        </Index>
                     </Match>
                     <Match when={snippetsTabActive()}>
-                        <For each={sortedSnippets()}>
-                            {(item) => <SnippetCard snippet={item} />}
-                        </For>
+                        <Index each={sortedSnippets()}>
+                            {(item) => <SnippetCard snippet={item()} />}
+                        </Index>
                     </Match>
                 </Switch>
             </div>
