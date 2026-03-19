@@ -238,14 +238,14 @@ export const ImageCard: VoidComponent<Props> = (props) => {
                 <div class='flex flex-row gap-2'>
                     <ButtonIcon onClick={handleToggleFavorite}>
                         <IconHeart01
-                            class={clsx({
+                            class={clsx('size-5', {
                                 'fill-red-500 text-red-500':
                                     props.image.isFavorite,
                             })}
                         />
                     </ButtonIcon>
                     <ButtonIcon ref={popoverMenuRef}>
-                        <IconMoreVertical />
+                        <IconMoreVertical class='size-5' />
                     </ButtonIcon>
                     <Popover
                         onOpenChange={setShowPopoverMenu}

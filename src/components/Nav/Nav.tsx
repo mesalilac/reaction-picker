@@ -48,7 +48,7 @@ export const Nav: VoidComponent<Props> = (props) => {
                 </Show>
 
                 <ButtonIcon onClick={() => setShowSettingsModal(true)}>
-                    <IconSettings />
+                    <IconSettings class='size-5' />
                 </ButtonIcon>
                 <Show when={showSettingsModal()}>
                     <SettingsModal
