@@ -63,36 +63,42 @@ export const SettingsModal: VoidComponent<ModalWrapperProps> = (props) => {
             };
         });
 
-        props.onOpenChange?.(props.open !== undefined ? !props.open : false);
+        props.onOpenChange?.(!props.open);
     };
 
     return (
         <Modal onOpenChange={props.onOpenChange} open={props.open}>
             <Modal.title title='Settings' />
             <div class='flex flex-col gap-4'>
-                <Checkbox
-                    checked={
-                        store.minimizeOnCopy !== undefined
-                            ? store.minimizeOnCopy
-                            : settings?.minimizeOnCopy || false
-                    }
-                    label='Minimize on copy'
-                    onChange={(checked) => {
-                        setStore('minimizeOnCopy', checked);
-                    }}
-                />
                 <div class='flex items-center gap-2'>
-                    <span>Default volume</span>
+                    <Checkbox
+                        checked={
+                            store.minimizeOnCopy !== undefined
+                                ? store.minimizeOnCopy
+                                : settings?.minimizeOnCopy || false
+                        }
+                        label='Minimize on copy'
+                        onChange={(checked) => {
+                            setStore('minimizeOnCopy', checked);
+                        }}
+                    />
+                </div>
+                <div class='flex items-center gap-2'>
                     <Input
+                        label='Default volume'
                         max={1}
                         min={0}
-                        onChange={(e) => {
-                            const value = Number(e.target.value);
-
+                        onInput={(value) => {
                             setStore('defaultVolume', value);
                         }}
+                        parse={(raw) => Number(raw)}
                         step={0.1}
                         type='number'
+                        validate={(value) => {
+                            if (value < 0 || value > 1) {
+                                return 'Default volume must be between 0 and 1';
+                            }
+                        }}
                         value={
                             store.defaultVolume !== undefined
                                 ? store.defaultVolume

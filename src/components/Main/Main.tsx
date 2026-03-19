@@ -200,12 +200,15 @@ export const Main: VoidComponent<Props> = (props) => {
     return (
         <main class='flex flex-col gap-4' ref={props.ref}>
             <div class='flex justify-between'>
-                <Input
-                    onInput={(e) => setSearchQuery(e.target.value.trim())}
-                    placeholder='Search...'
-                    type='search'
-                    value={searchQuery()}
-                />
+                <div>
+                    <Input
+                        onInput={(value) => setSearchQuery(value.trim())}
+                        parse={(raw) => String(raw)}
+                        placeholder='Search...'
+                        type='search'
+                        value={searchQuery()}
+                    />
+                </div>
 
                 <div class='flex gap-2'>
                     <Select

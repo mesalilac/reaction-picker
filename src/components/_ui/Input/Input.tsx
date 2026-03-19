@@ -7,20 +7,31 @@ import {
     Show,
     Switch,
     splitProps,
-    type VoidComponent,
 } from 'solid-js';
 import { twMerge } from 'tailwind-merge';
 
-interface Props extends JSX.InputHTMLAttributes<HTMLInputElement> {
+interface Props<T = string>
+    extends Omit<
+        JSX.InputHTMLAttributes<HTMLInputElement>,
+        'value' | 'onInput'
+    > {
     label?: string;
-    value?: string;
+    value?: T;
     required?: boolean;
     helperText?: string;
     error?: string;
-    validate?: (value: string) => string | undefined;
+    onInput?: (
+        value: T,
+        e: InputEvent & {
+            currentTarget: HTMLInputElement;
+        },
+    ) => void;
+    parse: (raw: string) => T;
+    format?: (value: T) => string;
+    validate?: (value: T) => string | undefined;
 }
 
-export const Input: VoidComponent<Props> = (props) => {
+export const Input = <T = string>(props: Props<T>) => {
     const [local, others] = splitProps(props, [
         'class',
         'label',
@@ -28,17 +39,41 @@ export const Input: VoidComponent<Props> = (props) => {
         'required',
         'helperText',
         'error',
+        'onInput',
+        'parse',
+        'format',
         'validate',
     ]);
 
     const id = createUniqueId();
 
-    const [value, setValue] = createSignal(local.value ?? '');
+    const parse = local.parse ?? ((v: string) => v as unknown as T);
+    const format = local.format ?? ((v: T) => String(v));
+
+    const [value, setValue] = createSignal<T>(local.value ?? parse(''));
 
     const error = createMemo(() => local.error ?? local.validate?.(value()));
 
+    const handleInput = (
+        e: InputEvent & {
+            currentTarget: HTMLInputElement;
+        },
+    ) => {
+        const raw = e.currentTarget.value;
+        const parsed = parse(raw);
+
+        setValue(() => parsed);
+
+        local.onInput?.(
+            parsed,
+            e as InputEvent & {
+                currentTarget: HTMLInputElement;
+            },
+        );
+    };
+
     return (
-        <div class='flex flex-col gap-2'>
+        <div class='flex w-full flex-col gap-2'>
             <Show when={local.label}>
                 <label
                     class='font-bold text-neutral-200 text-sm capitalize'
@@ -57,18 +92,16 @@ export const Input: VoidComponent<Props> = (props) => {
                     local.class,
                 )}
                 id={id}
-                onInput={(e) => {
-                    const v = e.currentTarget.value;
-                    setValue(v);
-                    (
-                        others.onInput as JSX.EventHandler<
-                            HTMLInputElement,
-                            InputEvent
-                        >
-                    )?.(e);
-                }}
+                onChange={(e) =>
+                    handleInput(
+                        e as unknown as InputEvent & {
+                            currentTarget: HTMLInputElement;
+                        },
+                    )
+                }
+                onInput={handleInput}
                 required={local.required}
-                value={value()}
+                value={format(value())}
                 {...others}
             />
             <Switch>
