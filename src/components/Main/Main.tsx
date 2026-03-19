@@ -1,7 +1,7 @@
 import {
     createMemo,
     createSignal,
-    Index,
+    For,
     Match,
     Show,
     Switch,
@@ -105,7 +105,7 @@ export const Main: VoidComponent<Props> = (props) => {
     };
 
     const sortedImages = createMemo(() => {
-        const list = [...(globalCtx.resources.images.get() || [])];
+        const list = globalCtx.resources.images.get() ?? [];
 
         const filtered = list.filter(filterList);
 
@@ -113,7 +113,7 @@ export const Main: VoidComponent<Props> = (props) => {
     });
 
     const sortedVideos = createMemo(() => {
-        const list = [...(globalCtx.resources.videos.get() || [])];
+        const list = globalCtx.resources.videos.get() ?? [];
 
         const filtered = list.filter(filterList);
 
@@ -121,7 +121,7 @@ export const Main: VoidComponent<Props> = (props) => {
     });
 
     const sortedAudio = createMemo(() => {
-        const list = [...(globalCtx.resources.audio.get() || [])];
+        const list = globalCtx.resources.audio.get() ?? [];
 
         const filtered = list.filter(filterList);
 
@@ -129,7 +129,7 @@ export const Main: VoidComponent<Props> = (props) => {
     });
 
     const sortedSnippets = createMemo(() => {
-        const list = [...(globalCtx.resources.snippets.get() || [])];
+        const list = globalCtx.resources.snippets.get() ?? [];
         const query = searchQuery().toLowerCase();
 
         const filtered = list.filter((item) => {
@@ -246,24 +246,24 @@ export const Main: VoidComponent<Props> = (props) => {
             <div class='grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-4'>
                 <Switch>
                     <Match when={imagesTabActive()}>
-                        <Index each={sortedImages()}>
-                            {(item) => <ImageCard image={item()} />}
-                        </Index>
+                        <For each={sortedImages()}>
+                            {(item) => <ImageCard image={item} />}
+                        </For>
                     </Match>
                     <Match when={videosTabActive()}>
-                        <Index each={sortedVideos()}>
-                            {(item) => <VideoCard video={item()} />}
-                        </Index>
+                        <For each={sortedVideos()}>
+                            {(item) => <VideoCard video={item} />}
+                        </For>
                     </Match>
                     <Match when={audioTabActive()}>
-                        <Index each={sortedAudio()}>
-                            {(item) => <AudioCard audio={item()} />}
-                        </Index>
+                        <For each={sortedAudio()}>
+                            {(item) => <AudioCard audio={item} />}
+                        </For>
                     </Match>
                     <Match when={snippetsTabActive()}>
-                        <Index each={sortedSnippets()}>
-                            {(item) => <SnippetCard snippet={item()} />}
-                        </Index>
+                        <For each={sortedSnippets()}>
+                            {(item) => <SnippetCard snippet={item} />}
+                        </For>
                     </Match>
                 </Switch>
             </div>
