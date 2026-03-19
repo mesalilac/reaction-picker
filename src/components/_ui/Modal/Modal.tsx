@@ -147,7 +147,7 @@ Modal.footer = (props: {
                 <Button onClick={closeModal} variant='secondary'>
                     {props.dismiss || (
                         <>
-                            <IconCloseMd class='size-4' /> Cancel
+                            <IconCloseMd /> Cancel
                         </>
                     )}
                 </Button>
@@ -155,7 +155,7 @@ Modal.footer = (props: {
                     <Button onClick={props.onAction}>
                         {props.action || (
                             <>
-                                <IconSave class='size-4' /> Save
+                                <IconSave /> Save
                             </>
                         )}
                     </Button>
