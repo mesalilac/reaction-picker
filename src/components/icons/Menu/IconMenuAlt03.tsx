@@ -20,8 +20,8 @@ export const IconMenuAlt03 = (props: IconProps) => {
         <svg
             role='img'
             aria-label='Menu Alt03'
-            width={pickedProps.size || '1.5rem'}
-            height={pickedProps.size || '1.5rem'}
+            width={pickedProps.size || '1rem'}
+            height={pickedProps.size || '1rem'}
             viewBox='0 0 24 24'
             fill='none'
             {...otherProps}

@@ -20,8 +20,8 @@ export const IconBellRing = (props: IconProps) => {
         <svg
             role='img'
             aria-label='Bell Ring'
-            width={pickedProps.size || '1.5rem'}
-            height={pickedProps.size || '1.5rem'}
+            width={pickedProps.size || '1rem'}
+            height={pickedProps.size || '1rem'}
             viewBox='0 0 24 24'
             fill='none'
             {...otherProps}
