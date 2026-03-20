@@ -12,7 +12,7 @@ export const NewSnippetModal: VoidComponent<ModalWrapperProps> = (props) => {
 
     return (
         <Modal onOpenChange={props.onOpenChange} open={props.open}>
-            <Modal.title title='New Snippet' />
+            <Modal.title title='new snippet' />
             <Modal.footer onAction={onAction} />
         </Modal>
     );

@@ -127,7 +127,7 @@ export const Modal = (props: {
 Modal.title = (props: { title: JSX.Element }) => {
     return (
         <>
-            <span class='text-xl'>{props.title}</span>
+            <span class='text-xl capitalize'>{props.title}</span>
             <Separator class='-mx-4 mb-4' />
         </>
     );
