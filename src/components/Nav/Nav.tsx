@@ -3,7 +3,7 @@ import { createMemo, createSignal, Show, type VoidComponent } from 'solid-js';
 import { Button, ButtonIcon, IconAddPlus, IconSettings } from '@/components';
 import { useGlobalContext } from '@/store';
 
-import { NewSnippetModal } from './NewSnippetModal';
+import { CreateSnippetModal } from './CreateSnippetModal';
 import { SettingsModal } from './SettingsModal';
 import { Tab } from './Tab';
 
@@ -31,7 +31,8 @@ export const Nav: VoidComponent<Props> = (props) => {
     );
 
     const [showSettingsModal, setShowSettingsModal] = createSignal(false);
-    const [showNewSnippetModal, setShowNewSnippetModal] = createSignal(false);
+    const [showCreateSnippetModal, setShowCreateSnippetModal] =
+        createSignal(false);
 
     return (
         <div class='flex justify-between'>
@@ -43,16 +44,16 @@ export const Nav: VoidComponent<Props> = (props) => {
             </div>
             <div class='flex gap-5'>
                 <Show when={globalCtx.store.activeTab === 'Snippets'}>
-                    <Button onClick={() => setShowNewSnippetModal(true)}>
+                    <Button onClick={() => setShowCreateSnippetModal(true)}>
                         <IconAddPlus />
-                        <span>New</span>
+                        <span>Create</span>
                     </Button>
-                    <Show when={showNewSnippetModal()}>
-                        <NewSnippetModal
+                    <Show when={showCreateSnippetModal()}>
+                        <CreateSnippetModal
                             onOpenChange={(open) => {
-                                setShowNewSnippetModal(open);
+                                setShowCreateSnippetModal(open);
                             }}
-                            open={showNewSnippetModal()}
+                            open={showCreateSnippetModal()}
                         />
                     </Show>
                 </Show>

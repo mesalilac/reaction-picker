@@ -6,7 +6,7 @@ import { commands } from '@/bindings';
 import { Input, Modal, type ModalWrapperProps, Textarea } from '@/components';
 import { useGlobalContext } from '@/store';
 
-export const NewSnippetModal: VoidComponent<ModalWrapperProps> = (props) => {
+export const CreateSnippetModal: VoidComponent<ModalWrapperProps> = (props) => {
     const globalCtx = useGlobalContext();
 
     let contentInputRef!: HTMLTextAreaElement;
