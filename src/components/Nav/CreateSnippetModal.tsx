@@ -63,7 +63,7 @@ export const CreateSnippetModal: VoidComponent<ModalWrapperProps> = (props) => {
 
     return (
         <Modal onOpenChange={props.onOpenChange} open={props.open}>
-            <Modal.Title title='new snippet' />
+            <Modal.Title title='create snippet' />
             <Modal.Body>
                 <Input
                     label='title'
