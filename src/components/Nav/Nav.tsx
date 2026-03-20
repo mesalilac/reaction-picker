@@ -47,12 +47,14 @@ export const Nav: VoidComponent<Props> = (props) => {
                         <IconAddPlus />
                         <span>New</span>
                     </Button>
-                    <NewSnippetModal
-                        onOpenChange={(open) => {
-                            setShowNewSnippetModal(open);
-                        }}
-                        open={showNewSnippetModal()}
-                    />
+                    <Show when={showNewSnippetModal()}>
+                        <NewSnippetModal
+                            onOpenChange={(open) => {
+                                setShowNewSnippetModal(open);
+                            }}
+                            open={showNewSnippetModal()}
+                        />
+                    </Show>
                 </Show>
 
                 <ButtonIcon onClick={() => setShowSettingsModal(true)}>
