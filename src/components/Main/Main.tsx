@@ -29,9 +29,9 @@ const FILTERS_LIST = ['Favorites', 'Discord Free limit', 'Deleted'] as const;
 type FilterType = (typeof FILTERS_LIST)[number];
 
 const SORT_BY_LIST = [
-    'Recently used',
-    'Most used',
-    'Newly added',
+    'Last used at date',
+    'Use counter',
+    'Added at date',
     'Size',
 ] as const;
 type SortByType = (typeof SORT_BY_LIST)[number];
@@ -45,7 +45,7 @@ export const Main: VoidComponent<Props> = (props) => {
     const [searchQuery, setSearchQuery] = createSignal('');
 
     const [filter, setFilter] = createSignal<FilterType[]>([]);
-    const [sortBy, setSortBy] = createSignal<SortByType>('Recently used');
+    const [sortBy, setSortBy] = createSignal<SortByType>('Last used at date');
     const [sortDir, setSortDir] = createSignal<SortDirType>('Desc');
 
     const imagesTabActive = () => globalCtx.store.activeTab === 'Images';
@@ -87,13 +87,13 @@ export const Main: VoidComponent<Props> = (props) => {
         let result = 0;
 
         switch (sortBy()) {
-            case 'Recently used':
+            case 'Last used at date':
                 result = (a.lastUsedAt || 0) - (b.lastUsedAt || 0);
                 break;
-            case 'Most used':
+            case 'Use counter':
                 result = a.useCounter - b.useCounter;
                 break;
-            case 'Newly added':
+            case 'Added at date':
                 result = (a.createdAt || 0) - (b.createdAt || 0);
                 break;
             case 'Size':
@@ -164,13 +164,13 @@ export const Main: VoidComponent<Props> = (props) => {
             let result = 0;
 
             switch (sortBy()) {
-                case 'Recently used':
+                case 'Last used at date':
                     result = (a.lastUsedAt || 0) - (b.lastUsedAt || 0);
                     break;
-                case 'Most used':
+                case 'Use counter':
                     result = a.useCounter - b.useCounter;
                     break;
-                case 'Newly added':
+                case 'Added at date':
                     result = (a.createdAt || 0) - (b.createdAt || 0);
                     break;
                 case 'Size':
