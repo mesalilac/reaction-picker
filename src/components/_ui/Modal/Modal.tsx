@@ -2,6 +2,7 @@ import gsap from 'gsap';
 import type { JSX } from 'solid-js';
 import { createEffect, createSignal, onCleanup, Show } from 'solid-js';
 import { Portal } from 'solid-js/web';
+import { twMerge } from 'tailwind-merge';
 
 import {
     Button,
@@ -124,10 +125,12 @@ export const Modal = (props: {
     );
 };
 
-Modal.title = (props: { title: JSX.Element }) => {
+Modal.title = (props: { title: JSX.Element; class?: string }) => {
     return (
         <>
-            <span class='text-xl capitalize'>{props.title}</span>
+            <span class={twMerge('px-2 text-xl capitalize', props.class)}>
+                {props.title}
+            </span>
             <Separator class='-mx-4 mb-4' />
         </>
     );
