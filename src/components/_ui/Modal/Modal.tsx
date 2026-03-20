@@ -136,6 +136,19 @@ Modal.title = (props: { title: JSX.Element; class?: string }) => {
     );
 };
 
+Modal.body = (props: { class?: string; children: JSX.Element }) => {
+    return (
+        <main
+            class={twMerge(
+                'flex flex-col gap-4 overflow-y-auto p-2',
+                props.class,
+            )}
+        >
+            {props.children}
+        </main>
+    );
+};
+
 Modal.footer = (props: {
     dismiss?: JSX.Element;
     action?: JSX.Element;
