@@ -1,27 +1,33 @@
 import { createSignal, type VoidComponent } from 'solid-js';
 import { createStore } from 'solid-js/store';
+import { toast } from 'solid-sonner';
 
+import { commands } from '@/bindings';
 import { Input, Modal, type ModalWrapperProps, Textarea } from '@/components';
-// import { useGlobalContext } from '@/store';
+import { useGlobalContext } from '@/store';
 
 export const NewSnippetModal: VoidComponent<ModalWrapperProps> = (props) => {
-    // const globalCtx = useGlobalContext();
+    const globalCtx = useGlobalContext();
 
     let contentInputRef!: HTMLTextAreaElement;
 
     const [contentInputError, setContentInputError] = createSignal<string>();
 
     const [store, setStore] = createStore<{
-        title?: string;
-        description?: string;
-        content?: string;
-        externalLink?: string;
-        tags: string[];
+        title: string | null;
+        description: string | null;
+        content: string;
+        externalLink: string | null;
+        tagIds: string[];
     }>({
-        tags: [],
+        title: null,
+        description: null,
+        content: '',
+        externalLink: null,
+        tagIds: [],
     });
 
-    const onAction = () => {
+    const onAction = async () => {
         if (!store.content) {
             contentInputRef.scrollIntoView();
             contentInputRef.focus();
@@ -31,6 +37,28 @@ export const NewSnippetModal: VoidComponent<ModalWrapperProps> = (props) => {
         }
 
         props.onOpenChange(false);
+
+        const res = await commands.createSnippet({ ...store }).catch((e) => {
+            toast.error(e);
+        });
+
+        if (!res) return;
+
+        if (res.status === 'error') {
+            toast.error(res.error.kind, {
+                description: res.error.message,
+            });
+
+            return;
+        }
+
+        toast.success('Snippet created successfully');
+
+        globalCtx.resources.snippets.mutate((prev) => {
+            if (!prev) return;
+
+            return [...prev, res.data];
+        });
     };
 
     return (
@@ -41,14 +69,14 @@ export const NewSnippetModal: VoidComponent<ModalWrapperProps> = (props) => {
                     label='title'
                     onInput={(value) => setStore('title', value)}
                     parse={(raw) => String(raw)}
-                    value={store.title}
+                    value={store.title ?? ''}
                 />
                 <Textarea
                     class='h-16'
                     label='description'
                     onInput={(value) => setStore('description', value.trim())}
                     parse={(raw) => String(raw)}
-                    value={store.description}
+                    value={store.description ?? ''}
                 />
                 <Textarea
                     error={contentInputError()}
@@ -68,10 +96,10 @@ export const NewSnippetModal: VoidComponent<ModalWrapperProps> = (props) => {
                     label='externalLink'
                     onInput={(value) => setStore('externalLink', value.trim())}
                     parse={(raw) => String(raw)}
-                    value={store.externalLink}
+                    value={store.externalLink ?? ''}
                 />
             </Modal.Body>
-            <Modal.Footer onAction={onAction} />
+            <Modal.Footer action={'Create'} onAction={onAction} />
         </Modal>
     );
 };

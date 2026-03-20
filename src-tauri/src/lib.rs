@@ -89,6 +89,7 @@ pub fn run() {
 
     let specta_builder = Builder::<tauri::Wry>::new()
         .commands(collect_commands![
+            create_snippet,
             get_images,
             get_videos,
             get_audio,

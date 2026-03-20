@@ -5,6 +5,19 @@
 /** user-defined commands **/
 
 export const commands = {
+    async createSnippet(
+        payload: CreateSnippetRequest,
+    ): Promise<Result<Snippet, CommandError>> {
+        try {
+            return {
+                status: 'ok',
+                data: await TAURI_INVOKE('create_snippet', { payload }),
+            };
+        } catch (e) {
+            if (e instanceof Error) throw e;
+            else return { status: 'error', error: e as any };
+        }
+    },
     async getImages(): Promise<Result<Image[], CommandError>> {
         try {
             return { status: 'ok', data: await TAURI_INVOKE('get_images') };
@@ -375,6 +388,13 @@ export type CommandError =
     | { kind: 'Io'; message: string }
     | { kind: 'Clipboard'; message: string }
     | { kind: 'Unknown'; message: string };
+export type CreateSnippetRequest = {
+    title: string | null;
+    description: string | null;
+    content: string;
+    externalLink: string | null;
+    tagIds: TagId[];
+};
 export type DeleteRequest = { permanent?: boolean | null };
 export type FileProcessingProgress = { current: number; total: number };
 export type GeneralStats = {
