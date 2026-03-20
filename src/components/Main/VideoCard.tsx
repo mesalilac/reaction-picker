@@ -258,11 +258,6 @@ export const VideoCard: VoidComponent<Props> = (props) => {
                             {props.video.description}
                         </span>
                     </CardField>
-                    <CardField label='file name'>
-                        <span title={props.video.fileName ?? undefined}>
-                            {props.video.fileName}
-                        </span>
-                    </CardField>
                     <CardField label='total uses'>
                         <span
                             title={

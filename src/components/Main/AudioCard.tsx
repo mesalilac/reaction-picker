@@ -256,11 +256,6 @@ export const AudioCard: VoidComponent<Props> = (props) => {
                             {props.audio.description}
                         </span>
                     </CardField>
-                    <CardField label='file path'>
-                        <span title={props.audio.fileName ?? undefined}>
-                            {props.audio.fileName}
-                        </span>
-                    </CardField>
                     <CardField label='total uses'>
                         <span
                             title={

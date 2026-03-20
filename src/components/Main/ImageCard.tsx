@@ -279,11 +279,6 @@ export const ImageCard: VoidComponent<Props> = (props) => {
                             {props.image.description}
                         </span>
                     </CardField>
-                    <CardField label='file path'>
-                        <span title={props.image.fileName ?? undefined}>
-                            {props.image.fileName}
-                        </span>
-                    </CardField>
                     <CardField label='dimensions'>
                         <span
                             title={`${props.image.width}x${props.image.height}`}
