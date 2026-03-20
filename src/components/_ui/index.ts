@@ -6,6 +6,7 @@ export * from './CountLabel';
 export * from './Popover';
 export * from './Select';
 export * from './Input';
+export * from './Textarea';
 export * from './Menu';
 export * from './Modal';
 export * from './Separator';
