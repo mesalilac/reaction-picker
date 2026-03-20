@@ -3,15 +3,15 @@ import { convertFileSrc } from '@tauri-apps/api/core';
 import { openUrl } from '@tauri-apps/plugin-opener';
 import { decode } from 'blurhash';
 import { clsx } from 'clsx';
-import { filesize } from 'filesize';
 import { createSignal, onMount, Show, type VoidComponent } from 'solid-js';
 import { toast } from 'solid-sonner';
 
 import { commands, type Image } from '@/bindings';
-import { Button, ButtonIcon, CardField, IconHeart01 } from '@/components';
+import { Button, ButtonIcon, IconHeart01 } from '@/components';
 import { useGlobalContext } from '@/store';
 import { minimizeWindow, unminimizeWindow } from '@/utils';
 
+import { CardInfo } from './CardInfo';
 import { CardMenu } from './CardMenu';
 
 type Props = {
@@ -267,73 +267,7 @@ export const ImageCard: VoidComponent<Props> = (props) => {
                     />
                 </Show>
             </div>
-            <div class='flex flex-col gap-4'>
-                <div class='flex flex-col gap-2'>
-                    <CardField label='title'>
-                        <span title={props.image.title ?? undefined}>
-                            {props.image.title}
-                        </span>
-                    </CardField>
-                    <CardField label='description'>
-                        <span title={props.image.description ?? undefined}>
-                            {props.image.description}
-                        </span>
-                    </CardField>
-                    <CardField label='dimensions'>
-                        <span
-                            title={`${props.image.width}x${props.image.height}`}
-                        >
-                            {props.image.width}x{props.image.height}
-                        </span>
-                    </CardField>
-                    <CardField label='total uses'>
-                        <span
-                            title={
-                                props.image.lastUsedAt
-                                    ? new Date(
-                                          props.image.lastUsedAt,
-                                      ).toLocaleString()
-                                    : undefined
-                            }
-                        >
-                            {props.image.useCounter}
-                        </span>
-                    </CardField>
-                    <CardField label='file size'>
-                        <span title={props.image.fileSize.toString()}>
-                            {filesize(props.image.fileSize)}
-                        </span>
-                    </CardField>
-                    <CardField label='tags'>
-                        {props.image.tags.length > 0 ? (
-                            <span
-                                title={props.image.tags
-                                    .map((tag) => tag.name)
-                                    .join(', ')}
-                            >
-                                {props.image.tags
-                                    .map((tag) => tag.name)
-                                    .join(', ')}
-                            </span>
-                        ) : undefined}
-                    </CardField>
-                    <CardField
-                        label='deleted at'
-                        show={props.image.deletedAt !== null}
-                    >
-                        {props.image.deletedAt ? (
-                            <span class='text-red-500'>
-                                {new Date(
-                                    props.image.deletedAt,
-                                ).toLocaleString()}
-                            </span>
-                        ) : undefined}
-                    </CardField>
-                    <CardField label='added at'>
-                        {new Date(props.image.createdAt).toLocaleString()}
-                    </CardField>
-                </div>
-            </div>
+            <CardInfo item={props.image} type='image' />
         </div>
     );
 };

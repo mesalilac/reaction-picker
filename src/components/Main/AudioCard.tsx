@@ -2,15 +2,15 @@ import { createVisibilityObserver } from '@solid-primitives/intersection-observe
 import { convertFileSrc } from '@tauri-apps/api/core';
 import { openUrl } from '@tauri-apps/plugin-opener';
 import clsx from 'clsx';
-import { filesize } from 'filesize';
 import { createSignal, Show, type VoidComponent } from 'solid-js';
 import { toast } from 'solid-sonner';
 
 import { type Audio, commands } from '@/bindings';
-import { Button, ButtonIcon, CardField, IconHeart01 } from '@/components';
+import { Button, ButtonIcon, IconHeart01 } from '@/components';
 import { useGlobalContext } from '@/store';
 import { minimizeWindow, unminimizeWindow } from '@/utils';
 
+import { CardInfo } from './CardInfo';
 import { CardMenu } from './CardMenu';
 
 type Props = {
@@ -244,66 +244,7 @@ export const AudioCard: VoidComponent<Props> = (props) => {
                     </audio>
                 </Show>
             </div>
-            <div class='flex flex-col gap-4'>
-                <div class='flex flex-col gap-2'>
-                    <CardField label='title'>
-                        <span title={props.audio.title ?? undefined}>
-                            {props.audio.title}
-                        </span>
-                    </CardField>
-                    <CardField label='description'>
-                        <span title={props.audio.description ?? undefined}>
-                            {props.audio.description}
-                        </span>
-                    </CardField>
-                    <CardField label='total uses'>
-                        <span
-                            title={
-                                props.audio.lastUsedAt
-                                    ? new Date(
-                                          props.audio.lastUsedAt,
-                                      ).toLocaleString()
-                                    : undefined
-                            }
-                        >
-                            {props.audio.useCounter}
-                        </span>
-                    </CardField>
-                    <CardField label='file size'>
-                        <span title={props.audio.fileSize.toString()}>
-                            {filesize(props.audio.fileSize)}
-                        </span>
-                    </CardField>
-                    <CardField label='tags'>
-                        {props.audio.tags.length > 0 ? (
-                            <span
-                                title={props.audio.tags
-                                    .map((tag) => tag.name)
-                                    .join(', ')}
-                            >
-                                {props.audio.tags
-                                    .map((tag) => tag.name)
-                                    .join(', ')}
-                            </span>
-                        ) : undefined}
-                    </CardField>
-                    <CardField
-                        label='deleted at'
-                        show={props.audio.deletedAt !== null}
-                    >
-                        {props.audio.deletedAt ? (
-                            <span class='text-red-500'>
-                                {new Date(
-                                    props.audio.deletedAt,
-                                ).toLocaleString()}
-                            </span>
-                        ) : undefined}
-                    </CardField>
-                    <CardField label='added at'>
-                        {new Date(props.audio.createdAt).toLocaleString()}
-                    </CardField>
-                </div>
-            </div>
+            <CardInfo item={props.audio} type='audio' />
         </div>
     );
 };

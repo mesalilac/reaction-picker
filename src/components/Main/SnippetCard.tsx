@@ -1,15 +1,15 @@
 import { createVisibilityObserver } from '@solid-primitives/intersection-observer';
 import { openUrl } from '@tauri-apps/plugin-opener';
 import clsx from 'clsx';
-import { filesize } from 'filesize';
 import { createSignal, Show, type VoidComponent } from 'solid-js';
 import { toast } from 'solid-sonner';
 
 import { commands, type Snippet } from '@/bindings';
-import { Button, ButtonIcon, CardField, IconHeart01 } from '@/components';
+import { Button, ButtonIcon, IconHeart01 } from '@/components';
 import { useGlobalContext } from '@/store';
 import { minimizeWindow, unminimizeWindow } from '@/utils';
 
+import { CardInfo } from './CardInfo';
 import { CardMenu } from './CardMenu';
 
 type Props = {
@@ -231,72 +231,7 @@ export const SnippetCard: VoidComponent<Props> = (props) => {
             <div class='pointer-events-none h-32 w-full select-none self-center overflow-hidden whitespace-pre-wrap rounded-lg bg-neutral-800/50 p-2 text-neutral-400'>
                 <Show when={containerVisible()}>{props.snippet.content}</Show>
             </div>
-            <div class='flex flex-col gap-4'>
-                <div class='flex flex-col gap-2'>
-                    <CardField label='title'>
-                        <span title={props.snippet.title ?? undefined}>
-                            {props.snippet.title}
-                        </span>
-                    </CardField>
-                    <CardField label='description'>
-                        <span title={props.snippet.description ?? undefined}>
-                            {props.snippet.description}
-                        </span>
-                    </CardField>
-                    <CardField label='total uses'>
-                        <span
-                            title={
-                                props.snippet.lastUsedAt
-                                    ? new Date(
-                                          props.snippet.lastUsedAt,
-                                      ).toLocaleString()
-                                    : undefined
-                            }
-                        >
-                            {props.snippet.useCounter}
-                        </span>
-                    </CardField>
-                    <CardField label='length'>
-                        <span>{props.snippet.content.length} character(s)</span>
-                    </CardField>
-                    <CardField label='size'>
-                        <span>
-                            {filesize(
-                                new TextEncoder().encode(props.snippet.content)
-                                    .length,
-                            )}
-                        </span>
-                    </CardField>
-                    <CardField label='tags'>
-                        {props.snippet.tags.length > 0 ? (
-                            <span
-                                title={props.snippet.tags
-                                    .map((tag) => tag.name)
-                                    .join(', ')}
-                            >
-                                {props.snippet.tags
-                                    .map((tag) => tag.name)
-                                    .join(', ')}
-                            </span>
-                        ) : undefined}
-                    </CardField>
-                    <CardField
-                        label='deleted at'
-                        show={props.snippet.deletedAt !== null}
-                    >
-                        {props.snippet.deletedAt ? (
-                            <span class='text-red-500'>
-                                {new Date(
-                                    props.snippet.deletedAt,
-                                ).toLocaleString()}
-                            </span>
-                        ) : undefined}
-                    </CardField>
-                    <CardField label='added at'>
-                        {new Date(props.snippet.createdAt).toLocaleString()}
-                    </CardField>
-                </div>
-            </div>
+            <CardInfo item={props.snippet} type='snippet' />
         </div>
     );
 };
