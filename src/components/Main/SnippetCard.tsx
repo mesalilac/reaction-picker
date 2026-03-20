@@ -228,14 +228,8 @@ export const SnippetCard: VoidComponent<Props> = (props) => {
                     />
                 </div>
             </div>
-            <div class='h-80 w-full self-center'>
-                <Show when={containerVisible()}>
-                    <textarea
-                        class='pointer-events-none h-full w-full select-none resize-none overflow-hidden rounded-lg text-neutral-400 focus:outline-none'
-                        readOnly
-                        textContent={props.snippet.content}
-                    />
-                </Show>
+            <div class='pointer-events-none h-32 w-full select-none self-center overflow-hidden whitespace-pre-wrap rounded-lg bg-neutral-800/50 p-2 text-neutral-400'>
+                <Show when={containerVisible()}>{props.snippet.content}</Show>
             </div>
             <div class='flex flex-col gap-4'>
                 <div class='flex flex-col gap-2'>
