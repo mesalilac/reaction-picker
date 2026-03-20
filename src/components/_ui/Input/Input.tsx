@@ -80,7 +80,11 @@ export const Input = <T = string>(props: Props<T>) => {
                     for={id}
                 >
                     {local.label}
-                    {local.required && <span class='text-red-500'>*</span>}
+                    {local.required && (
+                        <span class='text-red-500' title='required'>
+                            *
+                        </span>
+                    )}
                 </label>
             </Show>
             <input
