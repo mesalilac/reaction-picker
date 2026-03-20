@@ -125,7 +125,7 @@ export const Modal = (props: {
     );
 };
 
-Modal.title = (props: { title: JSX.Element; class?: string }) => {
+Modal.Title = (props: { title: JSX.Element; class?: string }) => {
     return (
         <>
             <span class={twMerge('px-2 text-xl capitalize', props.class)}>
@@ -136,7 +136,7 @@ Modal.title = (props: { title: JSX.Element; class?: string }) => {
     );
 };
 
-Modal.body = (props: { class?: string; children: JSX.Element }) => {
+Modal.Body = (props: { class?: string; children: JSX.Element }) => {
     return (
         <div
             class={twMerge(
@@ -149,7 +149,7 @@ Modal.body = (props: { class?: string; children: JSX.Element }) => {
     );
 };
 
-Modal.footer = (props: {
+Modal.Footer = (props: {
     dismiss?: JSX.Element;
     action?: JSX.Element;
     onAction?: () => void;
