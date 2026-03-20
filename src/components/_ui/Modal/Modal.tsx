@@ -99,13 +99,13 @@ export const Modal = (props: {
             <Show when={shouldRender()}>
                 <div
                     class='fixed inset-0 z-50 flex items-center justify-center bg-black/60'
-                    onClick={closeModal}
+                    onMouseDown={closeModal}
                     ref={modalOverlayRef}
                     role='none'
                 >
                     <div
                         class='relative flex h-9/12 w-9/12 flex-col gap-2 rounded-lg bg-neutral-900/80 p-4 shadow-lg backdrop-blur-sm'
-                        onClick={(e) => e.stopPropagation()}
+                        onMouseDown={(e) => e.stopPropagation()}
                         ref={modalContentRef}
                         role='none'
                     >
