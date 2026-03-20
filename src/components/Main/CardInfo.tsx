@@ -44,12 +44,15 @@ type Props =
 export const CardInfo = (props: Props) => {
     return (
         <div class='flex flex-col gap-2'>
-            <CardField label='title'>
+            <CardField label='title' show={props.item.title !== null}>
                 <span title={props.item.title ?? undefined}>
                     {props.item.title}
                 </span>
             </CardField>
-            <CardField label='description'>
+            <CardField
+                label='description'
+                show={props.item.description !== null}
+            >
                 <span title={props.item.description ?? undefined}>
                     {props.item.description}
                 </span>
@@ -65,7 +68,7 @@ export const CardInfo = (props: Props) => {
                     );
                 }}
             </Show>
-            <CardField label='total uses'>
+            <CardField label='total uses' show={props.item.useCounter > 0}>
                 <span
                     title={
                         props.item.lastUsedAt
@@ -106,7 +109,7 @@ export const CardInfo = (props: Props) => {
                     )}
                 </Match>
             </Switch>
-            <CardField label='tags'>
+            <CardField label='tags' show={props.item.tags.length > 0}>
                 <span>{props.item.tags.map((tag) => tag.name).join(', ')}</span>
             </CardField>
             <CardField label='deleted at' show={props.item.deletedAt !== null}>
