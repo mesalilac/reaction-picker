@@ -33,7 +33,7 @@ export const Modal = (props: {
         const tl = gsap.timeline({
             onComplete: () => {
                 setShouldRender(false);
-                props.onOpenChange(!props.open);
+                props.onOpenChange(false);
             },
         });
 
