@@ -3,7 +3,6 @@ import { Show } from 'solid-js';
 import { ButtonIcon, IconMoreVertical, Menu, Popover } from '@/components';
 
 type Props = {
-    handleViewDetails: () => void;
     handleEditDetails: () => void;
     handleOpenExternalLink: () => void;
     handleRestore: () => void;
@@ -29,9 +28,6 @@ export const CardMenu = (props: Props) => {
                 triggerElement={popoverMenuRef}
             >
                 <Menu onOpenChange={props.onOpenChange} open={props.open}>
-                    <Menu.Item onClick={props.handleViewDetails}>
-                        view details
-                    </Menu.Item>
                     <Menu.Item onClick={props.handleEditDetails}>
                         edit details
                     </Menu.Item>

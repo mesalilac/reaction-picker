@@ -111,10 +111,6 @@ export const AudioCard: VoidComponent<Props> = (props) => {
         setShowPopoverMenu(true);
     };
 
-    const handleViewDetails = () => {
-        setShowPopoverMenu(false);
-    };
-
     const handleOpenExternalLink = async () => {
         if (!props.audio.externalLink) {
             toast.error('Audio has no external link');
@@ -221,7 +217,6 @@ export const AudioCard: VoidComponent<Props> = (props) => {
                         handleEditDetails={() => setShowEditModal(true)}
                         handleOpenExternalLink={handleOpenExternalLink}
                         handleRestore={handleRestore}
-                        handleViewDetails={handleViewDetails}
                         onOpenChange={setShowPopoverMenu}
                         open={showPopoverMenu()}
                     />

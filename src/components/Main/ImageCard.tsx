@@ -136,8 +136,6 @@ export const ImageCard: VoidComponent<Props> = (props) => {
         setShowPopoverMenu(true);
     };
 
-    const handleViewDetails = () => {};
-
     const handleOpenExternalLink = async () => {
         if (!props.image.externalLink) {
             toast.error('Image has no external link');
@@ -238,7 +236,6 @@ export const ImageCard: VoidComponent<Props> = (props) => {
                         handleEditDetails={() => setShowEditModal(true)}
                         handleOpenExternalLink={handleOpenExternalLink}
                         handleRestore={handleRestore}
-                        handleViewDetails={handleViewDetails}
                         onOpenChange={setShowPopoverMenu}
                         open={showPopoverMenu()}
                     />
