@@ -29,6 +29,7 @@ interface Props<T = string>
     parse: (raw: string) => T;
     format?: (value: T) => string;
     validate?: (value: T) => string | undefined;
+    children?: JSX.Element;
 }
 
 export const Input = <T = string>(props: Props<T>) => {
@@ -87,27 +88,30 @@ export const Input = <T = string>(props: Props<T>) => {
                     )}
                 </label>
             </Show>
-            <input
-                aria-describedby={error() ? `${id}-error` : `${id}-helper`}
-                aria-invalid={!!error()}
-                class={twMerge(
-                    'rounded-lg border border-neutral-600 bg-neutral-700/30 px-3 py-2.5 text-sm placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-blue-500',
-                    error() && 'bg-red-500/30 focus:ring-red-500',
-                    local.class,
-                )}
-                id={id}
-                onChange={(e) =>
-                    handleInput(
-                        e as unknown as InputEvent & {
-                            currentTarget: HTMLInputElement;
-                        },
-                    )
-                }
-                onInput={handleInput}
-                required={local.required}
-                value={format(value())}
-                {...others}
-            />
+            <div class='flex flex-row items-center gap-2'>
+                <input
+                    aria-describedby={error() ? `${id}-error` : `${id}-helper`}
+                    aria-invalid={!!error()}
+                    class={twMerge(
+                        'grow rounded-lg border border-neutral-600 bg-neutral-700/30 px-3 py-2.5 text-sm placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-blue-500',
+                        error() && 'bg-red-500/30 focus:ring-red-500',
+                        local.class,
+                    )}
+                    id={id}
+                    onChange={(e) =>
+                        handleInput(
+                            e as unknown as InputEvent & {
+                                currentTarget: HTMLInputElement;
+                            },
+                        )
+                    }
+                    onInput={handleInput}
+                    required={local.required}
+                    value={format(value())}
+                    {...others}
+                />
+                {props.children}
+            </div>
             <Switch>
                 <Match when={error()}>
                     <span class='text-red-500 text-sm capitalize'>
