@@ -132,9 +132,7 @@ export const ImageCard: VoidComponent<Props> = (props) => {
         setShowPopoverMenu(true);
     };
 
-    const handleViewDetails = () => {
-        setShowPopoverMenu(false);
-    };
+    const handleViewDetails = () => {};
 
     const handleOpenExternalLink = async () => {
         if (!props.image.externalLink) {
@@ -143,18 +141,13 @@ export const ImageCard: VoidComponent<Props> = (props) => {
         }
 
         await openUrl(props.image.externalLink).catch((e) => toast.error(e));
-
-        setShowPopoverMenu(false);
     };
 
     const handleEditDetails = () => {
-        setShowPopoverMenu(false);
         setShowEditModal(true);
     };
 
     const handleRestore = async () => {
-        setShowPopoverMenu(false);
-
         const res = await commands
             .updateRestoreImage(props.image.id)
             .catch((e) => {
@@ -183,8 +176,6 @@ export const ImageCard: VoidComponent<Props> = (props) => {
     };
 
     const handleDelete = async () => {
-        setShowPopoverMenu(false);
-
         const alreadyDeleted = props.image.deletedAt !== null;
 
         const res = await commands
