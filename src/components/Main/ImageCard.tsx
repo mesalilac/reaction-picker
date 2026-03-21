@@ -252,6 +252,7 @@ export const ImageCard: VoidComponent<Props> = (props) => {
                                         title: store.title,
                                         description: store.description,
                                         externalLink: store.externalLink,
+                                        useCounter: store.useCounter,
                                         tagIds: store.tagIds,
                                     })
                                     .catch((e) => {
