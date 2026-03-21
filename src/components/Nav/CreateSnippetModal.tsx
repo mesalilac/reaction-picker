@@ -36,6 +36,13 @@ export const CreateSnippetModal: VoidComponent<ModalWrapperProps> = (props) => {
             return;
         }
 
+        if (
+            store.externalLink &&
+            store.externalLink.length > 0 &&
+            !store.externalLink.startsWith('http')
+        )
+            return;
+
         props.onOpenChange(false);
 
         const res = await commands.createSnippet({ ...store }).catch((e) => {
@@ -91,6 +98,10 @@ export const CreateSnippetModal: VoidComponent<ModalWrapperProps> = (props) => {
                     label='externalLink'
                     onInput={(value) => setStore('externalLink', value.trim())}
                     parse={(raw) => String(raw)}
+                    validate={(value) => {
+                        if (value.length > 0 && !value.startsWith('http'))
+                            return 'Invalid link. Must start with http:// or https://';
+                    }}
                     value={store.externalLink ?? ''}
                 />
             </Modal.Body>
