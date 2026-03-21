@@ -9,9 +9,8 @@ import { useGlobalContext } from '@/store';
 export const CreateSnippetModal: VoidComponent<ModalWrapperProps> = (props) => {
     const globalCtx = useGlobalContext();
 
-    let contentInputRef!: HTMLTextAreaElement;
-
     const [contentInputError, setContentInputError] = createSignal<string>();
+    let contentInputRef!: HTMLTextAreaElement;
 
     const [store, setStore] = createStore<{
         title: string | null;
@@ -32,7 +31,7 @@ export const CreateSnippetModal: VoidComponent<ModalWrapperProps> = (props) => {
             contentInputRef.scrollIntoView();
             contentInputRef.focus();
 
-            setContentInputError('Content is required');
+            setContentInputError('Content cannot be empty');
             return;
         }
 
@@ -92,6 +91,10 @@ export const CreateSnippetModal: VoidComponent<ModalWrapperProps> = (props) => {
                     parse={(raw) => String(raw)}
                     ref={contentInputRef}
                     required
+                    validate={(value, isDirty) => {
+                        if (value.length === 0 && isDirty)
+                            return 'Content cannot be empty';
+                    }}
                     value={store.content}
                 />
                 <Input
