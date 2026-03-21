@@ -69,15 +69,13 @@ export const EditAssetModal = (
                     label='title'
                     onInput={(value) => setStore('title', value?.trim())}
                     parse={(raw) => String(raw)}
-                    value={store.title ?? props.item.data.title ?? ''}
+                    value={store.title ?? ''}
                 />
                 <Textarea
                     label='description'
                     onInput={(value) => setStore('description', value?.trim())}
                     parse={(raw) => String(raw)}
-                    value={
-                        store.description ?? props.item.data.description ?? ''
-                    }
+                    value={store.description ?? ''}
                 />
                 <Show when={props.item.type === 'snippet'}>
                     <Textarea
@@ -89,27 +87,20 @@ export const EditAssetModal = (
                             if (value.length === 0)
                                 return 'Content is required';
                         }}
-                        value={
-                            store.content ??
-                            (props.item.type === 'snippet'
-                                ? props.item.data.content
-                                : '')
-                        }
+                        value={store.content ?? ''}
                     />
                 </Show>
                 <Input
                     label='external link'
                     onInput={(value) => setStore('externalLink', value?.trim())}
                     parse={(raw) => String(raw)}
-                    value={
-                        store.externalLink ?? props.item.data.externalLink ?? ''
-                    }
+                    value={store.externalLink ?? ''}
                 />
                 <Input
                     label='use counter'
                     onInput={(value) => setStore('useCounter', value)}
                     parse={(raw) => Number(raw)}
-                    value={store.useCounter ?? props.item.data.useCounter ?? 0}
+                    value={store.useCounter ?? 0}
                 >
                     <Button
                         onClick={() => {
