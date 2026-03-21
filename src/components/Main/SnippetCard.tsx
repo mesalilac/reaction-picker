@@ -276,7 +276,7 @@ export const SnippetCard: VoidComponent<Props> = (props) => {
                     </Show>
                 </div>
             </div>
-            <div class='pointer-events-none h-32 w-full select-none self-center overflow-hidden whitespace-pre-wrap rounded-lg bg-neutral-800/50 p-2 text-neutral-400'>
+            <div class='wrap-break-word pointer-events-none h-32 w-full select-none self-center overflow-hidden whitespace-pre-wrap rounded-lg bg-neutral-800/50 p-2 text-neutral-400'>
                 <Show when={containerVisible()}>{props.snippet.content}</Show>
             </div>
             <CardInfo item={props.snippet} type='snippet' />
