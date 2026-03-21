@@ -49,9 +49,9 @@ Menu.Item = (props: ItemProps) => {
     const [local, others] = splitProps(props, ['class', 'onClick', 'children']);
 
     const handleClick = () => {
-        local.onClick?.();
+        menuContext.onOpenChange(false);
 
-        menuContext.onOpenChange(!menuContext.open);
+        local.onClick?.();
     };
 
     return (
