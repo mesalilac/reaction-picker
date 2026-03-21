@@ -37,6 +37,10 @@ export const VideoCard: VoidComponent<Props> = (props) => {
         const res = await commands
             .updateVideo(props.video.id, {
                 isFavorite: !props.video.isFavorite,
+                description: props.video.description,
+                title: props.video.title,
+                externalLink: props.video.externalLink,
+                useCounter: props.video.useCounter,
             })
             .catch((e) => {
                 toast.error(e);
@@ -232,6 +236,7 @@ export const VideoCard: VoidComponent<Props> = (props) => {
                                         description: store.description,
                                         externalLink: store.externalLink,
                                         useCounter: store.useCounter,
+                                        isFavorite: props.video.isFavorite,
                                         tagIds: store.tagIds,
                                     })
                                     .catch((e) => {

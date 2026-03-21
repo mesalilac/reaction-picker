@@ -36,6 +36,10 @@ export const SnippetCard: VoidComponent<Props> = (props) => {
         const res = await commands
             .updateSnippet(props.snippet.id, {
                 isFavorite: !props.snippet.isFavorite,
+                description: props.snippet.description,
+                title: props.snippet.title,
+                externalLink: props.snippet.externalLink,
+                useCounter: props.snippet.useCounter,
             })
             .catch((e) => {
                 toast.error(e);
@@ -235,6 +239,7 @@ export const SnippetCard: VoidComponent<Props> = (props) => {
                                         description: store.description,
                                         externalLink: store.externalLink,
                                         useCounter: store.useCounter,
+                                        isFavorite: props.snippet.isFavorite,
                                         tagIds: store.tagIds,
                                     })
                                     .catch((e) => {

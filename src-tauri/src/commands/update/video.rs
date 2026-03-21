@@ -2,42 +2,23 @@ use super::prelude::*;
 
 #[derive(Debug, Clone, Serialize, AsChangeset)]
 #[diesel(table_name = videos)]
+#[diesel(treat_none_as_null = true)]
 struct VideoChangeset {
     pub title: Option<String>,
     pub description: Option<String>,
     pub external_link: Option<String>,
-    pub is_favorite: Option<bool>,
-    pub use_counter: Option<i32>,
-}
-
-impl VideoChangeset {
-    pub fn is_empty(&self) -> bool {
-        self.title.is_none()
-            && self.description.is_none()
-            && self.external_link.is_none()
-            && self.is_favorite.is_none()
-            && self.use_counter.is_none()
-    }
+    pub is_favorite: bool,
+    pub use_counter: i32,
 }
 
 #[derive(specta::Type, Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdateVideoRequest {
-    #[specta(optional)]
-    #[serde(default)]
     pub title: Option<String>,
-    #[specta(optional)]
-    #[serde(default)]
     pub description: Option<String>,
-    #[specta(optional)]
-    #[serde(default)]
     pub external_link: Option<String>,
-    #[specta(optional)]
-    #[serde(default)]
-    pub is_favorite: Option<bool>,
-    #[specta(optional)]
-    #[serde(default)]
-    pub use_counter: Option<i32>,
+    pub is_favorite: bool,
+    pub use_counter: i32,
     #[specta(optional)]
     #[serde(default)]
     pub tag_ids: Option<Vec<TagId>>,
@@ -60,11 +41,9 @@ pub async fn update_video(
         use_counter: payload.use_counter,
     };
 
-    if !changeset.is_empty() {
-        update(videos::table.find(&id))
-            .set(&changeset)
-            .execute(&mut conn)?;
-    }
+    update(videos::table.find(&id))
+        .set(&changeset)
+        .execute(&mut conn)?;
 
     if let Some(tags) = payload.tag_ids {
         delete(videos_tags::table.filter(videos_tags::video_id.eq(&id))).execute(&mut conn)?;

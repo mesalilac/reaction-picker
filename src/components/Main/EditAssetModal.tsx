@@ -13,8 +13,8 @@ import {
 type EditAssetStoreType = {
     title: string | null;
     description: string | null;
-    content: string | null;
-    useCounter: number | null;
+    content: string;
+    useCounter: number;
     externalLink: string | null;
     tagIds: string[];
 };
@@ -45,33 +45,18 @@ export const EditAssetModal = (
     const [store, setStore] = createStore<EditAssetStoreType>({
         title: props.item.data.title,
         description: props.item.data.description,
-        content: props.item.type === 'snippet' ? props.item.data.content : null,
+        content: props.item.type === 'snippet' ? props.item.data.content : '',
         useCounter: props.item.data.useCounter,
         externalLink: props.item.data.externalLink,
         tagIds: props.item.data.tags.map((tag) => tag.id),
     });
 
     const onAction = () => {
-        if (store.title === props.item.data.title || store.title?.trim() === '')
-            setStore('title', null);
-        if (
-            store.description === props.item.data.description ||
-            store.description?.trim() === ''
-        )
-            setStore('description', null);
-        if (
-            (props.item.type === 'snippet' &&
-                store.content === props.item.data.content) ||
-            store.content?.trim() === ''
-        )
-            setStore('content', null);
-        if (store.useCounter === props.item.data.useCounter)
-            setStore('useCounter', null);
-        if (
-            store.externalLink === props.item.data.externalLink ||
-            store.externalLink?.trim() === ''
-        )
-            setStore('externalLink', null);
+        if (store.title?.trim() === '') setStore('title', null);
+        if (store.description?.trim() === '') setStore('description', null);
+        if (store.externalLink?.trim() === '') setStore('externalLink', null);
+        if (props.item.type === 'snippet' && store.content.trim() === '')
+            return;
 
         props.onSave(store);
     };

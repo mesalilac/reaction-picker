@@ -448,19 +448,19 @@ export type Tag = { id: TagId; name: string; createdAt: Timestamp };
 export type TagId = string;
 export type Timestamp = number;
 export type UpdateAudioRequest = {
-    title?: string | null;
-    description?: string | null;
-    externalLink?: string | null;
-    isFavorite?: boolean | null;
-    useCounter?: number | null;
+    title: string | null;
+    description: string | null;
+    externalLink: string | null;
+    isFavorite: boolean;
+    useCounter: number;
     tagIds?: TagId[] | null;
 };
 export type UpdateImageRequest = {
-    title?: string | null;
-    description?: string | null;
-    externalLink?: string | null;
-    isFavorite?: boolean | null;
-    useCounter?: number | null;
+    title: string | null;
+    description: string | null;
+    externalLink: string | null;
+    isFavorite: boolean;
+    useCounter: number;
     tagIds?: TagId[] | null;
 };
 export type UpdateSettingsRequest = {
@@ -468,20 +468,20 @@ export type UpdateSettingsRequest = {
     defaultVolume?: number | null;
 };
 export type UpdateSnippetRequest = {
-    title?: string | null;
-    description?: string | null;
-    externalLink?: string | null;
-    isFavorite?: boolean | null;
-    useCounter?: number | null;
+    title: string | null;
+    description: string | null;
+    externalLink: string | null;
+    isFavorite: boolean;
+    useCounter: number;
     tagIds?: TagId[] | null;
 };
 export type UpdateTagRequest = { name?: string | null };
 export type UpdateVideoRequest = {
-    title?: string | null;
-    description?: string | null;
-    externalLink?: string | null;
-    isFavorite?: boolean | null;
-    useCounter?: number | null;
+    title: string | null;
+    description: string | null;
+    externalLink: string | null;
+    isFavorite: boolean;
+    useCounter: number;
     tagIds?: TagId[] | null;
 };
 export type Video = {

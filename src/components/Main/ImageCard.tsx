@@ -62,6 +62,10 @@ export const ImageCard: VoidComponent<Props> = (props) => {
         const res = await commands
             .updateImage(props.image.id, {
                 isFavorite: !props.image.isFavorite,
+                description: props.image.description,
+                title: props.image.title,
+                externalLink: props.image.externalLink,
+                useCounter: props.image.useCounter,
             })
             .catch((e) => {
                 toast.error(e);
@@ -249,6 +253,7 @@ export const ImageCard: VoidComponent<Props> = (props) => {
                                         description: store.description,
                                         externalLink: store.externalLink,
                                         useCounter: store.useCounter,
+                                        isFavorite: props.image.isFavorite,
                                         tagIds: store.tagIds,
                                     })
                                     .catch((e) => {

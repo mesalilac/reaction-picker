@@ -37,6 +37,10 @@ export const AudioCard: VoidComponent<Props> = (props) => {
         const res = await commands
             .updateAudio(props.audio.id, {
                 isFavorite: !props.audio.isFavorite,
+                description: props.audio.description,
+                title: props.audio.title,
+                externalLink: props.audio.externalLink,
+                useCounter: props.audio.useCounter,
             })
             .catch((e) => {
                 toast.error(e);
@@ -232,6 +236,7 @@ export const AudioCard: VoidComponent<Props> = (props) => {
                                         description: store.description,
                                         externalLink: store.externalLink,
                                         useCounter: store.useCounter,
+                                        isFavorite: props.audio.isFavorite,
                                         tagIds: store.tagIds,
                                     })
                                     .catch((e) => {
