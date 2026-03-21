@@ -36,19 +36,36 @@ export const EditAssetModal = (
     },
 ) => {
     const [store, setStore] = createStore<EditAssetStoreType>({
-        title: null,
-        description: null,
-        content: null,
-        useCounter: null,
-        externalLink: null,
+        title: props.item.data.title,
+        description: props.item.data.description,
+        content: props.item.type === 'snippet' ? props.item.data.content : null,
+        useCounter: props.item.data.useCounter,
+        externalLink: props.item.data.externalLink,
         tagIds: [],
     });
+
+    const onAction = () => {
+        if (store.title === props.item.data.title) setStore('title', null);
+        if (store.description === props.item.data.description)
+            setStore('description', null);
+        if (
+            props.item.type === 'snippet' &&
+            store.content === props.item.data.content
+        )
+            setStore('content', null);
+        if (store.useCounter === props.item.data.useCounter)
+            setStore('useCounter', null);
+        if (store.externalLink === props.item.data.externalLink)
+            setStore('externalLink', null);
+
+        props.onSave(store);
+    };
 
     return (
         <Modal onOpenChange={props.onOpenChange} open={props.open}>
             <Modal.Title title={props.title} />
             <Modal.Body>hi</Modal.Body>
-            <Modal.Footer onAction={() => props.onSave(store)} />
+            <Modal.Footer onAction={onAction} />
         </Modal>
     );
 };

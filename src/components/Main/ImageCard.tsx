@@ -250,7 +250,7 @@ export const ImageCard: VoidComponent<Props> = (props) => {
                                 // biome-ignore lint/suspicious/noConsole: <temporary>
                                 console.log('edit image saved!');
                                 // biome-ignore lint/suspicious/noConsole: <temporary>
-                                console.dir(store);
+                                console.log(store);
                                 // biome-ignore lint/suspicious/noConsole: <temporary>
                                 console.log('----------');
                             }}
