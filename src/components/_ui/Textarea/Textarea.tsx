@@ -86,6 +86,11 @@ export const Textarea = <T = string>(props: Props<T>) => {
     };
 
     createEffect(() => {
+        if (local.value !== undefined)
+            setInternalValue(format(local.value ?? parse('')));
+    });
+
+    createEffect(() => {
         if (local.error !== undefined) setTouched(false);
     });
 
