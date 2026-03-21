@@ -118,13 +118,9 @@ export const AudioCard: VoidComponent<Props> = (props) => {
         }
 
         await openUrl(props.audio.externalLink).catch((e) => toast.error(e));
-
-        setShowPopoverMenu(false);
     };
 
     const handleRestore = async () => {
-        setShowPopoverMenu(false);
-
         const res = await commands
             .updateRestoreAudio(props.audio.id)
             .catch((e) => {
@@ -153,8 +149,6 @@ export const AudioCard: VoidComponent<Props> = (props) => {
     };
 
     const handleDelete = async () => {
-        setShowPopoverMenu(false);
-
         const alreadyDeleted = props.audio.deletedAt !== null;
 
         const res = await commands

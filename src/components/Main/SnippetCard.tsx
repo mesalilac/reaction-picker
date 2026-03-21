@@ -120,13 +120,9 @@ export const SnippetCard: VoidComponent<Props> = (props) => {
         }
 
         await openUrl(props.snippet.externalLink).catch((e) => toast.error(e));
-
-        setShowPopoverMenu(false);
     };
 
     const handleRestore = async () => {
-        setShowPopoverMenu(false);
-
         const res = await commands
             .updateRestoreSnippet(props.snippet.id)
             .catch((e) => {
@@ -155,8 +151,6 @@ export const SnippetCard: VoidComponent<Props> = (props) => {
     };
 
     const handleDelete = async () => {
-        setShowPopoverMenu(false);
-
         const alreadyDeleted = props.snippet.deletedAt !== null;
 
         const res = await commands

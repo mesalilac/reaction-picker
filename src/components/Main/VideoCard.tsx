@@ -118,13 +118,9 @@ export const VideoCard: VoidComponent<Props> = (props) => {
         }
 
         await openUrl(props.video.externalLink).catch((e) => toast.error(e));
-
-        setShowPopoverMenu(false);
     };
 
     const handleRestore = async () => {
-        setShowPopoverMenu(false);
-
         const res = await commands
             .updateRestoreVideo(props.video.id)
             .catch((e) => {
@@ -153,8 +149,6 @@ export const VideoCard: VoidComponent<Props> = (props) => {
     };
 
     const handleDelete = async () => {
-        setShowPopoverMenu(false);
-
         const alreadyDeleted = props.video.deletedAt !== null;
 
         const res = await commands
