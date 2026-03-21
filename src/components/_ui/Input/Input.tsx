@@ -52,19 +52,27 @@ export const Input = <T = string>(props: Props<T>) => {
     const parse = local.parse ?? ((v: string) => v as unknown as T);
     const format = local.format ?? ((v: T) => String(v));
 
+    const [touched, setTouched] = createSignal(false);
+
     const [internalValue, setInternalValue] = createSignal(
         format(local.value ?? parse('')),
     );
 
-    const error = createMemo(
-        () => local.error ?? local.validate?.(parse(internalValue())),
-    );
+    const error = createMemo(() => {
+        const validationError = local.validate?.(parse(internalValue()));
+
+        if (touched()) return validationError;
+
+        return local.error ?? validationError;
+    });
 
     const handleInput = (
         e: InputEvent & {
             currentTarget: HTMLInputElement;
         },
     ) => {
+        setTouched(true);
+
         const raw = e.currentTarget.value;
         const parsed = parse(raw);
 

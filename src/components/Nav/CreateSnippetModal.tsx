@@ -81,12 +81,7 @@ export const CreateSnippetModal: VoidComponent<ModalWrapperProps> = (props) => {
                 <Textarea
                     error={contentInputError()}
                     label='content'
-                    onInput={(value) => {
-                        setStore('content', value.trim());
-
-                        if (contentInputError())
-                            setContentInputError(undefined);
-                    }}
+                    onInput={(value) => setStore('content', value.trim())}
                     parse={(raw) => String(raw)}
                     ref={contentInputRef}
                     required
