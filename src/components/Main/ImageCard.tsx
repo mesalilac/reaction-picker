@@ -251,20 +251,22 @@ export const ImageCard: VoidComponent<Props> = (props) => {
                         onOpenChange={setShowPopoverMenu}
                         open={showPopoverMenu()}
                     />
-                    <EditAssetModal
-                        item={{ type: 'image', data: props.image }}
-                        onOpenChange={setShowEditModal}
-                        onSave={(store) => {
-                            // biome-ignore lint/suspicious/noConsole: <temporary>
-                            console.log('edit image saved!');
-                            // biome-ignore lint/suspicious/noConsole: <temporary>
-                            console.dir(store);
-                            // biome-ignore lint/suspicious/noConsole: <temporary>
-                            console.log('----------');
-                        }}
-                        open={showEditModal()}
-                        title='Edit Image'
-                    />
+                    <Show when={showEditModal()}>
+                        <EditAssetModal
+                            item={{ type: 'image', data: props.image }}
+                            onOpenChange={setShowEditModal}
+                            onSave={(store) => {
+                                // biome-ignore lint/suspicious/noConsole: <temporary>
+                                console.log('edit image saved!');
+                                // biome-ignore lint/suspicious/noConsole: <temporary>
+                                console.dir(store);
+                                // biome-ignore lint/suspicious/noConsole: <temporary>
+                                console.log('----------');
+                            }}
+                            open={showEditModal()}
+                            title='Edit Image'
+                        />
+                    </Show>
                 </div>
             </div>
             <div class='h-80 w-full self-center'>
