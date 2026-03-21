@@ -48,7 +48,7 @@ export const EditAssetModal = (
         content: props.item.type === 'snippet' ? props.item.data.content : null,
         useCounter: props.item.data.useCounter,
         externalLink: props.item.data.externalLink,
-        tagIds: [],
+        tagIds: props.item.data.tags.map((tag) => tag.id),
     });
 
     const onAction = () => {
