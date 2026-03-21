@@ -12,6 +12,7 @@ import { minimizeWindow, unminimizeWindow } from '@/utils';
 
 import { CardInfo } from './CardInfo';
 import { CardMenu } from './CardMenu';
+import { EditAssetModal } from './EditAssetModal';
 
 type Props = {
     video: Video;
@@ -22,6 +23,7 @@ export const VideoCard: VoidComponent<Props> = (props) => {
 
     let containerRef!: HTMLDivElement;
 
+    const [showEditModal, setShowEditModal] = createSignal(false);
     const [showPopoverMenu, setShowPopoverMenu] = createSignal(false);
 
     const useVisibilityObserver = createVisibilityObserver({
@@ -120,10 +122,6 @@ export const VideoCard: VoidComponent<Props> = (props) => {
         setShowPopoverMenu(false);
     };
 
-    const handleEditDetails = () => {
-        setShowPopoverMenu(false);
-    };
-
     const handleRestore = async () => {
         setShowPopoverMenu(false);
 
@@ -216,13 +214,56 @@ export const VideoCard: VoidComponent<Props> = (props) => {
                         deletedAt={props.video.deletedAt}
                         externalLink={props.video.externalLink}
                         handleDelete={handleDelete}
-                        handleEditDetails={handleEditDetails}
+                        handleEditDetails={() => setShowEditModal(true)}
                         handleOpenExternalLink={handleOpenExternalLink}
                         handleRestore={handleRestore}
                         handleViewDetails={handleViewDetails}
                         onOpenChange={setShowPopoverMenu}
                         open={showPopoverMenu()}
                     />
+                    <Show when={showEditModal()}>
+                        <EditAssetModal
+                            item={{ type: 'video', data: props.video }}
+                            onOpenChange={setShowEditModal}
+                            onSave={async (store) => {
+                                const res = await commands
+                                    .updateVideo(props.video.id, {
+                                        title: store.title,
+                                        description: store.description,
+                                        externalLink: store.externalLink,
+                                        useCounter: store.useCounter,
+                                        tagIds: store.tagIds,
+                                    })
+                                    .catch((e) => {
+                                        toast.error(e);
+                                    });
+
+                                if (!res) return;
+
+                                if (res.status === 'error') {
+                                    toast.error(res.error.kind, {
+                                        description: res.error.message,
+                                    });
+
+                                    return;
+                                }
+
+                                toast.success('Video updated successfully');
+
+                                globalCtx.resources.videos.mutate((prev) => {
+                                    if (!prev) return;
+
+                                    return prev.map((item) =>
+                                        item.id === props.video.id
+                                            ? res.data
+                                            : item,
+                                    );
+                                });
+                            }}
+                            open={showEditModal()}
+                            title='Edit Image'
+                        />
+                    </Show>
                 </div>
             </div>
             <div class='h-80 w-full self-center'>

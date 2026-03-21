@@ -143,10 +143,6 @@ export const ImageCard: VoidComponent<Props> = (props) => {
         await openUrl(props.image.externalLink).catch((e) => toast.error(e));
     };
 
-    const handleEditDetails = () => {
-        setShowEditModal(true);
-    };
-
     const handleRestore = async () => {
         const res = await commands
             .updateRestoreImage(props.image.id)
@@ -235,7 +231,7 @@ export const ImageCard: VoidComponent<Props> = (props) => {
                         deletedAt={props.image.deletedAt}
                         externalLink={props.image.externalLink}
                         handleDelete={handleDelete}
-                        handleEditDetails={handleEditDetails}
+                        handleEditDetails={() => setShowEditModal(true)}
                         handleOpenExternalLink={handleOpenExternalLink}
                         handleRestore={handleRestore}
                         handleViewDetails={handleViewDetails}
