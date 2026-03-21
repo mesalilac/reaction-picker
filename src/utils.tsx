@@ -1,6 +1,8 @@
 import { getCurrentWindow } from '@tauri-apps/api/window';
 import { toast } from 'solid-sonner';
 
+import type { CommandError } from '@/bindings';
+
 export const minimizeWindow = async () => {
     try {
         const window = getCurrentWindow();
@@ -18,5 +20,31 @@ export const unminimizeWindow = async () => {
     } catch (e) {
         console.error(e);
         toast.error(e as string);
+    }
+};
+
+export const handleUnexpectedError = (e: unknown) => {
+    toast.error('Unexpected error', {
+        description: e as string,
+    });
+    console.error(e);
+};
+
+export const handleIpcError = (
+    e: CommandError,
+    id?: string | number | undefined,
+) => {
+    if (typeof e === 'object') {
+        toast.error(e.kind, {
+            description: e.message,
+            id,
+        });
+        console.error(e);
+    } else {
+        toast.error('IPC error', {
+            description: e,
+            id,
+        });
+        console.error(e);
     }
 };

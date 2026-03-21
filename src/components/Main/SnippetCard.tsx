@@ -7,7 +7,12 @@ import { toast } from 'solid-sonner';
 import { commands, type Snippet } from '@/bindings';
 import { Button, ButtonIcon, IconHeart01 } from '@/components';
 import { useGlobalContext } from '@/store';
-import { minimizeWindow, unminimizeWindow } from '@/utils';
+import {
+    handleIpcError,
+    handleUnexpectedError,
+    minimizeWindow,
+    unminimizeWindow,
+} from '@/utils';
 
 import { CardInfo } from './CardInfo';
 import { CardMenu } from './CardMenu';
@@ -42,16 +47,12 @@ export const SnippetCard: VoidComponent<Props> = (props) => {
                 useCounter: props.snippet.useCounter,
                 content: props.snippet.content,
             })
-            .catch((e) => {
-                toast.error(e);
-            });
+            .catch(handleUnexpectedError);
 
         if (!res) return;
 
         if (res.status === 'error') {
-            toast.error(res.error.kind, {
-                description: res.error.message,
-            });
+            handleIpcError(res.error);
 
             return;
         }
@@ -72,9 +73,7 @@ export const SnippetCard: VoidComponent<Props> = (props) => {
 
         const res = await commands
             .utilCopySnippet(props.snippet.id)
-            .catch((e) => {
-                toast.error(e);
-            });
+            .catch(handleUnexpectedError);
 
         if (!res) {
             if (globalCtx.resources.settings.get()?.minimizeOnCopy) {
@@ -85,9 +84,7 @@ export const SnippetCard: VoidComponent<Props> = (props) => {
         }
 
         if (res.status === 'error') {
-            toast.error(res.error.kind, {
-                description: res.error.message,
-            });
+            handleIpcError(res.error);
 
             if (globalCtx.resources.settings.get()?.minimizeOnCopy) {
                 await unminimizeWindow();
@@ -119,22 +116,18 @@ export const SnippetCard: VoidComponent<Props> = (props) => {
             return;
         }
 
-        await openUrl(props.snippet.externalLink).catch((e) => toast.error(e));
+        await openUrl(props.snippet.externalLink).catch(handleUnexpectedError);
     };
 
     const handleRestore = async () => {
         const res = await commands
             .updateRestoreSnippet(props.snippet.id)
-            .catch((e) => {
-                toast.error(e);
-            });
+            .catch(handleUnexpectedError);
 
         if (!res) return;
 
         if (res.status === 'error') {
-            toast.error(res.error.kind, {
-                description: res.error.message,
-            });
+            handleIpcError(res.error);
 
             return;
         }
@@ -157,16 +150,12 @@ export const SnippetCard: VoidComponent<Props> = (props) => {
             .removeDeleteSnippet(props.snippet.id, {
                 permanent: alreadyDeleted,
             })
-            .catch((e) => {
-                toast.error(e);
-            });
+            .catch(handleUnexpectedError);
 
         if (!res) return;
 
         if (res.status === 'error') {
-            toast.error(res.error.kind, {
-                description: res.error.message,
-            });
+            handleIpcError(res.error);
 
             return;
         }
@@ -233,16 +222,12 @@ export const SnippetCard: VoidComponent<Props> = (props) => {
                                         content: store.content,
                                         tagIds: store.tagIds,
                                     })
-                                    .catch((e) => {
-                                        toast.error(e);
-                                    });
+                                    .catch(handleUnexpectedError);
 
                                 if (!res) return;
 
                                 if (res.status === 'error') {
-                                    toast.error(res.error.kind, {
-                                        description: res.error.message,
-                                    });
+                                    handleIpcError(res.error);
 
                                     return;
                                 }

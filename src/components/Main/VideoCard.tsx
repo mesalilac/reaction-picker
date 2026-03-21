@@ -8,7 +8,12 @@ import { toast } from 'solid-sonner';
 import { commands, type Video } from '@/bindings';
 import { Button, ButtonIcon, IconHeart01 } from '@/components';
 import { useGlobalContext } from '@/store';
-import { minimizeWindow, unminimizeWindow } from '@/utils';
+import {
+    handleIpcError,
+    handleUnexpectedError,
+    minimizeWindow,
+    unminimizeWindow,
+} from '@/utils';
 
 import { CardInfo } from './CardInfo';
 import { CardMenu } from './CardMenu';
@@ -42,16 +47,12 @@ export const VideoCard: VoidComponent<Props> = (props) => {
                 externalLink: props.video.externalLink,
                 useCounter: props.video.useCounter,
             })
-            .catch((e) => {
-                toast.error(e);
-            });
+            .catch(handleUnexpectedError);
 
         if (!res) return;
 
         if (res.status === 'error') {
-            toast.error(res.error.kind, {
-                description: res.error.message,
-            });
+            handleIpcError(res.error);
 
             return;
         }
@@ -70,9 +71,9 @@ export const VideoCard: VoidComponent<Props> = (props) => {
             await minimizeWindow();
         }
 
-        const res = await commands.utilCopyVideo(props.video.id).catch((e) => {
-            toast.error(e);
-        });
+        const res = await commands
+            .utilCopyVideo(props.video.id)
+            .catch(handleUnexpectedError);
 
         if (!res) {
             if (globalCtx.resources.settings.get()?.minimizeOnCopy) {
@@ -83,9 +84,7 @@ export const VideoCard: VoidComponent<Props> = (props) => {
         }
 
         if (res.status === 'error') {
-            toast.error(res.error.kind, {
-                description: res.error.message,
-            });
+            handleIpcError(res.error);
 
             if (globalCtx.resources.settings.get()?.minimizeOnCopy) {
                 await unminimizeWindow();
@@ -117,22 +116,18 @@ export const VideoCard: VoidComponent<Props> = (props) => {
             return;
         }
 
-        await openUrl(props.video.externalLink).catch((e) => toast.error(e));
+        await openUrl(props.video.externalLink).catch(handleUnexpectedError);
     };
 
     const handleRestore = async () => {
         const res = await commands
             .updateRestoreVideo(props.video.id)
-            .catch((e) => {
-                toast.error(e);
-            });
+            .catch(handleUnexpectedError);
 
         if (!res) return;
 
         if (res.status === 'error') {
-            toast.error(res.error.kind, {
-                description: res.error.message,
-            });
+            handleIpcError(res.error);
 
             return;
         }
@@ -153,16 +148,12 @@ export const VideoCard: VoidComponent<Props> = (props) => {
 
         const res = await commands
             .removeDeleteVideo(props.video.id, { permanent: alreadyDeleted })
-            .catch((e) => {
-                toast.error(e);
-            });
+            .catch(handleUnexpectedError);
 
         if (!res) return;
 
         if (res.status === 'error') {
-            toast.error(res.error.kind, {
-                description: res.error.message,
-            });
+            handleIpcError(res.error);
 
             return;
         }
@@ -228,16 +219,12 @@ export const VideoCard: VoidComponent<Props> = (props) => {
                                         isFavorite: props.video.isFavorite,
                                         tagIds: store.tagIds,
                                     })
-                                    .catch((e) => {
-                                        toast.error(e);
-                                    });
+                                    .catch(handleUnexpectedError);
 
                                 if (!res) return;
 
                                 if (res.status === 'error') {
-                                    toast.error(res.error.kind, {
-                                        description: res.error.message,
-                                    });
+                                    handleIpcError(res.error);
 
                                     return;
                                 }

@@ -8,6 +8,7 @@ import { toast } from 'solid-sonner';
 
 import { commands, events } from '@/bindings';
 import { useGlobalContext } from '@/store';
+import { handleIpcError, handleUnexpectedError } from '@/utils';
 
 type Props = {
     ref?: HTMLDivElement | ((el: HTMLDivElement) => void);
@@ -57,7 +58,7 @@ export const DragOverlay: VoidComponent<Props> = (props) => {
                 const res = await commands
                     .utilDropFiles(e.payload.paths)
                     .catch((e) => {
-                        toast.error(e);
+                        handleUnexpectedError(e);
                         setProcessingFiles(false);
                         toast.dismiss(toastId);
                     });
@@ -65,10 +66,7 @@ export const DragOverlay: VoidComponent<Props> = (props) => {
                 if (!res) return;
 
                 if (res.status === 'error') {
-                    toast.error(res.error.kind, {
-                        description: res.error.message,
-                        id: toastId,
-                    });
+                    handleIpcError(res.error, toastId);
                     setProcessingFiles(false);
                     toast.dismiss(toastId);
 

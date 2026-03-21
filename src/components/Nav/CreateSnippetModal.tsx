@@ -5,6 +5,7 @@ import { toast } from 'solid-sonner';
 import { commands } from '@/bindings';
 import { Input, Modal, type ModalWrapperProps, Textarea } from '@/components';
 import { useGlobalContext } from '@/store';
+import { handleIpcError, handleUnexpectedError } from '@/utils';
 
 export const CreateSnippetModal: VoidComponent<ModalWrapperProps> = (props) => {
     const globalCtx = useGlobalContext();
@@ -44,16 +45,14 @@ export const CreateSnippetModal: VoidComponent<ModalWrapperProps> = (props) => {
 
         props.onOpenChange(false);
 
-        const res = await commands.createSnippet({ ...store }).catch((e) => {
-            toast.error(e);
-        });
+        const res = await commands
+            .createSnippet({ ...store })
+            .catch(handleUnexpectedError);
 
         if (!res) return;
 
         if (res.status === 'error') {
-            toast.error(res.error.kind, {
-                description: res.error.message,
-            });
+            handleIpcError(res.error);
 
             return;
         }

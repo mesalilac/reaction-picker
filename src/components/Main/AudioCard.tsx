@@ -8,7 +8,12 @@ import { toast } from 'solid-sonner';
 import { type Audio, commands } from '@/bindings';
 import { Button, ButtonIcon, IconHeart01 } from '@/components';
 import { useGlobalContext } from '@/store';
-import { minimizeWindow, unminimizeWindow } from '@/utils';
+import {
+    handleIpcError,
+    handleUnexpectedError,
+    minimizeWindow,
+    unminimizeWindow,
+} from '@/utils';
 
 import { CardInfo } from './CardInfo';
 import { CardMenu } from './CardMenu';
@@ -42,16 +47,12 @@ export const AudioCard: VoidComponent<Props> = (props) => {
                 externalLink: props.audio.externalLink,
                 useCounter: props.audio.useCounter,
             })
-            .catch((e) => {
-                toast.error(e);
-            });
+            .catch(handleUnexpectedError);
 
         if (!res) return;
 
         if (res.status === 'error') {
-            toast.error(res.error.kind, {
-                description: res.error.message,
-            });
+            handleIpcError(res.error);
 
             return;
         }
@@ -70,9 +71,9 @@ export const AudioCard: VoidComponent<Props> = (props) => {
             await minimizeWindow();
         }
 
-        const res = await commands.utilCopyAudio(props.audio.id).catch((e) => {
-            toast.error(e);
-        });
+        const res = await commands
+            .utilCopyAudio(props.audio.id)
+            .catch(handleUnexpectedError);
 
         if (!res) {
             if (globalCtx.resources.settings.get()?.minimizeOnCopy) {
@@ -83,9 +84,7 @@ export const AudioCard: VoidComponent<Props> = (props) => {
         }
 
         if (res.status === 'error') {
-            toast.error(res.error.kind, {
-                description: res.error.message,
-            });
+            handleIpcError(res.error);
 
             if (globalCtx.resources.settings.get()?.minimizeOnCopy) {
                 await unminimizeWindow();
@@ -117,22 +116,18 @@ export const AudioCard: VoidComponent<Props> = (props) => {
             return;
         }
 
-        await openUrl(props.audio.externalLink).catch((e) => toast.error(e));
+        await openUrl(props.audio.externalLink).catch(handleUnexpectedError);
     };
 
     const handleRestore = async () => {
         const res = await commands
             .updateRestoreAudio(props.audio.id)
-            .catch((e) => {
-                toast.error(e);
-            });
+            .catch(handleUnexpectedError);
 
         if (!res) return;
 
         if (res.status === 'error') {
-            toast.error(res.error.kind, {
-                description: res.error.message,
-            });
+            handleIpcError(res.error);
 
             return;
         }
@@ -153,16 +148,12 @@ export const AudioCard: VoidComponent<Props> = (props) => {
 
         const res = await commands
             .removeDeleteAudio(props.audio.id, { permanent: alreadyDeleted })
-            .catch((e) => {
-                toast.error(e);
-            });
+            .catch(handleUnexpectedError);
 
         if (!res) return;
 
         if (res.status === 'error') {
-            toast.error(res.error.kind, {
-                description: res.error.message,
-            });
+            handleIpcError(res.error);
 
             return;
         }
@@ -228,16 +219,12 @@ export const AudioCard: VoidComponent<Props> = (props) => {
                                         isFavorite: props.audio.isFavorite,
                                         tagIds: store.tagIds,
                                     })
-                                    .catch((e) => {
-                                        toast.error(e);
-                                    });
+                                    .catch(handleUnexpectedError);
 
                                 if (!res) return;
 
                                 if (res.status === 'error') {
-                                    toast.error(res.error.kind, {
-                                        description: res.error.message,
-                                    });
+                                    handleIpcError(res.error);
 
                                     return;
                                 }

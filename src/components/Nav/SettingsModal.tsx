@@ -5,6 +5,7 @@ import { toast } from 'solid-sonner';
 import { commands } from '@/bindings';
 import { Checkbox, Input, Modal, type ModalWrapperProps } from '@/components';
 import { useGlobalContext } from '@/store';
+import { handleIpcError, handleUnexpectedError } from '@/utils';
 
 export const SettingsModal: VoidComponent<ModalWrapperProps> = (props) => {
     const globalCtx = useGlobalContext();
@@ -39,16 +40,12 @@ export const SettingsModal: VoidComponent<ModalWrapperProps> = (props) => {
                 defaultVolume: store.defaultVolume,
                 minimizeOnCopy: store.minimizeOnCopy,
             })
-            .catch((e) => {
-                toast.error(e);
-            });
+            .catch(handleUnexpectedError);
 
         if (!res) return;
 
         if (res.status === 'error') {
-            toast.error(res.error.kind, {
-                description: res.error.message,
-            });
+            handleIpcError(res.error);
 
             return;
         }
