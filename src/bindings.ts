@@ -471,6 +471,7 @@ export type UpdateSnippetRequest = {
     title: string | null;
     description: string | null;
     externalLink: string | null;
+    content: string;
     isFavorite: boolean;
     useCounter: number;
     tagIds?: TagId[] | null;

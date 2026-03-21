@@ -7,6 +7,7 @@ struct SnippetChangeset {
     pub title: Option<String>,
     pub description: Option<String>,
     pub external_link: Option<String>,
+    pub content: String,
     pub is_favorite: bool,
     pub use_counter: i32,
 }
@@ -17,6 +18,7 @@ pub struct UpdateSnippetRequest {
     pub title: Option<String>,
     pub description: Option<String>,
     pub external_link: Option<String>,
+    pub content: String,
     pub is_favorite: bool,
     pub use_counter: i32,
     #[specta(optional)]
@@ -37,6 +39,7 @@ pub async fn update_snippet(
         title: normalize_optional_string(payload.title),
         description: normalize_optional_string(payload.description),
         external_link: normalize_optional_string(payload.external_link),
+        content: payload.content.trim().to_string(),
         is_favorite: payload.is_favorite,
         use_counter: payload.use_counter,
     };

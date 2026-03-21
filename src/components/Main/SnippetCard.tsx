@@ -40,6 +40,7 @@ export const SnippetCard: VoidComponent<Props> = (props) => {
                 title: props.snippet.title,
                 externalLink: props.snippet.externalLink,
                 useCounter: props.snippet.useCounter,
+                content: props.snippet.content,
             })
             .catch((e) => {
                 toast.error(e);
@@ -240,6 +241,7 @@ export const SnippetCard: VoidComponent<Props> = (props) => {
                                         externalLink: store.externalLink,
                                         useCounter: store.useCounter,
                                         isFavorite: props.snippet.isFavorite,
+                                        content: store.content,
                                         tagIds: store.tagIds,
                                     })
                                     .catch((e) => {
