@@ -31,7 +31,6 @@ export const SettingsModal: VoidComponent<ModalWrapperProps> = (props) => {
             store.defaultVolume !== undefined &&
             (store.defaultVolume < 0 || store.defaultVolume > 1)
         ) {
-            toast.error('Default volume must be between 0 and 1');
             return;
         }
 
