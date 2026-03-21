@@ -1,4 +1,5 @@
 import {
+    createEffect,
     createMemo,
     createSignal,
     createUniqueId,
@@ -51,9 +52,13 @@ export const Input = <T = string>(props: Props<T>) => {
     const parse = local.parse ?? ((v: string) => v as unknown as T);
     const format = local.format ?? ((v: T) => String(v));
 
-    const [value, setValue] = createSignal<T>(local.value ?? parse(''));
+    const [internalValue, setInternalValue] = createSignal(
+        format(local.value ?? parse('')),
+    );
 
-    const error = createMemo(() => local.error ?? local.validate?.(value()));
+    const error = createMemo(
+        () => local.error ?? local.validate?.(parse(internalValue())),
+    );
 
     const handleInput = (
         e: InputEvent & {
@@ -63,7 +68,7 @@ export const Input = <T = string>(props: Props<T>) => {
         const raw = e.currentTarget.value;
         const parsed = parse(raw);
 
-        setValue(() => parsed);
+        setInternalValue(raw);
 
         local.onInput?.(
             parsed,
@@ -72,6 +77,11 @@ export const Input = <T = string>(props: Props<T>) => {
             },
         );
     };
+
+    createEffect(() => {
+        if (local.value !== undefined)
+            setInternalValue(format(local.value ?? parse('')));
+    });
 
     return (
         <div class='flex w-full flex-col gap-2'>
@@ -107,7 +117,7 @@ export const Input = <T = string>(props: Props<T>) => {
                     }
                     onInput={handleInput}
                     required={local.required}
-                    value={format(value())}
+                    value={internalValue()}
                     {...others}
                 />
                 {props.children}
