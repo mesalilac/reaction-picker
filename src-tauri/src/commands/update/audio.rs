@@ -7,6 +7,7 @@ struct AudioChangeset {
     pub description: Option<String>,
     pub external_link: Option<String>,
     pub is_favorite: Option<bool>,
+    pub use_counter: Option<i32>,
 }
 
 impl AudioChangeset {
@@ -15,6 +16,7 @@ impl AudioChangeset {
             && self.description.is_none()
             && self.external_link.is_none()
             && self.is_favorite.is_none()
+            && self.use_counter.is_none()
     }
 }
 
@@ -35,6 +37,9 @@ pub struct UpdateAudioRequest {
     pub is_favorite: Option<bool>,
     #[specta(optional)]
     #[serde(default)]
+    pub use_counter: Option<i32>,
+    #[specta(optional)]
+    #[serde(default)]
     pub tag_ids: Option<Vec<TagId>>,
 }
 
@@ -52,6 +57,7 @@ pub async fn update_audio(
         description: normalize_optional_string(payload.description),
         external_link: normalize_optional_string(payload.external_link),
         is_favorite: payload.is_favorite,
+        use_counter: payload.use_counter,
     };
 
     if !changeset.is_empty() {

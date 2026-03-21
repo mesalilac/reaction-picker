@@ -452,6 +452,7 @@ export type UpdateAudioRequest = {
     description?: string | null;
     externalLink?: string | null;
     isFavorite?: boolean | null;
+    useCounter?: number | null;
     tagIds?: TagId[] | null;
 };
 export type UpdateImageRequest = {
@@ -459,6 +460,7 @@ export type UpdateImageRequest = {
     description?: string | null;
     externalLink?: string | null;
     isFavorite?: boolean | null;
+    useCounter?: number | null;
     tagIds?: TagId[] | null;
 };
 export type UpdateSettingsRequest = {
@@ -470,6 +472,7 @@ export type UpdateSnippetRequest = {
     description?: string | null;
     externalLink?: string | null;
     isFavorite?: boolean | null;
+    useCounter?: number | null;
     tagIds?: TagId[] | null;
 };
 export type UpdateTagRequest = { name?: string | null };
@@ -478,6 +481,7 @@ export type UpdateVideoRequest = {
     description?: string | null;
     externalLink?: string | null;
     isFavorite?: boolean | null;
+    useCounter?: number | null;
     tagIds?: TagId[] | null;
 };
 export type Video = {
