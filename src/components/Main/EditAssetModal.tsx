@@ -58,6 +58,13 @@ export const EditAssetModal = (
         if (props.item.type === 'snippet' && store.content.trim() === '')
             return;
 
+        if (
+            store.externalLink &&
+            store.externalLink.length > 0 &&
+            !store.externalLink.startsWith('http')
+        )
+            return;
+
         props.onSave(store);
     };
 
@@ -94,6 +101,10 @@ export const EditAssetModal = (
                     label='external link'
                     onInput={(value) => setStore('externalLink', value?.trim())}
                     parse={(raw) => String(raw)}
+                    validate={(value) => {
+                        if (value.length > 0 && !value.startsWith('http'))
+                            return 'Invalid link. Must start with http:// or https://';
+                    }}
                     value={store.externalLink ?? ''}
                 />
                 <Input
