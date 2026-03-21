@@ -29,7 +29,7 @@ interface Props<T = string>
     ) => void;
     parse: (raw: string) => T;
     format?: (value: T) => string;
-    validate?: (value: T) => string | undefined;
+    validate?: (value: T, isDirty: boolean) => string | undefined;
 }
 
 export const Textarea = <T = string>(props: Props<T>) => {
@@ -51,6 +51,7 @@ export const Textarea = <T = string>(props: Props<T>) => {
     const parse = local.parse ?? ((v: string) => v as unknown as T);
     const format = local.format ?? ((v: T) => String(v));
 
+    const [isDirty, setIsDirty] = createSignal(false);
     const [touched, setTouched] = createSignal(false);
 
     const [internalValue, setInternalValue] = createSignal(
@@ -58,7 +59,10 @@ export const Textarea = <T = string>(props: Props<T>) => {
     );
 
     const error = createMemo(() => {
-        const validationError = local.validate?.(parse(internalValue()));
+        const validationError = local.validate?.(
+            parse(internalValue()),
+            isDirty(),
+        );
 
         if (touched()) return validationError;
 
@@ -70,6 +74,7 @@ export const Textarea = <T = string>(props: Props<T>) => {
             currentTarget: HTMLTextAreaElement;
         },
     ) => {
+        setIsDirty(true);
         setTouched(true);
 
         const raw = e.currentTarget.value;
