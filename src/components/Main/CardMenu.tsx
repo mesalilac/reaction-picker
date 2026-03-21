@@ -39,10 +39,7 @@ export const CardMenu = (props: Props) => {
                     </Show>
                     <Menu.Separator />
                     <Show when={props.deletedAt !== null}>
-                        <Menu.Item
-                            class='text-blue-500'
-                            onClick={props.handleRestore}
-                        >
+                        <Menu.Item onClick={props.handleRestore}>
                             restore
                         </Menu.Item>
                     </Show>
