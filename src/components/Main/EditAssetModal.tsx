@@ -1,7 +1,14 @@
+import { Show } from 'solid-js';
 import { createStore } from 'solid-js/store';
 
 import type { Audio, Image, Snippet, Video } from '@/bindings';
-import { Input, Modal, type ModalWrapperProps } from '@/components';
+import {
+    Button,
+    Input,
+    Modal,
+    type ModalWrapperProps,
+    Textarea,
+} from '@/components';
 
 type EditAssetStoreType = {
     title: string | null;
@@ -78,6 +85,37 @@ export const EditAssetModal = (
                     onInput={(value) => setStore('title', value?.trim())}
                     parse={(raw) => String(raw)}
                     value={store.title ?? ''}
+                />
+                <Textarea
+                    label='description'
+                    onInput={(value) => setStore('description', value?.trim())}
+                    parse={(raw) => String(raw)}
+                    value={store.description ?? ''}
+                />
+                <Show when={props.item.type === 'snippet'}>
+                    <Textarea
+                        label='content'
+                        onInput={(value) => setStore('content', value?.trim())}
+                        parse={(raw) => String(raw)}
+                        required
+                        validate={(value) => {
+                            if (value.length === 0)
+                                return 'Content is required';
+                        }}
+                        value={store.content ?? ''}
+                    />
+                </Show>
+                <Input
+                    label='external link'
+                    onInput={(value) => setStore('externalLink', value?.trim())}
+                    parse={(raw) => String(raw)}
+                    value={store.externalLink ?? ''}
+                />
+                <Input
+                    label='use counter'
+                    onInput={(value) => setStore('useCounter', value)}
+                    parse={(raw) => Number(raw)}
+                    value={store.useCounter ?? 0}
                 />
             </Modal.Body>
             <Modal.Footer onAction={onAction} />
