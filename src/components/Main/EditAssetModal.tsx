@@ -116,7 +116,16 @@ export const EditAssetModal = (
                     onInput={(value) => setStore('useCounter', value)}
                     parse={(raw) => Number(raw)}
                     value={store.useCounter ?? 0}
-                />
+                >
+                    <Button
+                        onClick={() => {
+                            setStore('useCounter', 0);
+                        }}
+                        variant='secondary'
+                    >
+                        Reset
+                    </Button>
+                </Input>
             </Modal.Body>
             <Modal.Footer onAction={onAction} />
         </Modal>
