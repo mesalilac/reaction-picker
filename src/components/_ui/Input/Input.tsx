@@ -136,12 +136,10 @@ export const Input = <T = string>(props: Props<T>) => {
             </div>
             <Switch>
                 <Match when={error()}>
-                    <span class='text-red-500 text-sm capitalize'>
-                        {error()}
-                    </span>
+                    <span class='text-red-500 text-sm'>{error()}</span>
                 </Match>
                 <Match when={local.helperText}>
-                    <span class='text-neutral-300 text-sm capitalize'>
+                    <span class='text-neutral-300 text-sm'>
                         {local.helperText}
                     </span>
                 </Match>
