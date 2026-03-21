@@ -246,13 +246,39 @@ export const ImageCard: VoidComponent<Props> = (props) => {
                         <EditAssetModal
                             item={{ type: 'image', data: props.image }}
                             onOpenChange={setShowEditModal}
-                            onSave={(store) => {
-                                // biome-ignore lint/suspicious/noConsole: <temporary>
-                                console.log('edit image saved!');
-                                // biome-ignore lint/suspicious/noConsole: <temporary>
-                                console.log(store);
-                                // biome-ignore lint/suspicious/noConsole: <temporary>
-                                console.log('----------');
+                            onSave={async (store) => {
+                                const res = await commands
+                                    .updateImage(props.image.id, {
+                                        title: store.title,
+                                        description: store.description,
+                                        externalLink: store.externalLink,
+                                        tagIds: store.tagIds,
+                                    })
+                                    .catch((e) => {
+                                        toast.error(e);
+                                    });
+
+                                if (!res) return;
+
+                                if (res.status === 'error') {
+                                    toast.error(res.error.kind, {
+                                        description: res.error.message,
+                                    });
+
+                                    return;
+                                }
+
+                                toast.success('Image updated successfully');
+
+                                globalCtx.resources.images.mutate((prev) => {
+                                    if (!prev) return;
+
+                                    return prev.map((item) =>
+                                        item.id === props.image.id
+                                            ? res.data
+                                            : item,
+                                    );
+                                });
                             }}
                             open={showEditModal()}
                             title='Edit Image'
