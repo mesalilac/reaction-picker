@@ -1,4 +1,5 @@
 import {
+    createEffect,
     createMemo,
     createSignal,
     createUniqueId,
@@ -83,6 +84,10 @@ export const Textarea = <T = string>(props: Props<T>) => {
             },
         );
     };
+
+    createEffect(() => {
+        if (local.error !== undefined) setTouched(false);
+    });
 
     return (
         <div class='flex w-full flex-col gap-2'>

@@ -91,6 +91,10 @@ export const Input = <T = string>(props: Props<T>) => {
             setInternalValue(format(local.value ?? parse('')));
     });
 
+    createEffect(() => {
+        if (local.error !== undefined) setTouched(false);
+    });
+
     return (
         <div class='flex w-full flex-col gap-2'>
             <Show when={local.label}>
