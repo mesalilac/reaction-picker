@@ -13,6 +13,7 @@ import { minimizeWindow, unminimizeWindow } from '@/utils';
 
 import { CardInfo } from './CardInfo';
 import { CardMenu } from './CardMenu';
+import { EditAssetModal } from './EditAssetModal';
 
 type Props = {
     image: Image;
@@ -24,6 +25,7 @@ export const ImageCard: VoidComponent<Props> = (props) => {
     let canvasRef!: HTMLCanvasElement;
     let containerRef!: HTMLDivElement;
 
+    const [showEditModal, setShowEditModal] = createSignal(false);
     const [showPopoverMenu, setShowPopoverMenu] = createSignal(false);
     const [loaded, setLoaded] = createSignal(false);
 
@@ -147,6 +149,7 @@ export const ImageCard: VoidComponent<Props> = (props) => {
 
     const handleEditDetails = () => {
         setShowPopoverMenu(false);
+        setShowEditModal(true);
     };
 
     const handleRestore = async () => {
@@ -247,6 +250,20 @@ export const ImageCard: VoidComponent<Props> = (props) => {
                         handleViewDetails={handleViewDetails}
                         onOpenChange={setShowPopoverMenu}
                         open={showPopoverMenu()}
+                    />
+                    <EditAssetModal
+                        item={{ type: 'image', data: props.image }}
+                        onOpenChange={setShowEditModal}
+                        onSave={(store) => {
+                            // biome-ignore lint/suspicious/noConsole: <temporary>
+                            console.log('edit image saved!');
+                            // biome-ignore lint/suspicious/noConsole: <temporary>
+                            console.dir(store);
+                            // biome-ignore lint/suspicious/noConsole: <temporary>
+                            console.log('----------');
+                        }}
+                        open={showEditModal()}
+                        title='Edit Image'
                     />
                 </div>
             </div>
