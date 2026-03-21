@@ -92,7 +92,7 @@ export const EditAssetModal = (
                         required
                         validate={(value) => {
                             if (value.length === 0)
-                                return 'Content is required';
+                                return 'Content cannot be empty';
                         }}
                         value={store.content ?? ''}
                     />
