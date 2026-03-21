@@ -3,7 +3,10 @@ CREATE TABLE
         id TEXT NOT NULL PRIMARY KEY,
         title TEXT,
         description TEXT,
-        external_link TEXT,
+        external_link TEXT CHECK (
+            external_link IS NULL
+            OR external_link LIKE 'http%'
+        ),
         use_counter INT NOT NULL DEFAULT 0 CHECK (use_counter >= 0),
         last_used_at BIGINT,
         file_name TEXT NOT NULL UNIQUE,
@@ -23,7 +26,10 @@ CREATE TABLE
         id TEXT NOT NULL PRIMARY KEY,
         title TEXT,
         description TEXT,
-        external_link TEXT,
+        external_link TEXT CHECK (
+            external_link IS NULL
+            OR external_link LIKE 'http%'
+        ),
         use_counter INT NOT NULL DEFAULT 0 CHECK (use_counter >= 0),
         last_used_at BIGINT,
         file_name TEXT NOT NULL UNIQUE,
@@ -42,7 +48,10 @@ CREATE TABLE
         id TEXT NOT NULL PRIMARY KEY,
         title TEXT,
         description TEXT,
-        external_link TEXT,
+        external_link TEXT CHECK (
+            external_link IS NULL
+            OR external_link LIKE 'http%'
+        ),
         use_counter INT NOT NULL DEFAULT 0 CHECK (use_counter >= 0),
         last_used_at BIGINT,
         file_name TEXT NOT NULL UNIQUE,
@@ -61,7 +70,10 @@ CREATE TABLE
         title TEXT,
         description TEXT,
         content TEXT NOT NULL,
-        external_link TEXT,
+        external_link TEXT CHECK (
+            external_link IS NULL
+            OR external_link LIKE 'http%'
+        ),
         use_counter INT NOT NULL DEFAULT 0 CHECK (use_counter >= 0),
         last_used_at BIGINT,
         is_favorite BOOLEAN NOT NULL DEFAULT 0 CHECK (is_favorite IN (0, 1)),
