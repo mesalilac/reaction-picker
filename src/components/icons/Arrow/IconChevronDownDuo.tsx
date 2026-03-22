@@ -11,6 +11,13 @@ interface IconProps extends ComponentProps<'svg'> {
 /**
  * Arrow
  * ```
+ *        ▒▒░    ░▒▒
+ *        ░▓█▒░░▒█▓░
+ *          ░▓██▓░
+ *        ▒▒  ▒▒  ▒▒
+ *        ▒█▓░  ░▓█▒
+ *         ░▒█▓▓█▒░
+ *           ░▒▒░
  * ```
  */
 export const IconChevronDownDuo = (props: IconProps) => {

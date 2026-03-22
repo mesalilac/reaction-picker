@@ -11,6 +11,13 @@ interface IconProps extends ComponentProps<'svg'> {
 /**
  * Menu
  * ```
+ *        ░░      ░░
+ *        ▒█▒░  ░▒█▓
+ *         ░▓█▒▒█▓▒
+ *           ▓██▓
+ *         ░▓█▒▒█▓▒
+ *        ▒█▒░  ░▒█▓
+ *        ░░      ░░
  * ```
  */
 export const IconCloseSm = (props: IconProps) => {

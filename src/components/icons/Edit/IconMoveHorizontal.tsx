@@ -11,6 +11,11 @@ interface IconProps extends ComponentProps<'svg'> {
 /**
  * Edit
  * ```
+ *     ░▒▒          ▒▒░
+ *    ▒██▒          ▒██▒
+ *   ▓███▓██████████▓███▓
+ *    ▒██▒          ▒██▒
+ *     ░▒▒          ▒▒░
  * ```
  */
 export const IconMoveHorizontal = (props: IconProps) => {

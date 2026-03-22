@@ -11,6 +11,11 @@ interface IconProps extends ComponentProps<'svg'> {
 /**
  * Menu
  * ```
+ *           ▒▓▓▓▓▓▓▓▓▒
+ *           ░░░░░░░░░░
+ *     ▒██████████████▒
+ *           ░░░░░░░░░░
+ *           ▒▓▓▓▓▓▓▓▓▒
  * ```
  */
 export const IconMenuAlt02 = (props: IconProps) => {

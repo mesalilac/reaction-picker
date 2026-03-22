@@ -11,6 +11,17 @@ interface IconProps extends ComponentProps<'svg'> {
 /**
  * File
  * ```
+ *    ░░░░░░░░
+ *   ▒████████▓░░░░░░░░
+ *   ██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▒
+ *   ██                ██
+ *   ██                ██
+ *   ██                ██
+ *   ██                ██
+ *   ██                ██
+ *   ██                ██
+ *   ▒█▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▒
+ *    ░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░
  * ```
  */
 export const IconFolder = (props: IconProps) => {

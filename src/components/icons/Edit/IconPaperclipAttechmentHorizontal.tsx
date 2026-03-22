@@ -11,6 +11,14 @@ interface IconProps extends ComponentProps<'svg'> {
 /**
  * Edit
  * ```
+ *       ░░░░░░░░░░░░░
+ *       ▒▓▓▓▓▓▓▓▓▓▓▓▓▓▒░
+ *    ░░▒▒▒▒▒▒▒▒▒▒▒▒░░░██░
+ *   ▒█▓▒▒▒▒▒▒▒▒▒▒▒▒▓▓░░█▓
+ *  ▓█░  ▒▒▒▒▒▒▒▒▒▒▒▓█░ ██
+ *  ▓█░  ▒▒▒▒▒▒▒▒▒▒▒▒░░▓█░
+ *  ░▓█▓▒▒▒▒▒▒▒▒▒▒▒▒▒▓█▓░
+ *    ░▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░
  * ```
  */
 export const IconPaperclipAttechmentHorizontal = (props: IconProps) => {

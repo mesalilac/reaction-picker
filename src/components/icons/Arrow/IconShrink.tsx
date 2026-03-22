@@ -11,6 +11,14 @@ interface IconProps extends ComponentProps<'svg'> {
 /**
  * Arrow
  * ```
+ *              ▒▒
+ *              ██
+ *              ██░░░░
+ *              ▓█████▒
+ *     ▒█████▓
+ *      ░░░░██
+ *          ██
+ *          ▒▒
  * ```
  */
 export const IconShrink = (props: IconProps) => {

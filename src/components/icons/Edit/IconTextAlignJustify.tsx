@@ -11,6 +11,12 @@ interface IconProps extends ComponentProps<'svg'> {
 /**
  * Edit
  * ```
+ *    ░░░░░░░░░░░░░░░░░░
+ *    ▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒
+ *    ▒████████████████▒
+ *    ▒████████████████▒
+ *    ▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒
+ *    ░░░░░░░░░░░░░░░░░░
  * ```
  */
 export const IconTextAlignJustify = (props: IconProps) => {

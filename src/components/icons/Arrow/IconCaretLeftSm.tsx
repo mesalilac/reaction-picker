@@ -11,6 +11,11 @@ interface IconProps extends ComponentProps<'svg'> {
 /**
  * Arrow
  * ```
+ *            ░▒▒
+ *           ▒█▓▒
+ *          ▓█▓
+ *           ▒█▓▒
+ *            ░▒▒
  * ```
  */
 export const IconCaretLeftSm = (props: IconProps) => {

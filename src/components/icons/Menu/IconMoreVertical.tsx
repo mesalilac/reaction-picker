@@ -11,6 +11,15 @@ interface IconProps extends ComponentProps<'svg'> {
 /**
  * Menu
  * ```
+ *           ▒▓▓▒
+ *           ▓██▓
+ *            ░░
+ *           ░▒▒░
+ *           ▓██▓
+ *           ░▒▒░
+ *            ░░
+ *           ▓██▓
+ *           ▒▓▓▒
  * ```
  */
 export const IconMoreVertical = (props: IconProps) => {

@@ -11,6 +11,7 @@ interface IconProps extends ComponentProps<'svg'> {
 /**
  * Edit
  * ```
+ *      ▒████████████▒
  * ```
  */
 export const IconRemoveMinus = (props: IconProps) => {

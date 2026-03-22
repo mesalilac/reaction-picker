@@ -11,6 +11,11 @@ interface IconProps extends ComponentProps<'svg'> {
 /**
  * Menu
  * ```
+ *   ▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒
+ *   ░░░░░░░░░░░░░░░░░░░░
+ *   ▒██████████████████▒
+ *   ░░░░░░░░░░░░░░░░░░░░
+ *   ▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒
  * ```
  */
 export const IconHamburgerLg = (props: IconProps) => {

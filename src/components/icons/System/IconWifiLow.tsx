@@ -11,6 +11,11 @@ interface IconProps extends ComponentProps<'svg'> {
 /**
  * System
  * ```
+ *          ░▒▒▒▒░
+ *        ░▓█▓▒▒▓█▓░
+ *        ░▒░ ░░ ░▒░
+ *           ▓██▓
+ *           ▒▓▓▒
  * ```
  */
 export const IconWifiLow = (props: IconProps) => {

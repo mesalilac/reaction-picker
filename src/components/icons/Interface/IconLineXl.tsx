@@ -11,6 +11,17 @@ interface IconProps extends ComponentProps<'svg'> {
 /**
  * Interface
  * ```
+ *            ▓▓
+ *            ██
+ *            ██
+ *            ██
+ *            ██
+ *            ██
+ *            ██
+ *            ██
+ *            ██
+ *            ██
+ *            ▓▓
  * ```
  */
 export const IconLineXl = (props: IconProps) => {

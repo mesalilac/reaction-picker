@@ -11,6 +11,15 @@ interface IconProps extends ComponentProps<'svg'> {
 /**
  * Edit
  * ```
+ *      ▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+ *      ▒▒░░░░██░░░░▒▒
+ *            ██
+ *            ██
+ *            ██
+ *            ██
+ *            ██
+ *          ░░██░░
+ *          ▒▓▓▓▓▒
  * ```
  */
 export const IconText = (props: IconProps) => {

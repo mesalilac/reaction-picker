@@ -11,6 +11,10 @@ interface IconProps extends ComponentProps<'svg'> {
 /**
  * Menu
  * ```
+ *   ▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒
+ *   ░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░
+ *   ░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░
+ *   ▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒
  * ```
  */
 export const IconMenuDuoLg = (props: IconProps) => {

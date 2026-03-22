@@ -11,6 +11,13 @@ interface IconProps extends ComponentProps<'svg'> {
 /**
  * Interface
  * ```
+ *          ░░░░░░
+ *        ▒▓▓▓▓▓▓▓▓▒
+ *        ██      ██
+ *        ██      ██
+ *        ██      ██
+ *        ▒▓▓▓▓▓▓▓▓▒
+ *          ░░░░░░
  * ```
  */
 export const IconDummySquareSmall = (props: IconProps) => {
