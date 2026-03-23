@@ -269,9 +269,7 @@ export const Select: VoidComponent<Props> = (rawProps) => {
                             <Show when={props.searchable}>
                                 <Input
                                     class='grow'
-                                    onInput={(e) =>
-                                        setSearchQuery(e.target.value)
-                                    }
+                                    onInput={(value) => setSearchQuery(value)}
                                     onKeyDown={(e) => {
                                         if (
                                             e.key === 'Enter' &&
@@ -290,6 +288,7 @@ export const Select: VoidComponent<Props> = (rawProps) => {
                                             closeMenu();
                                         }
                                     }}
+                                    parse={(raw) => String(raw)}
                                     placeholder='Search...'
                                     ref={searchInputRef}
                                     type='search'
