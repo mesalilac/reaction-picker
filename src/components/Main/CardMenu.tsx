@@ -1,6 +1,16 @@
 import { Show } from 'solid-js';
 
-import { ButtonIcon, IconMoreVertical, Menu, Popover } from '@/components';
+import {
+    ButtonIcon,
+    IconArrowUndoDownRight,
+    IconEditPencil01,
+    IconExternalLink,
+    IconMoreVertical,
+    IconTrashEmpty,
+    IconTrashFull,
+    Menu,
+    Popover,
+} from '@/components';
 
 type Props = {
     handleEditDetails: () => void;
@@ -29,24 +39,25 @@ export const CardMenu = (props: Props) => {
             >
                 <Menu onOpenChange={props.onOpenChange} open={props.open}>
                     <Menu.Item onClick={props.handleEditDetails}>
-                        edit details
+                        <IconEditPencil01 /> edit details
                     </Menu.Item>
                     <Show when={props.externalLink}>
                         <Menu.Separator />
                         <Menu.Item onClick={props.handleOpenExternalLink}>
-                            open external link
+                            <IconExternalLink /> open external link
                         </Menu.Item>
                     </Show>
                     <Menu.Separator />
                     <Show when={props.deletedAt !== null}>
                         <Menu.Item onClick={props.handleRestore}>
-                            restore
+                            <IconArrowUndoDownRight /> restore
                         </Menu.Item>
                     </Show>
                     <Menu.Item
                         class='text-red-500'
                         onClick={props.handleDelete}
                     >
+                        <IconTrashEmpty />
                         {props.deletedAt !== null
                             ? 'permanently delete'
                             : 'delete'}
