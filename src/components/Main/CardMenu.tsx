@@ -1,8 +1,8 @@
 import { Show } from 'solid-js';
 
 import {
-    ButtonIcon,
     IconArrowUndoDownRight,
+    IconButton,
     IconEditPencil01,
     IconExternalLink,
     IconMoreHorizontal,
@@ -27,9 +27,9 @@ export const CardMenu = (props: Props) => {
 
     return (
         <>
-            <ButtonIcon ref={popoverMenuRef}>
+            <IconButton ref={popoverMenuRef}>
                 <IconMoreHorizontal class='size-5' />
-            </ButtonIcon>
+            </IconButton>
             <Popover
                 onOpenChange={props.onOpenChange}
                 open={props.open}

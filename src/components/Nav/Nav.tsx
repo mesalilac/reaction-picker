@@ -1,6 +1,6 @@
 import { createMemo, createSignal, Show, type VoidComponent } from 'solid-js';
 
-import { Button, ButtonIcon, IconAddPlus, IconSettings } from '@/components';
+import { Button, IconAddPlus, IconButton, IconSettings } from '@/components';
 import { useGlobalContext } from '@/store';
 
 import { CreateSnippetModal } from './CreateSnippetModal';
@@ -58,9 +58,9 @@ export const Nav: VoidComponent<Props> = (props) => {
                     </Show>
                 </Show>
 
-                <ButtonIcon onClick={() => setShowSettingsModal(true)}>
+                <IconButton onClick={() => setShowSettingsModal(true)}>
                     <IconSettings class='size-5' />
-                </ButtonIcon>
+                </IconButton>
                 <Show when={showSettingsModal()}>
                     <SettingsModal
                         onOpenChange={(open) => {

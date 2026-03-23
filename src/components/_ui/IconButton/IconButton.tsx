@@ -6,7 +6,7 @@ interface Props extends JSX.ButtonHTMLAttributes<HTMLButtonElement> {
     children: JSX.Element;
 }
 
-export const ButtonIcon: ParentComponent<Props> = (props) => {
+export const IconButton: ParentComponent<Props> = (props) => {
     const [local, others] = splitProps(props, ['class']);
 
     return (

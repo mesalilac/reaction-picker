@@ -6,7 +6,7 @@ import { createSignal, Show, type VoidComponent } from 'solid-js';
 import { toast } from 'solid-sonner';
 
 import { commands, type Video } from '@/bindings';
-import { Button, ButtonIcon, IconHeart01 } from '@/components';
+import { Button, IconButton, IconHeart01 } from '@/components';
 import { useGlobalContext } from '@/store';
 import {
     handleIpcError,
@@ -187,14 +187,14 @@ export const VideoCard: VoidComponent<Props> = (props) => {
                     <Button onClick={handleCopy}>Copy</Button>
                 </div>
                 <div class='flex flex-row gap-2'>
-                    <ButtonIcon onClick={handleToggleFavorite}>
+                    <IconButton onClick={handleToggleFavorite}>
                         <IconHeart01
                             class={clsx('size-5', {
                                 'fill-red-500 text-red-500':
                                     props.video.isFavorite,
                             })}
                         />
-                    </ButtonIcon>
+                    </IconButton>
                     <CardMenu
                         deletedAt={props.video.deletedAt}
                         externalLink={props.video.externalLink}
