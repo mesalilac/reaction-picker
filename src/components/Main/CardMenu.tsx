@@ -6,7 +6,6 @@ import {
     IconEditPencil01,
     IconExternalLink,
     IconMoreVertical,
-    IconTrashEmpty,
     IconTrashFull,
     Menu,
     Popover,
@@ -57,7 +56,7 @@ export const CardMenu = (props: Props) => {
                         class='text-red-500'
                         onClick={props.handleDelete}
                     >
-                        <IconTrashEmpty />
+                        <IconTrashFull />
                         {props.deletedAt !== null
                             ? 'permanently delete'
                             : 'delete'}
