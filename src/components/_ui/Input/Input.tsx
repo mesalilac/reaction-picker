@@ -104,10 +104,10 @@ export const Input = <T = string>(props: Props<T>) => {
         <div class='flex w-full flex-col gap-2'>
             <Show when={local.label}>
                 <label
-                    class='font-bold text-neutral-200 text-sm capitalize'
+                    class='flex gap-1 font-bold text-neutral-200 text-sm capitalize'
                     for={id}
                 >
-                    {local.label}
+                    <span>{local.label}</span>
                     {local.required && (
                         <span class='text-red-500' title='required'>
                             *
