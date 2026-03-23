@@ -27,9 +27,10 @@ export const CardMenu = (props: Props) => {
 
     return (
         <>
-            <IconButton ref={popoverMenuRef}>
-                <IconMoreHorizontal class='size-5' />
-            </IconButton>
+            <IconButton
+                icon={<IconMoreHorizontal class='size-5' />}
+                ref={popoverMenuRef}
+            />
             <Popover
                 onOpenChange={props.onOpenChange}
                 open={props.open}

@@ -187,14 +187,17 @@ export const AudioCard: VoidComponent<Props> = (props) => {
                     <Button onClick={handleCopy}>Copy</Button>
                 </div>
                 <div class='flex flex-row gap-2'>
-                    <IconButton onClick={handleToggleFavorite}>
-                        <IconHeart01
-                            class={clsx('size-5', {
-                                'fill-red-500 text-red-500':
-                                    props.audio.isFavorite,
-                            })}
-                        />
-                    </IconButton>
+                    <IconButton
+                        icon={
+                            <IconHeart01
+                                class={clsx('size-5', {
+                                    'fill-red-500 text-red-500':
+                                        props.audio.isFavorite,
+                                })}
+                            />
+                        }
+                        onClick={handleToggleFavorite}
+                    />
                     <CardMenu
                         deletedAt={props.audio.deletedAt}
                         externalLink={props.audio.externalLink}

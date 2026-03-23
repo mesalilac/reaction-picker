@@ -3,7 +3,7 @@ import { splitProps } from 'solid-js';
 import { twMerge } from 'tailwind-merge';
 
 interface Props extends JSX.ButtonHTMLAttributes<HTMLButtonElement> {
-    children: JSX.Element;
+    icon: JSX.Element;
 }
 
 export const IconButton: ParentComponent<Props> = (props) => {
@@ -18,7 +18,7 @@ export const IconButton: ParentComponent<Props> = (props) => {
             type='button'
             {...others}
         >
-            {props.children}
+            {props.icon}
         </button>
     );
 };

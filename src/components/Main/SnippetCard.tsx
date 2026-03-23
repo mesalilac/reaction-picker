@@ -189,14 +189,17 @@ export const SnippetCard: VoidComponent<Props> = (props) => {
                     <Button onClick={handleCopy}>Copy</Button>
                 </div>
                 <div class='flex flex-row gap-2'>
-                    <IconButton onClick={handleToggleFavorite}>
-                        <IconHeart01
-                            class={clsx('size-5', {
-                                'fill-red-500 text-red-500':
-                                    props.snippet.isFavorite,
-                            })}
-                        />
-                    </IconButton>
+                    <IconButton
+                        icon={
+                            <IconHeart01
+                                class={clsx('size-5', {
+                                    'fill-red-500 text-red-500':
+                                        props.snippet.isFavorite,
+                                })}
+                            />
+                        }
+                        onClick={handleToggleFavorite}
+                    />
                     <CardMenu
                         deletedAt={props.snippet.deletedAt}
                         externalLink={props.snippet.externalLink}

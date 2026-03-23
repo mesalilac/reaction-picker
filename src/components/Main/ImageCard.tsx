@@ -212,14 +212,17 @@ export const ImageCard: VoidComponent<Props> = (props) => {
                     <Button onClick={handleCopy}>Copy</Button>
                 </div>
                 <div class='flex flex-row gap-2'>
-                    <IconButton onClick={handleToggleFavorite}>
-                        <IconHeart01
-                            class={clsx('size-5', {
-                                'fill-red-500 text-red-500':
-                                    props.image.isFavorite,
-                            })}
-                        />
-                    </IconButton>
+                    <IconButton
+                        icon={
+                            <IconHeart01
+                                class={clsx('size-5', {
+                                    'fill-red-500 text-red-500':
+                                        props.image.isFavorite,
+                                })}
+                            />
+                        }
+                        onClick={handleToggleFavorite}
+                    />
                     <CardMenu
                         deletedAt={props.image.deletedAt}
                         externalLink={props.image.externalLink}

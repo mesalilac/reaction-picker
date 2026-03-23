@@ -187,14 +187,17 @@ export const VideoCard: VoidComponent<Props> = (props) => {
                     <Button onClick={handleCopy}>Copy</Button>
                 </div>
                 <div class='flex flex-row gap-2'>
-                    <IconButton onClick={handleToggleFavorite}>
-                        <IconHeart01
-                            class={clsx('size-5', {
-                                'fill-red-500 text-red-500':
-                                    props.video.isFavorite,
-                            })}
-                        />
-                    </IconButton>
+                    <IconButton
+                        icon={
+                            <IconHeart01
+                                class={clsx('size-5', {
+                                    'fill-red-500 text-red-500':
+                                        props.video.isFavorite,
+                                })}
+                            />
+                        }
+                        onClick={handleToggleFavorite}
+                    />
                     <CardMenu
                         deletedAt={props.video.deletedAt}
                         externalLink={props.video.externalLink}
