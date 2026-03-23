@@ -5,6 +5,7 @@ import {
     IconArrowUndoDownRight,
     IconEditPencil01,
     IconExternalLink,
+    IconMoreHorizontal,
     IconMoreVertical,
     IconTrashFull,
     Menu,
@@ -28,7 +29,7 @@ export const CardMenu = (props: Props) => {
     return (
         <>
             <ButtonIcon ref={popoverMenuRef}>
-                <IconMoreVertical class='size-5' />
+                <IconMoreHorizontal class='size-5' />
             </ButtonIcon>
             <Popover
                 onOpenChange={props.onOpenChange}
