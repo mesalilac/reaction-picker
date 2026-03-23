@@ -70,7 +70,7 @@ export const Button: ParentComponent<Props> = (rawProps) => {
             <Match when={local.loading}>
                 <button
                     class={twMerge(
-                        'box-border flex cursor-pointer items-center gap-1 rounded-lg border border-transparent px-4 py-2 font-medium text-sm text-white leading-5 shadow-xs focus-visible:outline-none focus-visible:ring-4',
+                        'box-border cursor-pointer items-center gap-2 rounded-lg border border-transparent px-4 py-2 font-medium text-sm text-white leading-5 shadow-xs focus-visible:outline-none focus-visible:ring-4',
                         others.disabled
                             ? disabledButtonStyles
                             : variantStyles[local.variant],
@@ -101,7 +101,7 @@ export const Button: ParentComponent<Props> = (rawProps) => {
             <Match when={!local.loading}>
                 <button
                     class={twMerge(
-                        'box-border flex cursor-pointer items-center gap-1 rounded-lg border border-transparent px-4 py-2 font-medium text-sm text-white leading-5 shadow-xs focus-visible:outline-none focus-visible:ring-4',
+                        'box-border flex cursor-pointer items-center gap-2 rounded-lg border border-transparent px-4 py-2 font-medium text-sm text-white leading-5 shadow-xs focus-visible:outline-none focus-visible:ring-4',
                         others.disabled
                             ? disabledButtonStyles
                             : variantStyles[local.variant],
