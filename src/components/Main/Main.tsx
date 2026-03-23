@@ -1,3 +1,4 @@
+import { clsx } from 'clsx';
 import {
     createMemo,
     createSignal,
@@ -9,7 +10,7 @@ import {
 } from 'solid-js';
 
 import type { Audio, Image, Video } from '@/bindings';
-import { Input, Select } from '@/components';
+import { Button, Input, Select } from '@/components';
 import {
     DISCORD_FREE_FILE_UPLOAD_LIMIT,
     DISCORD_FREE_MAX_CHAR_LIMIT,
@@ -199,7 +200,7 @@ export const Main: VoidComponent<Props> = (props) => {
 
     return (
         <main class='flex flex-col gap-4' ref={props.ref}>
-            <div class='flex justify-between'>
+            <div class='flex justify-between gap-2'>
                 <div>
                     <Input
                         onInput={(value) => setSearchQuery(value.trim())}
@@ -211,19 +212,62 @@ export const Main: VoidComponent<Props> = (props) => {
                 </div>
 
                 <div class='flex gap-2'>
-                    <Select
-                        onChange={(v) => {
-                            if (filter().includes(v as FilterType)) {
-                                setFilter(filter().filter((i) => i !== v));
-                                return;
-                            }
+                    <div class='hidden rounded-lg outline-2 outline-neutral-400/50 lg:flex'>
+                        <For each={FILTERS_LIST}>
+                            {(option, i) => (
+                                <Button
+                                    class={clsx(
+                                        'rounded-none',
+                                        i() === 0 && 'rounded-l-lg',
+                                        i() === FILTERS_LIST.length - 1 &&
+                                            'rounded-r-lg',
+                                    )}
+                                    onClick={() => {
+                                        if (
+                                            filter().includes(
+                                                option as FilterType,
+                                            )
+                                        ) {
+                                            setFilter(
+                                                filter().filter(
+                                                    (i) => i !== option,
+                                                ),
+                                            );
+                                            return;
+                                        }
 
-                            setFilter([...filter(), v as FilterType]);
-                        }}
-                        options={FILTERS_LIST.map((i) => ({ value: i }))}
-                        placeholder='Filter'
-                        selected={filter()}
-                    />
+                                        setFilter([
+                                            ...filter(),
+                                            option as FilterType,
+                                        ]);
+                                    }}
+                                    title='Filter option'
+                                    variant={
+                                        filter().includes(option)
+                                            ? 'tertiary'
+                                            : 'ghost'
+                                    }
+                                >
+                                    {option}
+                                </Button>
+                            )}
+                        </For>
+                    </div>
+                    <div class='hidden max-lg:block'>
+                        <Select
+                            onChange={(v) => {
+                                if (filter().includes(v as FilterType)) {
+                                    setFilter(filter().filter((i) => i !== v));
+                                    return;
+                                }
+
+                                setFilter([...filter(), v as FilterType]);
+                            }}
+                            options={FILTERS_LIST.map((i) => ({ value: i }))}
+                            placeholder='Filter'
+                            selected={filter()}
+                        />
+                    </div>
                     <Select
                         onChange={(v) => {
                             setSortBy(v as SortByType);
