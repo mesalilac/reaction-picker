@@ -6,7 +6,6 @@ import {
     IconEditPencil01,
     IconExternalLink,
     IconMoreHorizontal,
-    IconMoreVertical,
     IconTrashFull,
     Menu,
     Popover,
