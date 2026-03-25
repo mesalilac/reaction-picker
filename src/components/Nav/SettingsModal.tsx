@@ -1,3 +1,4 @@
+import { ask } from '@tauri-apps/plugin-dialog';
 import { createMemo, type VoidComponent } from 'solid-js';
 import { createStore } from 'solid-js/store';
 import { toast } from 'solid-sonner';
@@ -92,6 +93,18 @@ export const SettingsModal: VoidComponent<ModalWrapperProps> = (props) => {
     });
 
     const deleteData = async (target?: TabType) => {
+        let confirmMsg = 'Are you sure you want to delete all data?';
+        if (target) {
+            confirmMsg = `Are you sure you want to delete all ${target.toLocaleLowerCase()}?`;
+        }
+
+        const confirm = await ask(confirmMsg, {
+            title: 'Data management',
+            kind: 'warning',
+        });
+
+        if (!confirm) return;
+
         if (target === 'Images') {
             const res = await commands
                 .removeDeleteAllImages()
