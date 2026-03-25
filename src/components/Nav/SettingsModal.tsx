@@ -1,10 +1,19 @@
-import type { VoidComponent } from 'solid-js';
+import { createMemo, type VoidComponent } from 'solid-js';
 import { createStore } from 'solid-js/store';
 import { toast } from 'solid-sonner';
 
 import { commands } from '@/bindings';
-import { Checkbox, Input, Modal, type ModalWrapperProps } from '@/components';
-import { useGlobalContext } from '@/store';
+import {
+    Button,
+    Checkbox,
+    CountLabel,
+    IconTriangleWarning,
+    Input,
+    Modal,
+    type ModalWrapperProps,
+    Separator,
+} from '@/components';
+import { type TabType, useGlobalContext } from '@/store';
 import { handleIpcError, handleUnexpectedError } from '@/utils';
 
 export const SettingsModal: VoidComponent<ModalWrapperProps> = (props) => {
@@ -62,6 +71,107 @@ export const SettingsModal: VoidComponent<ModalWrapperProps> = (props) => {
         props.onOpenChange?.(!props.open);
     };
 
+    const imagesCount = createMemo(
+        () => globalCtx.resources.images.get()?.length || 0,
+    );
+
+    const videosCount = createMemo(
+        () => globalCtx.resources.videos.get()?.length || 0,
+    );
+
+    const audioCount = createMemo(
+        () => globalCtx.resources.audio.get()?.length || 0,
+    );
+
+    const snippetsCount = createMemo(
+        () => globalCtx.resources.snippets.get()?.length || 0,
+    );
+
+    const allCount = createMemo(() => {
+        return imagesCount() + videosCount() + audioCount() + snippetsCount();
+    });
+
+    const deleteData = async (target?: TabType) => {
+        if (target === 'Images') {
+            const res = await commands
+                .removeDeleteAllImages()
+                .catch(handleUnexpectedError);
+
+            if (!res) return;
+
+            if (res.status === 'error') {
+                handleIpcError(res.error);
+
+                return;
+            }
+
+            toast.success('All images deleted successfully');
+        } else if (target === 'Videos') {
+            const res = await commands
+                .removeDeleteAllVideos()
+                .catch(handleUnexpectedError);
+
+            if (!res) return;
+
+            if (res.status === 'error') {
+                handleIpcError(res.error);
+
+                return;
+            }
+
+            toast.success('All videos deleted successfully');
+        } else if (target === 'Audio') {
+            const res = await commands
+                .removeDeleteAllAudio()
+                .catch(handleUnexpectedError);
+
+            if (!res) return;
+
+            if (res.status === 'error') {
+                handleIpcError(res.error);
+
+                return;
+            }
+
+            toast.success('All audio deleted successfully');
+        } else if (target === 'Snippets') {
+            const res = await commands
+                .removeDeleteAllSnippets()
+                .catch(handleUnexpectedError);
+
+            if (!res) return;
+
+            if (res.status === 'error') {
+                handleIpcError(res.error);
+
+                return;
+            }
+
+            toast.success('All snippets deleted successfully');
+        } else {
+            const res = await commands
+                .removeDeleteAllData()
+                .catch(handleUnexpectedError);
+
+            if (!res) return;
+
+            if (res.status === 'error') {
+                handleIpcError(res.error);
+
+                return;
+            }
+
+            toast.success('All data deleted successfully');
+        }
+
+        globalCtx.resources.images.refetch();
+        globalCtx.resources.videos.refetch();
+        globalCtx.resources.audio.refetch();
+        globalCtx.resources.snippets.refetch();
+        globalCtx.resources.tags.refetch();
+        globalCtx.resources.generalStats.refetch();
+    };
+
     return (
         <Modal onOpenChange={props.onOpenChange} open={props.open}>
             <Modal.Title title='Settings' />
@@ -101,6 +211,51 @@ export const SettingsModal: VoidComponent<ModalWrapperProps> = (props) => {
                                 : (settings?.defaultVolume ?? undefined)
                         }
                     />
+                </div>
+                <div>
+                    <div>
+                        <span class='text-lg capitalize'>data management</span>
+                        <Separator class='mb-2' />
+                    </div>
+                    <div class='flex flex-wrap gap-2'>
+                        <Button onClick={() => deleteData()} variant='danger'>
+                            <IconTriangleWarning />
+                            Delete all
+                            <CountLabel>{allCount()}</CountLabel>
+                        </Button>
+                        <Button
+                            onClick={() => deleteData('Images')}
+                            variant='danger'
+                        >
+                            <IconTriangleWarning />
+                            Delete all images
+                            <CountLabel>{imagesCount()}</CountLabel>
+                        </Button>
+                        <Button
+                            onClick={() => deleteData('Videos')}
+                            variant='danger'
+                        >
+                            <IconTriangleWarning />
+                            Delete all videos
+                            <CountLabel>{videosCount()}</CountLabel>
+                        </Button>
+                        <Button
+                            onClick={() => deleteData('Audio')}
+                            variant='danger'
+                        >
+                            <IconTriangleWarning />
+                            Delete all audio
+                            <CountLabel>{audioCount()}</CountLabel>
+                        </Button>
+                        <Button
+                            onClick={() => deleteData('Snippets')}
+                            variant='danger'
+                        >
+                            <IconTriangleWarning />
+                            Delete all snippets
+                            <CountLabel>{snippetsCount()}</CountLabel>
+                        </Button>
+                    </div>
                 </div>
             </Modal.Body>
             <Modal.Footer onAction={saveSettings} />
