@@ -65,6 +65,13 @@ export const EditAssetModal = (
         )
             return;
 
+        setStore('content', store.content.trim());
+        if (store.title !== null) setStore('title', store.title.trim());
+        if (store.description !== null)
+            setStore('description', store.description.trim());
+        if (store.externalLink !== null)
+            setStore('externalLink', store.externalLink.trim());
+
         props.onSave(store);
     };
 
@@ -74,20 +81,20 @@ export const EditAssetModal = (
             <Modal.Body>
                 <Input
                     label='title'
-                    onInput={(value) => setStore('title', value?.trim())}
+                    onInput={(value) => setStore('title', value)}
                     parse={(raw) => String(raw)}
                     value={store.title ?? ''}
                 />
                 <Textarea
                     label='description'
-                    onInput={(value) => setStore('description', value?.trim())}
+                    onInput={(value) => setStore('description', value)}
                     parse={(raw) => String(raw)}
                     value={store.description ?? ''}
                 />
                 <Show when={props.item.type === 'snippet'}>
                     <Textarea
                         label='content'
-                        onInput={(value) => setStore('content', value?.trim())}
+                        onInput={(value) => setStore('content', value)}
                         parse={(raw) => String(raw)}
                         required
                         validate={(value) => {
@@ -99,7 +106,7 @@ export const EditAssetModal = (
                 </Show>
                 <Input
                     label='external link'
-                    onInput={(value) => setStore('externalLink', value?.trim())}
+                    onInput={(value) => setStore('externalLink', value)}
                     parse={(raw) => String(raw)}
                     validate={(value) => {
                         if (value.length > 0 && !value.startsWith('http'))

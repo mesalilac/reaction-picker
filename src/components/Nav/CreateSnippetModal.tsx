@@ -45,6 +45,13 @@ export const CreateSnippetModal: VoidComponent<ModalWrapperProps> = (props) => {
 
         props.onOpenChange(false);
 
+        setStore('content', store.content.trim());
+        if (store.title !== null) setStore('title', store.title.trim());
+        if (store.description !== null)
+            setStore('description', store.description.trim());
+        if (store.externalLink !== null)
+            setStore('externalLink', store.externalLink.trim());
+
         const res = await commands
             .createSnippet({ ...store })
             .catch(handleUnexpectedError);
@@ -79,14 +86,14 @@ export const CreateSnippetModal: VoidComponent<ModalWrapperProps> = (props) => {
                 <Textarea
                     class='h-16'
                     label='description'
-                    onInput={(value) => setStore('description', value.trim())}
+                    onInput={(value) => setStore('description', value)}
                     parse={(raw) => String(raw)}
                     value={store.description ?? ''}
                 />
                 <Textarea
                     error={contentInputError()}
                     label='content'
-                    onInput={(value) => setStore('content', value.trim())}
+                    onInput={(value) => setStore('content', value)}
                     parse={(raw) => String(raw)}
                     ref={contentInputRef}
                     required
@@ -98,7 +105,7 @@ export const CreateSnippetModal: VoidComponent<ModalWrapperProps> = (props) => {
                 />
                 <Input
                     label='externalLink'
-                    onInput={(value) => setStore('externalLink', value.trim())}
+                    onInput={(value) => setStore('externalLink', value)}
                     parse={(raw) => String(raw)}
                     validate={(value) => {
                         if (value.length > 0 && !value.startsWith('http'))
