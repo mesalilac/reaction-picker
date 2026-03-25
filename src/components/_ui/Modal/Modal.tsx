@@ -131,7 +131,7 @@ Modal.Title = (props: { title: JSX.Element; class?: string }) => {
             <span class={twMerge('px-2 text-xl capitalize', props.class)}>
                 {props.title}
             </span>
-            <Separator class='-mx-4 mb-4' />
+            <Separator class='mb-4' />
         </>
     );
 };
