@@ -88,6 +88,61 @@ export const commands = {
             else return { status: 'error', error: e as any };
         }
     },
+    async removeDeleteAllData(): Promise<Result<null, CommandError>> {
+        try {
+            return {
+                status: 'ok',
+                data: await TAURI_INVOKE('remove_delete_all_data'),
+            };
+        } catch (e) {
+            if (e instanceof Error) throw e;
+            else return { status: 'error', error: e as any };
+        }
+    },
+    async removeDeleteAllImages(): Promise<Result<null, CommandError>> {
+        try {
+            return {
+                status: 'ok',
+                data: await TAURI_INVOKE('remove_delete_all_images'),
+            };
+        } catch (e) {
+            if (e instanceof Error) throw e;
+            else return { status: 'error', error: e as any };
+        }
+    },
+    async removeDeleteAllVideos(): Promise<Result<null, CommandError>> {
+        try {
+            return {
+                status: 'ok',
+                data: await TAURI_INVOKE('remove_delete_all_videos'),
+            };
+        } catch (e) {
+            if (e instanceof Error) throw e;
+            else return { status: 'error', error: e as any };
+        }
+    },
+    async removeDeleteAllAudio(): Promise<Result<null, CommandError>> {
+        try {
+            return {
+                status: 'ok',
+                data: await TAURI_INVOKE('remove_delete_all_audio'),
+            };
+        } catch (e) {
+            if (e instanceof Error) throw e;
+            else return { status: 'error', error: e as any };
+        }
+    },
+    async removeDeleteAllSnippets(): Promise<Result<null, CommandError>> {
+        try {
+            return {
+                status: 'ok',
+                data: await TAURI_INVOKE('remove_delete_all_snippets'),
+            };
+        } catch (e) {
+            if (e instanceof Error) throw e;
+            else return { status: 'error', error: e as any };
+        }
+    },
     async removeDeleteImage(
         id: ImageId,
         payload: DeleteRequest,

@@ -1,3 +1,7 @@
+use crate::utils::fs::{
+    get_app_audio_dir, get_app_images_dir, get_app_media_dir, get_app_videos_dir,
+};
+
 use super::prelude::*;
 
 #[derive(specta::Type, Debug, Clone, Deserialize, Serialize)]
@@ -8,6 +12,82 @@ pub struct DeleteRequest {
     pub permanent: Option<bool>,
 }
 
+#[tauri::command]
+#[specta::specta]
+pub async fn remove_delete_all_data(state: AppState<'_>) -> CommandResult<()> {
+    let mut conn = state.pool.get()?;
+
+    let dir = get_app_media_dir();
+
+    delete(images::table).execute(&mut conn)?;
+    delete(videos::table).execute(&mut conn)?;
+    delete(audio::table).execute(&mut conn)?;
+    delete(snippets::table).execute(&mut conn)?;
+
+    if dir.exists() {
+        std::fs::remove_dir_all(dir)?;
+    }
+
+    Ok(())
+}
+
+#[tauri::command]
+#[specta::specta]
+pub async fn remove_delete_all_images(state: AppState<'_>) -> CommandResult<()> {
+    let mut conn = state.pool.get()?;
+
+    let dir = get_app_images_dir();
+
+    delete(images::table).execute(&mut conn)?;
+
+    if dir.exists() {
+        std::fs::remove_dir_all(dir)?;
+    }
+
+    Ok(())
+}
+
+#[tauri::command]
+#[specta::specta]
+pub async fn remove_delete_all_videos(state: AppState<'_>) -> CommandResult<()> {
+    let mut conn = state.pool.get()?;
+
+    let dir = get_app_videos_dir();
+
+    delete(videos::table).execute(&mut conn)?;
+
+    if dir.exists() {
+        std::fs::remove_dir_all(dir)?;
+    }
+
+    Ok(())
+}
+
+#[tauri::command]
+#[specta::specta]
+pub async fn remove_delete_all_audio(state: AppState<'_>) -> CommandResult<()> {
+    let mut conn = state.pool.get()?;
+
+    let dir = get_app_audio_dir();
+
+    delete(audio::table).execute(&mut conn)?;
+
+    if dir.exists() {
+        std::fs::remove_dir_all(dir)?;
+    }
+
+    Ok(())
+}
+
+#[tauri::command]
+#[specta::specta]
+pub async fn remove_delete_all_snippets(state: AppState<'_>) -> CommandResult<()> {
+    let mut conn = state.pool.get()?;
+
+    delete(snippets::table).execute(&mut conn)?;
+
+    Ok(())
+}
 #[tauri::command]
 #[specta::specta]
 pub async fn remove_delete_image(
