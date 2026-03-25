@@ -93,15 +93,13 @@ export const SettingsModal: VoidComponent<ModalWrapperProps> = (props) => {
     });
 
     const deleteData = async (target?: TabType) => {
-        let confirmMsg = 'Are you sure you want to delete all data?';
-        if (target) {
-            confirmMsg = `Are you sure you want to delete all ${target.toLocaleLowerCase()}?`;
-        }
-
-        const confirm = await ask(confirmMsg, {
-            title: 'Data management',
-            kind: 'warning',
-        });
+        const confirm = await ask(
+            'This action cannot be reverted. Are you sure?',
+            {
+                title: 'Data management',
+                kind: 'warning',
+            },
+        );
 
         if (!confirm) return;
 
