@@ -38,6 +38,9 @@ export const Button: ParentComponent<Props> = (rawProps) => {
         'loading',
     ]);
 
+    const baseStyles =
+        'box-border flex cursor-pointer items-center gap-2 rounded-lg border border-transparent px-4 py-2 font-medium text-sm text-white leading-5 shadow-xs focus-visible:outline-none focus-visible:ring-4';
+
     const variantStyles: Record<ButtonVariant, string> = {
         primary: clsx(
             'bg-blue-600 hover:bg-blue-700 focus-visible:ring-blue-600/50 active:bg-blue-800',
@@ -70,7 +73,7 @@ export const Button: ParentComponent<Props> = (rawProps) => {
             <Match when={local.loading}>
                 <button
                     class={twMerge(
-                        'box-border cursor-pointer items-center gap-2 rounded-lg border border-transparent px-4 py-2 font-medium text-sm text-white leading-5 shadow-xs focus-visible:outline-none focus-visible:ring-4',
+                        baseStyles,
                         others.disabled
                             ? disabledButtonStyles
                             : variantStyles[local.variant],
@@ -101,7 +104,7 @@ export const Button: ParentComponent<Props> = (rawProps) => {
             <Match when={!local.loading}>
                 <button
                     class={twMerge(
-                        'box-border flex cursor-pointer items-center gap-2 rounded-lg border border-transparent px-4 py-2 font-medium text-sm text-white leading-5 shadow-xs focus-visible:outline-none focus-visible:ring-4',
+                        baseStyles,
                         others.disabled
                             ? disabledButtonStyles
                             : variantStyles[local.variant],
