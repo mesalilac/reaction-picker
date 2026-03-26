@@ -24,7 +24,6 @@ import {
     IconCheckboxCheck,
     IconCheckboxUnchecked,
     IconCloseMd,
-    IconRemoveMinus,
     Input,
     Popover,
     Separator,
