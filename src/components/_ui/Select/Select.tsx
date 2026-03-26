@@ -231,20 +231,29 @@ export const Select: VoidComponent<Props> = (rawProps) => {
                 type='button'
                 variant='secondary'
             >
-                <Switch fallback={props.placeholder ?? 'Select an option'}>
-                    <Match when={isMultiSelect()}>
-                        <Show
-                            fallback={<>{props.selected.length} selected</>}
-                            when={props.placeholder}
-                        >
-                            <span>{props.placeholder}</span>
-                            <CountLabel>{props.selected.length}</CountLabel>
-                        </Show>
-                    </Match>
-                    <Match when={!isMultiSelect() && props.selected}>
-                        {props.selected}
-                    </Match>
-                </Switch>
+                <div class='flex gap-2'>
+                    <Switch fallback={props.placeholder ?? 'Select an option'}>
+                        <Match when={isMultiSelect()}>
+                            <Show
+                                fallback={
+                                    <>
+                                        <span>selected</span>
+                                        <CountLabel>
+                                            {props.selected.length}
+                                        </CountLabel>
+                                    </>
+                                }
+                                when={props.placeholder}
+                            >
+                                <span>{props.placeholder}</span>
+                                <CountLabel>{props.selected.length}</CountLabel>
+                            </Show>
+                        </Match>
+                        <Match when={!isMultiSelect() && props.selected}>
+                            {props.selected}
+                        </Match>
+                    </Switch>
+                </div>
                 <IconArrowCaretDownMd size='1.5em' />
             </Button>
             <Popover
