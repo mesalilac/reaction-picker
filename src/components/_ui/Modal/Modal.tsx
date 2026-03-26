@@ -21,6 +21,7 @@ export type ModalWrapperProps = {
 export const Modal = (props: {
     open: boolean;
     onOpenChange: (open: boolean) => void;
+    class?: string;
     children: JSX.Element;
 }) => {
     let modalOverlayRef: HTMLDivElement | undefined;
@@ -105,7 +106,10 @@ export const Modal = (props: {
                     role='none'
                 >
                     <div
-                        class='relative flex h-9/12 w-9/12 flex-col gap-2 rounded-lg bg-neutral-900/80 p-4 shadow-lg backdrop-blur-sm'
+                        class={twMerge(
+                            'relative flex size-9/12 flex-col gap-2 rounded-lg bg-neutral-900/80 p-4 shadow-lg backdrop-blur-sm',
+                            props.class,
+                        )}
                         onMouseDown={(e) => e.stopPropagation()}
                         ref={modalContentRef}
                         role='none'
