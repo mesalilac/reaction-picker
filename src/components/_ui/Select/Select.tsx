@@ -350,7 +350,7 @@ export const Select: VoidComponent<Props> = (rawProps) => {
                                 </Button>
                             </Show>
                         </div>
-                        <Separator class='my-4' />
+                        <Separator class='my-2 border-neutral-700' />
                     </Show>
                     <div class='flex flex-col flex-nowrap overflow-y-auto'>
                         <Switch>
