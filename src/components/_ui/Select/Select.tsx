@@ -21,6 +21,10 @@ import {
     IconAddPlus,
     IconCaretDownMd,
     IconCheck,
+    IconCheckboxCheck,
+    IconCheckboxUnchecked,
+    IconCloseMd,
+    IconRemoveMinus,
     Input,
     Popover,
     Separator,
@@ -270,7 +274,7 @@ export const Select: VoidComponent<Props> = (rawProps) => {
                             props.onClearSelection
                         }
                     >
-                        <div class='flex flex-col flex-nowrap items-stretch gap-4'>
+                        <div class='flex flex-col flex-nowrap items-stretch gap-1'>
                             <Show when={props.searchable}>
                                 <Input
                                     class='grow'
@@ -301,35 +305,37 @@ export const Select: VoidComponent<Props> = (rawProps) => {
                                 />
                                 <Show when={searchQuery().trim().length > 0}>
                                     <Button
-                                        class='self-start'
                                         onClick={() => {
                                             props.onAddNewOption?.(
                                                 searchQuery().trim(),
                                             );
                                             setSearchQuery('');
                                         }}
-                                        variant='primary'
+                                        variant='ghost'
                                     >
-                                        <IconAddPlus /> Add new option
+                                        <IconAddPlus />
+                                        Add new option
                                     </Button>
                                 </Show>
                             </Show>
                             <Show when={isMultiSelect()}>
                                 <Show when={props.onSelectAll}>
                                     <Button
-                                        class='self-start'
                                         onClick={props.onSelectAll}
                                         title='Select all'
+                                        variant='ghost'
                                     >
+                                        <IconCheckboxCheck />
                                         Select All
                                     </Button>
                                 </Show>
                                 <Show when={props.onDeselectAll}>
                                     <Button
-                                        class='self-start'
                                         onClick={props.onDeselectAll}
                                         title='Deselect All'
+                                        variant='ghost'
                                     >
+                                        <IconCheckboxUnchecked />
                                         Deselect All
                                     </Button>
                                 </Show>
@@ -342,10 +348,11 @@ export const Select: VoidComponent<Props> = (rawProps) => {
                                 }
                             >
                                 <Button
-                                    class='self-start'
                                     onClick={props.onClearSelection}
                                     title='Clear selection'
+                                    variant='ghost'
                                 >
+                                    <IconCloseMd />
                                     Clear Selection
                                 </Button>
                             </Show>
