@@ -358,7 +358,7 @@ export const Select: VoidComponent<Props> = (rawProps) => {
                         </div>
                         <Separator class='my-2 border-neutral-700' />
                     </Show>
-                    <div class='flex flex-col flex-nowrap overflow-y-auto'>
+                    <div class='flex flex-col flex-nowrap gap-1 overflow-y-auto'>
                         <Switch>
                             <Match
                                 when={
@@ -376,7 +376,7 @@ export const Select: VoidComponent<Props> = (rawProps) => {
                                     {(option) => (
                                         <Button
                                             class={clsx(
-                                                'select-menu__item justify-between text-nowrap rounded-none',
+                                                'select-menu__item justify-between text-nowrap rounded-lg',
                                                 isSelected(option.value) &&
                                                     'bg-blue-600/40 hover:bg-blue-700/40 active:bg-blue-800/40',
                                             )}
