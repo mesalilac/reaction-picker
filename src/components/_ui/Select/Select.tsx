@@ -262,7 +262,7 @@ export const Select: VoidComponent<Props> = (rawProps) => {
                 triggerElement={popoverTriggerRef}
             >
                 <div
-                    class='mt-4 flex max-h-80 min-w-80 flex-col overscroll-contain rounded-lg bg-neutral-800 p-1 text-inherit'
+                    class='mt-4 flex max-h-80 min-w-80 flex-col overscroll-contain rounded-lg bg-neutral-800 p-2 text-inherit'
                     ref={popoverContentRef}
                 >
                     <Show
@@ -366,7 +366,9 @@ export const Select: VoidComponent<Props> = (rawProps) => {
                                     searchQuery().length > 0
                                 }
                             >
-                                No results found for "{searchQuery()}"
+                                <span class='ml-4 text-sm'>
+                                    No results found for "{searchQuery()}"
+                                </span>
                             </Match>
                             <Match when={sortedTags().length === 0}>
                                 {props.emptyPlaceholder ?? 'No options'}
