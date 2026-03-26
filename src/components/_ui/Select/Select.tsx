@@ -18,6 +18,7 @@ import {
 import {
     Button,
     CountLabel,
+    IconAddPlus,
     IconCaretDownMd,
     IconCheck,
     Input,
@@ -82,6 +83,10 @@ type Props = {
      * Callback function to clear selected options
      */
     onClearSelection?: () => void;
+    /**
+     * Callback function to add a new option
+     */
+    onAddNewOption?: (value: string) => void;
     /**
      * Whether the select menu button is disabled
      */
@@ -294,6 +299,20 @@ export const Select: VoidComponent<Props> = (rawProps) => {
                                     type='search'
                                     value={searchQuery()}
                                 />
+                                <Show when={searchQuery().length > 0}>
+                                    <Button
+                                        class='self-start'
+                                        onClick={() => {
+                                            props.onAddNewOption?.(
+                                                searchQuery().trim(),
+                                            );
+                                            setSearchQuery('');
+                                        }}
+                                        variant='primary'
+                                    >
+                                        <IconAddPlus /> Add new option
+                                    </Button>
+                                </Show>
                             </Show>
                             <Show when={isMultiSelect()}>
                                 <Show when={props.onSelectAll}>
