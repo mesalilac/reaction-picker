@@ -1,14 +1,23 @@
 import { Show } from 'solid-js';
 import { createStore } from 'solid-js/store';
 
-import type { Audio, Image, Snippet, Video } from '@/bindings';
+import {
+    type Audio,
+    commands,
+    type Image,
+    type Snippet,
+    type Video,
+} from '@/bindings';
 import {
     Button,
     Input,
     Modal,
     type ModalWrapperProps,
+    Select,
     Textarea,
 } from '@/components';
+import { useGlobalContext } from '@/store';
+import { handleIpcError, handleUnexpectedError } from '@/utils';
 
 type EditAssetStoreType = {
     title: string | null;
@@ -42,6 +51,8 @@ export const EditAssetModal = (
               };
     },
 ) => {
+    const globalCtx = useGlobalContext();
+
     const [store, setStore] = createStore<EditAssetStoreType>({
         title: props.item.data.title,
         description: props.item.data.description,
@@ -129,6 +140,55 @@ export const EditAssetModal = (
                         Reset
                     </Button>
                 </Input>
+                <Select
+                    onAddNewOption={async (value) => {
+                        if (
+                            globalCtx.resources.tags
+                                .get()
+                                ?.find((t) => t.name === value)
+                        )
+                            return;
+
+                        const res = await commands
+                            .createTag({ name: value })
+                            .catch(handleUnexpectedError);
+
+                        if (!res) return;
+
+                        if (res.status === 'error') {
+                            handleIpcError(res.error);
+
+                            return;
+                        }
+
+                        globalCtx.resources.tags.mutate((prev) => {
+                            if (!prev) return;
+
+                            return [...prev, res.data];
+                        });
+
+                        setStore('tagIds', (prev) => [...prev, res.data.id]);
+                    }}
+                    onChange={(value) => {
+                        if (store.tagIds.includes(value)) {
+                            setStore(
+                                'tagIds',
+                                store.tagIds.filter((i) => i !== value),
+                            );
+
+                            return;
+                        }
+
+                        setStore('tagIds', [...store.tagIds, value]);
+                    }}
+                    options={
+                        globalCtx.resources.tags
+                            .get()
+                            ?.map((t) => ({ label: t.name, value: t.id })) ?? []
+                    }
+                    searchable
+                    selected={store.tagIds}
+                />
             </Modal.Body>
             <Modal.Footer onAction={onAction} />
         </Modal>
