@@ -13,6 +13,7 @@ import {
     Modal,
     type ModalWrapperProps,
     Separator,
+    TagsManager,
 } from '@/components';
 import { FALLBACK_VOLUME } from '@/consts';
 import { type TabType, useGlobalContext } from '@/store';
@@ -269,6 +270,7 @@ export const SettingsModal: VoidComponent<ModalWrapperProps> = (props) => {
                         </Button>
                     </div>
                 </div>
+                <TagsManager />
             </Modal.Body>
             <Modal.Footer onAction={saveSettings} />
         </Modal>
