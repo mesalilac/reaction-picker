@@ -186,6 +186,7 @@ export const EditAssetModal = (
                             .get()
                             ?.map((t) => ({ label: t.name, value: t.id })) ?? []
                     }
+                    placeholder='selected tags'
                     searchable
                     selected={store.tagIds}
                 />
