@@ -6,7 +6,7 @@ import { createSignal, Show, type VoidComponent } from 'solid-js';
 import { toast } from 'solid-sonner';
 
 import { type Audio, commands } from '@/bindings';
-import { Button, IconButton, IconHeart01 } from '@/components';
+import { Button, IconButton, IconInterfaceHeart01 } from '@/components';
 import { FALLBACK_VOLUME } from '@/consts';
 import { useGlobalContext } from '@/store';
 import {
@@ -190,7 +190,7 @@ export const AudioCard: VoidComponent<Props> = (props) => {
                 <div class='flex flex-row gap-2'>
                     <IconButton
                         icon={
-                            <IconHeart01
+                            <IconInterfaceHeart01
                                 class={clsx('size-5', {
                                     'fill-red-500 text-red-500':
                                         props.audio.isFavorite,

@@ -7,7 +7,7 @@ import { createSignal, onMount, Show, type VoidComponent } from 'solid-js';
 import { toast } from 'solid-sonner';
 
 import { commands, type Image } from '@/bindings';
-import { Button, IconButton, IconHeart01 } from '@/components';
+import { Button, IconButton, IconInterfaceHeart01 } from '@/components';
 import { useGlobalContext } from '@/store';
 import {
     handleIpcError,
@@ -214,7 +214,7 @@ export const ImageCard: VoidComponent<Props> = (props) => {
                 <div class='flex flex-row gap-2'>
                     <IconButton
                         icon={
-                            <IconHeart01
+                            <IconInterfaceHeart01
                                 class={clsx('size-5', {
                                     'fill-red-500 text-red-500':
                                         props.image.isFavorite,

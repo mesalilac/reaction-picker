@@ -6,8 +6,8 @@ import { twMerge } from 'tailwind-merge';
 
 import {
     Button,
-    IconCloseMd,
-    IconSave,
+    IconMenuCloseMd,
+    IconSystemSave,
     ModalContext,
     Separator,
     useModalContext,
@@ -163,7 +163,7 @@ Modal.Footer = (props: {
                 <Button onClick={closeModal} variant='secondary'>
                     {props.dismiss || (
                         <>
-                            <IconCloseMd /> Cancel
+                            <IconMenuCloseMd /> Cancel
                         </>
                     )}
                 </Button>
@@ -171,7 +171,7 @@ Modal.Footer = (props: {
                     <Button onClick={props.onAction}>
                         {props.action || (
                             <>
-                                <IconSave /> Save
+                                <IconSystemSave /> Save
                             </>
                         )}
                     </Button>

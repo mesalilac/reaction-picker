@@ -8,7 +8,7 @@ import {
     Button,
     Checkbox,
     CountLabel,
-    IconTriangleWarning,
+    IconWarningTriangleWarning,
     Input,
     Modal,
     type ModalWrapperProps,
@@ -231,7 +231,7 @@ export const SettingsModal: VoidComponent<ModalWrapperProps> = (props) => {
                     </div>
                     <div class='flex flex-wrap gap-2'>
                         <Button onClick={() => deleteData()} variant='danger'>
-                            <IconTriangleWarning />
+                            <IconWarningTriangleWarning />
                             Delete all
                             <CountLabel>{allCount()}</CountLabel>
                         </Button>
@@ -239,7 +239,7 @@ export const SettingsModal: VoidComponent<ModalWrapperProps> = (props) => {
                             onClick={() => deleteData('Images')}
                             variant='danger'
                         >
-                            <IconTriangleWarning />
+                            <IconWarningTriangleWarning />
                             Delete all images
                             <CountLabel>{imagesCount()}</CountLabel>
                         </Button>
@@ -247,7 +247,7 @@ export const SettingsModal: VoidComponent<ModalWrapperProps> = (props) => {
                             onClick={() => deleteData('Videos')}
                             variant='danger'
                         >
-                            <IconTriangleWarning />
+                            <IconWarningTriangleWarning />
                             Delete all videos
                             <CountLabel>{videosCount()}</CountLabel>
                         </Button>
@@ -255,7 +255,7 @@ export const SettingsModal: VoidComponent<ModalWrapperProps> = (props) => {
                             onClick={() => deleteData('Audio')}
                             variant='danger'
                         >
-                            <IconTriangleWarning />
+                            <IconWarningTriangleWarning />
                             Delete all audio
                             <CountLabel>{audioCount()}</CountLabel>
                         </Button>
@@ -263,7 +263,7 @@ export const SettingsModal: VoidComponent<ModalWrapperProps> = (props) => {
                             onClick={() => deleteData('Snippets')}
                             variant='danger'
                         >
-                            <IconTriangleWarning />
+                            <IconWarningTriangleWarning />
                             Delete all snippets
                             <CountLabel>{snippetsCount()}</CountLabel>
                         </Button>

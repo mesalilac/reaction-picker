@@ -1,12 +1,12 @@
 import { Show } from 'solid-js';
 
 import {
-    IconArrowUndoDownRight,
+    IconArrowArrowUndoDownRight,
     IconButton,
-    IconEditPencil01,
-    IconExternalLink,
-    IconMoreHorizontal,
-    IconTrashFull,
+    IconEditEditPencil01,
+    IconInterfaceExternalLink,
+    IconInterfaceTrashFull,
+    IconMenuMoreHorizontal,
     Menu,
     Popover,
 } from '@/components';
@@ -28,7 +28,7 @@ export const CardMenu = (props: Props) => {
     return (
         <>
             <IconButton
-                icon={<IconMoreHorizontal class='size-5' />}
+                icon={<IconMenuMoreHorizontal class='size-5' />}
                 ref={popoverMenuRef}
             />
             <Popover
@@ -39,25 +39,25 @@ export const CardMenu = (props: Props) => {
             >
                 <Menu onOpenChange={props.onOpenChange} open={props.open}>
                     <Menu.Item onClick={props.handleEditDetails}>
-                        <IconEditPencil01 /> edit details
+                        <IconEditEditPencil01 /> edit details
                     </Menu.Item>
                     <Show when={props.externalLink}>
                         <Menu.Separator />
                         <Menu.Item onClick={props.handleOpenExternalLink}>
-                            <IconExternalLink /> open external link
+                            <IconInterfaceExternalLink /> open external link
                         </Menu.Item>
                     </Show>
                     <Menu.Separator />
                     <Show when={props.deletedAt !== null}>
                         <Menu.Item onClick={props.handleRestore}>
-                            <IconArrowUndoDownRight /> restore
+                            <IconArrowArrowUndoDownRight /> restore
                         </Menu.Item>
                     </Show>
                     <Menu.Item
                         class='text-red-500'
                         onClick={props.handleDelete}
                     >
-                        <IconTrashFull />
+                        <IconInterfaceTrashFull />
                         {props.deletedAt !== null
                             ? 'permanently delete'
                             : 'delete'}

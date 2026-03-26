@@ -1,6 +1,11 @@
 import { createMemo, createSignal, Show, type VoidComponent } from 'solid-js';
 
-import { Button, IconAddPlus, IconButton, IconSettings } from '@/components';
+import {
+    Button,
+    IconButton,
+    IconEditAddPlus,
+    IconInterfaceSettings,
+} from '@/components';
 import { useGlobalContext } from '@/store';
 
 import { CreateSnippetModal } from './CreateSnippetModal';
@@ -45,7 +50,7 @@ export const Nav: VoidComponent<Props> = (props) => {
             <div class='flex gap-5'>
                 <Show when={globalCtx.store.activeTab === 'Snippets'}>
                     <Button onClick={() => setShowCreateSnippetModal(true)}>
-                        <IconAddPlus />
+                        <IconEditAddPlus />
                         <span>Create</span>
                     </Button>
                     <Show when={showCreateSnippetModal()}>
@@ -59,7 +64,7 @@ export const Nav: VoidComponent<Props> = (props) => {
                 </Show>
 
                 <IconButton
-                    icon={<IconSettings class='size-5' />}
+                    icon={<IconInterfaceSettings class='size-5' />}
                     onClick={() => setShowSettingsModal(true)}
                 />
                 <Show when={showSettingsModal()}>

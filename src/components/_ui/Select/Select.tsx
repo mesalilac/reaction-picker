@@ -18,12 +18,12 @@ import {
 import {
     Button,
     CountLabel,
-    IconAddPlus,
-    IconCaretDownMd,
-    IconCheck,
-    IconCheckboxCheck,
-    IconCheckboxUnchecked,
-    IconCloseMd,
+    IconArrowCaretDownMd,
+    IconEditAddPlus,
+    IconInterfaceCheck,
+    IconInterfaceCheckboxCheck,
+    IconInterfaceCheckboxUnchecked,
+    IconMenuCloseMd,
     Input,
     Popover,
     Separator,
@@ -245,7 +245,7 @@ export const Select: VoidComponent<Props> = (rawProps) => {
                         {props.selected}
                     </Match>
                 </Switch>
-                <IconCaretDownMd size='1.5em' />
+                <IconArrowCaretDownMd size='1.5em' />
             </Button>
             <Popover
                 onOpenChange={(open) => {
@@ -312,7 +312,7 @@ export const Select: VoidComponent<Props> = (rawProps) => {
                                         }}
                                         variant='ghost'
                                     >
-                                        <IconAddPlus />
+                                        <IconEditAddPlus />
                                         Add new option
                                     </Button>
                                 </Show>
@@ -323,7 +323,7 @@ export const Select: VoidComponent<Props> = (rawProps) => {
                                         onClick={props.onSelectAll}
                                         variant='ghost'
                                     >
-                                        <IconCheckboxCheck />
+                                        <IconInterfaceCheckboxCheck />
                                         Select All
                                     </Button>
                                 </Show>
@@ -332,7 +332,7 @@ export const Select: VoidComponent<Props> = (rawProps) => {
                                         onClick={props.onDeselectAll}
                                         variant='ghost'
                                     >
-                                        <IconCheckboxUnchecked />
+                                        <IconInterfaceCheckboxUnchecked />
                                         Deselect All
                                     </Button>
                                 </Show>
@@ -348,7 +348,7 @@ export const Select: VoidComponent<Props> = (rawProps) => {
                                     onClick={props.onClearSelection}
                                     variant='ghost'
                                 >
-                                    <IconCloseMd />
+                                    <IconMenuCloseMd />
                                     Clear Selection
                                 </Button>
                             </Show>
@@ -391,7 +391,7 @@ export const Select: VoidComponent<Props> = (rawProps) => {
                                                 {option.icon ?? null}
                                                 {option.label ?? option.value}
                                             </div>
-                                            <IconCheck
+                                            <IconInterfaceCheck
                                                 style={{
                                                     visibility: isSelected(
                                                         option.value,
