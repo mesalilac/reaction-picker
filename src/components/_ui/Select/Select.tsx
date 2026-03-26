@@ -376,7 +376,7 @@ export const Select: VoidComponent<Props> = (rawProps) => {
                                     {(option) => (
                                         <Button
                                             class={clsx(
-                                                'select-menu__item justify-start text-nowrap rounded-none',
+                                                'select-menu__item justify-between text-nowrap rounded-none',
                                                 isSelected(option.value) &&
                                                     'bg-blue-600/40 hover:bg-blue-700/40 active:bg-blue-800/40',
                                             )}
