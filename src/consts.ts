@@ -1,2 +1,3 @@
 export const DISCORD_FREE_FILE_UPLOAD_LIMIT = 10_000_000; // 10MB
 export const DISCORD_FREE_MAX_CHAR_LIMIT = 2000;
+export const FALLBACK_VOLUME = 0.1;

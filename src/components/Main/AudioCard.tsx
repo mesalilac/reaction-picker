@@ -7,6 +7,7 @@ import { toast } from 'solid-sonner';
 
 import { type Audio, commands } from '@/bindings';
 import { Button, IconButton, IconHeart01 } from '@/components';
+import { FALLBACK_VOLUME } from '@/consts';
 import { useGlobalContext } from '@/store';
 import {
     handleIpcError,
@@ -258,7 +259,7 @@ export const AudioCard: VoidComponent<Props> = (props) => {
                         ref={(el) => {
                             el.volume =
                                 globalCtx.resources.settings.get()
-                                    ?.defaultVolume || 0.1;
+                                    ?.defaultVolume || FALLBACK_VOLUME;
                         }}
                     >
                         <source

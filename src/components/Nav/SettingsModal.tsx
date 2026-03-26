@@ -14,6 +14,7 @@ import {
     type ModalWrapperProps,
     Separator,
 } from '@/components';
+import { FALLBACK_VOLUME } from '@/consts';
 import { type TabType, useGlobalContext } from '@/store';
 import { handleIpcError, handleUnexpectedError } from '@/utils';
 
@@ -219,7 +220,7 @@ export const SettingsModal: VoidComponent<ModalWrapperProps> = (props) => {
                         value={
                             store.defaultVolume !== undefined
                                 ? store.defaultVolume
-                                : (settings?.defaultVolume ?? undefined)
+                                : (settings?.defaultVolume ?? FALLBACK_VOLUME)
                         }
                     />
                 </div>
