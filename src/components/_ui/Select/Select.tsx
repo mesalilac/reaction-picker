@@ -299,7 +299,7 @@ export const Select: VoidComponent<Props> = (rawProps) => {
                                     type='search'
                                     value={searchQuery()}
                                 />
-                                <Show when={searchQuery().length > 0}>
+                                <Show when={searchQuery().trim().length > 0}>
                                     <Button
                                         class='self-start'
                                         onClick={() => {
