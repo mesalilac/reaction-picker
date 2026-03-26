@@ -18,6 +18,19 @@ export const commands = {
             else return { status: 'error', error: e as any };
         }
     },
+    async createTag(
+        payload: CreateTagRequest,
+    ): Promise<Result<Tag, CommandError>> {
+        try {
+            return {
+                status: 'ok',
+                data: await TAURI_INVOKE('create_tag', { payload }),
+            };
+        } catch (e) {
+            if (e instanceof Error) throw e;
+            else return { status: 'error', error: e as any };
+        }
+    },
     async getImages(): Promise<Result<Image[], CommandError>> {
         try {
             return { status: 'ok', data: await TAURI_INVOKE('get_images') };
@@ -450,6 +463,7 @@ export type CreateSnippetRequest = {
     externalLink: string | null;
     tagIds: TagId[];
 };
+export type CreateTagRequest = { name: string };
 export type DeleteRequest = { permanent?: boolean | null };
 export type FileProcessingProgress = { current: number; total: number };
 export type GeneralStats = {

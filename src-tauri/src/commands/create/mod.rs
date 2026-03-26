@@ -3,5 +3,7 @@ pub mod prelude {
 }
 
 mod snippet;
+mod tag;
 
 pub use snippet::*;
+pub use tag::*;
