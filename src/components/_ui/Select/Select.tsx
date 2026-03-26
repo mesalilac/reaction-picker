@@ -321,7 +321,6 @@ export const Select: VoidComponent<Props> = (rawProps) => {
                                 <Show when={props.onSelectAll}>
                                     <Button
                                         onClick={props.onSelectAll}
-                                        title='Select all'
                                         variant='ghost'
                                     >
                                         <IconCheckboxCheck />
@@ -331,7 +330,6 @@ export const Select: VoidComponent<Props> = (rawProps) => {
                                 <Show when={props.onDeselectAll}>
                                     <Button
                                         onClick={props.onDeselectAll}
-                                        title='Deselect All'
                                         variant='ghost'
                                     >
                                         <IconCheckboxUnchecked />
@@ -348,7 +346,6 @@ export const Select: VoidComponent<Props> = (rawProps) => {
                             >
                                 <Button
                                     onClick={props.onClearSelection}
-                                    title='Clear selection'
                                     variant='ghost'
                                 >
                                     <IconCloseMd />
