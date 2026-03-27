@@ -47,7 +47,10 @@ export const Tab: VoidComponent<{
                     ? 'text-blue-500'
                     : 'border-transparent hover:text-blue-500/50',
             )}
-            onClick={() => globalCtx.setStore('activeTab', props.type)}
+            onClick={() => {
+                globalCtx.setStore('activeTab', props.type);
+                window.scrollTo({ top: 0, behavior: 'instant' });
+            }}
             ref={props.ref}
             type='button'
         >
