@@ -40,7 +40,7 @@ export const Nav: VoidComponent<Props> = (props) => {
         createSignal(false);
 
     return (
-        <div class='flex justify-between'>
+        <nav class='flex justify-between'>
             <div class='flex gap-3' ref={props.ref}>
                 <Tab count={imagesCount()} type='Images' />
                 <Tab count={videosCount()} type='Videos' />
@@ -76,6 +76,6 @@ export const Nav: VoidComponent<Props> = (props) => {
                     />
                 </Show>
             </div>
-        </div>
+        </nav>
     );
 };
