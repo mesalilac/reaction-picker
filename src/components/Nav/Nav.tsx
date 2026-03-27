@@ -1,7 +1,15 @@
-import { createMemo, createSignal, Show, type VoidComponent } from 'solid-js';
+import {
+    createMemo,
+    createSignal,
+    onCleanup,
+    onMount,
+    Show,
+    type VoidComponent,
+} from 'solid-js';
 
 import {
     Button,
+    IconArrowArrowUpMd,
     IconButton,
     IconEditAddPlus,
     IconInterfaceSettings,
@@ -18,6 +26,18 @@ type Props = {
 
 export const Nav: VoidComponent<Props> = (props) => {
     const globalCtx = useGlobalContext();
+
+    const [scrollY, setScrollY] = createSignal(0);
+
+    const handleScroll = () => setScrollY(window.scrollY);
+
+    onMount(() => {
+        window.addEventListener('scroll', handleScroll);
+    });
+
+    onCleanup(() => {
+        window.removeEventListener('scroll', handleScroll);
+    });
 
     const imagesCount = createMemo(
         () => globalCtx.resources.images.get()?.length || 0,
@@ -40,7 +60,7 @@ export const Nav: VoidComponent<Props> = (props) => {
         createSignal(false);
 
     return (
-        <nav class='flex justify-between'>
+        <nav class='sticky top-0 z-50 flex justify-between bg-neutral-950/50 py-2 shadow-md backdrop-blur-lg'>
             <div class='flex gap-3' ref={props.ref}>
                 <Tab count={imagesCount()} type='Images' />
                 <Tab count={videosCount()} type='Videos' />
@@ -63,6 +83,12 @@ export const Nav: VoidComponent<Props> = (props) => {
                     </Show>
                 </Show>
 
+                <Show when={scrollY() > 0}>
+                    <IconButton
+                        icon={<IconArrowArrowUpMd class='size-5' />}
+                        onClick={() => window.scrollTo(0, 0)}
+                    />
+                </Show>
                 <IconButton
                     icon={<IconInterfaceSettings class='size-5' />}
                     onClick={() => setShowSettingsModal(true)}
