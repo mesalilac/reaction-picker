@@ -86,7 +86,9 @@ export const Nav: VoidComponent<Props> = (props) => {
                 <Show when={scrollY() > 0}>
                     <IconButton
                         icon={<IconArrowArrowUpMd class='size-5' />}
-                        onClick={() => window.scrollTo(0, 0)}
+                        onClick={() =>
+                            window.scrollTo({ top: 0, behavior: 'smooth' })
+                        }
                     />
                 </Show>
                 <IconButton
