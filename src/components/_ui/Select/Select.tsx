@@ -278,7 +278,7 @@ export const Select: VoidComponent<Props> = (rawProps) => {
                             props.onClearSelection
                         }
                     >
-                        <div class='flex flex-col flex-nowrap items-stretch gap-1'>
+                        <div class='flex flex-col flex-nowrap items-stretch gap-2'>
                             <Show when={props.searchable}>
                                 <Input
                                     class='grow'
