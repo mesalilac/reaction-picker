@@ -7,6 +7,8 @@ import {
     IconInterfaceTag,
     IconInterfaceTrashFull,
 } from '@/components';
+import { useGlobalContext } from '@/store';
+import { handleIpcError, handleUnexpectedError } from '@/utils';
 
 import { TagEditModal } from './TagEditModal';
 
@@ -15,9 +17,35 @@ type Props = {
 };
 
 export const TagView: VoidComponent<Props> = (props) => {
+    const globalCtx = useGlobalContext();
+
     const [showEditModal, setShowEditModal] = createSignal(false);
 
-    const handleDeleteTag = async () => {};
+    const handleDeleteTag = async () => {
+        const res = await commands
+            .removeTag(props.tag.id)
+            .catch(handleUnexpectedError);
+
+        if (!res) return;
+
+        if (res.status === 'error') {
+            handleIpcError(res.error);
+
+            return;
+        }
+
+        globalCtx.resources.tags.mutate((prev) => {
+            if (!prev) return;
+
+            return prev.filter((item) => item.id !== props.tag.id);
+        });
+
+        globalCtx.resources.images.refetch();
+        globalCtx.resources.videos.refetch();
+        globalCtx.resources.audio.refetch();
+        globalCtx.resources.snippets.refetch();
+        globalCtx.resources.generalStats.refetch();
+    };
 
     return (
         <div class='flex items-center justify-between gap-2 rounded-lg bg-neutral-700/50 p-2'>
