@@ -7,13 +7,12 @@ import {
     type VoidComponent,
 } from 'solid-js';
 
+import { Button, IconButton } from '@/components';
 import {
-    Button,
     IconArrowArrowUpMd,
-    IconButton,
     IconEditAddPlus,
     IconInterfaceSettings,
-} from '@/components';
+} from '@/icons';
 import { useGlobalContext } from '@/store';
 
 import { CreateSnippetModal } from './CreateSnippetModal';

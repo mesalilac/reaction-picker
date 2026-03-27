@@ -1,13 +1,12 @@
 import { createMemo, createSignal, Show, type VoidComponent } from 'solid-js';
 
 import { commands, type Tag } from '@/bindings';
+import { CountLabel, IconButton } from '@/components';
 import {
-    CountLabel,
-    IconButton,
     IconEditEditPencil01,
     IconInterfaceTag,
     IconInterfaceTrashFull,
-} from '@/components';
+} from '@/icons';
 import { useGlobalContext } from '@/store';
 import { handleIpcError, handleUnexpectedError } from '@/utils';
 

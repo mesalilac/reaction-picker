@@ -1,15 +1,13 @@
 import { Show } from 'solid-js';
 
+import { IconButton, Menu, Popover } from '@/components';
 import {
     IconArrowArrowUndoDownRight,
-    IconButton,
     IconEditEditPencil01,
     IconInterfaceExternalLink,
     IconInterfaceTrashFull,
     IconMenuMoreHorizontal,
-    Menu,
-    Popover,
-} from '@/components';
+} from '@/icons';
 
 type Props = {
     handleEditDetails: () => void;

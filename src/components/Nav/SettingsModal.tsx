@@ -8,7 +8,6 @@ import {
     Button,
     Checkbox,
     CountLabel,
-    IconWarningTriangleWarning,
     Input,
     Modal,
     type ModalWrapperProps,
@@ -16,6 +15,7 @@ import {
     TagsManager,
 } from '@/components';
 import { FALLBACK_VOLUME } from '@/consts';
+import { IconWarningTriangleWarning } from '@/icons';
 import { type TabType, useGlobalContext } from '@/store';
 import { handleIpcError, handleUnexpectedError } from '@/utils';
 

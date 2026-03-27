@@ -15,19 +15,15 @@ import {
     type VoidComponent,
 } from 'solid-js';
 
+import { Button, CountLabel, Input, Popover, Separator } from '@/components';
 import {
-    Button,
-    CountLabel,
     IconArrowCaretDownMd,
     IconEditAddPlus,
     IconInterfaceCheck,
     IconInterfaceCheckboxCheck,
     IconInterfaceCheckboxUnchecked,
     IconMenuCloseMd,
-    Input,
-    Popover,
-    Separator,
-} from '@/components';
+} from '@/icons';
 
 type Option = {
     /**

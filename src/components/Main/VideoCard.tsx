@@ -6,8 +6,9 @@ import { createSignal, Show, type VoidComponent } from 'solid-js';
 import { toast } from 'solid-sonner';
 
 import { commands, type Video } from '@/bindings';
-import { Button, IconButton, IconInterfaceHeart01 } from '@/components';
+import { Button, IconButton } from '@/components';
 import { FALLBACK_VOLUME } from '@/consts';
+import { IconInterfaceHeart01 } from '@/icons';
 import { useGlobalContext } from '@/store';
 import {
     handleIpcError,
