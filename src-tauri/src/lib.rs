@@ -104,6 +104,7 @@ pub fn run() {
             remove_delete_all_videos,
             remove_delete_all_audio,
             remove_delete_all_snippets,
+            remove_delete_all_tags,
             remove_delete_image,
             remove_delete_video,
             remove_delete_audio,

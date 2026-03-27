@@ -88,6 +88,17 @@ pub async fn remove_delete_all_snippets(state: AppState<'_>) -> CommandResult<()
 
     Ok(())
 }
+
+#[tauri::command]
+#[specta::specta]
+pub async fn remove_delete_all_tags(state: AppState<'_>) -> CommandResult<()> {
+    let mut conn = state.pool.get()?;
+
+    delete(tags::table).execute(&mut conn)?;
+
+    Ok(())
+}
+
 #[tauri::command]
 #[specta::specta]
 pub async fn remove_delete_image(
