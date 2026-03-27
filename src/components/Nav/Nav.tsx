@@ -82,7 +82,7 @@ export const Nav: VoidComponent<Props> = (props) => {
                     </Show>
                 </Show>
 
-                <Show when={scrollY() > 0}>
+                <Show when={scrollY() > 600}>
                     <IconButton
                         icon={<IconArrowArrowUpMd class='size-5' />}
                         onClick={() =>
