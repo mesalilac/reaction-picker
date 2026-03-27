@@ -33,7 +33,7 @@ export const VideoCard: VoidComponent<Props> = (props) => {
     const [showPopoverMenu, setShowPopoverMenu] = createSignal(false);
 
     const useVisibilityObserver = createVisibilityObserver({
-        rootMargin: '600px 0px 600px 0px',
+        rootMargin: '6000px 0px 6000px 0px',
         threshold: 0,
     });
 
