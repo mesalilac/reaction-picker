@@ -94,7 +94,11 @@ export const SettingsModal: VoidComponent<ModalWrapperProps> = (props) => {
         return imagesCount() + videosCount() + audioCount() + snippetsCount();
     });
 
-    const deleteData = async (target?: TabType) => {
+    const tagsCount = createMemo(
+        () => globalCtx.resources.tags.get()?.length || 0,
+    );
+
+    const deleteData = async (target?: TabType | 'Tags') => {
         const confirm = await ask(
             'This action cannot be reverted. Are you sure?',
             {
@@ -161,6 +165,20 @@ export const SettingsModal: VoidComponent<ModalWrapperProps> = (props) => {
             }
 
             toast.success('All snippets deleted successfully');
+        } else if (target === 'Tags') {
+            const res = await commands
+                .removeDeleteAllTags()
+                .catch(handleUnexpectedError);
+
+            if (!res) return;
+
+            if (res.status === 'error') {
+                handleIpcError(res.error);
+
+                return;
+            }
+
+            toast.success('All tags deleted successfully');
         } else {
             const res = await commands
                 .removeDeleteAllData()
@@ -267,6 +285,14 @@ export const SettingsModal: VoidComponent<ModalWrapperProps> = (props) => {
                             <IconWarningTriangleWarning />
                             Delete all snippets
                             <CountLabel>{snippetsCount()}</CountLabel>
+                        </Button>
+                        <Button
+                            onClick={() => deleteData('Tags')}
+                            variant='danger'
+                        >
+                            <IconWarningTriangleWarning />
+                            Delete all tags
+                            <CountLabel>{tagsCount()}</CountLabel>
                         </Button>
                     </div>
                 </div>
