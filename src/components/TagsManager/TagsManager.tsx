@@ -1,7 +1,7 @@
 import { createSignal, For, Show, type VoidComponent } from 'solid-js';
 
 import { commands } from '@/bindings';
-import { Button, IconButton, Input, Separator } from '@/components';
+import { Button, Input, Separator } from '@/components';
 import { IconEditAddPlus } from '@/icons';
 import { useGlobalContext } from '@/store';
 import { handleIpcError, handleUnexpectedError } from '@/utils';
