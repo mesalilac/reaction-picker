@@ -9,7 +9,7 @@ pub async fn remove_tag(state: AppState<'_>, id: TagId) -> CommandResult<Tag> {
 
     let tag = Tag::from_entity(entity);
 
-    delete(snippets::table.find(&id)).execute(&mut conn)?;
+    delete(tags::table.find(&id)).execute(&mut conn)?;
 
     Ok(tag)
 }
