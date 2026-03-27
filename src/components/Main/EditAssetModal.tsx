@@ -89,7 +89,7 @@ export const EditAssetModal = (
     return (
         <Modal onOpenChange={props.onOpenChange} open={props.open}>
             <Modal.Title title={props.title} />
-            <Modal.Body>
+            <Modal.Body class='pb-20'>
                 <Input
                     label='title'
                     onInput={(value) => setStore('title', value)}
