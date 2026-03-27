@@ -2,7 +2,7 @@
 
 /** biome-ignore-all assist/source/useSortedAttributes: Auto generated */
 
-import { type ComponentProps, splitProps } from 'solid-js';
+import { type ComponentProps, splitProps, type VoidComponent } from 'solid-js';
 
 interface IconProps extends ComponentProps<'svg'> {
     size?: string;
@@ -20,18 +20,18 @@ interface IconProps extends ComponentProps<'svg'> {
  *          ░░░░░░░░░░░░
  * ```
  */
-export const IconEditTextAlignRight = (props: IconProps) => {
-    const [pickedProps, otherProps] = splitProps(props, ['size']);
+export const IconEditTextAlignRight: VoidComponent<IconProps> = (props) => {
+    const [local, others] = splitProps(props, ['size']);
 
     return (
         <svg
             role='img'
             aria-label='Edit Text Align Right'
-            width={pickedProps.size || '1rem'}
-            height={pickedProps.size || '1rem'}
+            width={local.size || '1rem'}
+            height={local.size || '1rem'}
             viewBox='0 0 24 24'
             fill='none'
-            {...otherProps}
+            {...others}
         >
             <path
                 d='M20 18H10M20 14H4M20 10H10M20 6H4'

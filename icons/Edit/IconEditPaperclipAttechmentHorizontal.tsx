@@ -2,7 +2,7 @@
 
 /** biome-ignore-all assist/source/useSortedAttributes: Auto generated */
 
-import { type ComponentProps, splitProps } from 'solid-js';
+import { type ComponentProps, splitProps, type VoidComponent } from 'solid-js';
 
 interface IconProps extends ComponentProps<'svg'> {
     size?: string;
@@ -21,18 +21,18 @@ interface IconProps extends ComponentProps<'svg'> {
  *    ░▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░
  * ```
  */
-export const IconEditPaperclipAttechmentHorizontal = (props: IconProps) => {
-    const [pickedProps, otherProps] = splitProps(props, ['size']);
+export const IconEditPaperclipAttechmentHorizontal: VoidComponent<IconProps> = (props) => {
+    const [local, others] = splitProps(props, ['size']);
 
     return (
         <svg
             role='img'
             aria-label='Edit Paperclip Attechment Horizontal'
-            width={pickedProps.size || '1rem'}
-            height={pickedProps.size || '1rem'}
+            width={local.size || '1rem'}
+            height={local.size || '1rem'}
             viewBox='0 0 24 24'
             fill='none'
-            {...otherProps}
+            {...others}
         >
             <path
                 d='M7 6H16.75C19.6495 6 22 8.35051 22 11.25C22 14.1495 19.6495 16.5 16.75 16.5H5.5C3.567 16.5 2 14.933 2 13C2 11.067 3.567 9.5 5.5 9.5H16.75C17.7165 9.5 18.5 10.2835 18.5 11.25C18.5 12.2165 17.7165 13 16.75 13H7'

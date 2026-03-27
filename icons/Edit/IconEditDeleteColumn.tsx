@@ -2,7 +2,7 @@
 
 /** biome-ignore-all assist/source/useSortedAttributes: Auto generated */
 
-import { type ComponentProps, splitProps } from 'solid-js';
+import { type ComponentProps, splitProps, type VoidComponent } from 'solid-js';
 
 interface IconProps extends ComponentProps<'svg'> {
     size?: string;
@@ -24,18 +24,18 @@ interface IconProps extends ComponentProps<'svg'> {
  *       ░▒▓▓▒
  * ```
  */
-export const IconEditDeleteColumn = (props: IconProps) => {
-    const [pickedProps, otherProps] = splitProps(props, ['size']);
+export const IconEditDeleteColumn: VoidComponent<IconProps> = (props) => {
+    const [local, others] = splitProps(props, ['size']);
 
     return (
         <svg
             role='img'
             aria-label='Edit Delete Column'
-            width={pickedProps.size || '1rem'}
-            height={pickedProps.size || '1rem'}
+            width={local.size || '1rem'}
+            height={local.size || '1rem'}
             viewBox='0 0 24 24'
             fill='none'
-            {...otherProps}
+            {...others}
         >
             <path
                 d='M10 21H9C7.89543 21 7 20.1046 7 19V5C7 3.89543 7.89543 3 9 3H11C12.1046 3 13 3.89543 13 5V11M19 16H13'

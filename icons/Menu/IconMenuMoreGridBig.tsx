@@ -2,7 +2,7 @@
 
 /** biome-ignore-all assist/source/useSortedAttributes: Auto generated */
 
-import { type ComponentProps, splitProps } from 'solid-js';
+import { type ComponentProps, splitProps, type VoidComponent } from 'solid-js';
 
 interface IconProps extends ComponentProps<'svg'> {
     size?: string;
@@ -22,18 +22,18 @@ interface IconProps extends ComponentProps<'svg'> {
  *     ▒▓▓▒  ▒▓▓▒  ▒▓▓▒
  * ```
  */
-export const IconMenuMoreGridBig = (props: IconProps) => {
-    const [pickedProps, otherProps] = splitProps(props, ['size']);
+export const IconMenuMoreGridBig: VoidComponent<IconProps> = (props) => {
+    const [local, others] = splitProps(props, ['size']);
 
     return (
         <svg
             role='img'
             aria-label='Menu More Grid Big'
-            width={pickedProps.size || '1rem'}
-            height={pickedProps.size || '1rem'}
+            width={local.size || '1rem'}
+            height={local.size || '1rem'}
             viewBox='0 0 24 24'
             fill='none'
-            {...otherProps}
+            {...others}
         >
             <path
                 d='M17 18C17 18.5523 17.4477 19 18 19C18.5523 19 19 18.5523 19 18C19 17.4477 18.5523 17 18 17C17.4477 17 17 17.4477 17 18Z'

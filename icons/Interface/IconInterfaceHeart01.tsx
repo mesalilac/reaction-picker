@@ -2,7 +2,7 @@
 
 /** biome-ignore-all assist/source/useSortedAttributes: Auto generated */
 
-import { type ComponentProps, splitProps } from 'solid-js';
+import { type ComponentProps, splitProps, type VoidComponent } from 'solid-js';
 
 interface IconProps extends ComponentProps<'svg'> {
     size?: string;
@@ -23,18 +23,18 @@ interface IconProps extends ComponentProps<'svg'> {
  *           ░▒▒░
  * ```
  */
-export const IconInterfaceHeart01 = (props: IconProps) => {
-    const [pickedProps, otherProps] = splitProps(props, ['size']);
+export const IconInterfaceHeart01: VoidComponent<IconProps> = (props) => {
+    const [local, others] = splitProps(props, ['size']);
 
     return (
         <svg
             role='img'
             aria-label='Interface Heart01'
-            width={pickedProps.size || '1rem'}
-            height={pickedProps.size || '1rem'}
+            width={local.size || '1rem'}
+            height={local.size || '1rem'}
             viewBox='0 0 24 24'
             fill='none'
-            {...otherProps}
+            {...others}
         >
             <path
                 d='M12 7.69425C10 2.99982 3 3.49982 3 9.49985C3 15.4999 12 20.5 12 20.5C12 20.5 21 15.4999 21 9.49985C21 3.49982 14 2.99982 12 7.69425Z'

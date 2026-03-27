@@ -3,7 +3,7 @@ import { createMemo, createSignal, Show, type VoidComponent } from 'solid-js';
 import { commands, type Tag } from '@/bindings';
 import { CountLabel, IconButton } from '@/components';
 import {
-    IconEditEditPencil01,
+    IconEditPencil01,
     IconInterfaceTag,
     IconInterfaceTrashFull,
 } from '@/icons';
@@ -84,7 +84,7 @@ export const TagView: VoidComponent<Props> = (props) => {
             </div>
             <div class='flex'>
                 <IconButton
-                    icon={<IconEditEditPencil01 class='size-5' />}
+                    icon={<IconEditPencil01 class='size-5' />}
                     onClick={() => setShowEditModal(true)}
                 />
                 <Show when={showEditModal()}>

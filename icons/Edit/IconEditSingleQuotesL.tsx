@@ -2,7 +2,7 @@
 
 /** biome-ignore-all assist/source/useSortedAttributes: Auto generated */
 
-import { type ComponentProps, splitProps } from 'solid-js';
+import { type ComponentProps, splitProps, type VoidComponent } from 'solid-js';
 
 interface IconProps extends ComponentProps<'svg'> {
     size?: string;
@@ -20,18 +20,18 @@ interface IconProps extends ComponentProps<'svg'> {
  *          ░▒▓▓▓▒░
  * ```
  */
-export const IconEditSingleQuotesL = (props: IconProps) => {
-    const [pickedProps, otherProps] = splitProps(props, ['size']);
+export const IconEditSingleQuotesL: VoidComponent<IconProps> = (props) => {
+    const [local, others] = splitProps(props, ['size']);
 
     return (
         <svg
             role='img'
             aria-label='Edit Single Quotes L'
-            width={pickedProps.size || '1rem'}
-            height={pickedProps.size || '1rem'}
+            width={local.size || '1rem'}
+            height={local.size || '1rem'}
             viewBox='0 0 24 24'
             fill='none'
-            {...otherProps}
+            {...others}
         >
             <path
                 d='M10 12V15.4C10 15.9601 10 16.2399 10.109 16.4538C10.2049 16.642 10.3577 16.7952 10.5459 16.8911C10.7596 17 11.0395 17 11.5985 17H13.4015C13.9605 17 14.24 17 14.4537 16.8911C14.6419 16.7952 14.7952 16.6419 14.8911 16.4537C15 16.24 15 15.9605 15 15.4015V13.5985C15 13.0395 15 12.7596 14.8911 12.5459C14.7952 12.3577 14.642 12.2049 14.4538 12.109C14.2399 12 13.9601 12 13.4 12H10ZM10 12V10C10 8.34315 11.3431 7 13 7'

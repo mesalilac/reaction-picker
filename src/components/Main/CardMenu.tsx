@@ -2,8 +2,8 @@ import { Show } from 'solid-js';
 
 import { IconButton, Menu, Popover } from '@/components';
 import {
-    IconArrowArrowUndoDownRight,
-    IconEditEditPencil01,
+    IconArrowUndoDownRight,
+    IconEditPencil01,
     IconInterfaceExternalLink,
     IconInterfaceTrashFull,
     IconMenuMoreHorizontal,
@@ -37,7 +37,7 @@ export const CardMenu = (props: Props) => {
             >
                 <Menu onOpenChange={props.onOpenChange} open={props.open}>
                     <Menu.Item onClick={props.handleEditDetails}>
-                        <IconEditEditPencil01 /> edit details
+                        <IconEditPencil01 /> edit details
                     </Menu.Item>
                     <Show when={props.externalLink}>
                         <Menu.Separator />
@@ -48,7 +48,7 @@ export const CardMenu = (props: Props) => {
                     <Menu.Separator />
                     <Show when={props.deletedAt !== null}>
                         <Menu.Item onClick={props.handleRestore}>
-                            <IconArrowArrowUndoDownRight /> restore
+                            <IconArrowUndoDownRight /> restore
                         </Menu.Item>
                     </Show>
                     <Menu.Item

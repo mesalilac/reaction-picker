@@ -8,11 +8,7 @@ import {
 } from 'solid-js';
 
 import { Button, IconButton } from '@/components';
-import {
-    IconArrowArrowUpMd,
-    IconEditAddPlus,
-    IconInterfaceSettings,
-} from '@/icons';
+import { IconArrowUpMd, IconEditAddPlus, IconInterfaceSettings } from '@/icons';
 import { useGlobalContext } from '@/store';
 
 import { CreateSnippetModal } from './CreateSnippetModal';
@@ -84,7 +80,7 @@ export const Nav: VoidComponent<Props> = (props) => {
 
                 <Show when={scrollY() > 600}>
                     <IconButton
-                        icon={<IconArrowArrowUpMd class='size-5' />}
+                        icon={<IconArrowUpMd class='size-5' />}
                         onClick={() =>
                             window.scrollTo({ top: 0, behavior: 'smooth' })
                         }

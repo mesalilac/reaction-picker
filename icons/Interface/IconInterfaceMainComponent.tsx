@@ -2,7 +2,7 @@
 
 /** biome-ignore-all assist/source/useSortedAttributes: Auto generated */
 
-import { type ComponentProps, splitProps } from 'solid-js';
+import { type ComponentProps, splitProps, type VoidComponent } from 'solid-js';
 
 interface IconProps extends ComponentProps<'svg'> {
     size?: string;
@@ -26,18 +26,18 @@ interface IconProps extends ComponentProps<'svg'> {
  *           ░░░░
  * ```
  */
-export const IconInterfaceMainComponent = (props: IconProps) => {
-    const [pickedProps, otherProps] = splitProps(props, ['size']);
+export const IconInterfaceMainComponent: VoidComponent<IconProps> = (props) => {
+    const [local, others] = splitProps(props, ['size']);
 
     return (
         <svg
             role='img'
             aria-label='Interface Main Component'
-            width={pickedProps.size || '1rem'}
-            height={pickedProps.size || '1rem'}
+            width={local.size || '1rem'}
+            height={local.size || '1rem'}
             viewBox='0 0 24 24'
             fill='none'
-            {...otherProps}
+            {...others}
         >
             <path
                 d='M11.2348 2.37392C10.8672 2.52616 10.5377 2.85565 9.8788 3.51457C9.22003 4.17335 8.8904 4.50298 8.73818 4.87047C8.53519 5.36053 8.53519 5.91121 8.73818 6.40126C8.89042 6.76881 9.21989 7.09828 9.87883 7.75722C10.5374 8.41578 10.8673 8.74568 11.2347 8.89788C11.7248 9.10086 12.2755 9.10086 12.7655 8.89787C13.1331 8.74563 13.4625 8.41616 14.1215 7.75722C14.7804 7.09828 15.1089 6.76881 15.2612 6.40126C15.4641 5.91121 15.4641 5.36053 15.2612 4.87047C15.1089 4.50293 14.7804 4.17351 14.1215 3.51457C13.4625 2.85564 13.1331 2.52616 12.7655 2.37392C12.2755 2.17093 11.7248 2.17093 11.2348 2.37392Z'
