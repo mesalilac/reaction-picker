@@ -42,6 +42,12 @@ export const TagEditModal: VoidComponent<ModalWrapperProps & { tag: Tag }> = (
             );
         });
 
+        globalCtx.resources.images.refetch();
+        globalCtx.resources.videos.refetch();
+        globalCtx.resources.audio.refetch();
+        globalCtx.resources.snippets.refetch();
+        globalCtx.resources.generalStats.refetch();
+
         props.onOpenChange(false);
     };
 
