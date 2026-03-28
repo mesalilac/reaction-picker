@@ -9,7 +9,7 @@ import {
     type VoidComponent,
 } from 'solid-js';
 
-import type { Audio, Image, Video } from '@/bindings';
+import type { Audio, Image, TagId, Video } from '@/bindings';
 import { Button, Input, Select } from '@/components';
 import {
     DISCORD_FREE_FILE_UPLOAD_LIMIT,
@@ -44,6 +44,7 @@ export const Main: VoidComponent<Props> = (props) => {
     const globalCtx = useGlobalContext();
 
     const [searchQuery, setSearchQuery] = createSignal('');
+    const [selectedTags, setSelectedTags] = createSignal<TagId[]>([]);
 
     const [filter, setFilter] = createSignal<FilterType[]>([]);
     const [sortBy, setSortBy] = createSignal<SortByType>('Last used at date');
@@ -64,6 +65,11 @@ export const Main: VoidComponent<Props> = (props) => {
         const isFavorite = item.isFavorite;
         const belowDiscordFreeLimit =
             item.fileSize <= DISCORD_FREE_FILE_UPLOAD_LIMIT;
+        const hasSelectedTags = selectedTags().every((tagId) =>
+            item.tags.some((tag) => tag.id === tagId),
+        );
+
+        if (selectedTags().length > 0 && !hasSelectedTags) return false;
 
         const matchesSearch =
             !query ||
@@ -141,6 +147,11 @@ export const Main: VoidComponent<Props> = (props) => {
             const isFavorite = item.isFavorite;
             const belowDiscordFreeLimit =
                 item.content.length <= DISCORD_FREE_MAX_CHAR_LIMIT;
+            const hasSelectedTags = selectedTags().every((tagId) =>
+                item.tags.some((tag) => tag.id === tagId),
+            );
+
+            if (selectedTags().length > 0 && !hasSelectedTags) return false;
 
             const matchesSearch =
                 !query ||
@@ -270,6 +281,27 @@ export const Main: VoidComponent<Props> = (props) => {
                     </div>
                     <Select
                         onChange={(v) => {
+                            if (selectedTags().includes(v)) {
+                                setSelectedTags((prev) =>
+                                    prev.filter((i) => i !== v),
+                                );
+                                return;
+                            }
+
+                            setSelectedTags((prev) => [...prev, v]);
+                        }}
+                        options={
+                            globalCtx.resources.tags.get()?.map((x) => ({
+                                value: x.id,
+                                label: x.name,
+                            })) || []
+                        }
+                        placeholder='Tags'
+                        searchable
+                        selected={selectedTags()}
+                    />
+                    <Select
+                        onChange={(v) => {
                             setSortBy(v as SortByType);
                         }}
                         options={SORT_BY_LIST.map((i) => ({ value: i }))}
@@ -284,7 +316,13 @@ export const Main: VoidComponent<Props> = (props) => {
                     />
                 </div>
             </div>
-            <Show when={searchQuery() || filter().length > 0}>
+            <Show
+                when={
+                    searchQuery() ||
+                    filter().length > 0 ||
+                    selectedTags().length > 0
+                }
+            >
                 <span>Found {itemsCount()} Results</span>
             </Show>
             <div class='grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-4'>
