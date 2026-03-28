@@ -307,7 +307,12 @@ export const Select: VoidComponent<Props> = (rawProps) => {
                                     type='search'
                                     value={searchQuery()}
                                 />
-                                <Show when={searchQuery().trim().length > 0}>
+                                <Show
+                                    when={
+                                        searchQuery().trim().length > 0 &&
+                                        props.onAddNewOption
+                                    }
+                                >
                                     <Button
                                         onClick={() => {
                                             props.onAddNewOption?.(
