@@ -39,30 +39,31 @@ export const Button: ParentComponent<Props> = (rawProps) => {
         'loading',
     ]);
 
-    const baseStyles =
-        'box-border flex cursor-pointer items-center gap-2 rounded-lg border border-transparent px-4 py-2 font-medium text-sm text-white leading-5 shadow-xs focus-visible:outline-none focus-visible:ring-4';
+    const baseStyles = clsx(
+        'box-border flex cursor-pointer items-center gap-2 rounded-lg border border-transparent px-4 py-2 font-medium text-sm text-white leading-5 shadow-xs transition-colors duration-100 focus-visible:outline-none focus-visible:ring-4',
+    );
 
     const variantStyles: Record<ButtonVariant, string> = {
         primary: clsx(
-            'bg-blue-600 hover:bg-blue-700 focus-visible:ring-blue-600/50 active:bg-blue-800',
+            'bg-blue-500/60 hover:bg-blue-600/60 focus-visible:ring-blue-500/50 active:bg-blue-700/60',
         ),
         secondary: clsx(
-            'bg-neutral-500/50 text-neutral-300 hover:bg-neutral-600/50 focus-visible:ring-neutral-600/50 active:bg-neutral-700/50',
+            'bg-neutral-500/30 text-neutral-300 hover:bg-neutral-600/30 focus-visible:ring-neutral-500/50 active:bg-neutral-700/30',
         ),
         tertiary: clsx(
-            'bg-neutral-600/50 text-neutral-300 hover:bg-neutral-700/50 focus-visible:ring-neutral-700/50 active:bg-neutral-800/50',
+            'bg-neutral-600/30 text-neutral-300 hover:bg-neutral-700/30 focus-visible:ring-neutral-500/50 active:bg-neutral-800/30',
         ),
         success: clsx(
-            'bg-green-600 hover:bg-green-700 focus-visible:ring-green-600/50 active:bg-green-800',
+            'bg-green-500/30 text-green-400 hover:bg-green-600/30 focus-visible:ring-green-500/50 active:bg-green-700/30',
         ),
         danger: clsx(
-            'bg-red-600 hover:bg-red-700 focus-visible:ring-red-600/50 active:bg-red-800',
+            'bg-red-500/30 text-red-400 hover:bg-red-600/30 focus-visible:ring-red-500/50 active:bg-red-700/30',
         ),
         warning: clsx(
-            'bg-yellow-600 hover:bg-yellow-700 focus-visible:ring-yellow-600/50 active:bg-yellow-800',
+            'bg-yellow-500/30 text-yellow-400 hover:bg-yellow-600/30 focus-visible:ring-yellow-500/50 active:bg-yellow-700/30',
         ),
         ghost: clsx(
-            'bg-transparent hover:bg-neutral-600/50 focus-visible:ring-neutral-600/50 active:bg-neutral-700/50',
+            'bg-transparent hover:bg-neutral-600/30 focus-visible:ring-neutral-600/50 active:bg-neutral-700/30',
         ),
     };
 
