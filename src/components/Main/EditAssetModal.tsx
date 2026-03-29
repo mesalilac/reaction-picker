@@ -8,6 +8,7 @@ import {
     type Snippet,
     type Video,
 } from '@/bindings';
+import { useGlobalContext } from '@/store';
 import {
     Button,
     Input,
@@ -15,8 +16,7 @@ import {
     type ModalWrapperProps,
     Select,
     Textarea,
-} from '@/components';
-import { useGlobalContext } from '@/store';
+} from '@/ui';
 import { handleIpcError, handleUnexpectedError } from '@/utils';
 
 type EditAssetStoreType = {

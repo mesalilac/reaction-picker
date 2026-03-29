@@ -1,7 +1,7 @@
 import { createContext, type JSX, splitProps, useContext } from 'solid-js';
 import { twMerge } from 'tailwind-merge';
 
-import { Button, Separator } from '@/components';
+import { Button, Separator } from '@/ui';
 
 const MenuContext = createContext<{
     open: boolean;

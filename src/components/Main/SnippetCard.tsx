@@ -5,9 +5,9 @@ import { createSignal, Show, type VoidComponent } from 'solid-js';
 import { toast } from 'solid-sonner';
 
 import { commands, type Snippet } from '@/bindings';
-import { Button, IconButton } from '@/components';
 import { IconInterfaceHeart01 } from '@/icons';
 import { useGlobalContext } from '@/store';
+import { Button, IconButton } from '@/ui';
 import {
     handleIpcError,
     handleUnexpectedError,

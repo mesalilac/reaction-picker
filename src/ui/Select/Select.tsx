@@ -15,7 +15,6 @@ import {
     type VoidComponent,
 } from 'solid-js';
 
-import { Button, CountLabel, Input, Popover, Separator } from '@/components';
 import {
     IconArrowCaretDownMd,
     IconEditAddPlus,
@@ -24,6 +23,7 @@ import {
     IconInterfaceCheckboxUnchecked,
     IconMenuCloseMd,
 } from '@/icons';
+import { Button, CountLabel, Input, Popover, Separator } from '@/ui';
 
 type Option = {
     /**

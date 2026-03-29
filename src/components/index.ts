@@ -3,5 +3,4 @@
 export * from './DragOverlay';
 export * from './Main';
 export * from './Nav';
-export * from './_ui';
 export * from './TagsManager';

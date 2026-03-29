@@ -6,10 +6,10 @@ import { createSignal, Show, type VoidComponent } from 'solid-js';
 import { toast } from 'solid-sonner';
 
 import { commands, type Video } from '@/bindings';
-import { Button, IconButton } from '@/components';
 import { FALLBACK_VOLUME } from '@/consts';
 import { IconInterfaceHeart01 } from '@/icons';
 import { useGlobalContext } from '@/store';
+import { Button, IconButton } from '@/ui';
 import {
     handleIpcError,
     handleUnexpectedError,

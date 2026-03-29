@@ -7,9 +7,9 @@ import {
     type VoidComponent,
 } from 'solid-js';
 
-import { Button, IconButton } from '@/components';
 import { IconArrowUpMd, IconEditAddPlus, IconInterfaceSettings } from '@/icons';
 import { useGlobalContext } from '@/store';
+import { Button, IconButton } from '@/ui';
 
 import { CreateSnippetModal } from './CreateSnippetModal';
 import { SettingsModal } from './SettingsModal';

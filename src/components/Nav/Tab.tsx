@@ -7,8 +7,8 @@ import {
     type VoidComponent,
 } from 'solid-js';
 
-import { CountLabel } from '@/components';
 import { type TabType, useGlobalContext } from '@/store';
+import { CountLabel } from '@/ui';
 
 export const Tab: VoidComponent<{
     type: TabType;

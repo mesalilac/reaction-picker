@@ -3,8 +3,8 @@ import { createStore } from 'solid-js/store';
 import { toast } from 'solid-sonner';
 
 import { commands } from '@/bindings';
-import { Input, Modal, type ModalWrapperProps, Textarea } from '@/components';
 import { useGlobalContext } from '@/store';
+import { Input, Modal, type ModalWrapperProps, Textarea } from '@/ui';
 import { handleIpcError, handleUnexpectedError } from '@/utils';
 
 export const CreateSnippetModal: VoidComponent<ModalWrapperProps> = (props) => {

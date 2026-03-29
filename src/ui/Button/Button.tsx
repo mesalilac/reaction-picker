@@ -10,7 +10,7 @@ import {
 } from 'solid-js';
 import { twMerge } from 'tailwind-merge';
 
-import { CountLabel } from '@/components';
+import { CountLabel } from '@/ui';
 
 type ButtonVariant =
     | 'primary'

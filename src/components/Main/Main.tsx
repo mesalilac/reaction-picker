@@ -10,12 +10,12 @@ import {
 } from 'solid-js';
 
 import type { Audio, Image, TagId, Video } from '@/bindings';
-import { Button, Input, Select } from '@/components';
 import {
     DISCORD_FREE_FILE_UPLOAD_LIMIT,
     DISCORD_FREE_MAX_CHAR_LIMIT,
 } from '@/consts';
 import { useGlobalContext } from '@/store';
+import { Button, Input, Select } from '@/ui';
 
 import { AudioCard } from './AudioCard';
 import { ImageCard } from './ImageCard';

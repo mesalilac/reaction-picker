@@ -1,9 +1,9 @@
 import { createSignal, For, Show, type VoidComponent } from 'solid-js';
 
 import { commands } from '@/bindings';
-import { Button, Input, Separator } from '@/components';
 import { IconEditAddPlus } from '@/icons';
 import { useGlobalContext } from '@/store';
+import { Button, Input, Separator } from '@/ui';
 import { handleIpcError, handleUnexpectedError } from '@/utils';
 
 import { TagView } from './TagView';

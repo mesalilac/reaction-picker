@@ -2,8 +2,8 @@ import type { VoidComponent } from 'solid-js';
 import { createStore } from 'solid-js/store';
 
 import { commands, type Tag } from '@/bindings';
-import { Input, Modal, type ModalWrapperProps } from '@/components';
 import { useGlobalContext } from '@/store';
+import { Input, Modal, type ModalWrapperProps } from '@/ui';
 import { handleIpcError, handleUnexpectedError } from '@/utils';
 
 export const TagEditModal: VoidComponent<ModalWrapperProps & { tag: Tag }> = (

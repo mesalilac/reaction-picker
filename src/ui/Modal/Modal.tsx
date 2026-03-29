@@ -4,8 +4,8 @@ import { createEffect, createSignal, onCleanup, Show } from 'solid-js';
 import { Portal } from 'solid-js/web';
 import { twMerge } from 'tailwind-merge';
 
-import { Button, ModalContext, Separator, useModalContext } from '@/components';
 import { IconMenuCloseMd, IconSystemSave } from '@/icons';
+import { Button, ModalContext, Separator, useModalContext } from '@/ui';
 
 export type ModalWrapperProps = {
     open: boolean;

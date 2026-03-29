@@ -4,6 +4,10 @@ import { createStore } from 'solid-js/store';
 import { toast } from 'solid-sonner';
 
 import { commands } from '@/bindings';
+import { TagsManager } from '@/components';
+import { FALLBACK_VOLUME } from '@/consts';
+import { IconWarningTriangleWarning } from '@/icons';
+import { type TabType, useGlobalContext } from '@/store';
 import {
     Button,
     Checkbox,
@@ -12,11 +16,7 @@ import {
     Modal,
     type ModalWrapperProps,
     Separator,
-    TagsManager,
-} from '@/components';
-import { FALLBACK_VOLUME } from '@/consts';
-import { IconWarningTriangleWarning } from '@/icons';
-import { type TabType, useGlobalContext } from '@/store';
+} from '@/ui';
 import { handleIpcError, handleUnexpectedError } from '@/utils';
 
 export const SettingsModal: VoidComponent<ModalWrapperProps> = (props) => {
