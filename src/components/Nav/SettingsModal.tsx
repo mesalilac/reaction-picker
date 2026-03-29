@@ -1,12 +1,12 @@
 import { ask } from '@tauri-apps/plugin-dialog';
-import { createMemo, type VoidComponent } from 'solid-js';
+import { createMemo, createSignal, type VoidComponent } from 'solid-js';
 import { createStore } from 'solid-js/store';
 import { toast } from 'solid-sonner';
 
 import { commands } from '@/bindings';
 import { TagsManager } from '@/components';
 import { FALLBACK_VOLUME } from '@/consts';
-import { IconWarningTriangleWarning } from '@/icons';
+import { IconFileCheck, IconWarningTriangleWarning } from '@/icons';
 import { type TabType, useGlobalContext } from '@/store';
 import {
     Badge,
@@ -28,6 +28,8 @@ export const SettingsModal: VoidComponent<ModalWrapperProps> = (props) => {
         minimizeOnCopy?: boolean;
         defaultVolume?: number;
     }>();
+
+    const [syncing, setSyncing] = createSignal(false);
 
     const saveSettings = async () => {
         if (
@@ -97,6 +99,27 @@ export const SettingsModal: VoidComponent<ModalWrapperProps> = (props) => {
     const tagsCount = createMemo(
         () => globalCtx.resources.tags.get()?.length || 0,
     );
+
+    const syncData = async () => {
+        if (syncing()) return;
+
+        setSyncing(true);
+        toast.promise(commands.utilSyncData(), {
+            loading: 'Syncing data',
+            success: 'Data synced successfully',
+            error: 'Failed to sync data',
+            finally: () => {
+                setSyncing(false);
+
+                globalCtx.resources.images.refetch();
+                globalCtx.resources.videos.refetch();
+                globalCtx.resources.audio.refetch();
+                globalCtx.resources.snippets.refetch();
+                globalCtx.resources.tags.refetch();
+                globalCtx.resources.generalStats.refetch();
+            },
+        });
+    };
 
     const deleteData = async (target?: TabType | 'Tags') => {
         const confirm = await ask(
@@ -249,6 +272,14 @@ export const SettingsModal: VoidComponent<ModalWrapperProps> = (props) => {
                         <Separator class='mb-2' />
                     </div>
                     <div class='flex flex-wrap gap-2'>
+                        <Button
+                            disabled={syncing()}
+                            onClick={() => syncData()}
+                            variant='secondary'
+                        >
+                            <IconFileCheck />
+                            Delete Missing & Orphaned assets
+                        </Button>
                         <Button onClick={() => deleteData()} variant='danger'>
                             <IconWarningTriangleWarning />
                             Delete all

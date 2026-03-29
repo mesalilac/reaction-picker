@@ -10,6 +10,10 @@ mod utils;
 use clap::Parser;
 use cli::Cli;
 use commands::*;
+use diesel::{
+    r2d2::{ConnectionManager, Pool, PooledConnection},
+    SqliteConnection,
+};
 use diesel_migrations::{embed_migrations, EmbeddedMigrations, MigrationHarness};
 use events::*;
 use specta_typescript::{BigIntExportBehavior, Typescript};
@@ -20,7 +24,8 @@ const MIGRATIONS: EmbeddedMigrations = embed_migrations!("migrations");
 const APP_NAME: &str = "com.mesalilac.reaction-picker";
 const APP_SETTINGS_ID: i32 = 1;
 
-pub type DbPool = diesel::r2d2::Pool<diesel::r2d2::ConnectionManager<diesel::SqliteConnection>>;
+pub type DbPool = Pool<ConnectionManager<SqliteConnection>>;
+pub type PooledDbConn = PooledConnection<ConnectionManager<SqliteConnection>>;
 
 pub struct AppState {
     pub pool: DbPool,
@@ -119,6 +124,7 @@ pub fn run() {
             update_restore_snippet,
             update_tag,
             update_settings,
+            util_sync_data,
             util_drop_files,
             util_copy_image,
             util_copy_video,
