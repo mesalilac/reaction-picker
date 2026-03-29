@@ -9,9 +9,9 @@ import { FALLBACK_VOLUME } from '@/consts';
 import { IconWarningTriangleWarning } from '@/icons';
 import { type TabType, useGlobalContext } from '@/store';
 import {
+    Badge,
     Button,
     Checkbox,
-    CountLabel,
     Input,
     Modal,
     type ModalWrapperProps,
@@ -252,7 +252,7 @@ export const SettingsModal: VoidComponent<ModalWrapperProps> = (props) => {
                         <Button onClick={() => deleteData()} variant='danger'>
                             <IconWarningTriangleWarning />
                             Delete all
-                            <CountLabel>{allCount()}</CountLabel>
+                            <Badge>{allCount()}</Badge>
                         </Button>
                         <Button
                             onClick={() => deleteData('Images')}
@@ -260,7 +260,7 @@ export const SettingsModal: VoidComponent<ModalWrapperProps> = (props) => {
                         >
                             <IconWarningTriangleWarning />
                             Delete all images
-                            <CountLabel>{imagesCount()}</CountLabel>
+                            <Badge>{imagesCount()}</Badge>
                         </Button>
                         <Button
                             onClick={() => deleteData('Videos')}
@@ -268,7 +268,7 @@ export const SettingsModal: VoidComponent<ModalWrapperProps> = (props) => {
                         >
                             <IconWarningTriangleWarning />
                             Delete all videos
-                            <CountLabel>{videosCount()}</CountLabel>
+                            <Badge>{videosCount()}</Badge>
                         </Button>
                         <Button
                             onClick={() => deleteData('Audio')}
@@ -276,7 +276,7 @@ export const SettingsModal: VoidComponent<ModalWrapperProps> = (props) => {
                         >
                             <IconWarningTriangleWarning />
                             Delete all audio
-                            <CountLabel>{audioCount()}</CountLabel>
+                            <Badge>{audioCount()}</Badge>
                         </Button>
                         <Button
                             onClick={() => deleteData('Snippets')}
@@ -284,7 +284,7 @@ export const SettingsModal: VoidComponent<ModalWrapperProps> = (props) => {
                         >
                             <IconWarningTriangleWarning />
                             Delete all snippets
-                            <CountLabel>{snippetsCount()}</CountLabel>
+                            <Badge>{snippetsCount()}</Badge>
                         </Button>
                         <Button
                             onClick={() => deleteData('Tags')}
@@ -292,7 +292,7 @@ export const SettingsModal: VoidComponent<ModalWrapperProps> = (props) => {
                         >
                             <IconWarningTriangleWarning />
                             Delete all tags
-                            <CountLabel>{tagsCount()}</CountLabel>
+                            <Badge>{tagsCount()}</Badge>
                         </Button>
                     </div>
                 </div>

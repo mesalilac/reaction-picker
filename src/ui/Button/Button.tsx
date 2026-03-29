@@ -10,7 +10,7 @@ import {
 } from 'solid-js';
 import { twMerge } from 'tailwind-merge';
 
-import { CountLabel } from '@/ui';
+import { Badge } from '@/ui';
 
 type ButtonVariant =
     | 'primary'
@@ -118,7 +118,7 @@ export const Button: ParentComponent<Props> = (rawProps) => {
                 >
                     {props.children}
                     <Show when={local.label}>
-                        <CountLabel>{local.label}</CountLabel>
+                        <Badge>{local.label}</Badge>
                     </Show>
                 </button>
             </Match>

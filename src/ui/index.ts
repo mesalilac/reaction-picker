@@ -2,7 +2,7 @@
 
 export * from './Button';
 export * from './IconButton';
-export * from './CountLabel';
+export * from './Badge';
 export * from './Popover';
 export * from './Select';
 export * from './Input';

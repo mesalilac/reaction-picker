@@ -1,3 +1,3 @@
 /** biome-ignore-all assist/source/organizeImports: false */
 
-export * from './CountLabel';
+export * from './Badge';

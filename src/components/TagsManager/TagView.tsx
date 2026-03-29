@@ -7,7 +7,7 @@ import {
     IconInterfaceTrashFull,
 } from '@/icons';
 import { useGlobalContext } from '@/store';
-import { CountLabel, IconButton } from '@/ui';
+import { Badge, IconButton } from '@/ui';
 import { handleIpcError, handleUnexpectedError } from '@/utils';
 
 import { TagEditModal } from './TagEditModal';
@@ -80,7 +80,7 @@ export const TagView: VoidComponent<Props> = (props) => {
             <div class='flex items-center gap-2'>
                 <IconInterfaceTag />
                 <span class='text-neutral-300 text-sm'>{props.tag.name}</span>
-                <CountLabel>{usageCount()}</CountLabel>
+                <Badge>{usageCount()}</Badge>
             </div>
             <div class='flex'>
                 <IconButton

@@ -23,7 +23,7 @@ import {
     IconInterfaceCheckboxUnchecked,
     IconMenuCloseMd,
 } from '@/icons';
-import { Button, CountLabel, Input, Popover, Separator } from '@/ui';
+import { Badge, Button, Input, Popover, Separator } from '@/ui';
 
 type Option = {
     /**
@@ -234,15 +234,13 @@ export const Select: VoidComponent<Props> = (rawProps) => {
                                 fallback={
                                     <>
                                         <span>selected</span>
-                                        <CountLabel>
-                                            {props.selected.length}
-                                        </CountLabel>
+                                        <Badge>{props.selected.length}</Badge>
                                     </>
                                 }
                                 when={props.placeholder}
                             >
                                 <span>{props.placeholder}</span>
-                                <CountLabel>{props.selected.length}</CountLabel>
+                                <Badge>{props.selected.length}</Badge>
                             </Show>
                         </Match>
                         <Match when={!isMultiSelect() && props.selected}>

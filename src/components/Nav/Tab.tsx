@@ -8,7 +8,7 @@ import {
 } from 'solid-js';
 
 import { type TabType, useGlobalContext } from '@/store';
-import { CountLabel } from '@/ui';
+import { Badge } from '@/ui';
 
 export const Tab: VoidComponent<{
     type: TabType;
@@ -55,7 +55,7 @@ export const Tab: VoidComponent<{
             type='button'
         >
             {props.type}
-            <CountLabel>{count()}</CountLabel>
+            <Badge>{count()}</Badge>
         </button>
     );
 };
