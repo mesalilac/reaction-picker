@@ -51,6 +51,10 @@ impl VideoEntity {
             created_at: Timestamp::now(),
         }
     }
+
+    pub fn full_path(&self) -> PathBuf {
+        get_app_videos_dir().join(self.file_name.clone())
+    }
 }
 
 #[derive(specta::Type, Serialize, Deserialize, Debug, Clone)]
@@ -78,13 +82,13 @@ pub struct Video {
 impl Video {
     pub fn from_entity(entity: VideoEntity, tags: Vec<TagEntity>) -> Self {
         Self {
+            file_path: entity.full_path(),
             id: entity.id,
             title: entity.title,
             description: entity.description,
             external_link: entity.external_link,
             use_counter: entity.use_counter,
             last_used_at: entity.last_used_at,
-            file_path: get_app_videos_dir().join(entity.file_name.clone()),
             file_name: entity.file_name,
             mime_type: entity.mime_type,
             file_size: entity.file_size,
