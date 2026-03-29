@@ -1,8 +1,8 @@
 import { Show } from 'solid-js';
 
 import {
-    IconArrowUndoDownRight,
     IconEditPencil01,
+    IconEditUndo,
     IconInterfaceExternalLink,
     IconInterfaceTrashFull,
     IconMenuMoreHorizontal,
@@ -48,7 +48,7 @@ export const CardMenu = (props: Props) => {
                     <Menu.Separator />
                     <Show when={props.deletedAt !== null}>
                         <Menu.Item onClick={props.handleRestore}>
-                            <IconArrowUndoDownRight /> restore
+                            <IconEditUndo /> restore
                         </Menu.Item>
                     </Show>
                     <Menu.Item
