@@ -1,4 +1,3 @@
-import { clsx } from 'clsx';
 import { gsap } from 'gsap';
 import {
     createEffect,
@@ -9,6 +8,7 @@ import {
 
 import { type TabType, useGlobalContext } from '@/store';
 import { Badge } from '@/ui';
+import { cn } from '@/utils';
 
 export const Tab: VoidComponent<{
     type: TabType;
@@ -41,7 +41,7 @@ export const Tab: VoidComponent<{
 
     return (
         <button
-            class={clsx(
+            class={cn(
                 'flex cursor-pointer items-center gap-2 border-b-2 p-1 transition-colors duration-150 ease-out',
                 isActive()
                     ? 'text-blue-500'

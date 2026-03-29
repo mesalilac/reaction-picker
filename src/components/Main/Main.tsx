@@ -1,4 +1,3 @@
-import { clsx } from 'clsx';
 import {
     createMemo,
     createSignal,
@@ -16,6 +15,7 @@ import {
 } from '@/consts';
 import { useGlobalContext } from '@/store';
 import { Button, Input, Select } from '@/ui';
+import { cn } from '@/utils';
 
 import { AudioCard } from './AudioCard';
 import { ImageCard } from './ImageCard';
@@ -227,7 +227,7 @@ export const Main: VoidComponent<Props> = (props) => {
                         <For each={FILTERS_LIST}>
                             {(option, i) => (
                                 <Button
-                                    class={clsx(
+                                    class={cn(
                                         'rounded-none',
                                         i() === 0 && 'rounded-l-lg',
                                         i() === FILTERS_LIST.length - 1 &&

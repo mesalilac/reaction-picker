@@ -1,5 +1,7 @@
 import { getCurrentWindow } from '@tauri-apps/api/window';
+import clsx, { type ClassValue } from 'clsx';
 import { toast } from 'solid-sonner';
+import { twMerge } from 'tailwind-merge';
 
 import type { CommandError } from '@/bindings';
 
@@ -48,3 +50,5 @@ export const handleIpcError = (
         console.error(e);
     }
 };
+
+export const cn = (...inputs: ClassValue[]): string => twMerge(clsx(...inputs));

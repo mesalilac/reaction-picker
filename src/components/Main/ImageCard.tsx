@@ -2,7 +2,6 @@ import { createVisibilityObserver } from '@solid-primitives/intersection-observe
 import { convertFileSrc } from '@tauri-apps/api/core';
 import { openUrl } from '@tauri-apps/plugin-opener';
 import { decode } from 'blurhash';
-import { clsx } from 'clsx';
 import { createSignal, onMount, Show, type VoidComponent } from 'solid-js';
 import { toast } from 'solid-sonner';
 
@@ -11,6 +10,7 @@ import { IconInterfaceHeart01 } from '@/icons';
 import { useGlobalContext } from '@/store';
 import { Button, IconButton } from '@/ui';
 import {
+    cn,
     handleIpcError,
     handleUnexpectedError,
     minimizeWindow,
@@ -216,7 +216,7 @@ export const ImageCard: VoidComponent<Props> = (props) => {
                     <IconButton
                         icon={
                             <IconInterfaceHeart01
-                                class={clsx('size-5', {
+                                class={cn('size-5', {
                                     'fill-red-500 text-red-500':
                                         props.image.isFavorite,
                                 })}

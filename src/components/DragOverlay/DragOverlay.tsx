@@ -1,6 +1,5 @@
 import { listen, TauriEvent } from '@tauri-apps/api/event';
 import type { DragDropEvent } from '@tauri-apps/api/window';
-import clsx from 'clsx';
 import type { VoidComponent } from 'solid-js';
 import { createSignal, onCleanup, onMount } from 'solid-js';
 import { Portal } from 'solid-js/web';
@@ -8,7 +7,7 @@ import { toast } from 'solid-sonner';
 
 import { commands, events } from '@/bindings';
 import { useGlobalContext } from '@/store';
-import { handleIpcError, handleUnexpectedError } from '@/utils';
+import { cn, handleIpcError, handleUnexpectedError } from '@/utils';
 
 type Props = {
     ref?: HTMLDivElement | ((el: HTMLDivElement) => void);
@@ -111,7 +110,7 @@ export const DragOverlay: VoidComponent<Props> = (props) => {
     return (
         <Portal>
             <div
-                class={clsx(
+                class={cn(
                     'pointer-events-none fixed inset-0 z-50 flex scale-150 items-center justify-center bg-black/40 backdrop-blur-sm transition-opacity duration-150',
                     { 'pointer-events-none opacity-0': !isDragActive() },
                 )}

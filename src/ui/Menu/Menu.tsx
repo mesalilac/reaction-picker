@@ -1,7 +1,7 @@
 import { createContext, type JSX, splitProps, useContext } from 'solid-js';
-import { twMerge } from 'tailwind-merge';
 
 import { Button, Separator } from '@/ui';
+import { cn } from '@/utils';
 
 const MenuContext = createContext<{
     open: boolean;
@@ -56,7 +56,7 @@ Menu.Item = (props: ItemProps) => {
 
     return (
         <Button
-            class={twMerge('w-full text-nowrap capitalize', local.class)}
+            class={cn('w-full text-nowrap capitalize', local.class)}
             onClick={handleClick}
             variant='ghost'
             {...others}

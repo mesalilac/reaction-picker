@@ -1,6 +1,7 @@
 import type { JSX, ParentComponent } from 'solid-js';
 import { splitProps } from 'solid-js';
-import { twMerge } from 'tailwind-merge';
+
+import { cn } from '@/utils';
 
 interface Props extends JSX.ButtonHTMLAttributes<HTMLButtonElement> {
     icon: JSX.Element;
@@ -11,7 +12,7 @@ export const IconButton: ParentComponent<Props> = (props) => {
 
     return (
         <button
-            class={twMerge(
+            class={cn(
                 'box-border flex cursor-pointer items-center gap-1 rounded-lg border border-transparent p-2 font-medium text-sm text-white leading-5 shadow-xs focus-visible:outline-none focus-visible:ring-4',
                 local.class,
             )}

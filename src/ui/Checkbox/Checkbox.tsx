@@ -1,5 +1,6 @@
-import { clsx } from 'clsx';
 import { Show, type VoidComponent } from 'solid-js';
+
+import { cn } from '@/utils';
 
 type Props = {
     checked: boolean;
@@ -15,7 +16,7 @@ export const Checkbox: VoidComponent<Props> = (props) => {
             role='none'
         >
             <div
-                class={clsx(
+                class={cn(
                     'flex size-4 cursor-pointer items-center rounded-sm border transition-colors duration-100',
                     props.checked
                         ? 'border-blue-600 bg-blue-600'

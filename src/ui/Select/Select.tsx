@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import gsap from 'gsap';
 import { Flip } from 'gsap/Flip';
 import {
@@ -24,6 +23,7 @@ import {
     IconMenuCloseMd,
 } from '@/icons';
 import { Badge, Button, Input, Popover, Separator } from '@/ui';
+import { cn } from '@/utils';
 
 type Option = {
     /**
@@ -218,7 +218,7 @@ export const Select: VoidComponent<Props> = (rawProps) => {
         <>
             <Button
                 aria-expanded={isOpen()}
-                class={clsx(
+                class={cn(
                     'justify-between rounded-lg border-2 px-3 text-white capitalize',
                 )}
                 disabled={props.disabled}
@@ -382,7 +382,7 @@ export const Select: VoidComponent<Props> = (rawProps) => {
                                 <For each={sortedTags()}>
                                     {(option) => (
                                         <Button
-                                            class={clsx(
+                                            class={cn(
                                                 'select-menu__item justify-between text-nowrap rounded-lg',
                                                 isSelected(option.value) &&
                                                     'bg-blue-600/40 hover:bg-blue-700/40 active:bg-blue-800/40',

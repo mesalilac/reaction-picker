@@ -2,10 +2,10 @@ import gsap from 'gsap';
 import type { JSX } from 'solid-js';
 import { createEffect, createSignal, onCleanup, Show } from 'solid-js';
 import { Portal } from 'solid-js/web';
-import { twMerge } from 'tailwind-merge';
 
 import { IconMenuCloseMd, IconSystemSave } from '@/icons';
 import { Button, ModalContext, Separator, useModalContext } from '@/ui';
+import { cn } from '@/utils';
 
 export type ModalWrapperProps = {
     open: boolean;
@@ -100,7 +100,7 @@ export const Modal = (props: {
                     role='none'
                 >
                     <div
-                        class={twMerge(
+                        class={cn(
                             'relative flex size-9/12 flex-col gap-2 rounded-lg bg-neutral-900/80 p-4 shadow-lg backdrop-blur-sm',
                             props.class,
                         )}
@@ -126,7 +126,7 @@ export const Modal = (props: {
 Modal.Title = (props: { title: JSX.Element; class?: string }) => {
     return (
         <>
-            <span class={twMerge('px-2 text-xl capitalize', props.class)}>
+            <span class={cn('px-2 text-xl capitalize', props.class)}>
                 {props.title}
             </span>
             <Separator class='mb-4' />
@@ -136,12 +136,7 @@ Modal.Title = (props: { title: JSX.Element; class?: string }) => {
 
 Modal.Body = (props: { class?: string; children: JSX.Element }) => {
     return (
-        <div
-            class={twMerge(
-                'flex flex-col gap-4 overflow-y-auto p-2',
-                props.class,
-            )}
-        >
+        <div class={cn('flex flex-col gap-4 overflow-y-auto p-2', props.class)}>
             {props.children}
         </div>
     );

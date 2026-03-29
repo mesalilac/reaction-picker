@@ -9,7 +9,8 @@ import {
     Switch,
     splitProps,
 } from 'solid-js';
-import { twMerge } from 'tailwind-merge';
+
+import { cn } from '@/utils';
 
 interface Props<T = string>
     extends Omit<
@@ -117,7 +118,7 @@ export const Textarea = <T = string>(props: Props<T>) => {
             <textarea
                 aria-describedby={error() ? `${id}-error` : `${id}-helper`}
                 aria-invalid={!!error()}
-                class={twMerge(
+                class={cn(
                     'h-32 max-h-32 resize-none rounded-lg border border-neutral-600 bg-neutral-700/30 px-3 py-2.5 text-sm placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-blue-500',
                     error() && 'bg-red-500/30 focus:ring-red-500',
                     local.class,

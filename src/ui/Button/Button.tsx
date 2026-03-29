@@ -1,4 +1,3 @@
-import { clsx } from 'clsx';
 import {
     type JSX,
     Match,
@@ -8,9 +7,9 @@ import {
     Switch,
     splitProps,
 } from 'solid-js';
-import { twMerge } from 'tailwind-merge';
 
 import { Badge } from '@/ui';
+import { cn } from '@/utils';
 
 type ButtonVariant =
     | 'primary'
@@ -39,30 +38,30 @@ export const Button: ParentComponent<Props> = (rawProps) => {
         'loading',
     ]);
 
-    const baseStyles = clsx(
+    const baseStyles = cn(
         'box-border flex cursor-pointer items-center gap-2 rounded-lg border border-transparent px-4 py-2 font-medium text-sm text-white leading-5 shadow-xs transition-colors duration-100 focus-visible:outline-none focus-visible:ring-4',
     );
 
     const variantStyles: Record<ButtonVariant, string> = {
-        primary: clsx(
+        primary: cn(
             'bg-blue-500/60 hover:bg-blue-600/60 focus-visible:ring-blue-500/50 active:bg-blue-700/60',
         ),
-        secondary: clsx(
+        secondary: cn(
             'bg-neutral-500/30 text-neutral-300 hover:bg-neutral-600/30 focus-visible:ring-neutral-500/50 active:bg-neutral-700/30',
         ),
-        tertiary: clsx(
+        tertiary: cn(
             'bg-neutral-600/30 text-neutral-300 hover:bg-neutral-700/30 focus-visible:ring-neutral-500/50 active:bg-neutral-800/30',
         ),
-        success: clsx(
+        success: cn(
             'bg-green-500/30 text-green-400 hover:bg-green-600/30 focus-visible:ring-green-500/50 active:bg-green-700/30',
         ),
-        danger: clsx(
+        danger: cn(
             'bg-red-500/30 text-red-400 hover:bg-red-600/30 focus-visible:ring-red-500/50 active:bg-red-700/30',
         ),
-        warning: clsx(
+        warning: cn(
             'bg-yellow-500/30 text-yellow-400 hover:bg-yellow-600/30 focus-visible:ring-yellow-500/50 active:bg-yellow-700/30',
         ),
-        ghost: clsx(
+        ghost: cn(
             'bg-transparent hover:bg-neutral-600/30 focus-visible:ring-neutral-600/50 active:bg-neutral-700/30',
         ),
     };
@@ -74,7 +73,7 @@ export const Button: ParentComponent<Props> = (rawProps) => {
         <Switch>
             <Match when={local.loading}>
                 <button
-                    class={twMerge(
+                    class={cn(
                         baseStyles,
                         variantStyles[local.variant],
                         disabledButtonStyles,
@@ -106,7 +105,7 @@ export const Button: ParentComponent<Props> = (rawProps) => {
 
             <Match when={!local.loading}>
                 <button
-                    class={twMerge(
+                    class={cn(
                         baseStyles,
                         variantStyles[local.variant],
                         local.disabled && disabledButtonStyles,

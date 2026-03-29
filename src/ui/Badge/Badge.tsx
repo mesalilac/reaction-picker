@@ -1,5 +1,6 @@
 import type { JSX, ParentComponent } from 'solid-js';
-import { twMerge } from 'tailwind-merge';
+
+import { cn } from '@/utils';
 
 type Props = {
     ref?: HTMLSpanElement | ((el: HTMLSpanElement) => void);
@@ -10,7 +11,7 @@ type Props = {
 export const Badge: ParentComponent<Props> = (props) => {
     return (
         <span
-            class={twMerge(
+            class={cn(
                 'inline-flex items-center justify-center rounded-full bg-neutral-100/10 px-1 font-medium text-neutral-100 text-xs',
                 props.class,
             )}
