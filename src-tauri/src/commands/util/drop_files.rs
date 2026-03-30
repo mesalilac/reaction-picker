@@ -15,6 +15,7 @@ use tauri_specta::Event;
 use walkdir::WalkDir;
 
 struct FileQueue {
+    title: String,
     path: PathBuf,
     file_type: infer::Type,
     new_file_name: String,
@@ -79,6 +80,7 @@ pub async fn util_drop_files(
                 }
 
                 files.push(FileQueue {
+                    title: file_name,
                     path: entry_path.to_path_buf(),
                     file_type,
                     new_file_name,
@@ -99,6 +101,7 @@ pub async fn util_drop_files(
                 }
 
                 files.push(FileQueue {
+                    title: file_name,
                     path: entry_path.to_path_buf(),
                     file_type,
                     new_file_name,
@@ -119,6 +122,7 @@ pub async fn util_drop_files(
                 }
 
                 files.push(FileQueue {
+                    title: file_name,
                     path: entry_path.to_path_buf(),
                     file_type,
                     new_file_name,
@@ -170,7 +174,7 @@ pub async fn util_drop_files(
                 blur_hash,
             });
 
-            image_entity.title = Some(item.new_file_name);
+            image_entity.title = Some(item.title);
 
             match diesel::insert_into(images::table)
                 .values(&image_entity)
@@ -211,7 +215,7 @@ pub async fn util_drop_files(
 
             let mut format = probed.format;
 
-            let mut title: Option<String> = Some(item.new_file_name.clone());
+            let mut title: Option<String> = Some(item.title);
             let mut has_audio: bool = false;
             let mut duration = 0;
 
@@ -292,7 +296,7 @@ pub async fn util_drop_files(
 
             let mut format = probed.format;
 
-            let mut title: Option<String> = Some(item.new_file_name.clone());
+            let mut title: Option<String> = Some(item.title);
             let mut duration = 0;
 
             if let Some(metadata) = format.metadata().current() {
