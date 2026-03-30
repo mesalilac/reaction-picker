@@ -1,8 +1,10 @@
 import {
+    createEffect,
     createMemo,
     createSignal,
     For,
     Match,
+    onMount,
     Show,
     Switch,
     type VoidComponent,
@@ -54,6 +56,36 @@ export const Main: VoidComponent<Props> = (props) => {
     const videosTabActive = () => globalCtx.store.activeTab === 'Videos';
     const audioTabActive = () => globalCtx.store.activeTab === 'Audio';
     const snippetsTabActive = () => globalCtx.store.activeTab === 'Snippets';
+
+    // Restore sort options
+    onMount(() => {
+        const sortByIndex = Math.min(
+            Math.max(Number(localStorage.getItem('sortBy') || 0), 0),
+            SORT_BY_LIST.length - 1,
+        );
+        const sortDirIndex = Math.min(
+            Math.max(Number(localStorage.getItem('sortDir') || 0), 0),
+            SORT_DIR_LIST.length - 1,
+        );
+
+        const sortByValue = SORT_BY_LIST[sortByIndex];
+        const sortDirValue = SORT_DIR_LIST[sortDirIndex];
+
+        setSortBy(sortByValue);
+        setSortDir(sortDirValue);
+    });
+
+    // Save sort options
+    createEffect(() => {
+        const sortByIndex = SORT_BY_LIST.indexOf(sortBy());
+
+        localStorage.setItem('sortBy', sortByIndex.toString());
+    });
+    createEffect(() => {
+        const sortDirIndex = SORT_DIR_LIST.indexOf(sortDir());
+
+        localStorage.setItem('sortDir', sortDirIndex.toString());
+    });
 
     const filterList = (item: Image | Video | Audio) => {
         const query = searchQuery().toLowerCase();
