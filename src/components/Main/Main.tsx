@@ -97,6 +97,9 @@ export const Main: VoidComponent<Props> = (props) => {
         const isFavorite = item.isFavorite;
         const belowDiscordFreeLimit =
             item.fileSize <= DISCORD_FREE_FILE_UPLOAD_LIMIT;
+        const searchableTags = item.tags.map((tag) =>
+            tag.name.toLocaleLowerCase(),
+        );
         const hasSelectedTags = selectedTags().every((tagId) =>
             item.tags.some((tag) => tag.id === tagId),
         );
@@ -107,7 +110,8 @@ export const Main: VoidComponent<Props> = (props) => {
             !query ||
             title?.includes(query) ||
             description?.includes(query) ||
-            fileName.includes(query);
+            fileName.includes(query) ||
+            searchableTags.some((tag) => tag.includes(query));
 
         if (!matchesSearch) return false;
 
@@ -179,6 +183,9 @@ export const Main: VoidComponent<Props> = (props) => {
             const isFavorite = item.isFavorite;
             const belowDiscordFreeLimit =
                 item.content.length <= DISCORD_FREE_MAX_CHAR_LIMIT;
+            const searchableTags = item.tags.map((tag) =>
+                tag.name.toLocaleLowerCase(),
+            );
             const hasSelectedTags = selectedTags().every((tagId) =>
                 item.tags.some((tag) => tag.id === tagId),
             );
@@ -189,7 +196,8 @@ export const Main: VoidComponent<Props> = (props) => {
                 !query ||
                 title?.includes(query) ||
                 description?.includes(query) ||
-                content.includes(query);
+                content.includes(query) ||
+                searchableTags.some((tag) => tag.includes(query));
 
             if (!matchesSearch) return false;
 
