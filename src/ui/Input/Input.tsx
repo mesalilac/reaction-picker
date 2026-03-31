@@ -116,7 +116,7 @@ export const Input = <T = string>(props: Props<T>) => {
                     )}
                 </label>
             </Show>
-            <div class='flex flex-row items-center gap-2'>
+            <div class='flex flex-row gap-2'>
                 <input
                     aria-describedby={error() ? `${id}-error` : `${id}-helper`}
                     aria-invalid={!!error()}

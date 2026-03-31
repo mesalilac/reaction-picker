@@ -1,4 +1,4 @@
-import { Show } from 'solid-js';
+import { createSignal, For, Show } from 'solid-js';
 import { createStore } from 'solid-js/store';
 
 import {
@@ -10,6 +10,7 @@ import {
 } from '@/bindings';
 import { useGlobalContext } from '@/store';
 import {
+    Badge,
     Button,
     Input,
     Modal,
@@ -53,6 +54,8 @@ export const EditAssetModal = (
 ) => {
     const globalCtx = useGlobalContext();
 
+    const [tagsMenuSearchQuery, setTagsMenuSearchQuery] = createSignal('');
+
     const [store, setStore] = createStore<EditAssetStoreType>({
         title: props.item.data.title,
         description: props.item.data.description,
@@ -84,6 +87,31 @@ export const EditAssetModal = (
             setStore('externalLink', store.externalLink.trim());
 
         props.onSave(store);
+    };
+
+    const createNewTag = async (value: string) => {
+        if (globalCtx.resources.tags.get()?.find((t) => t.name === value))
+            return;
+
+        const res = await commands
+            .createTag({ name: value })
+            .catch(handleUnexpectedError);
+
+        if (!res) return;
+
+        if (res.status === 'error') {
+            handleIpcError(res.error);
+
+            return;
+        }
+
+        globalCtx.resources.tags.mutate((prev) => {
+            if (!prev) return;
+
+            return [...prev, res.data];
+        });
+
+        setStore('tagIds', (prev) => [...prev, res.data.id]);
     };
 
     return (
@@ -141,34 +169,6 @@ export const EditAssetModal = (
                     </Button>
                 </Input>
                 <Select
-                    onAddNewOption={async (value) => {
-                        if (
-                            globalCtx.resources.tags
-                                .get()
-                                ?.find((t) => t.name === value)
-                        )
-                            return;
-
-                        const res = await commands
-                            .createTag({ name: value })
-                            .catch(handleUnexpectedError);
-
-                        if (!res) return;
-
-                        if (res.status === 'error') {
-                            handleIpcError(res.error);
-
-                            return;
-                        }
-
-                        globalCtx.resources.tags.mutate((prev) => {
-                            if (!prev) return;
-
-                            return [...prev, res.data];
-                        });
-
-                        setStore('tagIds', (prev) => [...prev, res.data.id]);
-                    }}
                     onChange={(value) => {
                         if (store.tagIds.includes(value)) {
                             setStore(
@@ -181,15 +181,31 @@ export const EditAssetModal = (
 
                         setStore('tagIds', [...store.tagIds, value]);
                     }}
-                    options={
-                        globalCtx.resources.tags
-                            .get()
-                            ?.map((t) => ({ label: t.name, value: t.id })) ?? []
-                    }
-                    placeholder='selected tags'
-                    searchable
-                    selected={store.tagIds}
-                />
+                >
+                    <Select.Trigger>
+                        Tags <Badge>{store.tagIds.length}</Badge>
+                    </Select.Trigger>
+                    <Select.Menu>
+                        <Select.Filter>
+                            <Select.Searchbar
+                                onCreateNewOption={createNewTag}
+                                query={tagsMenuSearchQuery()}
+                                setQuery={setTagsMenuSearchQuery}
+                            />
+                        </Select.Filter>
+
+                        <For each={globalCtx.resources.tags.get()}>
+                            {(option) => (
+                                <Select.Option
+                                    selected={store.tagIds.includes(option.id)}
+                                    value={option.id}
+                                >
+                                    {option.name}
+                                </Select.Option>
+                            )}
+                        </For>
+                    </Select.Menu>
+                </Select>
             </Modal.Body>
             <Modal.Footer onAction={onAction} />
         </Modal>
