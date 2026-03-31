@@ -148,18 +148,21 @@ Select.Filter = (props: SelectFilterProps) => {
 export type SelectSearchbarProps = {
     query: string;
     setQuery: (query: string) => void;
-    onCreate?: (value: string) => void;
+    onCreateNewOption?: (value: string) => void;
+    canCreateFromQuery?: (value: string) => boolean;
     class?: string;
 };
 
 Select.Searchbar = (props: SelectSearchbarProps) => {
+    const canCreateFromQuery = props.canCreateFromQuery ?? (() => true);
+
     const onCreate = () => {
         const query = props.query.trim();
 
         if (!query) return;
 
         props.setQuery('');
-        props.onCreate?.(query);
+        props.onCreateNewOption?.(query);
     };
 
     return (
@@ -170,7 +173,11 @@ Select.Searchbar = (props: SelectSearchbarProps) => {
             value={props.query}
         >
             <Show when={props.query.trim()}>
-                <Button onClick={onCreate} variant='primary'>
+                <Button
+                    disabled={!canCreateFromQuery(props.query)}
+                    onClick={onCreate}
+                    variant='primary'
+                >
                     <IconEditAddPlus size='1.5em' />
                 </Button>
             </Show>
