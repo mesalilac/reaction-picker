@@ -179,6 +179,7 @@ Select.Searchbar = (props: SelectSearchbarProps) => {
             class={props.class}
             onInput={(value, _) => props.setQuery(value)}
             parse={(raw) => String(raw)}
+            type='search'
             value={props.query}
         >
             <Show when={props.query.trim()}>
