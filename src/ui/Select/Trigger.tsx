@@ -28,7 +28,7 @@ export const Trigger = (props: Props) => {
             role='combobox'
             variant='secondary'
         >
-            {props.children ?? (ctx.value || 'Choose an option')}
+            {props.children ?? (ctx.value() || 'Choose an option')}
             <Show
                 fallback={<IconArrowCaretDownMd size='1.5em' />}
                 when={ctx.isOpen()}

@@ -1,4 +1,10 @@
-import { createSignal, type JSX, mergeProps, onMount } from 'solid-js';
+import {
+    createMemo,
+    createSignal,
+    type JSX,
+    mergeProps,
+    onMount,
+} from 'solid-js';
 
 import { SelectContext } from './context';
 import { Filter } from './Filter';
@@ -53,12 +59,14 @@ export const Select = (rawProps: Props) => {
         props.onChange(value);
     };
 
+    const value = createMemo(() => props.value);
+
     return (
         <SelectContext.Provider
             value={{
                 onChange,
                 autoClose: props.autoClose,
-                value: props.value,
+                value,
                 isOpen,
                 setIsOpen,
                 triggerRef: triggerRef,

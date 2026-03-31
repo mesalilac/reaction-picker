@@ -16,7 +16,7 @@ export type Props = {
 export const Option = (props: Props) => {
     const ctx = useSelectContext();
 
-    const isSelected = ctx.value === props.value;
+    const isSelected = ctx.value() === props.value;
 
     return (
         <Button
