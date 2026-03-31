@@ -3,9 +3,10 @@ import { createSignal, type JSX, Show } from 'solid-js';
 import {
     IconArrowCaretDownMd,
     IconArrowCaretUpMd,
+    IconEditAddPlus,
     IconInterfaceCheck,
 } from '@/icons';
-import { Button, Popover } from '@/ui';
+import { Button, Input, Popover, Separator } from '@/ui';
 import { cn } from '@/utils';
 
 import { SelectContext, useSelectContext } from './context';
@@ -127,5 +128,52 @@ Select.Option = (props: SelectOptionProps) => {
                 <IconInterfaceCheck />
             </Show>
         </Button>
+    );
+};
+
+export type SelectFilterProps = {
+    class?: string;
+    children: JSX.Element;
+};
+
+Select.Filter = (props: SelectFilterProps) => {
+    return (
+        <div class={cn('flex flex-col gap-1 p-2', props.class)}>
+            {props.children}
+            <Separator class='my-2 border-neutral-700' />
+        </div>
+    );
+};
+
+export type SelectSearchbarProps = {
+    query: string;
+    setQuery: (query: string) => void;
+    onCreate?: (value: string) => void;
+    class?: string;
+};
+
+Select.Searchbar = (props: SelectSearchbarProps) => {
+    const onCreate = () => {
+        const query = props.query.trim();
+
+        if (!query) return;
+
+        props.setQuery('');
+        props.onCreate?.(query);
+    };
+
+    return (
+        <Input
+            class={props.class}
+            onInput={(value, _) => props.setQuery(value)}
+            parse={(raw) => String(raw)}
+            value={props.query}
+        >
+            <Show when={props.query.trim()}>
+                <Button onClick={onCreate} variant='primary'>
+                    <IconEditAddPlus size='1.5em' />
+                </Button>
+            </Show>
+        </Input>
     );
 };
