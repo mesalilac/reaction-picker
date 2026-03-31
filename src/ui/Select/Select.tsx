@@ -57,7 +57,6 @@ Select.Trigger = (props: SelectTriggerProps) => {
                 props.class,
             )}
             disabled={props.disabled}
-            onClick={() => ctx.setIsOpen((prev) => !prev)}
             ref={(el) => ctx.setTriggerRef(el)}
             role='combobox'
             variant='secondary'
