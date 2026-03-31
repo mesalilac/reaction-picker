@@ -28,7 +28,9 @@ export const Trigger = (props: Props) => {
             role='combobox'
             variant='secondary'
         >
-            {props.children ?? (ctx.value() || 'Choose an option')}
+            <div class='flex flex-row gap-2'>
+                {props.children ?? (ctx.value() || 'Choose an option')}
+            </div>
             <Show
                 fallback={<IconArrowCaretDownMd size='1.5em' />}
                 when={ctx.isOpen()}
