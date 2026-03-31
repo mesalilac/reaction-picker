@@ -16,7 +16,7 @@ import {
     DISCORD_FREE_MAX_CHAR_LIMIT,
 } from '@/consts';
 import { useGlobalContext } from '@/store';
-import { Button, Input, Select } from '@/ui';
+import { Badge, Button, Input, Select } from '@/ui';
 import { cn } from '@/utils';
 
 import { AudioCard } from './AudioCard';
@@ -45,6 +45,7 @@ type SortDirType = (typeof SORT_DIR_LIST)[number];
 export const Main: VoidComponent<Props> = (props) => {
     const globalCtx = useGlobalContext();
 
+    const [tagsMenuSearchQuery, setTagsMenuSearchQuery] = createSignal('');
     const [searchQuery, setSearchQuery] = createSignal('');
     const [selectedTags, setSelectedTags] = createSignal<TagId[]>([]);
 
@@ -85,6 +86,14 @@ export const Main: VoidComponent<Props> = (props) => {
         const sortDirIndex = SORT_DIR_LIST.indexOf(sortDir());
 
         localStorage.setItem('sortDir', sortDirIndex.toString());
+    });
+
+    const tagsList = createMemo(() => {
+        const query = tagsMenuSearchQuery().toLowerCase();
+
+        return (globalCtx.resources.tags.get() ?? []).filter((tag) =>
+            tag.name.toLowerCase().includes(query),
+        );
     });
 
     const filterList = (item: Image | Video | Audio) => {
@@ -314,10 +323,25 @@ export const Main: VoidComponent<Props> = (props) => {
 
                                 setFilter([...filter(), v as FilterType]);
                             }}
-                            options={FILTERS_LIST.map((i) => ({ value: i }))}
-                            placeholder='Filter'
-                            selected={filter()}
-                        />
+                        >
+                            <Select.Trigger>
+                                Filter <Badge>{filter().length}</Badge>
+                            </Select.Trigger>
+                            <Select.Menu>
+                                <For each={FILTERS_LIST}>
+                                    {(option) => (
+                                        <Select.Option
+                                            selected={filter().includes(
+                                                option as FilterType,
+                                            )}
+                                            value={option}
+                                        >
+                                            {option}
+                                        </Select.Option>
+                                    )}
+                                </For>
+                            </Select.Menu>
+                        </Select>
                     </div>
                     <Select
                         onChange={(v) => {
@@ -330,30 +354,55 @@ export const Main: VoidComponent<Props> = (props) => {
 
                             setSelectedTags((prev) => [...prev, v]);
                         }}
-                        options={
-                            globalCtx.resources.tags.get()?.map((x) => ({
-                                value: x.id,
-                                label: x.name,
-                            })) || []
-                        }
-                        placeholder='Tags'
-                        searchable
-                        selected={selectedTags()}
-                    />
-                    <Select
-                        onChange={(v) => {
-                            setSortBy(v as SortByType);
-                        }}
-                        options={SORT_BY_LIST.map((i) => ({ value: i }))}
-                        selected={sortBy()}
-                    />
-                    <Select
-                        onChange={(v) => {
-                            setSortDir(v as SortDirType);
-                        }}
-                        options={SORT_DIR_LIST.map((i) => ({ value: i }))}
-                        selected={sortDir()}
-                    />
+                    >
+                        <Select.Trigger>
+                            Tags <Badge>{selectedTags().length}</Badge>
+                        </Select.Trigger>
+                        <Select.Menu>
+                            <Select.Filter>
+                                <Select.Searchbar
+                                    query={tagsMenuSearchQuery()}
+                                    setQuery={setTagsMenuSearchQuery}
+                                />
+                            </Select.Filter>
+                            <For each={tagsList()}>
+                                {(option) => (
+                                    <Select.Option
+                                        selected={selectedTags().includes(
+                                            option.id,
+                                        )}
+                                        value={option.id}
+                                    >
+                                        {option.name}
+                                    </Select.Option>
+                                )}
+                            </For>
+                        </Select.Menu>
+                    </Select>
+                    <Select onChange={setSortBy} value={sortBy()}>
+                        <Select.Trigger />
+                        <Select.Menu>
+                            <For each={SORT_BY_LIST}>
+                                {(option) => (
+                                    <Select.Option value={option}>
+                                        {option}
+                                    </Select.Option>
+                                )}
+                            </For>
+                        </Select.Menu>
+                    </Select>
+                    <Select onChange={setSortDir} value={sortDir()}>
+                        <Select.Trigger />
+                        <Select.Menu>
+                            <For each={SORT_DIR_LIST}>
+                                {(option) => (
+                                    <Select.Option value={option}>
+                                        {option}
+                                    </Select.Option>
+                                )}
+                            </For>
+                        </Select.Menu>
+                    </Select>
                 </div>
             </div>
             <Show
