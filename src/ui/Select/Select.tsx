@@ -1,4 +1,10 @@
-import { createSignal, type JSX, mergeProps } from 'solid-js';
+import {
+    createEffect,
+    createSignal,
+    type JSX,
+    mergeProps,
+    onMount,
+} from 'solid-js';
 
 import { SelectContext } from './context';
 import { Filter } from './Filter';
@@ -15,7 +21,16 @@ export type Props = {
      */
     autoClose?: boolean;
     value: string;
+    /** Enables persistence of the selected value after refresh */
+    persistKey?: string;
     children: JSX.Element;
+};
+
+const getItemKey = (persistKey: string | undefined): string | undefined => {
+    const key = persistKey?.trim().toLocaleUpperCase();
+    if (!persistKey) return;
+
+    return `SELECT_MENU_${key}`;
 };
 
 export const Select = (rawProps: Props) => {
@@ -27,10 +42,27 @@ export const Select = (rawProps: Props) => {
         HTMLButtonElement | undefined
     >(undefined);
 
+    onMount(() => {
+        const itemKey = getItemKey(props.persistKey);
+        if (!itemKey) return;
+
+        const value = localStorage.getItem(itemKey);
+        if (!value) return;
+
+        props.onChange(value);
+    });
+
+    const onChange = (value: string) => {
+        const itemKey = getItemKey(props.persistKey);
+        if (itemKey) localStorage.setItem(itemKey, value);
+
+        props.onChange(value);
+    };
+
     return (
         <SelectContext.Provider
             value={{
-                onChange: props.onChange,
+                onChange,
                 autoClose: props.autoClose,
                 value: props.value,
                 isOpen,
