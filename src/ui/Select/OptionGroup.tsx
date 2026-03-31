@@ -11,7 +11,7 @@ export const OptionGroup = (props: Props) => {
             <span class='ml-4 font-bold text-neutral-400 text-sm uppercase'>
                 {props.label}
             </span>
-            <div class='ml-4 flex flex-col gap-1 rounded-lg bg-neutral-700/30'>
+            <div class='ml-4 flex flex-col gap-1 rounded-lg bg-neutral-700/20'>
                 {props.children}
             </div>
         </>
