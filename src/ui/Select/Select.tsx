@@ -13,6 +13,9 @@ import { SelectContext, useSelectContext } from './context';
 
 export type Props = {
     onChange: (value: string) => void;
+    /**
+     * @default true
+     */
     autoClose?: boolean;
     value?: string;
     children: JSX.Element;
