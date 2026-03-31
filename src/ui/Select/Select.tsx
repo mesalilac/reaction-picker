@@ -20,7 +20,7 @@ export type Props = {
      * @default true
      */
     autoClose?: boolean;
-    value: string;
+    value?: string;
     /** Enables persistence of the selected value after refresh */
     persistKey?: string;
     children: JSX.Element;

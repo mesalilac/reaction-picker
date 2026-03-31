@@ -10,13 +10,14 @@ export type Props = {
     value: string;
     class?: string;
     disabled?: boolean;
+    selected?: boolean;
     children: JSX.Element;
 };
 
 export const Option = (props: Props) => {
     const ctx = useSelectContext();
 
-    const isSelected = ctx.value() === props.value;
+    const isSelected = props.selected ?? ctx.value() === props.value;
 
     return (
         <Button
