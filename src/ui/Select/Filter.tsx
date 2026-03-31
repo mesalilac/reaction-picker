@@ -13,7 +13,7 @@ export const Filter = (props: Props) => {
         <>
             <div
                 class={cn(
-                    'sticky top-0 flex flex-col gap-1 bg-inherit p-2 pt-4',
+                    'sticky top-0 -mt-2 flex flex-col gap-1 bg-inherit p-2',
                     props.class,
                 )}
             >
