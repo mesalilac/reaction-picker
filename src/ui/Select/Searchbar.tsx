@@ -28,6 +28,7 @@ export const Searchbar = (props: Props) => {
             class={props.class}
             onInput={(value, _) => props.setQuery(value)}
             parse={(raw) => String(raw)}
+            placeholder='Search'
             type='search'
             value={props.query}
         >
