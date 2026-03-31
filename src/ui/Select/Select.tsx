@@ -98,13 +98,31 @@ Select.Menu = (props: SelectMenuProps) => {
         >
             <div
                 class={cn(
-                    'mt-2 flex min-w-80 flex-col gap-1 overscroll-contain rounded-lg bg-neutral-800 p-2 text-inherit',
+                    'mt-2 flex max-h-80 min-w-80 flex-col gap-1 overflow-y-auto overscroll-contain rounded-lg bg-neutral-800 p-2 text-inherit',
                     props.class,
                 )}
             >
                 {props.children}
             </div>
         </Popover>
+    );
+};
+
+export type SelectOptionGroup = {
+    label: string;
+    children: JSX.Element;
+};
+
+Select.OptionGroup = (props: SelectOptionGroup) => {
+    return (
+        <>
+            <span class='ml-4 font-bold text-neutral-400 text-sm uppercase'>
+                {props.label}
+            </span>
+            <div class='ml-4 flex flex-col gap-1 rounded-lg bg-neutral-700/30'>
+                {props.children}
+            </div>
+        </>
     );
 };
 
