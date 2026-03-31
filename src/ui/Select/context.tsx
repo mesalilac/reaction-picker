@@ -8,6 +8,7 @@ import {
 export type SelectContext = {
     onChange: (value: string) => void;
     autoClose?: boolean;
+    value?: string;
 
     isOpen: Accessor<boolean>;
     setIsOpen: Setter<boolean>;

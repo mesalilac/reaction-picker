@@ -14,6 +14,7 @@ import { SelectContext, useSelectContext } from './context';
 export type Props = {
     onChange: (value: string) => void;
     autoClose?: boolean;
+    value?: string;
     children: JSX.Element;
 };
 
@@ -29,6 +30,7 @@ export const Select = (props: Props) => {
             value={{
                 onChange: props.onChange,
                 autoClose: props.autoClose,
+                value: props.value,
                 isOpen,
                 setIsOpen,
                 triggerRef: triggerRef,
@@ -43,7 +45,7 @@ export const Select = (props: Props) => {
 export type SelectTriggerProps = {
     class?: string;
     disabled?: boolean;
-    children: JSX.Element;
+    children?: JSX.Element;
 };
 
 Select.Trigger = (props: SelectTriggerProps) => {
@@ -62,7 +64,7 @@ Select.Trigger = (props: SelectTriggerProps) => {
             role='combobox'
             variant='secondary'
         >
-            {props.children}
+            {props.children ?? ctx.value ?? 'Choose an option'}
             <Show
                 fallback={<IconArrowCaretDownMd size='1.5em' />}
                 when={ctx.isOpen()}
@@ -112,6 +114,8 @@ export type SelectOptionProps = {
 Select.Option = (props: SelectOptionProps) => {
     const ctx = useSelectContext();
 
+    const selected = props.selected ?? ctx.value === props.value;
+
     return (
         <Button
             class={cn('justify-between text-nowrap', props.class)}
@@ -121,10 +125,10 @@ Select.Option = (props: SelectOptionProps) => {
 
                 if (ctx.autoClose) ctx.setIsOpen(false);
             }}
-            variant={props.selected ? 'primary' : 'ghost'}
+            variant={selected ? 'primary' : 'ghost'}
         >
             <div class='flex gap-1'>{props.children}</div>
-            <Show when={props.selected}>
+            <Show when={selected}>
                 <IconInterfaceCheck />
             </Show>
         </Button>
