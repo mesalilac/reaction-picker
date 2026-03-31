@@ -10,9 +10,16 @@ export type Props = {
 
 export const Filter = (props: Props) => {
     return (
-        <div class={cn('flex flex-col gap-1 p-2', props.class)}>
-            {props.children}
+        <>
+            <div
+                class={cn(
+                    'sticky top-0 flex flex-col gap-1 bg-inherit p-2 pt-4',
+                    props.class,
+                )}
+            >
+                {props.children}
+            </div>
             <Separator class='my-2 border-neutral-700' />
-        </div>
+        </>
     );
 };
