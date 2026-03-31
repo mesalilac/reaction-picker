@@ -1,4 +1,4 @@
-import { createSignal, type JSX, Show } from 'solid-js';
+import { createSignal, type JSX, mergeProps, Show } from 'solid-js';
 
 import {
     IconArrowCaretDownMd,
@@ -18,7 +18,9 @@ export type Props = {
     children: JSX.Element;
 };
 
-export const Select = (props: Props) => {
+export const Select = (rawProps: Props) => {
+    const props = mergeProps({ autoClose: true } as Props, rawProps);
+
     const [isOpen, setIsOpen] = createSignal(false);
 
     const [triggerRef, setTriggerRef] = createSignal<
