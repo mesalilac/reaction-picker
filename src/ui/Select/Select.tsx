@@ -1,10 +1,4 @@
-import {
-    createEffect,
-    createSignal,
-    type JSX,
-    mergeProps,
-    onMount,
-} from 'solid-js';
+import { createSignal, type JSX, mergeProps, onMount } from 'solid-js';
 
 import { SelectContext } from './context';
 import { Filter } from './Filter';
