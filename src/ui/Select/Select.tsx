@@ -14,7 +14,7 @@ export type Props = {
      * @default true
      */
     autoClose?: boolean;
-    value?: string;
+    value: string;
     children: JSX.Element;
 };
 

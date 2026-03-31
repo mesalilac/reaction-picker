@@ -8,7 +8,6 @@ import { useSelectContext } from './context';
 
 export type Props = {
     value: string;
-    selected?: boolean;
     class?: string;
     disabled?: boolean;
     children: JSX.Element;
@@ -17,7 +16,7 @@ export type Props = {
 export const Option = (props: Props) => {
     const ctx = useSelectContext();
 
-    const selected = props.selected ?? ctx.value === props.value;
+    const isSelected = ctx.value === props.value;
 
     return (
         <Button
@@ -28,10 +27,10 @@ export const Option = (props: Props) => {
 
                 if (ctx.autoClose) ctx.setIsOpen(false);
             }}
-            variant={selected ? 'primary' : 'ghost'}
+            variant={isSelected ? 'primary' : 'ghost'}
         >
             <div class='flex gap-1'>{props.children}</div>
-            <Show when={selected}>
+            <Show when={isSelected}>
                 <IconInterfaceCheck />
             </Show>
         </Button>
