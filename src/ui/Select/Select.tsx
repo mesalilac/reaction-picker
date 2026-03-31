@@ -93,7 +93,7 @@ Select.Menu = (props: SelectMenuProps) => {
         >
             <div
                 class={cn(
-                    'mt-2 flex min-w-80 flex-col overscroll-contain rounded-lg bg-neutral-800 p-2 text-inherit',
+                    'mt-2 flex min-w-80 flex-col gap-1 overscroll-contain rounded-lg bg-neutral-800 p-2 text-inherit',
                     props.class,
                 )}
             >
