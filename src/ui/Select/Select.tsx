@@ -182,7 +182,7 @@ Select.Searchbar = (props: SelectSearchbarProps) => {
                     onClick={onCreate}
                     variant='primary'
                 >
-                    <IconEditAddPlus size='1.5em' />
+                    <IconEditAddPlus />
                 </Button>
             </Show>
         </Input>
