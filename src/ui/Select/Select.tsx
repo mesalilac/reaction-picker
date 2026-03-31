@@ -57,7 +57,7 @@ Select.Trigger = (props: SelectTriggerProps) => {
                 props.class,
             )}
             disabled={props.disabled}
-            ref={(el) => ctx.setTriggerRef(el)}
+            ref={ctx.setTriggerRef}
             role='combobox'
             variant='secondary'
         >
