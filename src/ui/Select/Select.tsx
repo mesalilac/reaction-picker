@@ -12,6 +12,7 @@ import { SelectContext, useSelectContext } from './context';
 
 export type Props = {
     onChange: (value: string) => void;
+    autoClose?: boolean;
     children: JSX.Element;
 };
 
@@ -26,6 +27,7 @@ export const Select = (props: Props) => {
         <SelectContext.Provider
             value={{
                 onChange: props.onChange,
+                autoClose: props.autoClose,
                 isOpen,
                 setIsOpen,
                 triggerRef: triggerRef,
@@ -114,7 +116,11 @@ Select.Option = (props: SelectOptionProps) => {
         <Button
             class={cn('justify-between text-nowrap', props.class)}
             disabled={props.disabled}
-            onClick={() => ctx.onChange(props.value)}
+            onClick={() => {
+                ctx.onChange(props.value);
+
+                if (ctx.autoClose) ctx.setIsOpen(false);
+            }}
             variant={props.selected ? 'primary' : 'ghost'}
         >
             <div class='flex gap-1'>{props.children}</div>

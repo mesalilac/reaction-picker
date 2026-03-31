@@ -7,9 +7,10 @@ import {
 
 export type SelectContext = {
     onChange: (value: string) => void;
+    autoClose?: boolean;
+
     isOpen: Accessor<boolean>;
     setIsOpen: Setter<boolean>;
-
     triggerRef: Accessor<HTMLButtonElement | undefined>;
     setTriggerRef: Setter<HTMLButtonElement | undefined>;
 };
