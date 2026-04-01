@@ -31,12 +31,10 @@ export const Trigger = (props: Props) => {
             <div class='flex flex-row gap-2'>
                 {props.children ?? (ctx.value() || 'Choose an option')}
             </div>
-            <Show
-                fallback={<IconArrowCaretDownMd size='1.5em' />}
-                when={ctx.isOpen()}
-            >
-                <IconArrowCaretUpMd size='1.5em' />
-            </Show>
+            <div class='flex flex-col'>
+                <IconArrowCaretUpMd class='-mb-2' />
+                <IconArrowCaretDownMd />
+            </div>
         </Button>
     );
 };
