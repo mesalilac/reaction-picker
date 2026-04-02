@@ -5,13 +5,13 @@ import { cn } from '@/utils';
 
 import { useMenuContext } from './context';
 
-type ItemProps = {
+type Props = {
     onClick?: () => void;
     class?: string;
     children: JSX.Element;
 };
 
-export const Item = (props: ItemProps) => {
+export const Item = (props: Props) => {
     const menuContext = useMenuContext();
 
     const handleClick = () => {
