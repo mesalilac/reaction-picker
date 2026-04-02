@@ -1,9 +1,35 @@
-import type { JSX } from 'solid-js';
+import { type JSX, mergeProps } from 'solid-js';
+
+import { Button } from '@/ui';
+import { cn } from '@/utils';
+
+import { useDropdownMenuContext } from './context';
 
 type Props = {
+    onClick?: () => void;
+    class?: string;
+    autoClose?: boolean;
     children: JSX.Element;
 };
 
-export const Item = (props: Props) => {
-    return <div>{props.children}</div>;
+export const Item = (rawProps: Props) => {
+    const props = mergeProps({ autoClose: true } as Props, rawProps);
+
+    const ctx = useDropdownMenuContext();
+
+    const handleClick = () => {
+        if (props.autoClose) ctx.closeMenu();
+
+        props.onClick?.();
+    };
+
+    return (
+        <Button
+            class={cn('w-full select-none text-nowrap capitalize', props.class)}
+            onClick={handleClick}
+            variant='ghost'
+        >
+            {props.children}
+        </Button>
+    );
 };
