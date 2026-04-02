@@ -16,28 +16,48 @@ import {
     untrack,
 } from 'solid-js';
 
-type ValidPositionAreaX =
-    | 'left'
-    | 'right'
-    | 'start'
-    | 'end'
-    | 'center'
-    | 'self-start'
-    | 'self-end'
-    | 'x-start'
-    | 'x-end';
-type ValidPositionAreaY =
+type SpanBlock =
+    | 'span-top'
+    | 'span-bottom'
+    | 'span-block-start'
+    | 'span-block-end'
+    | 'span-block';
+
+type SpanInline =
+    | 'span-left'
+    | 'span-right'
+    | 'span-inline-start'
+    | 'span-inline-end'
+    | 'span-inline';
+
+type PositionAreaBlock =
     | 'top'
     | 'bottom'
-    | 'start'
-    | 'end'
     | 'center'
+    | 'block-start'
+    | 'block-end'
     | 'self-start'
     | 'self-end'
-    | 'y-start'
-    | 'y-end';
+    | 'block-start'
+    | 'block-end'
+    | 'block-center'
+    | SpanBlock;
 
-export type PositionArea = `${ValidPositionAreaY} ${ValidPositionAreaX}`;
+type PositionAreaInline =
+    | 'left'
+    | 'right'
+    | 'center'
+    | 'inline-start'
+    | 'inline-end'
+    | 'self-start'
+    | 'self-end'
+    | 'inline-start'
+    | 'inline-end'
+    | 'inline-center'
+    | SpanInline;
+
+export type PositionArea = `${PositionAreaBlock} ${PositionAreaInline}`;
+
 export type TargetPositionArea =
     | PositionArea
     | {
