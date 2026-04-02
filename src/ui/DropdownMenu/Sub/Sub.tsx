@@ -2,6 +2,7 @@ import { createSignal, type JSX } from 'solid-js';
 
 import { Content } from './Content';
 import { SubMenuContext } from './context';
+import { Item } from './Item';
 import { Trigger } from './Trigger';
 
 type Props = {
@@ -16,7 +17,13 @@ export const Sub = (props: Props) => {
 
     return (
         <SubMenuContext.Provider
-            value={{ isOpen, setIsOpen, triggerRef, setTriggerRef }}
+            value={{
+                isOpen,
+                setIsOpen,
+                closeMenu: () => setIsOpen(false),
+                triggerRef,
+                setTriggerRef,
+            }}
         >
             {props.children}
         </SubMenuContext.Provider>
@@ -25,3 +32,4 @@ export const Sub = (props: Props) => {
 
 Sub.Trigger = Trigger;
 Sub.Content = Content;
+Sub.Item = Item;
