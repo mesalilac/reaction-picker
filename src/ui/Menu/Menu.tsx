@@ -26,11 +26,6 @@ type Props = {
     children: JSX.Element;
 };
 
-interface ItemProps extends JSX.ButtonHTMLAttributes<HTMLButtonElement> {
-    onClick?: () => void;
-    children: JSX.Element;
-}
-
 export const Menu = (props: Props) => {
     return (
         <MenuContext.Provider
@@ -43,25 +38,28 @@ export const Menu = (props: Props) => {
     );
 };
 
+type ItemProps = {
+    onClick?: () => void;
+    class?: string;
+    children: JSX.Element;
+};
+
 Menu.Item = (props: ItemProps) => {
     const menuContext = useMenuContext();
-
-    const [local, others] = splitProps(props, ['class', 'onClick', 'children']);
 
     const handleClick = () => {
         menuContext.onOpenChange(false);
 
-        local.onClick?.();
+        props.onClick?.();
     };
 
     return (
         <Button
-            class={cn('w-full text-nowrap capitalize', local.class)}
+            class={cn('w-full text-nowrap capitalize', props.class)}
             onClick={handleClick}
             variant='ghost'
-            {...others}
         >
-            {local.children}
+            {props.children}
         </Button>
     );
 };
