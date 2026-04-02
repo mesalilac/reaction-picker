@@ -19,7 +19,7 @@ export const Content = (props: Props) => {
             targetPositionArea='block-end span-inline-end'
             triggerElement={ctx.triggerRef()}
         >
-            <div class='mt-1 mb-1 min-w-30 rounded-lg border border-neutral-600 bg-neutral-800 p-2 text-white'>
+            <div class='mt-1 mb-1 min-w-30 rounded-lg border border-neutral-600 bg-neutral-800 p-2 text-white shadow-2xl shadow-black'>
                 {props.children}
             </div>
         </Popover>
