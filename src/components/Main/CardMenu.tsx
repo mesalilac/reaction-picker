@@ -46,6 +46,10 @@ export const CardMenu = (props: Props) => {
                         </Menu.Item>
                     </Show>
                     <Menu.Separator />
+                    <Menu.SubMenu label='Sub menu'>
+                        <Menu.Item>sub menu item</Menu.Item>
+                    </Menu.SubMenu>
+                    <Menu.Separator />
                     <Show when={props.deletedAt !== null}>
                         <Menu.Item onClick={props.handleRestore}>
                             <IconEditUndo /> restore
