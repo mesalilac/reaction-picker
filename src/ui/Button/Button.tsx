@@ -18,7 +18,8 @@ export type ButtonVariant =
     | 'success'
     | 'danger'
     | 'warning'
-    | 'ghost';
+    | 'ghost'
+    | 'icon';
 
 export interface ButtonProps
     extends JSX.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -64,6 +65,9 @@ export const Button: ParentComponent<ButtonProps> = (rawProps) => {
         ),
         ghost: cn(
             'bg-transparent hover:bg-neutral-600/30 focus-visible:ring-neutral-600/50 active:bg-neutral-700/30',
+        ),
+        icon: cn(
+            'bg-transparent focus-visible:ring-neutral-600/50 active:bg-neutral-700/30',
         ),
     };
 
