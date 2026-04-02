@@ -3,6 +3,7 @@ import type { JSX } from 'solid-js';
 import { MenuContext } from './context';
 import { Item } from './Item';
 import { MenuSeparator } from './Separator';
+import { SubMenu } from './SubMenu';
 
 type Props = {
     open: boolean;
@@ -22,5 +23,6 @@ export const Menu = (props: Props) => {
     );
 };
 
+Menu.SubMenu = SubMenu;
 Menu.Item = Item;
 Menu.Separator = MenuSeparator;
