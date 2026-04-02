@@ -1,6 +1,6 @@
-import { type JSX, Show } from 'solid-js';
+import type { JSX } from 'solid-js';
 
-import { IconArrowDownMd, IconArrowRightMd } from '@/icons';
+import { IconArrowChevronRight } from '@/icons';
 import { Button } from '@/ui';
 import { cn } from '@/utils';
 
@@ -28,7 +28,12 @@ export const Trigger = (props: Props) => {
             variant='ghost'
         >
             {props.children}
-            <IconArrowRightMd />
+            <IconArrowChevronRight
+                class={cn(
+                    'transition-transform duration-150',
+                    ctx.isOpen() && 'rotate-90',
+                )}
+            />
         </Button>
     );
 };
