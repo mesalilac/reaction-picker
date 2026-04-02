@@ -25,7 +25,10 @@ export const Item = (rawProps: Props) => {
 
     return (
         <Button
-            class={cn('w-full select-none text-nowrap capitalize', props.class)}
+            class={cn(
+                'w-full select-none text-nowrap text-neutral-200 capitalize',
+                props.class,
+            )}
             onClick={handleClick}
             variant='ghost'
         >
