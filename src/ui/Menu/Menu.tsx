@@ -1,4 +1,4 @@
-import { createContext, type JSX, splitProps, useContext } from 'solid-js';
+import { createContext, type JSX, useContext } from 'solid-js';
 
 import { Button, Separator } from '@/ui';
 import { cn } from '@/utils';
