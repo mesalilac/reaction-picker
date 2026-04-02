@@ -1,24 +1,8 @@
-import { createContext, type JSX, useContext } from 'solid-js';
+import type { JSX } from 'solid-js';
 
-import { Button, Separator } from '@/ui';
-import { cn } from '@/utils';
-
-const MenuContext = createContext<{
-    open: boolean;
-    onOpenChange: (open: boolean) => void;
-}>();
-
-const useMenuContext = () => {
-    const context = useContext(MenuContext);
-
-    if (!context) {
-        throw new Error(
-            'useMenuContext must be used within a MenuContextProvider',
-        );
-    }
-
-    return context;
-};
+import { MenuContext } from './context';
+import { Item } from './Item';
+import { MenuSeparator } from './Separator';
 
 type Props = {
     open: boolean;
@@ -38,32 +22,5 @@ export const Menu = (props: Props) => {
     );
 };
 
-type ItemProps = {
-    onClick?: () => void;
-    class?: string;
-    children: JSX.Element;
-};
-
-Menu.Item = (props: ItemProps) => {
-    const menuContext = useMenuContext();
-
-    const handleClick = () => {
-        menuContext.onOpenChange(false);
-
-        props.onClick?.();
-    };
-
-    return (
-        <Button
-            class={cn('w-full text-nowrap capitalize', props.class)}
-            onClick={handleClick}
-            variant='ghost'
-        >
-            {props.children}
-        </Button>
-    );
-};
-
-Menu.Separator = () => {
-    return <Separator class='-mx-2 my-2 border-neutral-700' />;
-};
+Menu.Item = Item;
+Menu.Separator = MenuSeparator;
