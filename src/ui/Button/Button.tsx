@@ -11,7 +11,7 @@ import {
 import { Badge } from '@/ui';
 import { cn } from '@/utils';
 
-type ButtonVariant =
+export type ButtonVariant =
     | 'primary'
     | 'secondary'
     | 'tertiary'
@@ -20,14 +20,15 @@ type ButtonVariant =
     | 'warning'
     | 'ghost';
 
-interface Props extends JSX.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps
+    extends JSX.ButtonHTMLAttributes<HTMLButtonElement> {
     variant?: ButtonVariant;
     label?: JSX.Element;
     loading?: boolean;
     children: JSX.Element;
 }
 
-export const Button: ParentComponent<Props> = (rawProps) => {
+export const Button: ParentComponent<ButtonProps> = (rawProps) => {
     const props = mergeProps({ variant: 'primary' as ButtonVariant }, rawProps);
 
     const [local, others] = splitProps(props, [
