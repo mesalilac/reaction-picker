@@ -25,13 +25,14 @@ export const Menu = (props: Props) => {
         <Popover
             onOpenChange={ctx.setIsOpen}
             open={ctx.isOpen()}
+            positionTryFallbacks={() => ['block-start span-inline-end']}
             targetPosition='fixed'
             targetPositionArea='block-end span-inline-end'
             triggerElement={ctx.triggerRef()}
         >
             <div
                 class={cn(
-                    'mt-2 flex max-h-80 flex-col gap-1 overflow-y-auto overscroll-contain rounded-lg bg-neutral-800 p-2 text-inherit',
+                    'mt-1 mb-1 flex max-h-80 flex-col gap-1 overflow-y-auto overscroll-contain rounded-lg bg-neutral-800 p-2 text-inherit',
                     props.class,
                 )}
                 style={{
