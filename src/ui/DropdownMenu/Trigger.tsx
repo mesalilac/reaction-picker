@@ -21,12 +21,9 @@ export const Trigger = (rawProps: Props) => {
             aria-expanded={ctx.isOpen()}
             aria-haspopup='listbox'
             class={cn('border-2 px-3 text-white capitalize', props.class)}
-            disabled={props.disabled}
             ref={ctx.setTriggerRef}
             role='combobox'
-            variant={props.variant}
-        >
-            {props.children}
-        </Button>
+            {...props}
+        />
     );
 };
