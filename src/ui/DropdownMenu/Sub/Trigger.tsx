@@ -1,6 +1,6 @@
-import type { JSX } from 'solid-js';
+import { type JSX, Show } from 'solid-js';
 
-import { IconArrowRightMd } from '@/icons';
+import { IconArrowDownMd, IconArrowRightMd } from '@/icons';
 import { Button } from '@/ui';
 import { cn } from '@/utils';
 
@@ -21,6 +21,7 @@ export const Trigger = (props: Props) => {
             class={cn(
                 'w-full select-none justify-between text-nowrap text-neutral-200 capitalize',
                 props.class,
+                ctx.isOpen() && 'bg-neutral-700/30',
             )}
             ref={ctx.setTriggerRef}
             role='combobox'
