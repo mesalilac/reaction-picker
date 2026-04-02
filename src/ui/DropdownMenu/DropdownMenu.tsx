@@ -1,5 +1,5 @@
 import type { JSX } from 'solid-js';
-import { createSignal } from 'solid-js';
+import { createComputed, createSignal, on } from 'solid-js';
 
 import { Content } from './Content';
 import { DropdownMenuContext } from './context';
@@ -9,11 +9,29 @@ import { MenuSeparator } from './Separator';
 import { Trigger } from './Trigger';
 
 type Props = {
+    open?: boolean;
+    defaultOpen?: boolean;
+    onOpenChange?: (open: boolean) => void;
     children: JSX.Element;
 };
 
 export const DropdownMenu = (props: Props) => {
-    const [isOpen, setIsOpen] = createSignal(false);
+    const [isOpen, setIsOpen] = createSignal(
+        props.open ?? props.defaultOpen ?? false,
+    );
+
+    // sync state with props
+    createComputed(
+        on(
+            () => Boolean(props.open),
+            (isOpen) => {
+                setIsOpen(isOpen);
+                props.onOpenChange?.(isOpen);
+            },
+            { defer: true },
+        ),
+    );
+
     const [triggerRef, setTriggerRef] = createSignal<
         HTMLButtonElement | undefined
     >();
