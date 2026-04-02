@@ -8,6 +8,7 @@ import {
 export const DropdownMenuContext = createContext<{
     isOpen: Accessor<boolean>;
     setIsOpen: Setter<boolean>;
+    closeMenu: () => void;
     triggerRef: Accessor<HTMLButtonElement | undefined>;
     setTriggerRef: Setter<HTMLButtonElement | undefined>;
 }>();
