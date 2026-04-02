@@ -7,7 +7,7 @@ import {
     IconInterfaceTrashFull,
     IconMenuMoreHorizontal,
 } from '@/icons';
-import { IconButton, Menu, Popover } from '@/ui';
+import { Button, Menu, Popover } from '@/ui';
 
 type Props = {
     handleEditDetails: () => void;
@@ -25,10 +25,9 @@ export const CardMenu = (props: Props) => {
 
     return (
         <>
-            <IconButton
-                icon={<IconMenuMoreHorizontal class='size-5' />}
-                ref={popoverMenuRef}
-            />
+            <Button ref={popoverMenuRef} variant='icon'>
+                <IconMenuMoreHorizontal class='size-5' />
+            </Button>
             <Popover
                 onOpenChange={props.onOpenChange}
                 open={props.open}

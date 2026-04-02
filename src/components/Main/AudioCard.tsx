@@ -8,7 +8,7 @@ import { type Audio, commands } from '@/bindings';
 import { FALLBACK_VOLUME } from '@/consts';
 import { IconInterfaceHeart01 } from '@/icons';
 import { useGlobalContext } from '@/store';
-import { Button, IconButton } from '@/ui';
+import { Button } from '@/ui';
 import {
     cn,
     handleIpcError,
@@ -189,17 +189,14 @@ export const AudioCard: VoidComponent<Props> = (props) => {
                     <Button onClick={handleCopy}>Copy</Button>
                 </div>
                 <div class='flex flex-row gap-2'>
-                    <IconButton
-                        icon={
-                            <IconInterfaceHeart01
-                                class={cn('size-5', {
-                                    'fill-red-500 text-red-500':
-                                        props.audio.isFavorite,
-                                })}
-                            />
-                        }
-                        onClick={handleToggleFavorite}
-                    />
+                    <Button onClick={handleToggleFavorite} variant='icon'>
+                        <IconInterfaceHeart01
+                            class={cn('size-5', {
+                                'fill-red-500 text-red-500':
+                                    props.audio.isFavorite,
+                            })}
+                        />
+                    </Button>
                     <CardMenu
                         deletedAt={props.audio.deletedAt}
                         externalLink={props.audio.externalLink}

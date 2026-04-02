@@ -9,7 +9,7 @@ import {
 
 import { IconArrowUpMd, IconEditAddPlus, IconInterfaceSettings } from '@/icons';
 import { useGlobalContext } from '@/store';
-import { Button, IconButton } from '@/ui';
+import { Button } from '@/ui';
 
 import { CreateSnippetModal } from './CreateSnippetModal';
 import { SettingsModal } from './SettingsModal';
@@ -79,17 +79,21 @@ export const Nav: VoidComponent<Props> = (props) => {
                 </Show>
 
                 <Show when={scrollY() > 600}>
-                    <IconButton
-                        icon={<IconArrowUpMd class='size-5' />}
+                    <Button
                         onClick={() =>
                             window.scrollTo({ top: 0, behavior: 'smooth' })
                         }
-                    />
+                        variant='icon'
+                    >
+                        <IconArrowUpMd class='size-5' />
+                    </Button>
                 </Show>
-                <IconButton
-                    icon={<IconInterfaceSettings class='size-5' />}
+                <Button
                     onClick={() => setShowSettingsModal(true)}
-                />
+                    variant='icon'
+                >
+                    <IconInterfaceSettings class='size-5' />
+                </Button>
                 <Show when={showSettingsModal()}>
                     <SettingsModal
                         onOpenChange={(open) => {

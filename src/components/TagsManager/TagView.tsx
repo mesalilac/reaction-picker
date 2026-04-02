@@ -7,7 +7,7 @@ import {
     IconInterfaceTrashFull,
 } from '@/icons';
 import { useGlobalContext } from '@/store';
-import { Badge, IconButton } from '@/ui';
+import { Badge, Button } from '@/ui';
 import { handleIpcError, handleUnexpectedError } from '@/utils';
 
 import { TagEditModal } from './TagEditModal';
@@ -83,10 +83,9 @@ export const TagView: VoidComponent<Props> = (props) => {
                 <Badge>{usageCount()}</Badge>
             </div>
             <div class='flex'>
-                <IconButton
-                    icon={<IconEditPencil01 class='size-5' />}
-                    onClick={() => setShowEditModal(true)}
-                />
+                <Button onClick={() => setShowEditModal(true)} variant='icon'>
+                    <IconEditPencil01 class='size-5' />
+                </Button>
                 <Show when={showEditModal()}>
                     <TagEditModal
                         onOpenChange={setShowEditModal}
@@ -94,12 +93,9 @@ export const TagView: VoidComponent<Props> = (props) => {
                         tag={props.tag}
                     />
                 </Show>
-                <IconButton
-                    icon={
-                        <IconInterfaceTrashFull class='size-5 text-red-500' />
-                    }
-                    onClick={handleDeleteTag}
-                />
+                <Button onClick={handleDeleteTag} variant='icon'>
+                    <IconInterfaceTrashFull class='size-5 text-red-500' />
+                </Button>
             </div>
         </div>
     );

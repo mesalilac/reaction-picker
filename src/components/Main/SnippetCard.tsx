@@ -6,7 +6,7 @@ import { toast } from 'solid-sonner';
 import { commands, type Snippet } from '@/bindings';
 import { IconInterfaceHeart01 } from '@/icons';
 import { useGlobalContext } from '@/store';
-import { Button, IconButton } from '@/ui';
+import { Button } from '@/ui';
 import {
     cn,
     handleIpcError,
@@ -190,17 +190,14 @@ export const SnippetCard: VoidComponent<Props> = (props) => {
                     <Button onClick={handleCopy}>Copy</Button>
                 </div>
                 <div class='flex flex-row gap-2'>
-                    <IconButton
-                        icon={
-                            <IconInterfaceHeart01
-                                class={cn('size-5', {
-                                    'fill-red-500 text-red-500':
-                                        props.snippet.isFavorite,
-                                })}
-                            />
-                        }
-                        onClick={handleToggleFavorite}
-                    />
+                    <Button onClick={handleToggleFavorite} variant='icon'>
+                        <IconInterfaceHeart01
+                            class={cn('size-5', {
+                                'fill-red-500 text-red-500':
+                                    props.snippet.isFavorite,
+                            })}
+                        />
+                    </Button>
                     <CardMenu
                         deletedAt={props.snippet.deletedAt}
                         externalLink={props.snippet.externalLink}
