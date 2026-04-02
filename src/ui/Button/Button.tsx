@@ -67,7 +67,7 @@ export const Button: ParentComponent<ButtonProps> = (rawProps) => {
             'bg-transparent hover:bg-neutral-600/30 focus-visible:ring-neutral-600/50 active:bg-neutral-700/30',
         ),
         icon: cn(
-            'bg-transparent focus-visible:ring-neutral-600/50 active:bg-neutral-700/30',
+            'bg-transparent focus-visible:ring-neutral-600/50 active:bg-neutral-700/30 p-2 rounded-full',
         ),
     };
 
