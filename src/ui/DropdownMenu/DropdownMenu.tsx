@@ -6,6 +6,7 @@ import { DropdownMenuContext } from './context';
 import { Item } from './Item';
 import { Label } from './Label';
 import { MenuSeparator } from './Separator';
+import { Sub } from './Sub';
 import { Trigger } from './Trigger';
 
 type Props = {
@@ -55,3 +56,5 @@ DropdownMenu.Content = Content;
 DropdownMenu.Item = Item;
 DropdownMenu.Label = Label;
 DropdownMenu.Separator = MenuSeparator;
+
+DropdownMenu.Sub = Sub;
