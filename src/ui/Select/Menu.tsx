@@ -26,7 +26,7 @@ export const Menu = (props: Props) => {
             onOpenChange={ctx.setIsOpen}
             open={ctx.isOpen()}
             targetPosition='fixed'
-            targetPositionArea='bottom center'
+            targetPositionArea='block-end span-inline-end'
             triggerElement={ctx.triggerRef()}
         >
             <div
