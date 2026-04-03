@@ -6,7 +6,7 @@ import { cn } from '@/utils';
 
 import { useSelectContext } from './context';
 
-export interface Props extends Pick<ButtonProps, 'variant' | 'label'> {
+export interface Props extends Pick<ButtonProps, 'variant'> {
     class?: string;
     disabled?: boolean;
     children?: JSX.Element;
@@ -29,7 +29,6 @@ export const Trigger = (rawProps: Props) => {
                 props.class,
             )}
             disabled={props.disabled}
-            label={props.label}
             ref={ctx.setTriggerRef}
             role='combobox'
             variant={props.variant}
