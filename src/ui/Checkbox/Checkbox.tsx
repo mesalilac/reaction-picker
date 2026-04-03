@@ -39,7 +39,7 @@ export const Checkbox: VoidComponent<Props> = (props) => {
                     </svg>
                 </Show>
             </div>
-            <span class='font-bold'>{props.label}</span>
+            <span>{props.label}</span>
         </div>
     );
 };
