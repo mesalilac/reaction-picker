@@ -11,3 +11,4 @@ export * from './Modal';
 export * from './Separator';
 export * from './Checkbox';
 export * from './DropdownMenu';
+export * from './ToggleSwitch';
