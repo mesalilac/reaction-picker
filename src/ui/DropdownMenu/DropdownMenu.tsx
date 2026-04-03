@@ -5,6 +5,7 @@ import { Content } from './Content';
 import { DropdownMenuContext } from './context';
 import { Item } from './Item';
 import { Label } from './Label';
+import { RadioGroup } from './RadioGroup';
 import { MenuSeparator } from './Separator';
 import { Sub } from './Sub';
 import { Trigger } from './Trigger';
@@ -64,3 +65,4 @@ DropdownMenu.Label = Label;
 DropdownMenu.Separator = MenuSeparator;
 
 DropdownMenu.Sub = Sub;
+DropdownMenu.RadioGroup = RadioGroup;
