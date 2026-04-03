@@ -17,10 +17,10 @@ export const Checkbox: VoidComponent<Props> = (props) => {
         >
             <div
                 class={cn(
-                    'flex size-4 cursor-pointer items-center rounded-sm border transition-colors duration-100',
+                    'flex size-4 cursor-pointer items-center rounded-sm border transition-colors duration-200 ease-out',
                     props.checked
-                        ? 'border-blue-600 bg-blue-600'
-                        : 'border-neutral-300',
+                        ? 'border-blue-500 bg-blue-500'
+                        : 'border-neutral-600',
                 )}
             >
                 <Show when={props.checked}>
