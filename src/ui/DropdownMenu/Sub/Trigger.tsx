@@ -14,6 +14,22 @@ type Props = {
 export const Trigger = (props: Props) => {
     const ctx = useSubMenuContext();
 
+    let openTimer: number | undefined;
+
+    const handleMouseEnter = async () => {
+        openTimer = await setTimeout(() => ctx.setIsOpen(true), 150);
+    };
+
+    const handleMouseLeave = async () => {
+        clearTimeout(openTimer);
+
+        const timer = await setTimeout(() => {
+            ctx.setIsOpen(false);
+        }, 150);
+
+        ctx.setCloseTimer(timer);
+    };
+
     return (
         <Button
             aria-expanded={ctx.isOpen()}
@@ -23,6 +39,8 @@ export const Trigger = (props: Props) => {
                 props.class,
                 ctx.isOpen() && 'bg-neutral-700/30',
             )}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
             ref={ctx.setTriggerRef}
             role='combobox'
             variant='ghost'

@@ -11,6 +11,8 @@ export const SubMenuContext = createContext<{
     closeMenu: () => void;
     triggerRef: Accessor<HTMLButtonElement | undefined>;
     setTriggerRef: Setter<HTMLButtonElement | undefined>;
+    closeTimer: Accessor<number | undefined>;
+    setCloseTimer: Setter<number | undefined>;
 }>();
 
 export const useSubMenuContext = () => {

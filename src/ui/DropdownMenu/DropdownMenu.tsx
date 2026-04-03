@@ -44,7 +44,13 @@ export const DropdownMenu = (props: Props) => {
 
     return (
         <DropdownMenuContext.Provider
-            value={{ isOpen, setIsOpen, closeMenu, triggerRef, setTriggerRef }}
+            value={{
+                isOpen,
+                setIsOpen,
+                closeMenu,
+                triggerRef,
+                setTriggerRef,
+            }}
         >
             {props.children}
         </DropdownMenuContext.Provider>

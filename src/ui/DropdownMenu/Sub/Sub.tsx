@@ -10,9 +10,9 @@ type Props = {
 
 export const Sub = (props: Props) => {
     const [isOpen, setIsOpen] = createSignal(false);
-    const [triggerRef, setTriggerRef] = createSignal<
-        HTMLButtonElement | undefined
-    >(undefined);
+    const [triggerRef, setTriggerRef] = createSignal<HTMLButtonElement>();
+
+    const [closeTimer, setCloseTimer] = createSignal<number>();
 
     return (
         <SubMenuContext.Provider
@@ -22,6 +22,8 @@ export const Sub = (props: Props) => {
                 closeMenu: () => setIsOpen(false),
                 triggerRef,
                 setTriggerRef,
+                closeTimer,
+                setCloseTimer,
             }}
         >
             {props.children}
