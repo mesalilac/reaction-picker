@@ -1,18 +1,23 @@
-import type { JSX } from 'solid-js';
+import { type JSX, mergeProps } from 'solid-js';
 
 import { IconArrowCaretDownMd, IconArrowCaretUpMd } from '@/icons';
-import { Button } from '@/ui';
+import { Button, type ButtonProps } from '@/ui';
 import { cn } from '@/utils';
 
 import { useSelectContext } from './context';
 
-export type Props = {
+export interface Props extends Pick<ButtonProps, 'variant' | 'label'> {
     class?: string;
     disabled?: boolean;
     children?: JSX.Element;
-};
+}
 
-export const Trigger = (props: Props) => {
+export const Trigger = (rawProps: Props) => {
+    const props = mergeProps(
+        { variant: 'secondary' } satisfies Props,
+        rawProps,
+    );
+
     const ctx = useSelectContext();
 
     return (
@@ -24,9 +29,10 @@ export const Trigger = (props: Props) => {
                 props.class,
             )}
             disabled={props.disabled}
+            label={props.label}
             ref={ctx.setTriggerRef}
             role='combobox'
-            variant='secondary'
+            variant={props.variant}
         >
             <div class='flex flex-row gap-2'>
                 {props.children ?? (ctx.value() || 'Choose an option')}
