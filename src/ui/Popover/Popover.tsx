@@ -128,7 +128,7 @@ export type PopoverProps = {
     /** @see https://css-tricks.com/css-anchor-positioning-guide/#aa-position-visibility */
     positionVisibility?: 'always' | 'anchors-visible' | 'no-overflow';
     /** @see https://css-tricks.com/css-anchor-positioning-guide/#aa-position-try-fallbacks */
-    positionTryFallbacks?: (anchorName: string) => string[];
+    positionTryFallbacks?: (anchorName: string) => PositionArea[];
     /** @see https://css-tricks.com/css-anchor-positioning-guide/#aa-position-try-order */
     positionTryOrder?:
         | 'normal'
