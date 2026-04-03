@@ -40,7 +40,7 @@ export const ToggleSwitch = (props: Props) => {
                 class={cn(
                     'flex h-5 w-9 cursor-pointer items-center rounded-full border border-neutral-600 bg-neutral-600/30 p-0.5 transition-colors',
                     props.checked && 'border-blue-600 bg-blue-500',
-                    props.disabled && 'cursor-not-allowed opacity-60',
+                    props.disabled && 'opacity-60',
                     props.trackClass,
                 )}
             >
