@@ -10,7 +10,7 @@ export type Props = {
     children: JSX.Element;
 };
 
-export const Menu = (props: Props) => {
+export const Content = (props: Props) => {
     const ctx = useSelectContext();
 
     const triggerWidth = (): string => {

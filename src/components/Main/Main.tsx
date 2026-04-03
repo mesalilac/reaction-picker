@@ -295,7 +295,7 @@ export const Main: VoidComponent<Props> = (props) => {
                             <Select.Trigger>
                                 Filter <Badge>{filter().length}</Badge>
                             </Select.Trigger>
-                            <Select.Menu>
+                            <Select.Content>
                                 <For each={FILTERS_LIST}>
                                     {(option) => (
                                         <Select.Option
@@ -308,7 +308,7 @@ export const Main: VoidComponent<Props> = (props) => {
                                         </Select.Option>
                                     )}
                                 </For>
-                            </Select.Menu>
+                            </Select.Content>
                         </Select>
                     </div>
                     <Select
@@ -326,7 +326,7 @@ export const Main: VoidComponent<Props> = (props) => {
                         <Select.Trigger>
                             Tags <Badge>{selectedTags().length}</Badge>
                         </Select.Trigger>
-                        <Select.Menu>
+                        <Select.Content>
                             <Select.Filter>
                                 <Select.Searchbar
                                     query={tagsMenuSearchQuery()}
@@ -345,7 +345,7 @@ export const Main: VoidComponent<Props> = (props) => {
                                     </Select.Option>
                                 )}
                             </For>
-                        </Select.Menu>
+                        </Select.Content>
                     </Select>
                     <Select
                         onChange={setSortBy}
@@ -353,7 +353,7 @@ export const Main: VoidComponent<Props> = (props) => {
                         value={sortBy()}
                     >
                         <Select.Trigger />
-                        <Select.Menu>
+                        <Select.Content>
                             <For each={SORT_BY_LIST}>
                                 {(option) => (
                                     <Select.Option value={option}>
@@ -361,7 +361,7 @@ export const Main: VoidComponent<Props> = (props) => {
                                     </Select.Option>
                                 )}
                             </For>
-                        </Select.Menu>
+                        </Select.Content>
                     </Select>
                     <Select
                         onChange={setSortDir}
@@ -369,7 +369,7 @@ export const Main: VoidComponent<Props> = (props) => {
                         value={sortDir()}
                     >
                         <Select.Trigger />
-                        <Select.Menu>
+                        <Select.Content>
                             <For each={SORT_DIR_LIST}>
                                 {(option) => (
                                     <Select.Option value={option}>
@@ -377,7 +377,7 @@ export const Main: VoidComponent<Props> = (props) => {
                                     </Select.Option>
                                 )}
                             </For>
-                        </Select.Menu>
+                        </Select.Content>
                     </Select>
                 </div>
             </div>

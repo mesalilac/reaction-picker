@@ -6,9 +6,9 @@ import {
     onMount,
 } from 'solid-js';
 
+import { Content } from './Content';
 import { SelectContext } from './context';
 import { Filter } from './Filter';
-import { Menu } from './Menu';
 import { Option } from './Option';
 import { OptionGroup } from './OptionGroup';
 import { Searchbar } from './Searchbar';
@@ -79,7 +79,7 @@ export const Select = (rawProps: Props) => {
 };
 
 Select.Trigger = Trigger;
-Select.Menu = Menu;
+Select.Content = Content;
 Select.OptionGroup = OptionGroup;
 Select.Option = Option;
 Select.Filter = Filter;

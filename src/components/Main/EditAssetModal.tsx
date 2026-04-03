@@ -185,7 +185,7 @@ export const EditAssetModal = (
                     <Select.Trigger>
                         Tags <Badge>{store.tagIds.length}</Badge>
                     </Select.Trigger>
-                    <Select.Menu>
+                    <Select.Content>
                         <Select.Filter>
                             <Select.Searchbar
                                 onCreateNewOption={createNewTag}
@@ -204,7 +204,7 @@ export const EditAssetModal = (
                                 </Select.Option>
                             )}
                         </For>
-                    </Select.Menu>
+                    </Select.Content>
                 </Select>
             </Modal.Body>
             <Modal.Footer onAction={onAction} />
