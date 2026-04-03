@@ -32,7 +32,7 @@ export const Menu = (props: Props) => {
         >
             <div
                 class={cn(
-                    'mt-1 mb-1 flex max-h-80 flex-col gap-1 overflow-y-auto overscroll-contain rounded-lg bg-neutral-800 p-2 text-inherit',
+                    'mt-1 mb-1 flex max-h-80 flex-col gap-1 overflow-y-auto overscroll-contain rounded-lg border border-neutral-600 bg-neutral-800 p-2 text-white shadow-2xl shadow-black',
                     props.class,
                 )}
                 style={{
