@@ -4,6 +4,7 @@ import { createComputed, createSignal, on } from 'solid-js';
 import { Content } from './Content';
 import { DropdownMenuContext } from './context';
 import { Item } from './Item';
+import { ItemSwitch } from './ItemSwitch';
 import { Label } from './Label';
 import { RadioGroup } from './RadioGroup';
 import { MenuSeparator } from './Separator';
@@ -61,6 +62,7 @@ export const DropdownMenu = (props: Props) => {
 DropdownMenu.Trigger = Trigger;
 DropdownMenu.Content = Content;
 DropdownMenu.Item = Item;
+DropdownMenu.ItemSwitch = ItemSwitch;
 DropdownMenu.Label = Label;
 DropdownMenu.Separator = MenuSeparator;
 
