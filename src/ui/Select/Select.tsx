@@ -34,7 +34,12 @@ const getItemKey = (persistKey: string | undefined): string | undefined => {
 };
 
 export const Select = (rawProps: Props) => {
-    const props = mergeProps({ autoClose: true } as Props, rawProps);
+    const props = mergeProps(
+        {
+            autoClose: true,
+        } satisfies Partial<Props>,
+        rawProps,
+    );
 
     const [isOpen, setIsOpen] = createSignal(false);
 

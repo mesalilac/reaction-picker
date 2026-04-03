@@ -1,16 +1,29 @@
-import type { JSX } from 'solid-js';
+import { type JSX, mergeProps } from 'solid-js';
 
-import { Popover } from '@/ui';
+import { Popover, type PopoverProps } from '@/ui';
 import { cn } from '@/utils';
 
 import { useSelectContext } from './context';
 
-export type Props = {
+export interface Props
+    extends Pick<
+        PopoverProps,
+        'targetPosition' | 'targetPositionArea' | 'positionTryFallbacks'
+    > {
     class?: string;
     children: JSX.Element;
-};
+}
 
-export const Content = (props: Props) => {
+export const Content = (rawProps: Props) => {
+    const props = mergeProps(
+        {
+            targetPosition: 'fixed',
+            targetPositionArea: 'block-end span-inline-end',
+            positionTryFallbacks: () => ['block-start span-inline-end'],
+        } satisfies Partial<Props>,
+        rawProps,
+    );
+
     const ctx = useSelectContext();
 
     const triggerWidth = (): string => {
@@ -25,9 +38,9 @@ export const Content = (props: Props) => {
         <Popover
             onOpenChange={ctx.setIsOpen}
             open={ctx.isOpen()}
-            positionTryFallbacks={() => ['block-start span-inline-end']}
-            targetPosition='fixed'
-            targetPositionArea='block-end span-inline-end'
+            positionTryFallbacks={props.positionTryFallbacks}
+            targetPosition={props.targetPosition}
+            targetPositionArea={props.targetPositionArea}
             triggerElement={ctx.triggerRef()}
         >
             <div
