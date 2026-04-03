@@ -20,6 +20,7 @@ export const ItemSwitch = (props: Props) => {
                 props.class,
             )}
             disabled={props.disabled}
+            onClick={() => props.onChange(!props.checked)}
             variant='ghost'
         >
             {props.children}
@@ -27,7 +28,7 @@ export const ItemSwitch = (props: Props) => {
                 checked={props.checked}
                 disabled={props.disabled}
                 label={props.label}
-                onChange={props.onChange}
+                onChange={() => {}}
             />
         </Button>
     );
