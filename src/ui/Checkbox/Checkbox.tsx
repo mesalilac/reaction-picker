@@ -1,4 +1,4 @@
-import { type JSX, Show, type VoidComponent } from 'solid-js';
+import type { JSX, VoidComponent } from 'solid-js';
 
 import { cn } from '@/utils';
 
@@ -23,21 +23,22 @@ export const Checkbox: VoidComponent<Props> = (props) => {
                         : 'border-neutral-600',
                 )}
             >
-                <Show when={props.checked}>
-                    <svg
-                        class='size-4'
-                        fill='none'
-                        stroke='currentColor'
-                        stroke-linecap='round'
-                        stroke-linejoin='round'
-                        stroke-width='2'
-                        viewBox='0 0 24 24'
-                        xmlns='http://www.w3.org/2000/svg'
-                    >
-                        <title>Check</title>
-                        <path d='M5 12l5 5l10 -10' />
-                    </svg>
-                </Show>
+                <svg
+                    class='size-4 transition-opacity duration-100 ease-in-out'
+                    fill='none'
+                    stroke='currentColor'
+                    stroke-linecap='round'
+                    stroke-linejoin='round'
+                    stroke-width='2'
+                    style={{
+                        opacity: props.checked ? '1' : '0',
+                    }}
+                    viewBox='0 0 24 24'
+                    xmlns='http://www.w3.org/2000/svg'
+                >
+                    <title>Check</title>
+                    <path d='M5 12l5 5l10 -10' />
+                </svg>
             </div>
             {props.label}
         </div>
