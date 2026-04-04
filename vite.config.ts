@@ -2,7 +2,6 @@ import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'vite';
 import checker from 'vite-plugin-checker';
 import solid from 'vite-plugin-solid';
-import tsconfigPaths from 'vite-tsconfig-paths';
 
 // @ts-expect-error process is a nodejs global
 const host = process.env.TAURI_DEV_HOST;
@@ -11,10 +10,12 @@ const host = process.env.TAURI_DEV_HOST;
 export default defineConfig(async () => ({
     plugins: [
         solid(),
-        tsconfigPaths(),
         tailwindcss(),
         checker({ typescript: true, biome: { watchPath: './src/' } }),
     ],
+    resolve: {
+        tsconfigPaths: true,
+    },
 
     // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
     //
