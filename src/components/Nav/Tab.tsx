@@ -42,10 +42,8 @@ export const Tab: VoidComponent<{
     return (
         <button
             class={cn(
-                'flex cursor-pointer items-center gap-2 border-b-2 p-1 transition-colors duration-150 ease-out',
-                isActive()
-                    ? 'text-blue-500'
-                    : 'border-transparent hover:text-blue-500/50',
+                'flex cursor-pointer items-center gap-2 rounded-lg p-2 transition-colors duration-150 ease-out',
+                isActive() ? 'bg-blue-600' : 'hover:bg-neutral-600/30',
             )}
             onClick={() => {
                 globalCtx.setStore('activeTab', props.type);
