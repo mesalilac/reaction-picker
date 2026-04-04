@@ -227,6 +227,8 @@ export const Popover: ParentComponent<PopoverProps> = (initialProps) => {
 
         events.forEach((event) => {
             const [eventName, ...modifiers] = event.split('.');
+            if (!eventName) return;
+
             const modifiersSet = new Set(modifiers);
 
             trigger.addEventListener(
