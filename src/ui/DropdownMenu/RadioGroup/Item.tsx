@@ -38,12 +38,19 @@ export const Item = (props: Props) => {
         >
             <div
                 class={cn(
-                    'size-2 rounded-full border transition-colors duration-100 ease-in-out',
+                    'flex size-4 items-center justify-center rounded-full border bg-neutral-600 transition-colors duration-200 ease-in-out',
                     isSelected()
                         ? 'border-blue-500 bg-blue-500'
                         : 'border-neutral-600',
                 )}
-            />
+            >
+                <div
+                    class='size-2 rounded-full bg-white transition-opacity duration-100 ease-in-out'
+                    style={{
+                        opacity: isSelected() ? '1' : '0',
+                    }}
+                />
+            </div>
 
             {props.children}
         </Button>
