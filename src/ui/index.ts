@@ -12,3 +12,4 @@ export * from './Separator';
 export * from './Checkbox';
 export * from './DropdownMenu';
 export * from './ToggleSwitch';
+export * from './ToggleGroup';

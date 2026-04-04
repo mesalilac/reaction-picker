@@ -14,8 +14,7 @@ import {
     DISCORD_FREE_MAX_CHAR_LIMIT,
 } from '@/consts';
 import { useGlobalContext } from '@/store';
-import { Badge, Button, Input, Select } from '@/ui';
-import { cn } from '@/utils';
+import { Badge, Input, Select, ToggleGroup } from '@/ui';
 
 import { AudioCard } from './AudioCard';
 import { ImageCard } from './ImageCard';
@@ -240,46 +239,20 @@ export const Main: VoidComponent<Props> = (props) => {
                 </div>
 
                 <div class='flex gap-2'>
-                    <div class='hidden rounded-lg outline-2 outline-neutral-400/50 lg:flex'>
-                        <For each={FILTERS_LIST}>
-                            {(option, i) => (
-                                <Button
-                                    class={cn(
-                                        'rounded-none',
-                                        i() === 0 && 'rounded-l-lg',
-                                        i() === FILTERS_LIST.length - 1 &&
-                                            'rounded-r-lg',
-                                    )}
-                                    onClick={() => {
-                                        if (
-                                            filter().includes(
-                                                option as FilterType,
-                                            )
-                                        ) {
-                                            setFilter(
-                                                filter().filter(
-                                                    (i) => i !== option,
-                                                ),
-                                            );
-                                            return;
-                                        }
-
-                                        setFilter([
-                                            ...filter(),
-                                            option as FilterType,
-                                        ]);
-                                    }}
-                                    title='Filter option'
-                                    variant={
-                                        filter().includes(option)
-                                            ? 'tertiary'
-                                            : 'ghost'
-                                    }
-                                >
-                                    {option}
-                                </Button>
-                            )}
-                        </For>
+                    <div class='hidden rounded-lg lg:flex'>
+                        <ToggleGroup
+                            onChange={setFilter}
+                            type='multiple'
+                            value={filter()}
+                        >
+                            <For each={FILTERS_LIST}>
+                                {(option) => (
+                                    <ToggleGroup.Item value={option}>
+                                        {option}
+                                    </ToggleGroup.Item>
+                                )}
+                            </For>
+                        </ToggleGroup>
                     </div>
                     <div class='hidden max-lg:block'>
                         <Select
