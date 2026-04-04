@@ -293,9 +293,7 @@ export const Popover: ParentComponent<PopoverProps> = (initialProps) => {
 
                     const anchorName = `--anchor-${String(Math.random()).slice(2, 6)}`;
 
-                    // @ts-expect-error ts(2339)
                     anchorElement.style.anchorName = anchorName;
-                    // @ts-expect-error ts(2339)
                     content.style.positionAnchor = anchorName;
 
                     createEffect(() => {
@@ -305,12 +303,10 @@ export const Popover: ParentComponent<PopoverProps> = (initialProps) => {
 
                     createEffect(() => {
                         if (typeof props.targetPositionArea === 'string') {
-                            // @ts-expect-error ts(2339)
                             content.style.positionArea =
                                 props.targetPositionArea ?? '';
 
                             onCleanup(() => {
-                                // @ts-expect-error ts(2339)
                                 content.style.positionArea = '';
                             });
                         } else if (
@@ -347,24 +343,20 @@ export const Popover: ParentComponent<PopoverProps> = (initialProps) => {
                                 content.style.bottom = '';
                             });
                         } else {
-                            // @ts-expect-error ts(2339)
                             content.style.positionArea = 'end center';
 
                             onCleanup(() => {
-                                // @ts-expect-error ts(2339)
                                 content.style.positionArea = '';
                             });
                         }
                     });
 
                     createEffect(() => {
-                        // @ts-expect-error ts(2339)
                         content.style.positionVisibility =
                             props.positionVisibility ?? '';
                     });
 
                     createEffect(() => {
-                        // @ts-expect-error ts(2339)
                         content.style.positionTryFallbacks =
                             untrack(() =>
                                 props
@@ -374,7 +366,6 @@ export const Popover: ParentComponent<PopoverProps> = (initialProps) => {
                     });
 
                     createEffect(() => {
-                        // @ts-expect-error ts(2339)
                         content.style.positionTryOrder =
                             props.positionTryOrder ?? '';
                     });
