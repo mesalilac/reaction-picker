@@ -1,11 +1,14 @@
-import type { JSX } from 'solid-js';
+import { type JSX, Show } from 'solid-js';
 
 import { Button } from '@/ui';
 import { cn } from '@/utils';
 
+import { Helper } from './Helper';
+
 type Props = {
     checked: boolean;
     onChange: (value: boolean) => void;
+    helper?: JSX.Element;
     disabled?: boolean;
     class?: string;
     children: JSX.Element;
@@ -54,7 +57,15 @@ export const ItemCheckbox = (props: Props) => {
                 </svg>
             </div>
 
-            {props.children}
+            <div class='flex flex-col items-start gap-1'>
+                <div class='flex flex-row items-start gap-1'>
+                    {props.children}
+                </div>
+
+                <Show when={props.helper}>
+                    <Helper text={props.helper} />
+                </Show>
+            </div>
         </Button>
     );
 };

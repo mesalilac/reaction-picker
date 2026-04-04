@@ -1,14 +1,16 @@
-import { type JSX, mergeProps } from 'solid-js';
+import { type JSX, mergeProps, Show } from 'solid-js';
 
 import { Button } from '@/ui';
 import { cn } from '@/utils';
 
 import { useDropdownMenuContext } from './context';
+import { Helper } from './Helper';
 
 type Props = {
     onClick?: () => void;
     class?: string;
     autoClose?: boolean;
+    helper?: JSX.Element;
     disabled?: boolean;
     children: JSX.Element;
 };
@@ -34,7 +36,15 @@ export const Item = (rawProps: Props) => {
             onClick={handleClick}
             variant='ghost'
         >
-            {props.children}
+            <div class='flex flex-col items-start gap-1'>
+                <div class='flex flex-row items-start gap-1'>
+                    {props.children}
+                </div>
+
+                <Show when={props.helper}>
+                    <Helper text={props.helper} />
+                </Show>
+            </div>
         </Button>
     );
 };

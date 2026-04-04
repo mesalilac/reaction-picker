@@ -1,13 +1,15 @@
-import type { JSX } from 'solid-js';
+import { type JSX, Show } from 'solid-js';
 
 import { Button } from '@/ui';
 import { cn } from '@/utils';
 
+import { Helper } from '../Helper';
 import { useRadioGroupContext } from './context';
 
 type Props = {
     value: string;
     disabled?: boolean;
+    helper?: JSX.Element;
     onSelect?: () => void;
     class?: string;
     children: JSX.Element;
@@ -52,7 +54,15 @@ export const Item = (props: Props) => {
                 />
             </div>
 
-            {props.children}
+            <div class='flex flex-col items-start gap-1'>
+                <div class='flex flex-row items-start gap-1'>
+                    {props.children}
+                </div>
+
+                <Show when={props.helper}>
+                    <Helper text={props.helper} />
+                </Show>
+            </div>
         </Button>
     );
 };
