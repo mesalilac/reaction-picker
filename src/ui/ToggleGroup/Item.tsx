@@ -20,13 +20,13 @@ export const Item: FlowComponent<Props> = (props) => {
     return (
         <Button
             class={cn(
-                'rounded-none border border-neutral-600 first:rounded-l-lg last:rounded-r-lg disabled:bg-transparent',
+                'rounded-none first:rounded-l-lg last:rounded-r-lg disabled:bg-transparent',
                 props.class,
-                isSelected() && 'bg-neutral-600/30',
+                isSelected() && 'bg-neutral-500/30',
             )}
             disabled={isDisabled()}
             onClick={() => ctx.toggle(props.value)}
-            variant='ghost'
+            variant='outline'
         >
             {props.children}
         </Button>
