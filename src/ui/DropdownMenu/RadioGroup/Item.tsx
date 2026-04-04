@@ -37,10 +37,12 @@ export const Item = (props: Props) => {
             variant='ghost'
         >
             <div
-                class='size-2 rounded-full bg-gray-500 transition-opacity duration-100 ease-in-out'
-                style={{
-                    opacity: isSelected() ? '1' : '0',
-                }}
+                class={cn(
+                    'size-2 rounded-full border transition-colors duration-100 ease-in-out',
+                    isSelected()
+                        ? 'border-blue-500 bg-blue-500'
+                        : 'border-neutral-600',
+                )}
             />
 
             {props.children}
