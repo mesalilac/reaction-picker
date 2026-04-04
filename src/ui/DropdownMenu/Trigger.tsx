@@ -20,7 +20,7 @@ export const Trigger = (rawProps: Props) => {
         <Button
             aria-expanded={ctx.isOpen()}
             aria-haspopup='listbox'
-            class={cn('border-2 px-3 text-white capitalize', props.class)}
+            class={cn('px-3 text-white capitalize', props.class)}
             ref={ctx.setTriggerRef}
             role='combobox'
             {...props}

@@ -25,7 +25,7 @@ export const Trigger = (rawProps: Props) => {
             aria-expanded={ctx.isOpen()}
             aria-haspopup='listbox'
             class={cn(
-                'justify-between border-2 px-3 text-white capitalize',
+                'justify-between px-3 text-white capitalize',
                 props.class,
             )}
             disabled={props.disabled}

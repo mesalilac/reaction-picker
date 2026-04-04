@@ -49,19 +49,19 @@ export const Button: ParentComponent<ButtonProps> = (rawProps) => {
             'bg-blue-500/60 hover:bg-blue-600/60 focus-visible:ring-blue-500/50 active:bg-blue-700/60',
         ),
         secondary: cn(
-            'bg-neutral-500/30 text-neutral-300 hover:bg-neutral-600/30 focus-visible:ring-neutral-500/50 active:bg-neutral-700/30',
+            'bg-neutral-500/30 border-neutral-600/30 text-neutral-300 hover:bg-neutral-600/30 focus-visible:ring-neutral-500/50 active:bg-neutral-700/30',
         ),
         tertiary: cn(
-            'bg-neutral-600/30 text-neutral-300 hover:bg-neutral-700/30 focus-visible:ring-neutral-500/50 active:bg-neutral-800/30',
+            'bg-neutral-600/30 border-neutral-700/30 text-neutral-300 hover:bg-neutral-700/30 focus-visible:ring-neutral-500/50 active:bg-neutral-800/30',
         ),
         success: cn(
-            'bg-green-500/30 text-green-400 hover:bg-green-600/30 focus-visible:ring-green-500/50 active:bg-green-700/30',
+            'bg-green-500/30 border-green-600/30 text-green-400 hover:bg-green-600/30 focus-visible:ring-green-500/50 active:bg-green-700/30',
         ),
         danger: cn(
-            'bg-red-500/30 text-red-400 hover:bg-red-600/30 focus-visible:ring-red-500/50 active:bg-red-700/30',
+            'bg-red-500/30 border-red-600/30 text-red-400 hover:bg-red-600/30 focus-visible:ring-red-500/50 active:bg-red-700/30',
         ),
         warning: cn(
-            'bg-yellow-500/30 text-yellow-400 hover:bg-yellow-600/30 focus-visible:ring-yellow-500/50 active:bg-yellow-700/30',
+            'bg-yellow-500/30 border-yellow-600/60 text-yellow-400 hover:bg-yellow-600/30 focus-visible:ring-yellow-500/50 active:bg-yellow-700/30',
         ),
         ghost: cn(
             'bg-transparent hover:bg-neutral-600/30 focus-visible:ring-neutral-600/50 active:bg-neutral-700/30',
