@@ -21,6 +21,7 @@ type Props = {
 };
 
 export const CardMenu = (props: Props) => {
+    // TODO: Fix menu doesn't close correctly
     return (
         <DropdownMenu onOpenChange={props.onOpenChange} open={props.open}>
             <DropdownMenu.Trigger variant='icon'>
