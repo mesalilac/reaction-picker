@@ -10,7 +10,7 @@ type Props = {
 };
 
 export const Content = (props: Props) => {
-    let divRef: HTMLDivElement | undefined;
+    let divRef!: HTMLDivElement;
 
     const ctx = useSubMenuContext();
 
@@ -22,7 +22,7 @@ export const Content = (props: Props) => {
                     duration: 0.2,
                     height: 0,
                     overflow: 'hidden',
-                    ease: 'power2.in',
+                    ease: 'power3.out',
                 });
             });
 
