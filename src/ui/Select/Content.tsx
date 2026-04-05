@@ -1,4 +1,5 @@
-import { type JSX, mergeProps } from 'solid-js';
+import { gsap } from 'gsap';
+import { createEffect, type JSX, mergeProps, onCleanup } from 'solid-js';
 
 import { Popover, type PopoverProps } from '@/ui';
 import { cn } from '@/utils';
@@ -24,7 +25,25 @@ export const Content = (rawProps: Props) => {
         rawProps,
     );
 
+    let divRef!: HTMLDivElement;
+
     const ctx = useSelectContext();
+
+    createEffect(() => {
+        if (ctx.isOpen() && divRef) {
+            const gsapCtx = gsap.context(() => {
+                gsap.from(divRef, {
+                    autoAlpha: 0,
+                    duration: 0.2,
+                    height: 0,
+                    overflow: 'hidden',
+                    ease: 'power3.out',
+                });
+            });
+
+            onCleanup(() => gsapCtx.revert());
+        }
+    });
 
     const triggerWidth = (): string => {
         const ref = ctx.triggerRef();
@@ -48,6 +67,7 @@ export const Content = (rawProps: Props) => {
                     'mt-1 mb-1 flex max-h-80 flex-col gap-1 overflow-y-auto overscroll-contain rounded-lg border border-neutral-600 bg-neutral-800 p-2 text-white shadow-2xl shadow-black',
                     props.class,
                 )}
+                ref={divRef}
                 style={{
                     'min-width': triggerWidth(),
                 }}
