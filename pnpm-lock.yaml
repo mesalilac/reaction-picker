@@ -24,8 +24,8 @@ importers:
         specifier: ^2.0.5
         version: 2.0.5
       cronus-ui:
-        specifier: github:mesalilac/cronus-ui#v0.1.0
-        version: https://codeload.github.com/mesalilac/cronus-ui/tar.gz/81b7b59be20dc1de31454aa92a8ffea2f8259171(gsap@3.14.2)(solid-js@1.9.12)
+        specifier: github:mesalilac/cronus-ui#v0.1.1
+        version: https://codeload.github.com/mesalilac/cronus-ui/tar.gz/7d54b1327b61534b79ca86257c91db32cea02d0b(gsap@3.14.2)(solid-js@1.9.12)
       filesize:
         specifier: ^11.0.13
         version: 11.0.15
@@ -562,9 +562,9 @@ packages:
   convert-source-map@2.0.0:
     resolution: {integrity: sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==}
 
-  cronus-ui@https://codeload.github.com/mesalilac/cronus-ui/tar.gz/81b7b59be20dc1de31454aa92a8ffea2f8259171:
-    resolution: {tarball: https://codeload.github.com/mesalilac/cronus-ui/tar.gz/81b7b59be20dc1de31454aa92a8ffea2f8259171}
-    version: 0.1.0
+  cronus-ui@https://codeload.github.com/mesalilac/cronus-ui/tar.gz/7d54b1327b61534b79ca86257c91db32cea02d0b:
+    resolution: {tarball: https://codeload.github.com/mesalilac/cronus-ui/tar.gz/7d54b1327b61534b79ca86257c91db32cea02d0b}
+    version: 0.1.1
     peerDependencies:
       gsap: ^3.14.2
       solid-js: ^1.9.12
@@ -1386,7 +1386,7 @@ snapshots:
 
   convert-source-map@2.0.0: {}
 
-  cronus-ui@https://codeload.github.com/mesalilac/cronus-ui/tar.gz/81b7b59be20dc1de31454aa92a8ffea2f8259171(gsap@3.14.2)(solid-js@1.9.12):
+  cronus-ui@https://codeload.github.com/mesalilac/cronus-ui/tar.gz/7d54b1327b61534b79ca86257c91db32cea02d0b(gsap@3.14.2)(solid-js@1.9.12):
     dependencies:
       clsx: 2.1.1
       gsap: 3.14.2
