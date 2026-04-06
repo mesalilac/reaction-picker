@@ -22,8 +22,10 @@ export const ToggleSwitch = (props: Props) => {
     return (
         <div
             aria-checked={props.checked}
+            aria-disabled={props.disabled}
             class={cn(
                 'flex flex-row items-center gap-2 outline-none focus-visible:ring-2 focus-visible:ring-blue-500',
+                props.disabled && 'opacity-60',
                 props.class,
             )}
             onClick={handleToggle}
@@ -40,7 +42,7 @@ export const ToggleSwitch = (props: Props) => {
                 class={cn(
                     'flex h-5 w-9 cursor-pointer items-center rounded-full border border-neutral-600 bg-neutral-600/30 p-0.5 transition-colors',
                     props.checked && 'border-blue-600 bg-blue-500',
-                    props.disabled && 'opacity-60',
+                    props.disabled && 'cursor-auto',
                     props.trackClass,
                 )}
             >
