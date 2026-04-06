@@ -36,10 +36,12 @@ export const DropdownMenu = (props: Props) => {
         ),
     );
 
-    const closeMenu = () => {
-        if (props.open === undefined) setIsOpen(false);
-        props.onOpenChange?.(false);
+    const onOpenChange = (open: boolean) => {
+        setIsOpen(open);
+        props.onOpenChange?.(open);
     };
+
+    const closeMenu = () => onOpenChange(false);
 
     const [triggerRef, setTriggerRef] = createSignal<
         HTMLButtonElement | undefined
@@ -49,7 +51,7 @@ export const DropdownMenu = (props: Props) => {
         <DropdownMenuContext.Provider
             value={{
                 isOpen,
-                setIsOpen,
+                onOpenChange,
                 closeMenu,
                 triggerRef,
                 setTriggerRef,

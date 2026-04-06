@@ -1,4 +1,4 @@
-import { Show } from 'solid-js';
+import { createEffect, Show } from 'solid-js';
 
 import {
     IconEditPencil01,
@@ -21,7 +21,6 @@ type Props = {
 };
 
 export const CardActionMenu = (props: Props) => {
-    // TODO: Fix menu doesn't close correctly
     return (
         <DropdownMenu onOpenChange={props.onOpenChange} open={props.open}>
             <DropdownMenu.Trigger variant='icon'>

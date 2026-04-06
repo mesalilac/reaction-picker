@@ -32,7 +32,7 @@ export const Content = (props: Props) => {
 
     return (
         <Popover
-            onOpenChange={ctx.setIsOpen}
+            onOpenChange={ctx.onOpenChange}
             open={ctx.isOpen()}
             positionTryFallbacks={() => ['block-start span-inline-end']}
             targetPositionArea='block-end span-inline-end'

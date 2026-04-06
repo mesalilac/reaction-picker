@@ -7,7 +7,7 @@ import {
 
 export const DropdownMenuContext = createContext<{
     isOpen: Accessor<boolean>;
-    setIsOpen: Setter<boolean>;
+    onOpenChange: (open: boolean) => void;
     closeMenu: () => void;
     triggerRef: Accessor<HTMLButtonElement | undefined>;
     setTriggerRef: Setter<HTMLButtonElement | undefined>;
