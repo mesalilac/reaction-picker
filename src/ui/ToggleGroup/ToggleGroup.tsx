@@ -1,6 +1,5 @@
+import { cn } from 'cronus-ui';
 import { createMemo, type JSX } from 'solid-js';
-
-import { cn } from '@/utils';
 
 import { ToggleGroupContext } from './context';
 import { Item } from './Item';

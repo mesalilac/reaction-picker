@@ -1,6 +1,5 @@
+import { cn } from 'cronus-ui';
 import { type JSX, splitProps, type VoidComponent } from 'solid-js';
-
-import { cn } from '@/utils';
 
 interface Props extends JSX.HTMLAttributes<HTMLDivElement> {}
 

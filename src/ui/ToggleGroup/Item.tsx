@@ -1,7 +1,7 @@
+import { cn } from 'cronus-ui';
 import type { FlowComponent } from 'solid-js';
 
 import { Button } from '@/ui';
-import { cn } from '@/utils';
 
 import { useToggleGroupContext } from './context';
 

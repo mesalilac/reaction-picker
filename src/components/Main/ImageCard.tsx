@@ -1,3 +1,4 @@
+import { cn } from 'cronus-ui';
 import { createVisibilityObserver } from '@solid-primitives/intersection-observer';
 import { convertFileSrc } from '@tauri-apps/api/core';
 import { openUrl } from '@tauri-apps/plugin-opener';
@@ -10,7 +11,6 @@ import { IconInterfaceHeart01 } from '@/icons';
 import { useGlobalContext } from '@/store';
 import { Button } from '@/ui';
 import {
-    cn,
     handleIpcError,
     handleUnexpectedError,
     minimizeWindow,

@@ -1,3 +1,4 @@
+import { cn } from 'cronus-ui';
 import { createVisibilityObserver } from '@solid-primitives/intersection-observer';
 import { openUrl } from '@tauri-apps/plugin-opener';
 import { createSignal, Show, type VoidComponent } from 'solid-js';
@@ -8,7 +9,6 @@ import { IconInterfaceHeart01 } from '@/icons';
 import { useGlobalContext } from '@/store';
 import { Button } from '@/ui';
 import {
-    cn,
     handleIpcError,
     handleUnexpectedError,
     minimizeWindow,

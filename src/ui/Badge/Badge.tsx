@@ -1,6 +1,5 @@
+import { cn } from 'cronus-ui';
 import type { JSX, ParentComponent } from 'solid-js';
-
-import { cn } from '@/utils';
 
 type Props = {
     ref?: HTMLSpanElement | ((el: HTMLSpanElement) => void);

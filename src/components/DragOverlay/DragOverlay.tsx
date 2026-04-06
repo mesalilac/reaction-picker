@@ -1,3 +1,4 @@
+import { cn } from 'cronus-ui';
 import { listen, TauriEvent } from '@tauri-apps/api/event';
 import type { DragDropEvent } from '@tauri-apps/api/window';
 import type { VoidComponent } from 'solid-js';
@@ -7,7 +8,7 @@ import { toast } from 'solid-sonner';
 
 import { commands, events } from '@/bindings';
 import { useGlobalContext } from '@/store';
-import { cn, handleIpcError, handleUnexpectedError } from '@/utils';
+import { handleIpcError, handleUnexpectedError } from '@/utils';
 
 type Props = {
     ref?: HTMLDivElement | ((el: HTMLDivElement) => void);
