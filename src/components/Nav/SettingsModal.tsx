@@ -235,7 +235,7 @@ export const SettingsModal: VoidComponent<ModalWrapperProps> = (props) => {
                         checked={
                             store.minimizeOnCopy !== undefined
                                 ? store.minimizeOnCopy
-                                : settings?.minimizeOnCopy || false
+                                : settings?.minimizeOnCopy
                         }
                         label='Minimize on copy'
                         onChange={(checked) => {
