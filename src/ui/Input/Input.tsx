@@ -128,13 +128,16 @@ export const Input = <T = string>(props: Props<T>) => {
                         local.class,
                     )}
                     id={id}
-                    onChange={(e) =>
+                    onChange={(e) => {
+                        if (others.type === 'text' || others.type === 'search')
+                            return;
+
                         handleInput(
                             e as unknown as InputEvent & {
                                 currentTarget: HTMLInputElement;
                             },
-                        )
-                    }
+                        );
+                    }}
                     onInput={handleInput}
                     required={local.required}
                     value={internalValue()}
