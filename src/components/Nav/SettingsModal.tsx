@@ -11,11 +11,11 @@ import { type TabType, useGlobalContext } from '@/store';
 import {
     Badge,
     Button,
-    Checkbox,
     Input,
     Modal,
     type ModalWrapperProps,
     Separator,
+    ToggleSwitch,
 } from '@/ui';
 import { handleIpcError, handleUnexpectedError } from '@/utils';
 
@@ -231,7 +231,7 @@ export const SettingsModal: VoidComponent<ModalWrapperProps> = (props) => {
             <Modal.Title title='Settings' />
             <Modal.Body>
                 <div class='flex items-center gap-2'>
-                    <Checkbox
+                    <ToggleSwitch
                         checked={
                             store.minimizeOnCopy !== undefined
                                 ? store.minimizeOnCopy
