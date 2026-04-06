@@ -17,8 +17,8 @@ import {
     unminimizeWindow,
 } from '@/utils';
 
+import { CardActionMenu } from './CardActionMenu';
 import { CardInfo } from './CardInfo';
-import { CardMenu } from './CardMenu';
 import { EditAssetModal } from './EditAssetModal';
 
 type Props = {
@@ -31,7 +31,7 @@ export const AudioCard: VoidComponent<Props> = (props) => {
     let containerRef!: HTMLDivElement;
 
     const [showEditModal, setShowEditModal] = createSignal(false);
-    const [showPopoverMenu, setShowPopoverMenu] = createSignal(false);
+    const [showActionMenu, setShowActionMenu] = createSignal(false);
 
     const useVisibilityObserver = createVisibilityObserver({
         rootMargin: '600px 0px 600px 0px',
@@ -109,7 +109,7 @@ export const AudioCard: VoidComponent<Props> = (props) => {
     const handleContextMenu = (e: MouseEvent) => {
         e.preventDefault();
 
-        setShowPopoverMenu(true);
+        setShowActionMenu(true);
     };
 
     const handleOpenExternalLink = async () => {
@@ -197,15 +197,15 @@ export const AudioCard: VoidComponent<Props> = (props) => {
                             })}
                         />
                     </Button>
-                    <CardMenu
+                    <CardActionMenu
                         deletedAt={props.audio.deletedAt}
                         externalLink={props.audio.externalLink}
                         handleDelete={handleDelete}
                         handleEditDetails={() => setShowEditModal(true)}
                         handleOpenExternalLink={handleOpenExternalLink}
                         handleRestore={handleRestore}
-                        onOpenChange={setShowPopoverMenu}
-                        open={showPopoverMenu()}
+                        onOpenChange={setShowActionMenu}
+                        open={showActionMenu()}
                     />
                     <Show when={showEditModal()}>
                         <EditAssetModal

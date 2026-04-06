@@ -20,7 +20,7 @@ type Props = {
     onOpenChange: (open: boolean) => void;
 };
 
-export const CardMenu = (props: Props) => {
+export const CardActionMenu = (props: Props) => {
     // TODO: Fix menu doesn't close correctly
     return (
         <DropdownMenu onOpenChange={props.onOpenChange} open={props.open}>
