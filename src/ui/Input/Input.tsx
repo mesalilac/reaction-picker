@@ -10,6 +10,7 @@ import {
     splitProps,
 } from 'solid-js';
 
+import { Helper } from '@/ui';
 import { cn } from '@/utils';
 
 interface Props<T = string>
@@ -20,7 +21,7 @@ interface Props<T = string>
     label?: string;
     value?: T;
     required?: boolean;
-    helperText?: string;
+    helper?: JSX.Element;
     error?: string;
     onInput?: (
         value: T,
@@ -40,7 +41,7 @@ export const Input = <T = string>(props: Props<T>) => {
         'label',
         'value',
         'required',
-        'helperText',
+        'helper',
         'error',
         'onInput',
         'parse',
@@ -145,10 +146,8 @@ export const Input = <T = string>(props: Props<T>) => {
                 <Match when={error()}>
                     <span class='text-red-500 text-sm'>{error()}</span>
                 </Match>
-                <Match when={local.helperText}>
-                    <span class='text-neutral-300 text-sm'>
-                        {local.helperText}
-                    </span>
+                <Match when={local.helper}>
+                    <Helper text={local.helper} />
                 </Match>
             </Switch>
         </div>
