@@ -13,3 +13,4 @@ export * from './DropdownMenu';
 export * from './ToggleSwitch';
 export * from './ToggleGroup';
 export * from './Helper';
+export * from './RadioGroup';
