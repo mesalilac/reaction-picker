@@ -238,9 +238,7 @@ export const SettingsModal: VoidComponent<ModalWrapperProps> = (props) => {
                                 : settings?.minimizeOnCopy
                         }
                         label='Minimize on copy'
-                        onChange={(checked) => {
-                            setStore('minimizeOnCopy', checked);
-                        }}
+                        onChange={(v) => setStore('minimizeOnCopy', v)}
                     />
                 </div>
                 <div class='flex items-center gap-2'>
