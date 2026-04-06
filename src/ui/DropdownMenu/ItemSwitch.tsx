@@ -6,7 +6,7 @@ import { cn } from '@/utils';
 import { Helper } from './Helper';
 
 type Props = {
-    checked: boolean;
+    checked?: boolean;
     onChange: (value: boolean) => void;
     disabled?: boolean;
     helper?: JSX.Element;

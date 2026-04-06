@@ -3,7 +3,7 @@ import { type JSX, Show } from 'solid-js';
 import { cn } from '@/utils';
 
 type Props = {
-    checked: boolean;
+    checked?: boolean;
     onChange: (value: boolean) => void;
     label?: JSX.Element;
     disabled?: boolean;
