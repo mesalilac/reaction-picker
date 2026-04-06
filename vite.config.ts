@@ -11,7 +11,7 @@ export default defineConfig(async () => ({
     plugins: [
         solid(),
         tailwindcss(),
-        checker({ typescript: true, biome: { watchPath: './src/' } }),
+        checker({ typescript: true, biome: { command: "check" } }),
     ],
     resolve: {
         tsconfigPaths: true,
