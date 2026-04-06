@@ -1,9 +1,8 @@
 import { type JSX, Show } from 'solid-js';
 
-import { Button } from '@/ui';
+import { Button, Helper } from '@/ui';
 import { cn } from '@/utils';
 
-import { Helper } from '../Helper';
 import { useRadioGroupContext } from './context';
 
 type Props = {

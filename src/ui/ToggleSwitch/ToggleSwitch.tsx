@@ -1,8 +1,7 @@
 import { type JSX, Show } from 'solid-js';
 
+import { Helper } from '@/ui';
 import { cn } from '@/utils';
-
-import { Helper } from '../DropdownMenu/Helper';
 
 type Props = {
     checked?: boolean;

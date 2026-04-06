@@ -1,9 +1,7 @@
 import { type JSX, Show } from 'solid-js';
 
-import { Button, ToggleSwitch } from '@/ui';
+import { Button, Helper, ToggleSwitch } from '@/ui';
 import { cn } from '@/utils';
-
-import { Helper } from './Helper';
 
 type Props = {
     checked?: boolean;

@@ -1,10 +1,9 @@
 import { type JSX, mergeProps, Show } from 'solid-js';
 
-import { Button } from '@/ui';
+import { Button, Helper } from '@/ui';
 import { cn } from '@/utils';
 
 import { useDropdownMenuContext } from './context';
-import { Helper } from './Helper';
 
 type Props = {
     onClick?: () => void;
