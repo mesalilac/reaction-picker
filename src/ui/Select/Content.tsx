@@ -1,8 +1,8 @@
-import { cn } from 'cronus-ui';
 import { gsap } from 'gsap';
 import { createEffect, type JSX, mergeProps, onCleanup } from 'solid-js';
 
 import { Popover, type PopoverProps } from '@/ui';
+import { cn } from '@/utils';
 
 import { useSelectContext } from './context';
 

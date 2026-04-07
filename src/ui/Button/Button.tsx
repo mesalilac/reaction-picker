@@ -1,4 +1,3 @@
-import { cn } from 'cronus-ui';
 import {
     type JSX,
     Match,
@@ -10,6 +9,7 @@ import {
 } from 'solid-js';
 
 import { Badge } from '@/ui';
+import { cn } from '@/utils';
 
 export type ButtonVariant =
     | 'primary'

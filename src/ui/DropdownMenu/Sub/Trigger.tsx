@@ -1,8 +1,8 @@
-import { cn } from 'cronus-ui';
-import { IconArrowChevronRight } from 'cronus-ui/icons';
 import type { JSX } from 'solid-js';
 
+import { IconArrowChevronRight } from '@/icons';
 import { Button } from '@/ui';
+import { cn } from '@/utils';
 
 import { useSubMenuContext } from './context';
 

@@ -1,6 +1,6 @@
-import { IconEditAddPlus } from 'cronus-ui/icons';
 import { Show } from 'solid-js';
 
+import { IconEditAddPlus } from '@/icons';
 import { Button, Input } from '@/ui';
 
 export type Props = {

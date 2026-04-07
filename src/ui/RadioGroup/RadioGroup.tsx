@@ -1,5 +1,6 @@
-import { cn } from 'cronus-ui';
 import { createMemo, type JSX, mergeProps, Show } from 'solid-js';
+
+import { cn } from '@/utils';
 
 import { RadioGroupContext } from './context';
 import { Item } from './Item';

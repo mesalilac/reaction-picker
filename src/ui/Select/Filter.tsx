@@ -1,7 +1,7 @@
-import { cn } from 'cronus-ui';
 import type { JSX } from 'solid-js';
 
 import { Separator } from '@/ui';
+import { cn } from '@/utils';
 
 export type Props = {
     class?: string;

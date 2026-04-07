@@ -1,7 +1,7 @@
-import { IconEditAddPlus } from 'cronus-ui/icons';
 import { createSignal, For, Show, type VoidComponent } from 'solid-js';
 
 import { commands } from '@/bindings';
+import { IconEditAddPlus } from '@/icons';
 import { useGlobalContext } from '@/store';
 import { Button, Input, Separator } from '@/ui';
 import { handleIpcError, handleUnexpectedError } from '@/utils';

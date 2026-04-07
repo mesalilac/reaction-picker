@@ -1,4 +1,3 @@
-import { cn } from 'cronus-ui';
 import {
     createEffect,
     createMemo,
@@ -12,6 +11,7 @@ import {
 } from 'solid-js';
 
 import { Helper } from '@/ui';
+import { cn } from '@/utils';
 
 interface Props<T = string>
     extends Omit<

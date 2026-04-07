@@ -1,9 +1,4 @@
 import {
-    IconArrowUpMd,
-    IconEditAddPlus,
-    IconInterfaceSettings,
-} from 'cronus-ui/icons';
-import {
     createMemo,
     createSignal,
     onCleanup,
@@ -12,6 +7,7 @@ import {
     type VoidComponent,
 } from 'solid-js';
 
+import { IconArrowUpMd, IconEditAddPlus, IconInterfaceSettings } from '@/icons';
 import { useGlobalContext } from '@/store';
 import { Button } from '@/ui';
 

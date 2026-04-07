@@ -23,9 +23,9 @@ importers:
       blurhash:
         specifier: ^2.0.5
         version: 2.0.5
-      cronus-ui:
-        specifier: github:mesalilac/cronus-ui#v0.1.1
-        version: https://codeload.github.com/mesalilac/cronus-ui/tar.gz/7d54b1327b61534b79ca86257c91db32cea02d0b(gsap@3.14.2)(solid-js@1.9.12)
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
       filesize:
         specifier: ^11.0.13
         version: 11.0.15
@@ -38,6 +38,9 @@ importers:
       solid-sonner:
         specifier: ^0.3.1
         version: 0.3.1(solid-js@1.9.12)
+      tailwind-merge:
+        specifier: ^3.5.0
+        version: 3.5.0
     devDependencies:
       '@biomejs/biome':
         specifier: ^2.4.10
@@ -561,13 +564,6 @@ packages:
 
   convert-source-map@2.0.0:
     resolution: {integrity: sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==}
-
-  cronus-ui@https://codeload.github.com/mesalilac/cronus-ui/tar.gz/7d54b1327b61534b79ca86257c91db32cea02d0b:
-    resolution: {tarball: https://codeload.github.com/mesalilac/cronus-ui/tar.gz/7d54b1327b61534b79ca86257c91db32cea02d0b}
-    version: 0.1.1
-    peerDependencies:
-      gsap: ^3.14.2
-      solid-js: ^1.9.12
 
   csstype@3.2.3:
     resolution: {integrity: sha512-z1HGKcYy2xA8AGQfwrn0PAy+PB7X/GSj3UVJW9qKyn43xWa+gl5nXmU4qqLMRzWVLFC8KusUX8T/0kCiOYpAIQ==}
@@ -1385,13 +1381,6 @@ snapshots:
   clsx@2.1.1: {}
 
   convert-source-map@2.0.0: {}
-
-  cronus-ui@https://codeload.github.com/mesalilac/cronus-ui/tar.gz/7d54b1327b61534b79ca86257c91db32cea02d0b(gsap@3.14.2)(solid-js@1.9.12):
-    dependencies:
-      clsx: 2.1.1
-      gsap: 3.14.2
-      solid-js: 1.9.12
-      tailwind-merge: 3.5.0
 
   csstype@3.2.3: {}
 

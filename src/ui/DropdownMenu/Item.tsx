@@ -1,7 +1,7 @@
-import { cn } from 'cronus-ui';
 import { type JSX, mergeProps, Show } from 'solid-js';
 
 import { Button, Helper } from '@/ui';
+import { cn } from '@/utils';
 
 import { useDropdownMenuContext } from './context';
 
