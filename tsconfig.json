@@ -47,9 +47,6 @@
             "@/components": [
                 "./src/components"
             ],
-            "@/icons": [
-                "./icons"
-            ],
             "@/pages": [
                 "./src/pages"
             ],

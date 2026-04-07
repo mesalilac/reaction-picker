@@ -1,10 +1,10 @@
 import { cn } from 'cronus-ui';
+import { IconMenuCloseMd, IconSystemSave } from 'cronus-ui/icons';
 import gsap from 'gsap';
 import type { JSX } from 'solid-js';
 import { createEffect, createSignal, onCleanup, Show } from 'solid-js';
 import { Portal } from 'solid-js/web';
 
-import { IconMenuCloseMd, IconSystemSave } from '@/icons';
 import { Button, ModalContext, Separator, useModalContext } from '@/ui';
 
 export type ModalWrapperProps = {

@@ -1,7 +1,7 @@
 import { cn } from 'cronus-ui';
+import { IconArrowCaretDownMd, IconArrowCaretUpMd } from 'cronus-ui/icons';
 import { type JSX, mergeProps } from 'solid-js';
 
-import { IconArrowCaretDownMd, IconArrowCaretUpMd } from '@/icons';
 import { Button, type ButtonProps } from '@/ui';
 
 import { useSelectContext } from './context';

@@ -1,4 +1,5 @@
 import { ask } from '@tauri-apps/plugin-dialog';
+import { IconFileCheck, IconWarningTriangleWarning } from 'cronus-ui/icons';
 import { createMemo, createSignal, type VoidComponent } from 'solid-js';
 import { createStore } from 'solid-js/store';
 import { toast } from 'solid-sonner';
@@ -6,7 +7,6 @@ import { toast } from 'solid-sonner';
 import { commands } from '@/bindings';
 import { TagsManager } from '@/components';
 import { FALLBACK_VOLUME } from '@/consts';
-import { IconFileCheck, IconWarningTriangleWarning } from '@/icons';
 import { type TabType, useGlobalContext } from '@/store';
 import {
     Badge,

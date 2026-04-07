@@ -1,12 +1,12 @@
-import { Show } from 'solid-js';
-
 import {
     IconEditPencil01,
     IconEditUndo,
     IconInterfaceExternalLink,
     IconInterfaceTrashFull,
     IconMenuMoreHorizontal,
-} from '@/icons';
+} from 'cronus-ui/icons';
+import { Show } from 'solid-js';
+
 import { DropdownMenu } from '@/ui';
 
 type Props = {

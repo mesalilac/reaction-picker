@@ -1,6 +1,6 @@
+import { IconArrowCaretDownMd, IconArrowCaretUpMd } from 'cronus-ui/icons';
 import { createSignal, type JSX, Show } from 'solid-js';
 
-import { IconArrowCaretDownMd, IconArrowCaretUpMd } from '@/icons';
 import { Button } from '@/ui';
 
 export type Props = {

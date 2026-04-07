@@ -1,4 +1,9 @@
 import {
+    IconArrowUpMd,
+    IconEditAddPlus,
+    IconInterfaceSettings,
+} from 'cronus-ui/icons';
+import {
     createMemo,
     createSignal,
     onCleanup,
@@ -7,7 +12,6 @@ import {
     type VoidComponent,
 } from 'solid-js';
 
-import { IconArrowUpMd, IconEditAddPlus, IconInterfaceSettings } from '@/icons';
 import { useGlobalContext } from '@/store';
 import { Button } from '@/ui';
 
@@ -56,13 +60,13 @@ export const Nav: VoidComponent<Props> = (props) => {
 
     return (
         <nav class='sticky top-0 z-50 flex justify-between bg-neutral-950/50 py-2 shadow-md backdrop-blur-lg'>
-            <div class='flex gap-3' ref={props.ref}>
+            <div class='flex items-center gap-3' ref={props.ref}>
                 <Tab count={imagesCount()} type='Images' />
                 <Tab count={videosCount()} type='Videos' />
                 <Tab count={audioCount()} type='Audio' />
                 <Tab count={snippetsCount()} type='Snippets' />
             </div>
-            <div class='flex gap-5'>
+            <div class='flex items-center gap-5'>
                 <Show when={globalCtx.store.activeTab === 'Snippets'}>
                     <Button onClick={() => setShowCreateSnippetModal(true)}>
                         <IconEditAddPlus />

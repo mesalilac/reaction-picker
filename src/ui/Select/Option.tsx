@@ -1,7 +1,7 @@
 import { cn } from 'cronus-ui';
+import { IconInterfaceCheck } from 'cronus-ui/icons';
 import { type JSX, Show } from 'solid-js';
 
-import { IconInterfaceCheck } from '@/icons';
 import { Button } from '@/ui';
 
 import { useSelectContext } from './context';

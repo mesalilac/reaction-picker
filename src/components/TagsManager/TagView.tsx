@@ -1,11 +1,11 @@
-import { createMemo, createSignal, Show, type VoidComponent } from 'solid-js';
-
-import { commands, type Tag } from '@/bindings';
 import {
     IconEditPencil01,
     IconInterfaceTag,
     IconInterfaceTrashFull,
-} from '@/icons';
+} from 'cronus-ui/icons';
+import { createMemo, createSignal, Show, type VoidComponent } from 'solid-js';
+
+import { commands, type Tag } from '@/bindings';
 import { useGlobalContext } from '@/store';
 import { Badge, Button } from '@/ui';
 import { handleIpcError, handleUnexpectedError } from '@/utils';
