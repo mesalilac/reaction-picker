@@ -4,7 +4,7 @@ import { IconInterfaceExternalLink } from 'cronus-ui/icons/Interface/IconInterfa
 import { IconInterfaceTrashFull } from 'cronus-ui/icons/Interface/IconInterfaceTrashFull';
 import { IconMenuMoreHorizontal } from 'cronus-ui/icons/Menu/IconMenuMoreHorizontal';
 import { DropdownMenu } from 'cronus-ui/ui';
-import { Show } from 'solid-js';
+import { type Accessor, type Setter, Show } from 'solid-js';
 
 type Props = {
     handleEditDetails: () => void;
@@ -15,11 +15,18 @@ type Props = {
     deletedAt: number | null;
     open: boolean;
     onOpenChange: (open: boolean) => void;
+    contextMenuPos?: Accessor<{ x: number; y: number } | null>;
+    setContextMenuPos?: Setter<{ x: number; y: number } | null>;
 };
 
 export const CardActionMenu = (props: Props) => {
     return (
-        <DropdownMenu onOpenChange={props.onOpenChange} open={props.open}>
+        <DropdownMenu
+            contextMenuPos={props.contextMenuPos}
+            onOpenChange={props.onOpenChange}
+            open={props.open}
+            setContextMenuPos={props.setContextMenuPos}
+        >
             <DropdownMenu.Trigger variant='icon'>
                 <IconMenuMoreHorizontal class='size-5' />
             </DropdownMenu.Trigger>

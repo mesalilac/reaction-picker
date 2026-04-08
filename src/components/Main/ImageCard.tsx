@@ -34,6 +34,10 @@ export const ImageCard: VoidComponent<Props> = (props) => {
     const [showEditModal, setShowEditModal] = createSignal(false);
     const [showActionMenu, setShowActionMenu] = createSignal(false);
     const [loaded, setLoaded] = createSignal(false);
+    const [contextMenuPos, setContextMenuPos] = createSignal<{
+        x: number;
+        y: number;
+    } | null>(null);
 
     const useVisibilityObserver = createVisibilityObserver({
         rootMargin: '600px 0px 600px 0px',
@@ -133,6 +137,11 @@ export const ImageCard: VoidComponent<Props> = (props) => {
     const handleContextMenu = (e: MouseEvent) => {
         e.preventDefault();
 
+        setContextMenuPos({
+            x: e.clientX,
+            y: e.clientY,
+        });
+
         setShowActionMenu(true);
     };
 
@@ -222,6 +231,7 @@ export const ImageCard: VoidComponent<Props> = (props) => {
                         />
                     </Button>
                     <CardActionMenu
+                        contextMenuPos={contextMenuPos}
                         deletedAt={props.image.deletedAt}
                         externalLink={props.image.externalLink}
                         handleDelete={handleDelete}
@@ -230,6 +240,7 @@ export const ImageCard: VoidComponent<Props> = (props) => {
                         handleRestore={handleRestore}
                         onOpenChange={setShowActionMenu}
                         open={showActionMenu()}
+                        setContextMenuPos={setContextMenuPos}
                     />
                     <Show when={showEditModal()}>
                         <EditAssetModal

@@ -32,6 +32,10 @@ export const VideoCard: VoidComponent<Props> = (props) => {
 
     const [showEditModal, setShowEditModal] = createSignal(false);
     const [showActionMenu, setShowActionMenu] = createSignal(false);
+    const [contextMenuPos, setContextMenuPos] = createSignal<{
+        x: number;
+        y: number;
+    } | null>(null);
 
     const useVisibilityObserver = createVisibilityObserver({
         rootMargin: '6000px 0px 6000px 0px',
@@ -108,6 +112,11 @@ export const VideoCard: VoidComponent<Props> = (props) => {
 
     const handleContextMenu = (e: MouseEvent) => {
         e.preventDefault();
+
+        setContextMenuPos({
+            x: e.clientX,
+            y: e.clientY,
+        });
 
         setShowActionMenu(true);
     };
@@ -198,6 +207,7 @@ export const VideoCard: VoidComponent<Props> = (props) => {
                         />
                     </Button>
                     <CardActionMenu
+                        contextMenuPos={contextMenuPos}
                         deletedAt={props.video.deletedAt}
                         externalLink={props.video.externalLink}
                         handleDelete={handleDelete}
@@ -206,6 +216,7 @@ export const VideoCard: VoidComponent<Props> = (props) => {
                         handleRestore={handleRestore}
                         onOpenChange={setShowActionMenu}
                         open={showActionMenu()}
+                        setContextMenuPos={setContextMenuPos}
                     />
                     <Show when={showEditModal()}>
                         <EditAssetModal
