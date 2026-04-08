@@ -307,16 +307,47 @@ export const Main: VoidComponent<Props> = (props) => {
                                 />
                             </Select.Filter>
                             <For each={tagsList()}>
-                                {(option) => (
-                                    <Select.Option
-                                        selected={selectedTags().includes(
-                                            option.id,
-                                        )}
-                                        value={option.id}
-                                    >
-                                        {option.name}
-                                    </Select.Option>
-                                )}
+                                {(option) => {
+                                    let usesCount = 0;
+
+                                    if (imagesTabActive())
+                                        usesCount = sortedImages().filter((x) =>
+                                            x.tags.some(
+                                                (y) => y.id === option.id,
+                                            ),
+                                        ).length;
+                                    else if (videosTabActive())
+                                        usesCount = sortedVideos().filter((x) =>
+                                            x.tags.some(
+                                                (y) => y.id === option.id,
+                                            ),
+                                        ).length;
+                                    else if (audioTabActive())
+                                        usesCount = sortedAudio().filter((x) =>
+                                            x.tags.some(
+                                                (y) => y.id === option.id,
+                                            ),
+                                        ).length;
+                                    else if (snippetsTabActive())
+                                        usesCount = sortedSnippets().filter(
+                                            (x) =>
+                                                x.tags.some(
+                                                    (y) => y.id === option.id,
+                                                ),
+                                        ).length;
+
+                                    return (
+                                        <Select.Option
+                                            selected={selectedTags().includes(
+                                                option.id,
+                                            )}
+                                            value={option.id}
+                                        >
+                                            {option.name}
+                                            <Badge>{usesCount}</Badge>
+                                        </Select.Option>
+                                    );
+                                }}
                             </For>
                         </Select.Content>
                     </Select>
