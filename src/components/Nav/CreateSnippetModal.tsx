@@ -1,10 +1,10 @@
+import { Input, Modal, type ModalWrapperProps, Textarea } from 'cronus-ui/ui';
 import { createSignal, type VoidComponent } from 'solid-js';
 import { createStore } from 'solid-js/store';
 import { toast } from 'solid-sonner';
 
 import { commands } from '@/bindings';
 import { useGlobalContext } from '@/store';
-import { Input, Modal, type ModalWrapperProps, Textarea } from '@/ui';
 import { handleIpcError, handleUnexpectedError } from '@/utils';
 
 export const CreateSnippetModal: VoidComponent<ModalWrapperProps> = (props) => {

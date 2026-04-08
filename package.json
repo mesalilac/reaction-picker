@@ -17,11 +17,12 @@
         "@tauri-apps/plugin-dialog": "~2.6.0",
         "@tauri-apps/plugin-opener": "~2",
         "blurhash": "^2.0.5",
+        "clsx": "^2.1.1",
+        "cronus-ui": "github:mesalilac/cronus-ui",
         "filesize": "^11.0.13",
         "gsap": "^3.14.2",
         "solid-js": "^1.9.12",
         "solid-sonner": "^0.3.1",
-        "clsx": "^2.1.1",
         "tailwind-merge": "^3.5.0"
     },
     "devDependencies": {

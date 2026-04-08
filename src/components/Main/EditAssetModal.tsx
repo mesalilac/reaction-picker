@@ -1,3 +1,12 @@
+import {
+    Badge,
+    Button,
+    Input,
+    Modal,
+    type ModalWrapperProps,
+    Select,
+    Textarea,
+} from 'cronus-ui/ui';
 import { createSignal, For, Show } from 'solid-js';
 import { createStore } from 'solid-js/store';
 
@@ -9,15 +18,6 @@ import {
     type Video,
 } from '@/bindings';
 import { useGlobalContext } from '@/store';
-import {
-    Badge,
-    Button,
-    Input,
-    Modal,
-    type ModalWrapperProps,
-    Select,
-    Textarea,
-} from '@/ui';
 import { handleIpcError, handleUnexpectedError } from '@/utils';
 
 type EditAssetStoreType = {

@@ -1,13 +1,10 @@
+import { IconEditPencil01 } from 'cronus-ui/icons/Edit/IconEditPencil01';
+import { IconEditUndo } from 'cronus-ui/icons/Edit/IconEditUndo';
+import { IconInterfaceExternalLink } from 'cronus-ui/icons/Interface/IconInterfaceExternalLink';
+import { IconInterfaceTrashFull } from 'cronus-ui/icons/Interface/IconInterfaceTrashFull';
+import { IconMenuMoreHorizontal } from 'cronus-ui/icons/Menu/IconMenuMoreHorizontal';
+import { DropdownMenu } from 'cronus-ui/ui';
 import { Show } from 'solid-js';
-
-import {
-    IconEditPencil01,
-    IconEditUndo,
-    IconInterfaceExternalLink,
-    IconInterfaceTrashFull,
-    IconMenuMoreHorizontal,
-} from '@/icons';
-import { DropdownMenu } from '@/ui';
 
 type Props = {
     handleEditDetails: () => void;

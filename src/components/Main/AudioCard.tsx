@@ -1,14 +1,14 @@
 import { createVisibilityObserver } from '@solid-primitives/intersection-observer';
 import { convertFileSrc } from '@tauri-apps/api/core';
 import { openUrl } from '@tauri-apps/plugin-opener';
+import { IconInterfaceHeart01 } from 'cronus-ui/icons/Interface/IconInterfaceHeart01';
+import { Button } from 'cronus-ui/ui';
 import { createSignal, Show, type VoidComponent } from 'solid-js';
 import { toast } from 'solid-sonner';
 
 import { type Audio, commands } from '@/bindings';
 import { FALLBACK_VOLUME } from '@/consts';
-import { IconInterfaceHeart01 } from '@/icons';
 import { useGlobalContext } from '@/store';
-import { Button } from '@/ui';
 import {
     cn,
     handleIpcError,

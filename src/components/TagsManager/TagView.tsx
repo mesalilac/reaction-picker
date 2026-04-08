@@ -1,13 +1,11 @@
+import { IconEditPencil01 } from 'cronus-ui/icons/Edit/IconEditPencil01';
+import { IconInterfaceTag } from 'cronus-ui/icons/Interface/IconInterfaceTag';
+import { IconInterfaceTrashFull } from 'cronus-ui/icons/Interface/IconInterfaceTrashFull';
+import { Badge, Button } from 'cronus-ui/ui';
 import { createMemo, createSignal, Show, type VoidComponent } from 'solid-js';
 
 import { commands, type Tag } from '@/bindings';
-import {
-    IconEditPencil01,
-    IconInterfaceTag,
-    IconInterfaceTrashFull,
-} from '@/icons';
 import { useGlobalContext } from '@/store';
-import { Badge, Button } from '@/ui';
 import { handleIpcError, handleUnexpectedError } from '@/utils';
 
 import { TagEditModal } from './TagEditModal';

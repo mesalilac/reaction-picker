@@ -41,12 +41,6 @@
             "@/consts": [
                 "./src/consts"
             ],
-            "@/ui": [
-                "./src/ui"
-            ],
-            "@/icons": [
-                "./icons"
-            ],
             "@/components": [
                 "./src/components"
             ],

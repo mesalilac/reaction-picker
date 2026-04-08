@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@source "../node_modules/cronus-ui/dist/ui";
 
 @layer base {
     * {

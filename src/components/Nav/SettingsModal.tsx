@@ -1,13 +1,6 @@
 import { ask } from '@tauri-apps/plugin-dialog';
-import { createMemo, createSignal, type VoidComponent } from 'solid-js';
-import { createStore } from 'solid-js/store';
-import { toast } from 'solid-sonner';
-
-import { commands } from '@/bindings';
-import { TagsManager } from '@/components';
-import { FALLBACK_VOLUME } from '@/consts';
-import { IconFileCheck, IconWarningTriangleWarning } from '@/icons';
-import { type TabType, useGlobalContext } from '@/store';
+import { IconFileCheck } from 'cronus-ui/icons/File/IconFileCheck';
+import { IconWarningTriangleWarning } from 'cronus-ui/icons/Warning/IconWarningTriangleWarning';
 import {
     Badge,
     Button,
@@ -16,7 +9,15 @@ import {
     type ModalWrapperProps,
     Separator,
     ToggleSwitch,
-} from '@/ui';
+} from 'cronus-ui/ui';
+import { createMemo, createSignal, type VoidComponent } from 'solid-js';
+import { createStore } from 'solid-js/store';
+import { toast } from 'solid-sonner';
+
+import { commands } from '@/bindings';
+import { TagsManager } from '@/components';
+import { FALLBACK_VOLUME } from '@/consts';
+import { type TabType, useGlobalContext } from '@/store';
 import { handleIpcError, handleUnexpectedError } from '@/utils';
 
 export const SettingsModal: VoidComponent<ModalWrapperProps> = (props) => {

@@ -1,3 +1,4 @@
+import { Badge, Input, Select, ToggleGroup } from 'cronus-ui/ui';
 import {
     createMemo,
     createSignal,
@@ -14,7 +15,6 @@ import {
     DISCORD_FREE_MAX_CHAR_LIMIT,
 } from '@/consts';
 import { useGlobalContext } from '@/store';
-import { Badge, Input, Select, ToggleGroup } from '@/ui';
 
 import { AudioCard } from './AudioCard';
 import { ImageCard } from './ImageCard';

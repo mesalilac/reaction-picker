@@ -1,3 +1,4 @@
+import { Badge } from 'cronus-ui/ui';
 import { gsap } from 'gsap';
 import {
     createEffect,
@@ -7,7 +8,6 @@ import {
 } from 'solid-js';
 
 import { type TabType, useGlobalContext } from '@/store';
-import { Badge } from '@/ui';
 import { cn } from '@/utils';
 
 export const Tab: VoidComponent<{
