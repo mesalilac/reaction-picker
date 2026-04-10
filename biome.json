@@ -48,7 +48,8 @@
 				"useArrayLiterals": "error",
 				"useAsConstAssertion": "error",
 				"useBlockStatements": "off",
-				"useNamingConvention": "error"
+				"useNamingConvention": "error",
+				"noEnum": "error"
 			},
 			"suspicious": {
 				"noDeprecatedImports": "error",
