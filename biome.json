@@ -5,13 +5,6 @@
 		"clientKind": "git",
 		"useIgnoreFile": true
 	},
-	"formatter": {
-		"enabled": true,
-		"indentStyle": "space",
-		"indentWidth": 4,
-		"lineEnding": "lf",
-		"lineWidth": 80
-	},
 	"css": {
 		"parser": {
 			"tailwindDirectives": true
@@ -126,6 +119,7 @@
 	},
 	"javascript": {
 		"formatter": {
+			"enabled": true,
 			"quoteStyle": "single",
 			"jsxQuoteStyle": "single",
 			"trailingCommas": "all",
@@ -134,7 +128,8 @@
 			"bracketSpacing": true,
 			"indentStyle": "space",
 			"indentWidth": 4,
-			"trailingNewline": true
+			"trailingNewline": true,
+			"lineEnding": "lf"
 		}
 	},
 	"assist": {
