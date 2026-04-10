@@ -1,5 +1,5 @@
 {
-	"$schema": "https://biomejs.dev/schemas/2.4.10/schema.json",
+	"$schema": "https://biomejs.dev/schemas/2.4.11/schema.json",
 	"vcs": {
 		"enabled": true,
 		"clientKind": "git",
@@ -25,7 +25,22 @@
 		"rules": {
 			"recommended": true,
 			"correctness": {
-				"noUnusedVariables": "warn"
+				"noUnusedVariables": "warn",
+				"noUndeclaredDependencies": "error",
+				"noUnresolvedImports": "error",
+				"useJsonImportAttributes": "error",
+				"noChildrenProp": "error",
+				"noConstAssign": "error",
+				"noEmptyPattern": "error",
+				"noSwitchDeclarations": "error",
+				"noUnreachable": "error",
+				"noUnsafeFinally": "error"
+			},
+			"performance": {
+				"noAccumulatingSpread": "error"
+			},
+			"security": {
+				"noGlobalEval": "error"
 			},
 			"style": {
 				"noCommonJs": "error",
@@ -36,12 +51,15 @@
 				"useNamingConvention": "error"
 			},
 			"suspicious": {
+				"noDeprecatedImports": "error",
+				"noImportCycles": "error",
 				"noConsole": {
 					"level": "error",
 					"options": {
 						"allow": [
 							"warn",
-							"error"
+							"error",
+							"debug"
 						]
 					}
 				},
@@ -50,7 +68,42 @@
 			"a11y": {
 				"useKeyWithClickEvents": "off"
 			},
+			"complexity": {
+				"noForEach": "error",
+				"noCommaOperator": "error",
+				"noEmptyTypeParameters": "error",
+				"noExtraBooleanCast": "error",
+				"noImplicitCoercions": "error",
+				"noUselessCatch": "error",
+				"noUselessCatchBinding": "error",
+				"noUselessContinue": "error",
+				"noUselessEmptyExport": "error",
+				"noUselessLabel": "error",
+				"noUselessLoneBlockStatements": "error",
+				"noUselessStringConcat": "error",
+				"noUselessSwitchCase": "error",
+				"noUselessTernary": "error",
+				"noUselessUndefined": "error",
+				"noUselessUndefinedInitialization": "error",
+				"useArrowFunction": "error",
+				"useIndexOf": "error",
+				"useLiteralKeys": "error",
+				"useOptionalChain": "error",
+				"useWhile": "error"
+			},
 			"nursery": {
+				"useFind": "error",
+				"useExhaustiveSwitchCases": "error",
+				"useDisposables": "error",
+				"useAwaitThenable": "error",
+				"useArraySortCompare": "error",
+				"noUselessTypeConversion": "error",
+				"noUnsafePlusOperands": "error",
+				"noFloatingPromises": "error",
+				"noMisleadingReturnType": "error",
+				"noMisusedPromises": "error",
+				"noUnnecessaryConditions": "error",
+				"useNullishCoalescing": "error",
 				"useSortedClasses": {
 					"level": "error",
 					"fix": "safe",
@@ -60,6 +113,7 @@
 						],
 						"functions": [
 							"clsx",
+							"cn",
 							"cva",
 							"tw",
 							"tw.*"
@@ -76,7 +130,10 @@
 			"trailingCommas": "all",
 			"semicolons": "always",
 			"arrowParentheses": "always",
-			"bracketSpacing": true
+			"bracketSpacing": true,
+			"indentStyle": "space",
+			"indentWidth": 4,
+			"trailingNewline": true
 		}
 	},
 	"assist": {
@@ -102,7 +159,8 @@
 						]
 					}
 				},
-				"useSortedAttributes": "on"
+				"useSortedAttributes": "on",
+				"noDuplicateClasses": "on"
 			}
 		}
 	}
